@@ -1,3 +1,5 @@
+import { Check, ChevronsUpDown } from "lucide-react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -14,8 +16,6 @@ import {
 } from "@/components/ui/popover";
 import { useSchema } from "@/context/schema-provider";
 import { cn } from "@/lib/utils";
-import { Check, ChevronsUpDown } from "lucide-react";
-import { useState } from "react";
 
 interface SchemaNameSelectProps {
   value?: string;
@@ -63,7 +63,7 @@ export default function SchemaNameSelect({
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      value === s ? "opacity-100" : "opacity-0"
+                      value === s ? "opacity-100" : "opacity-0",
                     )}
                   />
                   {s}

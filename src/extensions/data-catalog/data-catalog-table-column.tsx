@@ -1,3 +1,6 @@
+import { Edit3, EyeOff, LucideMoreHorizontal } from "lucide-react";
+import { useCallback, useState } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/orbit/button";
 import { Toggle } from "@/components/orbit/toggle";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
@@ -9,14 +12,11 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import HighlightText from "@/components/ui/highlight-text";
-import {
+import type {
   DatabaseTableColumn,
   DatabaseTableSchema,
 } from "@/drivers/base-driver";
 import { cn } from "@/lib/utils";
-import { Edit3, EyeOff, LucideMoreHorizontal } from "lucide-react";
-import { useCallback, useState } from "react";
-import { toast } from "sonner";
 import DataCatalogTableColumnModal from "./data-catalog-table-column-modal";
 import { useDataCatalogContext } from "./data-model-tab";
 
@@ -36,7 +36,7 @@ export default function DataCatalogTableColumn({
   const modelColumn = driver.getColumn(
     table.schemaName,
     table.tableName!,
-    column.name
+    column.name,
   );
   const [open, setOpen] = useState(false);
   const [enabled, setEnabled] = useState<boolean>(() => {
@@ -51,7 +51,7 @@ export default function DataCatalogTableColumn({
         hide: !enabled,
       })
       .then(() =>
-        toast.success(`${column.name} is turned ${!enabled ? "on" : "off"}`)
+        toast.success(`${column.name} is turned ${!enabled ? "on" : "off"}`),
       )
       .catch(() => toast.error("Failed to update column"));
     setEnabled((prev) => !prev);
@@ -66,7 +66,7 @@ export default function DataCatalogTableColumn({
       key={column.name}
       className={cn(
         "border-accent flex items-center border-t pt-2 pb-2 text-sm",
-        enabled ? "opacity-100" : "opacity-50"
+        enabled ? "opacity-100" : "opacity-50",
       )}
     >
       <Toggle size="sm" toggled={enabled} onChange={handleClickToggle} />

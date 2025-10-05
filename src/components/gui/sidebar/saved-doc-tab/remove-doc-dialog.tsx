@@ -1,3 +1,4 @@
+import { useCallback, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -7,8 +8,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useStudioContext } from "@/context/driver-provider";
-import { SavedDocData } from "@/drivers/saved-doc/saved-doc-driver";
-import { useCallback, useState } from "react";
+import type { SavedDocData } from "@/drivers/saved-doc/saved-doc-driver";
 
 interface Props {
   doc: SavedDocData;

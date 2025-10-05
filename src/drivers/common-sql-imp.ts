@@ -14,7 +14,7 @@ import { escapeSqlValue } from "./sqlite/sql-helper";
 export default abstract class CommonSQLImplement extends BaseDriver {
   protected validateUpdateOperation(
     ops: DatabaseTableOperation[],
-    validateSchema: DatabaseTableSchema
+    validateSchema: DatabaseTableSchema,
   ) {
     for (const op of ops) {
       const { valid, reason } = validateOperation(op, validateSchema);
@@ -46,7 +46,7 @@ export default abstract class CommonSQLImplement extends BaseDriver {
     schemaName: string,
     tableName: string,
     ops: DatabaseTableOperation[],
-    validateSchema?: DatabaseTableSchema
+    validateSchema?: DatabaseTableSchema,
   ): Promise<DatabaseTableOperationReslt[]> {
     if (validateSchema) {
       this.validateUpdateOperation(ops, validateSchema);
@@ -60,7 +60,7 @@ export default abstract class CommonSQLImplement extends BaseDriver {
           tableName,
           op.values,
           this.getFlags().supportInsertReturning,
-          this.getFlags().supportRowId
+          this.getFlags().supportRowId,
         );
 
       if (op.operation === "DELETE")
@@ -73,7 +73,7 @@ export default abstract class CommonSQLImplement extends BaseDriver {
         op.values,
         op.where,
         this.getFlags().supportInsertReturning,
-        this.getFlags().supportRowId
+        this.getFlags().supportRowId,
       );
     });
 
@@ -100,7 +100,7 @@ export default abstract class CommonSQLImplement extends BaseDriver {
           const selectResult = await this.findFirst(
             schemaName,
             tableName,
-            op.where
+            op.where,
           );
 
           tmp.push({
@@ -129,7 +129,7 @@ export default abstract class CommonSQLImplement extends BaseDriver {
             op.pk.reduce<Record<string, unknown>>((a, b) => {
               a[b] = op.values[b];
               return a;
-            }, {})
+            }, {}),
           );
 
           tmp.push({
@@ -150,7 +150,7 @@ export default abstract class CommonSQLImplement extends BaseDriver {
   async findFirst(
     schemaName: string,
     tableName: string,
-    key: Record<string, DatabaseValue>
+    key: Record<string, DatabaseValue>,
   ): Promise<DatabaseResultSet> {
     const wherePart = Object.entries(key)
       .map(([colName, colValue]) => {
@@ -165,7 +165,7 @@ export default abstract class CommonSQLImplement extends BaseDriver {
   async selectTable(
     schemaName: string,
     tableName: string,
-    options: SelectFromTableOptions
+    options: SelectFromTableOptions,
   ): Promise<{ data: DatabaseResultSet; schema: DatabaseTableSchema }> {
     const whereRaw = options.whereRaw?.trim();
 
@@ -188,13 +188,13 @@ export default abstract class CommonSQLImplement extends BaseDriver {
 
   async dropTable(schemaName: string, tableName: string): Promise<void> {
     await this.query(
-      `DROP TABLE ${this.escapeId(schemaName)}.${this.escapeId(tableName)};`
+      `DROP TABLE ${this.escapeId(schemaName)}.${this.escapeId(tableName)};`,
     );
   }
 
   async emptyTable(schemaName: string, tableName: string): Promise<void> {
     await this.query(
-      `DELETE FROM ${this.escapeId(schemaName)}.${this.escapeId(tableName)};`
+      `DELETE FROM ${this.escapeId(schemaName)}.${this.escapeId(tableName)};`,
     );
   }
 }

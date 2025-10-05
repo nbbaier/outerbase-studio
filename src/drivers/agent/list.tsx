@@ -1,7 +1,7 @@
+import type { ReactElement } from "react";
 import { CloudflareIcon } from "@/components/icons/outerbase-icon";
-import { ReactElement } from "react";
-import { BaseDriver } from "../base-driver";
-import { AgentBaseDriver, AgentPromptOption } from "./base";
+import type { BaseDriver } from "../base-driver";
+import type { AgentBaseDriver, AgentPromptOption } from "./base";
 import { ChatGPTDriver } from "./chatgpt";
 import CloudflareAgentDriver from "./cloudflare";
 
@@ -27,12 +27,12 @@ export default class AgentDriverList {
     this.dict = {
       "llama-3.3-70b": new CloudflareAgentDriver(
         databaseDriver,
-        "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
+        "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
       ),
 
       "sqlcoder-7b-2": new CloudflareAgentDriver(
         databaseDriver,
-        "@cf/defog/sqlcoder-7b-2"
+        "@cf/defog/sqlcoder-7b-2",
       ),
 
       "gpt-4o mini": token
@@ -91,7 +91,7 @@ export default class AgentDriverList {
     modelName: string,
     message: string,
     sessionId: string | undefined,
-    options: AgentPromptOption
+    options: AgentPromptOption,
   ): Promise<string> {
     const driver = this.dict[modelName];
 

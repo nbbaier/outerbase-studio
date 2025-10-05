@@ -1,4 +1,4 @@
-import { CommonConnectionConfigTemplate } from "..";
+import type { CommonConnectionConfigTemplate } from "..";
 
 export const GENERIC_CONNECTION_TEMPLATE: CommonConnectionConfigTemplate = [
   {

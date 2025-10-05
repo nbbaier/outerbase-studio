@@ -1,14 +1,14 @@
-import { useStudioContext } from "@/context/driver-provider";
-import { useSchema } from "@/context/schema-provider";
-import { OpenContextMenuList } from "@/core/channel-builtin";
-import { scc } from "@/core/command";
-import { DatabaseSchemaItem } from "@/drivers/base-driver";
-import { triggerEditorExtensionTab } from "@/extensions/trigger-editor";
-import { ExportFormat, exportTableData } from "@/lib/export-helper";
-import { Icon, Table } from "@phosphor-icons/react";
+import { type Icon, Table } from "@phosphor-icons/react";
 import { LucideCog, LucideDatabase, LucideView } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { ListView, ListViewItem } from "../listview";
+import { useStudioContext } from "@/context/driver-provider";
+import { useSchema } from "@/context/schema-provider";
+import type { OpenContextMenuList } from "@/core/channel-builtin";
+import { scc } from "@/core/command";
+import type { DatabaseSchemaItem } from "@/drivers/base-driver";
+import { triggerEditorExtensionTab } from "@/extensions/trigger-editor";
+import { type ExportFormat, exportTableData } from "@/lib/export-helper";
+import { ListView, type ListViewItem } from "../listview";
 import { CloudflareIcon } from "../resource-card/icon";
 import SchemaCreateDialog from "./schema-editor/schema-create";
 
@@ -23,18 +23,18 @@ function formatTableSize(byteCount?: number) {
 
   if (!byteCount) return undefined;
   if (byteInMb * 999 < byteCount)
-    return (byteCount / byteInGb).toFixed(1) + " GB";
+    return `${(byteCount / byteInGb).toFixed(1)} GB`;
   if (byteInMb * 100 < byteCount)
-    return (byteCount / byteInMb).toFixed(0) + " MB";
+    return `${(byteCount / byteInMb).toFixed(0)} MB`;
   if (byteInKb * 100 < byteCount)
-    return (byteCount / byteInMb).toFixed(1) + " MB";
-  if (byteInKb < byteCount) return Math.floor(byteCount / byteInKb) + " KB";
+    return `${(byteCount / byteInMb).toFixed(1)} MB`;
+  if (byteInKb < byteCount) return `${Math.floor(byteCount / byteInKb)} KB`;
   return "1 KB";
 }
 
 function prepareListViewItem(
   schema: DatabaseSchemaItem[],
-  maxTableSize: number
+  maxTableSize: number,
 ): ListViewItem<DatabaseSchemaItem>[] {
   return schema.map((s) => {
     let icon = Table;
@@ -57,7 +57,7 @@ function prepareListViewItem(
       data: s,
       icon: icon,
       iconColor: iconClassName,
-      key: s.schemaName + "." + s.name,
+      key: `${s.schemaName}.${s.name}`,
       name: s.name,
       progressBarMax: maxTableSize,
       progressBarValue: s.tableSchema?.stats?.sizeInByte,
@@ -67,7 +67,7 @@ function prepareListViewItem(
 }
 
 function groupTriggerByTable(
-  items: ListViewItem<DatabaseSchemaItem>[]
+  items: ListViewItem<DatabaseSchemaItem>[],
 ): ListViewItem<DatabaseSchemaItem>[] {
   // Find all triggers
   const triggers = items.filter((item) => item.data.type === "trigger");
@@ -76,7 +76,7 @@ function groupTriggerByTable(
       a[b.data.tableName ?? ""] = [...(a[b.data.tableName ?? ""] ?? []), b];
       return a;
     },
-    {} as Record<string, ListViewItem<DatabaseSchemaItem>[]>
+    {} as Record<string, ListViewItem<DatabaseSchemaItem>[]>,
   );
 
   const list = items.filter((item) => item.data.type !== "trigger");
@@ -98,7 +98,7 @@ function groupByFtsTable(items: ListViewItem<DatabaseSchemaItem>[]) {
       a[b.name] = b;
       return a;
     },
-    {} as Record<string, ListViewItem<DatabaseSchemaItem>>
+    {} as Record<string, ListViewItem<DatabaseSchemaItem>>,
   );
   const ftsSuffix = ["_config", "_content", "_data", "_docsize", "_idx"];
   const excludes = new Set();
@@ -123,7 +123,7 @@ function sortTable(items: ListViewItem<DatabaseSchemaItem>[]) {
 }
 
 function flattenSchemaGroup(
-  schemaGroup: ListViewItem<DatabaseSchemaItem>[]
+  schemaGroup: ListViewItem<DatabaseSchemaItem>[],
 ): ListViewItem<DatabaseSchemaItem>[] {
   if (schemaGroup.length === 1) return schemaGroup[0].children ?? [];
   return schemaGroup;
@@ -132,7 +132,7 @@ function flattenSchemaGroup(
 // Copy of export-result-button.tsx
 async function downloadExportTable(
   format: string,
-  handler: Promise<string | Blob>
+  handler: Promise<string | Blob>,
 ) {
   try {
     if (!format) return;
@@ -166,7 +166,7 @@ export default function SchemaList({ search }: Readonly<SchemaListProps>) {
 
   useEffect(() => {
     setSelected("");
-  }, [setSelected, search]);
+  }, []);
 
   const exportFormats = useMemo(() => {
     return [
@@ -227,7 +227,7 @@ export default function SchemaList({ search }: Readonly<SchemaListProps>) {
                     schemaName,
                     selectedName,
                     format as ExportFormat,
-                    "file"
+                    "file",
                   );
                   downloadExportTable(format, handler);
                 },
@@ -255,14 +255,14 @@ export default function SchemaList({ search }: Readonly<SchemaListProps>) {
         { title: "Refresh", onClick: () => refresh() },
       ].filter(Boolean) as OpenContextMenuList;
     },
-    [refresh, databaseDriver, currentSchemaName, extensions, exportFormats]
+    [refresh, databaseDriver, currentSchemaName, extensions, exportFormats],
   );
 
   const listViewItems = useMemo(() => {
     const r = sortTable(
       Object.entries(schema).map(([s, tables]) => {
         const maxTableSize = Math.max(
-          ...tables.map((t) => t.tableSchema?.stats?.sizeInByte ?? 0)
+          ...tables.map((t) => t.tableSchema?.stats?.sizeInByte ?? 0),
         );
 
         return {
@@ -273,11 +273,11 @@ export default function SchemaList({ search }: Readonly<SchemaListProps>) {
           key: s.toString(),
           children: sortTable(
             groupByFtsTable(
-              groupTriggerByTable(prepareListViewItem(tables, maxTableSize))
-            )
+              groupTriggerByTable(prepareListViewItem(tables, maxTableSize)),
+            ),
           ),
         } as ListViewItem<DatabaseSchemaItem>;
-      })
+      }),
     );
 
     if (databaseDriver.getFlags().optionalSchema) {
@@ -293,7 +293,7 @@ export default function SchemaList({ search }: Readonly<SchemaListProps>) {
       if (!search) return true;
       return item.name.toLowerCase().indexOf(search.toLowerCase()) >= 0;
     },
-    [search]
+    [search],
   );
 
   return (

@@ -1,3 +1,7 @@
+import { Check, Copy } from "lucide-react";
+import { useRouter } from "next/router";
+import { useCallback, useMemo, useState } from "react";
+import { toast } from "sonner";
 import { useSession } from "@/app/(outerbase)/session-provider";
 import { Button } from "@/components/orbit/button";
 import { Input } from "@/components/orbit/input";
@@ -11,10 +15,6 @@ import {
 } from "@/components/ui/dialog";
 import { isValidEmail } from "@/lib/validation";
 import { deleteOuterbaseUser } from "@/outerbase-cloud/api-account";
-import { Check, Copy } from "lucide-react";
-import { useRouter } from "next/router";
-import { useCallback, useMemo, useState } from "react";
-import { toast } from "sonner";
 
 export default function AccountFooter() {
   const { session } = useSession();
@@ -52,11 +52,11 @@ export default function AccountFooter() {
         setLoading(false);
         toast.error(err.message);
       });
-  }, [router]);
+  }, [router, onClose]);
 
   const fullName = useMemo(() => {
     if (!session) return;
-    return session?.user.first_name + " " + session?.user.last_name;
+    return `${session?.user.first_name} ${session?.user.last_name}`;
   }, [session]);
 
   const disabled = useMemo(() => {

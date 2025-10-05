@@ -35,11 +35,13 @@ export default abstract class CommonAgentDriverImplementation extends AgentBaseD
 
     if (option.schema) {
       parts.push(
-        "Here is " + this.driver.getFlags().dialect + " my database schema:\n\n"
+        "Here is " +
+          this.driver.getFlags().dialect +
+          " my database schema:\n\n",
       );
 
       parts.push(
-        "```sql\n" + this.convertSchemaToDDLContent(option.schema) + "```"
+        "```sql\n" + this.convertSchemaToDDLContent(option.schema) + "```",
       );
     }
 
@@ -59,7 +61,7 @@ export default abstract class CommonAgentDriverImplementation extends AgentBaseD
   async run(
     message: string,
     previousId: string | undefined,
-    option: AgentPromptOption
+    option: AgentPromptOption,
   ): Promise<string> {
     const session = this.history[previousId ?? ""] ?? {
       id: previousId || generateId(),
@@ -110,7 +112,7 @@ export default abstract class CommonAgentDriverImplementation extends AgentBaseD
 
   protected convertTableToDDLContent(
     schemaName: string | undefined,
-    table: DatabaseTableSchema
+    table: DatabaseTableSchema,
   ): string {
     const columns = table.columns
       .map((column) => {
@@ -139,7 +141,7 @@ export default abstract class CommonAgentDriverImplementation extends AgentBaseD
             "(",
             (column.constraint?.foreignKey?.foreignColumns ?? [])[0] ?? "",
             ")",
-          ].join(" ")
+          ].join(" "),
         );
       }
     }
@@ -153,7 +155,7 @@ export default abstract class CommonAgentDriverImplementation extends AgentBaseD
             "REFERENCES",
             constraint.foreignKey.foreignTableName ?? "",
             `(${(constraint.foreignKey.foreignColumns ?? []).join(", ")})`,
-          ].join(" ")
+          ].join(" "),
         );
       }
     }
@@ -175,8 +177,8 @@ export default abstract class CommonAgentDriverImplementation extends AgentBaseD
             defaultSchema.toLowerCase() === schemaName.toLowerCase()
               ? ""
               : schemaName,
-            table.tableSchema
-          )
+            table.tableSchema,
+          ),
         );
       }
     }

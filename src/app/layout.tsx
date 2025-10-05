@@ -1,5 +1,5 @@
-import { WEBSITE_NAME } from "@/const";
 import type { Metadata } from "next";
+import { WEBSITE_NAME } from "@/const";
 
 import "./codemirror-override.css";
 import "./globals.css";

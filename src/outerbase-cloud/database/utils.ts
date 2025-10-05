@@ -6,7 +6,7 @@ import { OuterbaseAPIQueryRaw, OuterbaseDatabaseConfig } from "../api-type";
 import { OuterbaseQueryable } from "./query";
 
 export function transformOuterbaseResult(
-  result: OuterbaseAPIQueryRaw
+  result: OuterbaseAPIQueryRaw,
 ): DatabaseResultSet {
   return {
     rows: result.items,
@@ -23,7 +23,7 @@ export function transformOuterbaseResult(
 
 export function createOuterbaseDatabaseDriver(
   type: string,
-  config: OuterbaseDatabaseConfig
+  config: OuterbaseDatabaseConfig,
 ) {
   const queryable = new OuterbaseQueryable(config);
 

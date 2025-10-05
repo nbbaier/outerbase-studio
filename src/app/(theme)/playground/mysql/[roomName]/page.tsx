@@ -1,5 +1,5 @@
-import ClientOnly from "@/components/client-only";
 import type { Metadata } from "next";
+import ClientOnly from "@/components/client-only";
 import ThemeLayout from "../../../theme_layout";
 import MySQLPlaygroundPageClient from "./page-client";
 
@@ -30,7 +30,7 @@ interface MySQLPlaygroundProps {
 }
 
 export default async function MySQLPlaygroundEditor(
-  props: MySQLPlaygroundProps
+  props: MySQLPlaygroundProps,
 ) {
   const { roomName } = await props.params;
 

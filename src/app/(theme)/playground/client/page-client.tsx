@@ -1,4 +1,17 @@
 "use client";
+import { saveAs } from "file-saver";
+import {
+  FolderOpenIcon,
+  LucideFile,
+  LucideLoader,
+  RefreshCcw,
+  Save,
+} from "lucide-react";
+import { useSearchParams } from "next/navigation";
+import Script from "next/script";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { toast } from "sonner";
+import type { Database, SqlJsStatic } from "sql.js";
 import { Studio } from "@/components/gui/studio";
 import {
   Toolbar,
@@ -12,19 +25,6 @@ import SqljsDriver from "@/drivers/database/sqljs";
 import { localDb } from "@/indexdb";
 import { useAvailableAIAgents } from "@/lib/ai-agent-storage";
 import downloadFileFromUrl from "@/lib/download-file";
-import { saveAs } from "file-saver";
-import {
-  FolderOpenIcon,
-  LucideFile,
-  LucideLoader,
-  RefreshCcw,
-  Save,
-} from "lucide-react";
-import { useSearchParams } from "next/navigation";
-import Script from "next/script";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { toast } from "sonner";
-import { Database, SqlJsStatic } from "sql.js";
 
 const SQLITE_FILE_EXTENSIONS =
   ".db,.sdb,.sqlite,.db3,.s3db,.sqlite3,.sl3,.db2,.s2db,.sqlite2,.sl2";
@@ -68,7 +68,7 @@ export default function PlaygroundEditorBody({
         setDriver(new SqljsDriver(sqljsDatabase));
       }
     },
-    [sqlInit]
+    [sqlInit],
   );
 
   /**
@@ -79,7 +79,7 @@ export default function PlaygroundEditorBody({
       setFilename(file.name);
       file.arrayBuffer().then(loadDatabaseFromBuffer);
     },
-    [loadDatabaseFromBuffer]
+    [loadDatabaseFromBuffer],
   );
 
   /*
@@ -89,7 +89,7 @@ export default function PlaygroundEditorBody({
     (fileHandler: FileSystemFileHandle) => {
       fileHandler.getFile().then(loadDatabaseFromFile);
     },
-    [loadDatabaseFromFile]
+    [loadDatabaseFromFile],
   );
 
   /**
@@ -113,7 +113,7 @@ export default function PlaygroundEditorBody({
         setHandler(fileHandler);
       }
     },
-    [loadDatabaseFromFile]
+    [loadDatabaseFromFile],
   );
 
   /**
@@ -148,10 +148,10 @@ export default function PlaygroundEditorBody({
    * Reload the database from the file handler.
    */
   const onReloadDatabase = useCallback(() => {
-    if (driver && driver.hasChanged()) {
+    if (driver?.hasChanged()) {
       if (
         !confirm(
-          "You have some changes. Refresh will lose your change. Do you want to refresh"
+          "You have some changes. Refresh will lose your change. Do you want to refresh",
         )
       ) {
         return;
@@ -234,7 +234,7 @@ export default function PlaygroundEditorBody({
           toast.success(
             <div>
               Successfully save <strong>{fileName}</strong>
-            </div>
+            </div>,
           );
           driver?.resetChange();
         })
@@ -245,7 +245,7 @@ export default function PlaygroundEditorBody({
         new Blob([new Uint8Array(nativeDriver.export())], {
           type: "application/x-sqlite3",
         }),
-        "sqlite-dump.db"
+        "sqlite-dump.db",
       );
     }
   }, [driver, fileName, handler, nativeDriver]);

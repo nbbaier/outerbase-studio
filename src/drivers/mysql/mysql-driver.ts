@@ -137,7 +137,7 @@ export default class MySQLLikeDriver extends CommonSQLImplement {
 
   constructor(
     protected _db: QueryableBaseDriver,
-    selectedDatabase = ""
+    selectedDatabase = "",
   ) {
     super();
     this.selectedDatabase = selectedDatabase;
@@ -338,7 +338,7 @@ export default class MySQLLikeDriver extends CommonSQLImplement {
         if (constraint.primaryKey) {
           constraint.primaryColumns?.push(c.COLUMN_NAME);
           const column = tableSchema.columns.find(
-            (col) => col.name === c.COLUMN_NAME
+            (col) => col.name === c.COLUMN_NAME,
           );
           if (column) column.pk = true;
         }
@@ -393,7 +393,7 @@ export default class MySQLLikeDriver extends CommonSQLImplement {
 
   async tableSchema(
     schemaName: string,
-    tableName: string
+    tableName: string,
   ): Promise<DatabaseTableSchema> {
     const columnSql = `SELECT TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME, COLUMN_TYPE, DATA_TYPE, EXTRA, COLUMN_KEY, IS_NULLABLE, COLUMN_DEFAULT, COLLATION_NAME FROM information_schema.columns WHERE TABLE_NAME=${escapeSqlValue(tableName)} AND TABLE_SCHEMA=${escapeSqlValue(schemaName)} ORDER BY ORDINAL_POSITION`;
     const constraintSql = `SELECT TABLE_SCHEMA, TABLE_NAME, CONSTRAINT_NAME, CONSTRAINT_TYPE FROM information_schema.table_constraints WHERE TABLE_SCHEMA = ${this.escapeValue(schemaName)} AND TABLE_NAME = ${this.escapeValue(tableName)} AND CONSTRAINT_TYPE IN ('PRIMARY KEY', 'UNIQUE', 'FOREIGN KEY')`;
@@ -412,7 +412,7 @@ export default class MySQLLikeDriver extends CommonSQLImplement {
       .rows as unknown as MySQLConstraintColumnResult[];
 
     const autoIncrement = columnResult.some(
-      (c) => c.EXTRA === "auto_increment"
+      (c) => c.EXTRA === "auto_increment",
     );
 
     const columns: DatabaseTableColumn[] = columnResult.map(mapColumn);
@@ -420,7 +420,7 @@ export default class MySQLLikeDriver extends CommonSQLImplement {
     const constraints: DatabaseTableColumnConstraint[] = constraintResult.map(
       (constraint) => {
         const columnList = constraintColumnsResult.filter(
-          (column) => column.CONSTRAINT_NAME === constraint.CONSTRAINT_NAME
+          (column) => column.CONSTRAINT_NAME === constraint.CONSTRAINT_NAME,
         );
 
         if (constraint.CONSTRAINT_TYPE === "PRIMARY KEY") {
@@ -450,14 +450,14 @@ export default class MySQLLikeDriver extends CommonSQLImplement {
               ? {
                   columns: columnList.map((c) => c.COLUMN_NAME),
                   foreignColumns: columnList.map(
-                    (c) => c.REFERENCED_COLUMN_NAME
+                    (c) => c.REFERENCED_COLUMN_NAME,
                   ),
                   foreignSchemaName: columnList[0].REFERENCED_TABLE_SCHEMA,
                   foreignTableName: columnList[0].REFERENCED_TABLE_NAME,
                 }
               : undefined,
         };
-      }
+      },
     );
 
     const pk = columnResult
@@ -476,10 +476,10 @@ export default class MySQLLikeDriver extends CommonSQLImplement {
 
   async trigger(
     schemaName: string,
-    name: string
+    name: string,
   ): Promise<DatabaseTriggerSchema> {
     const result = await this.query(
-      `SELECT * from information_schema.triggers WHERE TRIGGER_SCHEMA=${this.escapeValue(schemaName)} AND TRIGGER_NAME=${this.escapeValue(name)}`
+      `SELECT * from information_schema.triggers WHERE TRIGGER_SCHEMA=${this.escapeValue(schemaName)} AND TRIGGER_NAME=${this.escapeValue(name)}`,
     );
 
     const triggerRow = result.rows[0] as unknown as

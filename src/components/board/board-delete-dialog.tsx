@@ -1,8 +1,7 @@
-import { IBoardStorageDriver } from "@/drivers/board-storage/base";
 import { produce } from "immer";
 import { LucideLoader } from "lucide-react";
 import { useCallback, useState } from "react";
-import { DashboardProps } from ".";
+import type { IBoardStorageDriver } from "@/drivers/board-storage/base";
 import CopyableText from "../copyable-text";
 import { createDialog } from "../create-dialog";
 import LabelInput from "../label-input";
@@ -13,6 +12,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../ui/dialog";
+import type { DashboardProps } from ".";
 
 export const deleteChartDialog = createDialog<
   {
@@ -92,5 +92,5 @@ export const deleteChartDialog = createDialog<
       </>
     );
   },
-  { defaultValue: undefined }
+  { defaultValue: undefined },
 );

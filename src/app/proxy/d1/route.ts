@@ -14,7 +14,7 @@ export async function POST(req: NextRequest) {
       {
         error: "Please provide account id or database id",
       },
-      { status: HttpStatus.BAD_REQUEST }
+      { status: HttpStatus.BAD_REQUEST },
     );
   }
 
@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
       {
         error: "Please provide authorization header",
       },
-      { status: HttpStatus.BAD_REQUEST }
+      { status: HttpStatus.BAD_REQUEST },
     );
   }
 
@@ -47,7 +47,7 @@ export async function POST(req: NextRequest) {
         {
           error: response.errors[0].message,
         },
-        { status: HttpStatus.INTERNAL_SERVER_ERROR }
+        { status: HttpStatus.INTERNAL_SERVER_ERROR },
       );
     }
 
@@ -57,7 +57,7 @@ export async function POST(req: NextRequest) {
       {
         error: (e as Error).message,
       },
-      { status: HttpStatus.BAD_REQUEST }
+      { status: HttpStatus.BAD_REQUEST },
     );
   }
 }

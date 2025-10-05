@@ -1,5 +1,10 @@
 "use client";
-import { FunctionComponent, useCallback, useEffect, useState } from "react";
+import {
+  type FunctionComponent,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { Dialog, DialogContent } from "./ui/dialog";
 
 type DialogProviderSlot = "default" | "workspace" | "base";
@@ -35,7 +40,7 @@ export function DialogProvider({
       setDefaultCloseValue(defaultCloseValue);
       setOpen(true);
     },
-    []
+    [],
   );
 
   useEffect(() => {
@@ -94,7 +99,7 @@ export function createDialog<ParamType = unknown, ReturnType = undefined>(
      * it will be rendered to the deepest available slot.
      */
     slot?: DialogProviderSlot;
-  }
+  },
 ) {
   return {
     show: (props: ParamType) => {
@@ -104,8 +109,8 @@ export function createDialog<ParamType = unknown, ReturnType = undefined>(
         let slot = options?.slot;
 
         if (!slot) {
-          if (window.showOuterbaseDialog["base"]) slot = "base";
-          else if (window.showOuterbaseDialog["workspace"]) slot = "workspace";
+          if (window.showOuterbaseDialog.base) slot = "base";
+          else if (window.showOuterbaseDialog.workspace) slot = "workspace";
           else slot = "default";
         }
 

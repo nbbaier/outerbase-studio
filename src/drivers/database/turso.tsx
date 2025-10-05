@@ -1,14 +1,14 @@
-import {
+import type { Client, InStatement, ResultSet } from "@libsql/client/web";
+import { createClient as createClientStateless } from "libsql-stateless-easy";
+import type {
   DatabaseHeader,
   DatabaseResultSet,
   DatabaseRow,
   DriverFlags,
   QueryableBaseDriver,
 } from "@/drivers/base-driver";
-import { Client, InStatement, ResultSet } from "@libsql/client/web";
-import { createClient as createClientStateless } from "libsql-stateless-easy";
-import { SqliteLikeBaseDriver } from "../sqlite-base-driver";
 import { convertSqliteType } from "../sqlite/sql-helper";
+import { SqliteLikeBaseDriver } from "../sqlite-base-driver";
 
 export function transformRawResult(raw: ResultSet): DatabaseResultSet {
   const headerSet = new Set();
@@ -41,7 +41,7 @@ export function transformRawResult(raw: ResultSet): DatabaseResultSet {
         a[b.name] = r[idx];
       }
       return a;
-    }, {} as DatabaseRow)
+    }, {} as DatabaseRow),
   );
 
   return {
@@ -83,7 +83,7 @@ export default class TursoDriver extends SqliteLikeBaseDriver {
   constructor(
     url: string,
     authToken: string,
-    protected bigInt: boolean = false
+    protected bigInt: boolean = false,
   ) {
     super(
       new TursoQueryable(
@@ -94,11 +94,11 @@ export default class TursoDriver extends SqliteLikeBaseDriver {
             .replace(/^wss:\/\//, "https://"),
           authToken: authToken,
           intMode: bigInt ? "bigint" : "number",
-        })
+        }),
       ),
       {
         supportBigInt: bigInt,
-      }
+      },
     );
   }
 

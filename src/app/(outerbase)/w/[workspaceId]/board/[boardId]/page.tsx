@@ -1,5 +1,8 @@
 "use client";
 
+import { useParams } from "next/navigation";
+import { useMemo, useState } from "react";
+import useSWR, { type KeyedMutator } from "swr";
 import NavigationDashboardLayout from "@/app/(outerbase)/nav-board-layout";
 import { useWorkspaces } from "@/app/(outerbase)/workspace-provider";
 import Board, { type DashboardProps } from "@/components/board";
@@ -10,9 +13,6 @@ import { getOuterbaseDashboard } from "@/outerbase-cloud/api";
 import type { OuterbaseAPIDashboardDetail } from "@/outerbase-cloud/api-type";
 import OuterbaseBoardSourceDriver from "@/outerbase-cloud/database-source";
 import { useOuterbaseDashboardList } from "@/outerbase-cloud/hook";
-import { useParams } from "next/navigation";
-import { useMemo, useState } from "react";
-import useSWR, { type KeyedMutator } from "swr";
 
 function BoardPageEditor({
   initialValue,
@@ -36,7 +36,7 @@ function BoardPageEditor({
     if (!currentWorkspace) return;
     return new OuterbaseBoardStorageDriver(
       currentWorkspace.short_name,
-      boardId
+      boardId,
     );
   }, [boardId, currentWorkspace]);
 
@@ -80,7 +80,7 @@ export default function BoardPage() {
 
     const tmp = (dashboardList ?? []).filter(
       (board) =>
-        board.workspace_id === currentWorkspace.id && board.base_id === null
+        board.workspace_id === currentWorkspace.id && board.base_id === null,
     );
 
     tmp.sort((a, b) => a.name.localeCompare(b.name));

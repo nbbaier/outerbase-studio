@@ -37,7 +37,7 @@ function isRequireEndStatement(state: EditorState, node: SyntaxNode): number {
   if (keywords.length === 0) return 0;
 
   return keywords.filter(
-    (k) => toNodeString(state, k).toLowerCase() === "begin"
+    (k) => toNodeString(state, k).toLowerCase() === "begin",
   ).length;
 }
 
@@ -55,7 +55,7 @@ function isEndStatement(state: EditorState, node: SyntaxNode) {
 
 export function splitSqlQuery(
   state: EditorState,
-  generateText: boolean = true
+  generateText: boolean = true,
 ): StatementSegment[] {
   const topNode = syntaxTree(state).topNode;
 
@@ -103,7 +103,7 @@ export function splitSqlQuery(
 
 export function resolveToNearestStatement(
   state: EditorState,
-  position?: number
+  position?: number,
 ): { from: number; to: number } | null {
   // Breakdown and grouping the statement
   const cursor = position ?? state.selection.main.from;

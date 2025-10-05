@@ -94,7 +94,7 @@ var initSqlJs = function (moduleConfig) {
                 "Wrong API use : tried to return a value of an unknown type (" +
                   m +
                   ").",
-                -1
+                -1,
               );
             break;
           default:
@@ -223,8 +223,8 @@ var initSqlJs = function (moduleConfig) {
           "sqlite3_create_function_v2",
           "number",
           "number string number number number number number number number".split(
-            " "
-          )
+            " ",
+          ),
         ),
         rc = l("sqlite3_value_type", "number", ["number"]),
         uc = l("sqlite3_value_bytes", "number", ["number"]),
@@ -741,8 +741,8 @@ var initSqlJs = function (moduleConfig) {
           b = new Uint8Array(
             [0, 97, 115, 109, 1, 0, 0, 0].concat(
               f,
-              [2, 7, 1, 1, 101, 1, 102, 0, 0, 7, 5, 1, 1, 102, 0, 0]
-            )
+              [2, 7, 1, 1, 101, 1, 102, 0, 0, 7, 5, 1, 1, 102, 0, 0],
+            ),
           );
           b = new WebAssembly.Module(b);
           b = new WebAssembly.Instance(b, { e: { f: a } }).exports.f;
@@ -829,7 +829,7 @@ var initSqlJs = function (moduleConfig) {
       b ||
         J(
           "Assertion failed: Cannot call unknown function " +
-            (a + ", make sure it is exported")
+            (a + ", make sure it is exported"),
         );
       return b;
     }
@@ -893,7 +893,7 @@ var initSqlJs = function (moduleConfig) {
               : ((f -= 65536),
                 (d += String.fromCharCode(
                   55296 | (f >> 10),
-                  56320 | (f & 1023)
+                  56320 | (f & 1023),
                 )));
           }
         } else d += String.fromCharCode(f);
@@ -991,7 +991,7 @@ var initSqlJs = function (moduleConfig) {
       Ia(a);
       Qa = !0;
       throw new WebAssembly.RuntimeError(
-        a + ". Build with -s ASSERTIONS=1 for more info."
+        a + ". Build with -s ASSERTIONS=1 for more info.",
       );
     }
     function gb() {
@@ -1031,7 +1031,7 @@ var initSqlJs = function (moduleConfig) {
               function (c) {
                 a(new Uint8Array(c));
               },
-              b
+              b,
             );
           });
       }
@@ -1099,7 +1099,7 @@ var initSqlJs = function (moduleConfig) {
         a.split("/").filter(function (d) {
           return !!d;
         }),
-        !b
+        !b,
       ).join("/")) ||
         b ||
         (a = ".");
@@ -1158,7 +1158,7 @@ var initSqlJs = function (moduleConfig) {
         a.split("/").filter(function (d) {
           return !!d;
         }),
-        !b
+        !b,
       ).join("/");
       return (b ? "/" : "") + a || ".";
     }
@@ -1500,7 +1500,7 @@ var initSqlJs = function (moduleConfig) {
         a.split("/").filter(function (l) {
           return !!l;
         }),
-        !1
+        !1,
       );
       var f = Pb;
       c = "/";
@@ -1774,7 +1774,7 @@ var initSqlJs = function (moduleConfig) {
           Pb: [],
           error: !1,
         },
-        d
+        d,
       );
       d.Ma.open && d.Ma.open(d);
       !e.logReadFiles || b & 1 || (mc || (mc = {}), a in mc || (mc[a] = 1));
@@ -2091,7 +2091,7 @@ var initSqlJs = function (moduleConfig) {
             return b;
           },
         },
-        "/proc/self/fd"
+        "/proc/self/fd",
       );
     })();
     function na(a, b) {
@@ -2106,7 +2106,7 @@ var initSqlJs = function (moduleConfig) {
           "Assertion failed: " +
             D(a) +
             ", at: " +
-            [b ? D(b) : "unknown filename", c, d ? D(d) : "unknown function"]
+            [b ? D(b) : "unknown filename", c, d ? D(d) : "unknown function"],
         );
       },
       p: function (a, b) {
@@ -2573,7 +2573,7 @@ var initSqlJs = function (moduleConfig) {
                 n,
                 N[(b + 8 * h) >> 2],
                 N[(b + (8 * h + 4)) >> 2],
-                void 0
+                void 0,
               );
               if (0 > l) {
                 var q = -1;
@@ -2694,7 +2694,7 @@ var initSqlJs = function (moduleConfig) {
                   Ia("wasm streaming compile failed: " + h);
                   Ia("falling back to ArrayBuffer instantiation");
                   return c(b);
-                }
+                },
               );
             });
       })();
@@ -2814,7 +2814,7 @@ var initSqlJs = function (moduleConfig) {
     e._sqlite3_bind_parameter_index = function () {
       return (e._sqlite3_bind_parameter_index = e.asm.ua).apply(
         null,
-        arguments
+        arguments,
       );
     };
     e._sqlite3_normalized_sql = function () {

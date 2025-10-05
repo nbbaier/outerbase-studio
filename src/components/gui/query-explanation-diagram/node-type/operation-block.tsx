@@ -1,11 +1,11 @@
-import { BaseHandle } from "@/components/base-handle";
 import { Position } from "@xyflow/react";
-import { ExplainNodeProps } from "../build-query-explanation-flow";
+import { BaseHandle } from "@/components/base-handle";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import type { ExplainNodeProps } from "../build-query-explanation-flow";
 
 export function OperationBlock(props: ExplainNodeProps) {
   const borderColor = props.data.using_filesort

@@ -1,6 +1,9 @@
-import { DatabaseResultSet, SupportedDialect } from "@/drivers/base-driver";
 import { useMemo } from "react";
 import { z } from "zod";
+import type {
+  DatabaseResultSet,
+  SupportedDialect,
+} from "@/drivers/base-driver";
 import QueryExplanationDiagram from "./query-explanation-diagram";
 import { convertSQLiteRowToMySQL } from "./query-explanation-diagram/build-query-explanation-flow";
 
@@ -74,7 +77,7 @@ function mapExplanationRows(props: QueryExplanationProps) {
         id: Number(r.id),
         parent: Number(r.parent),
         notused: Number(r.notused),
-      }))
+      })),
     );
   }
 
@@ -122,7 +125,7 @@ export function QueryExplanation(props: QueryExplanationProps) {
 
   if (props.dialect === "sqlite") {
     value = convertSQLiteRowToMySQL(
-      props.data.rows as unknown as ExplanationRow[]
+      props.data.rows as unknown as ExplanationRow[],
     );
   }
 

@@ -1,8 +1,12 @@
-import { SavedConnectionRawLocalStorage } from "@/app/(theme)/connect/saved-connection-storage";
-import { LocalConnectionData, LocalDashboardData, localDb } from "@/indexdb";
+import useSWR, { mutate } from "swr";
+import type { SavedConnectionRawLocalStorage } from "@/app/(theme)/connect/saved-connection-storage";
+import {
+  type LocalConnectionData,
+  type LocalDashboardData,
+  localDb,
+} from "@/indexdb";
 import { generateId } from "@/lib/generate-id";
 import parseSafeJson from "@/lib/json-safe";
-import useSWR, { mutate } from "swr";
 
 export function useLocalDashboardList() {
   return useSWR(
@@ -14,7 +18,7 @@ export function useLocalDashboardList() {
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
       revalidateIfStale: false,
-    }
+    },
   );
 }
 
@@ -51,7 +55,7 @@ export function useLocalConnectionList() {
       if (localStorage.getItem("connections")) {
         const legacyList = parseSafeJson<SavedConnectionRawLocalStorage[]>(
           localStorage.getItem("connections") ?? "[]",
-          []
+          [],
         );
 
         if (legacyList.length) {
@@ -78,7 +82,7 @@ export function useLocalConnectionList() {
       }
 
       return await localDb.connection.toCollection().toArray();
-    }
+    },
   );
 }
 
@@ -92,7 +96,7 @@ export function useLocalConnection(id: string) {
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
       revalidateIfStale: false,
-    }
+    },
   );
 }
 
@@ -102,7 +106,7 @@ export async function removeLocalConnection(id: string) {
 }
 
 export async function createLocalConnection(
-  config: SavedConnectionRawLocalStorage
+  config: SavedConnectionRawLocalStorage,
 ): Promise<LocalConnectionData> {
   const id = generateId();
 
@@ -121,7 +125,7 @@ export async function createLocalConnection(
 
 export async function updateLocalConnection(
   id: string,
-  config: SavedConnectionRawLocalStorage
+  config: SavedConnectionRawLocalStorage,
 ) {
   const oldData = await localDb.connection.get(id);
   if (!oldData) return;
@@ -136,7 +140,7 @@ export async function updateLocalConnection(
   await localDb.connection.put(data);
 
   mutate("/connections/local");
-  mutate("/connections/local/" + id, data, {
+  mutate(`/connections/local/${id}`, data, {
     optimisticData: data,
     revalidate: false,
   });

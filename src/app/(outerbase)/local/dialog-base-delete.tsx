@@ -1,3 +1,5 @@
+import { LucideLoader } from "lucide-react";
+import { useCallback, useState } from "react";
 import CopyableText from "@/components/copyable-text";
 import { createDialog } from "@/components/create-dialog";
 import LabelInput from "@/components/label-input";
@@ -8,8 +10,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { LucideLoader } from "lucide-react";
-import { useCallback, useState } from "react";
 import { removeLocalConnection } from "./hooks";
 
 export const deleteLocalBaseDialog = createDialog<{

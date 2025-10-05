@@ -1,7 +1,7 @@
 "use client";
+import { useState } from "react";
 import ColumnTypeSelector from "@/components/gui/schema-editor/column-type-selector";
 import { MYSQL_DATA_TYPE_SUGGESTION } from "@/drivers/mysql/mysql-data-type";
-import { useState } from "react";
 
 export default function ColumnTypeStorybook() {
   const [value, setValue] = useState("");

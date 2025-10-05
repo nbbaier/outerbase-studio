@@ -21,7 +21,7 @@ export default class OuterbaseQueryDriver implements SavedDocDriver {
   constructor(
     protected workspaceId: string,
     protected baseId: string,
-    protected sourceId: string
+    protected sourceId: string,
   ) {}
 
   async getNamespaces(): Promise<SavedDocNamespace[]> {
@@ -76,7 +76,7 @@ export default class OuterbaseQueryDriver implements SavedDocDriver {
   async createDoc(
     _: SavedDocType,
     __: string,
-    data: SavedDocInput
+    data: SavedDocInput,
   ): Promise<SavedDocData> {
     await this.getNamespaces();
 
@@ -157,7 +157,7 @@ export default class OuterbaseQueryDriver implements SavedDocDriver {
 
     for (const namespaceId of Object.keys(this.cacheDocs)) {
       this.cacheDocs[namespaceId] = this.cacheDocs[namespaceId].filter(
-        (d) => d.id !== id
+        (d) => d.id !== id,
       );
     }
 

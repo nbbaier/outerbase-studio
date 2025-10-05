@@ -1,8 +1,8 @@
 "use client";
 
-import { sendAnalyticEvents, normalizedPathname } from "@/lib/tracking";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
+import { normalizedPathname, sendAnalyticEvents } from "@/lib/tracking";
 
 export default function PageTracker() {
   const pathname = usePathname();

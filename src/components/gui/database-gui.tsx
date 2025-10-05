@@ -1,16 +1,12 @@
 "use client";
+import { Binoculars, GearSix, Table } from "@phosphor-icons/react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import QueryWindow from "@/components/gui/tabs/query-tab";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import SchemaView from "./schema-sidebar";
-import SidebarTab, { SidebarTabItem } from "./sidebar-tab";
-import ToolSidebar from "./sidebar/tools-sidebar";
-import WindowTabs, { WindowTabItemProps } from "./windows-tab";
-
 import { useStudioContext } from "@/context/driver-provider";
 import { useSchema } from "@/context/schema-provider";
 import { scc } from "@/core/command";
@@ -21,8 +17,11 @@ import {
 } from "@/core/extension-tab";
 import { normalizedPathname, sendAnalyticEvents } from "@/lib/tracking";
 import { cn } from "@/lib/utils";
-import { Binoculars, GearSix, Table } from "@phosphor-icons/react";
+import SchemaView from "./schema-sidebar";
 import SavedDocTab from "./sidebar/saved-doc-tab";
+import ToolSidebar from "./sidebar/tools-sidebar";
+import SidebarTab, { type SidebarTabItem } from "./sidebar-tab";
+import WindowTabs, { type WindowTabItemProps } from "./windows-tab";
 
 export default function DatabaseGui() {
   const DEFAULT_WIDTH = 300;
@@ -52,7 +51,7 @@ export default function DatabaseGui() {
   const openTabInternal = useCallback((tabOption: WindowTabItemProps) => {
     setTabs((prev) => {
       const foundIndex = prev.findIndex(
-        (tab) => tab.identifier === tabOption.key
+        (tab) => tab.identifier === tabOption.key,
       );
 
       if (foundIndex >= 0) {
@@ -69,7 +68,7 @@ export default function DatabaseGui() {
     (tabOption: WindowTabItemProps) => {
       setTabs((prev) => {
         const foundIndex = prev.findIndex(
-          (tab) => tab.identifier === tabOption.key
+          (tab) => tab.identifier === tabOption.key,
         );
 
         if (foundIndex >= 0) {
@@ -85,7 +84,7 @@ export default function DatabaseGui() {
         });
       });
     },
-    [selectedTabIndex]
+    [selectedTabIndex],
   );
 
   const closeStudioTab = useCallback(
@@ -94,16 +93,16 @@ export default function DatabaseGui() {
         setTabs((currentTabs) => {
           const selectedTab = currentTabs[selectedTabIndex];
           const newTabs = currentTabs.filter(
-            (t) => !keys?.includes(t.identifier)
+            (t) => !keys?.includes(t.identifier),
           );
 
           if (selectedTab) {
             const selectedTabNewIndex = newTabs.findIndex(
-              (t) => t.identifier === selectedTab.identifier
+              (t) => t.identifier === selectedTab.identifier,
             );
             if (selectedTabNewIndex < 0) {
               setSelectedTabIndex(
-                Math.min(selectedTabIndex, newTabs.length - 1)
+                Math.min(selectedTabIndex, newTabs.length - 1),
               );
             } else {
               setSelectedTabIndex(selectedTabNewIndex);
@@ -114,7 +113,7 @@ export default function DatabaseGui() {
         });
       }
     },
-    [selectedTabIndex]
+    [selectedTabIndex],
   );
 
   useEffect(() => {
@@ -195,7 +194,7 @@ export default function DatabaseGui() {
 
       previousLogTabKey.current = currentTab.key;
     }
-  }, [tabs, selectedTabIndex, previousLogTabKey]);
+  }, [tabs, selectedTabIndex]);
 
   return (
     <div className={cn("flex h-screen w-screen flex-col", containerClassName)}>

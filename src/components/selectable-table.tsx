@@ -1,12 +1,12 @@
 import {
-  PropsWithChildren,
+  type PropsWithChildren,
   useCallback,
   useEffect,
   useMemo,
   useState,
 } from "react";
-import { Checkbox } from "./ui/checkbox";
 import { cn } from "@/lib/utils";
+import { Checkbox } from "./ui/checkbox";
 
 interface SelectableTableProps<T> {
   items: T[];
@@ -122,7 +122,7 @@ export function SelectableTable<T>({
         {items.map((item) => {
           const itemKey = extractKey(item);
           const isSelected = !!selectedItems.find(
-            (t) => extractKey(t) === itemKey
+            (t) => extractKey(t) === itemKey,
           );
 
           // If we selected to show only selected items,
@@ -139,8 +139,8 @@ export function SelectableTable<T>({
                       if (isSelected) {
                         onSelectedItemChanged(
                           selectedItems.filter(
-                            (item) => extractKey(item) !== itemKey
-                          )
+                            (item) => extractKey(item) !== itemKey,
+                          ),
                         );
                       } else {
                         onSelectedItemChanged([...selectedItems, item]);
@@ -150,7 +150,9 @@ export function SelectableTable<T>({
               }
               className={cn(
                 "h-[40px] cursor-pointer hover:bg-accent",
-                isSelected ? "text-primary" : "text-gray-400 dark:text-gray-600"
+                isSelected
+                  ? "text-primary"
+                  : "text-gray-400 dark:text-gray-600",
               )}
             >
               {!disabledSelection && (

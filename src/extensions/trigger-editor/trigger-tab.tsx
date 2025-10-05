@@ -1,9 +1,9 @@
-import OpacityLoading from "@/components/gui/loading-opacity";
-import { useStudioContext } from "@/context/driver-provider";
-import { DatabaseTriggerSchema } from "@/drivers/base-driver";
 import { produce } from "immer";
 import { isEqual } from "lodash";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import OpacityLoading from "@/components/gui/loading-opacity";
+import { useStudioContext } from "@/context/driver-provider";
+import type { DatabaseTriggerSchema } from "@/drivers/base-driver";
 import { TriggerController } from "./trigger-controller";
 import TriggerEditor from "./trigger-editor";
 import { TriggerSaveDialog } from "./trigger-save-dialog";
@@ -42,7 +42,7 @@ export default function TriggerTab({
         draft.tableName = tableName ?? "";
         draft.schemaName = schemaName ?? "";
       });
-    }
+    },
   );
   const [value, setValue] = useState<DatabaseTriggerSchema>(initialValue);
 

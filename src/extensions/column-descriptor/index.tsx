@@ -1,5 +1,5 @@
 import { StudioExtension } from "@/core/extension-base";
-import { StudioExtensionContext } from "@/core/extension-manager";
+import type { StudioExtensionContext } from "@/core/extension-manager";
 
 export default class ColumnDescriptorExtension extends StudioExtension {
   extensionName = "column-descriptor";

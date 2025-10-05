@@ -1,10 +1,10 @@
+import { type ReactElement, useMemo } from "react";
 import { cn } from "@/lib/utils";
-import { ReactElement, useMemo } from "react";
-import {
+import type {
   OptimizeTableCellRenderProps,
   OptimizeTableHeaderWithIndexProps,
 } from ".";
-import OptimizeTableState from "./optimize-table-state";
+import type OptimizeTableState from "./optimize-table-state";
 
 export default function OptimizeTableCell<HeaderMetadata = unknown>({
   state,
@@ -18,7 +18,7 @@ export default function OptimizeTableCell<HeaderMetadata = unknown>({
   colIndex: number;
   header: OptimizeTableHeaderWithIndexProps<HeaderMetadata>;
   renderCell: (
-    props: OptimizeTableCellRenderProps<HeaderMetadata>
+    props: OptimizeTableCellRenderProps<HeaderMetadata>,
   ) => ReactElement;
 }) {
   const { isFocus, isSelected, isBorderBottom, isBorderRight } =
@@ -31,7 +31,7 @@ export default function OptimizeTableCell<HeaderMetadata = unknown>({
 
   const additionalStyles = useMemo(() => {
     if (!isSticky) return undefined;
-    return { zIndex: 15, left: state.gutterColumnWidth + "px" };
+    return { zIndex: 15, left: `${state.gutterColumnWidth}px` };
   }, [state.gutterColumnWidth, isSticky]);
 
   let cellBackgroundColor = "bg-background";
@@ -62,7 +62,7 @@ export default function OptimizeTableCell<HeaderMetadata = unknown>({
     isFocus &&
       "shadow-[0_0_0_1px_rgba(0,0,0,0.5)_inset] dark:shadow-[0_0_0_1px_rgba(255,255,255,0.5)_inset]",
     isSticky && "sticky",
-    cellBackgroundColor
+    cellBackgroundColor,
   );
 
   return (
@@ -85,7 +85,7 @@ export default function OptimizeTableCell<HeaderMetadata = unknown>({
             focusedCell.y,
             focusedCell.x,
             rowIndex,
-            colIndex
+            colIndex,
           );
         } else if (e.ctrlKey) {
           state.addSelectionRange(rowIndex, colIndex, rowIndex, colIndex);

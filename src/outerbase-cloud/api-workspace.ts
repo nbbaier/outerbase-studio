@@ -16,13 +16,13 @@ export function createOuterbaseWorkspace(options: {
   return requestOuterbase<OuterbaseAPIWorkspace>(
     "/api/v1/workspace",
     "POST",
-    options
+    options,
   );
 }
 
 export function updateOuterbaseWorkspace(
   workspaceId: string,
-  options: { short_name: string; name: string }
+  options: { short_name: string; name: string },
 ) {
   return requestOuterbase(`/api/v1/workspace/${workspaceId}`, "PUT", options);
 }
@@ -37,14 +37,14 @@ export function createOuterbaseBase(workspaceId: string, name: string) {
     "POST",
     {
       name,
-    }
+    },
   );
 }
 
 export function createOuterbaseConnection(
   workspaceId: string,
   baseId: string,
-  name: string
+  name: string,
 ) {
   return requestOuterbase<OuterbaseAPIConnection>(
     `/api/v1/workspace/${workspaceId}/connection`,
@@ -52,74 +52,74 @@ export function createOuterbaseConnection(
     {
       name,
       baseId,
-    }
+    },
   );
 }
 
 export function testOuterbaseSource(
   workspaceId: string,
-  source: OuterbaseAPISourceInput
+  source: OuterbaseAPISourceInput,
 ) {
   return requestOuterbase(
     `/api/v1/workspace/${workspaceId}/source/credential/test`,
     "POST",
-    source
+    source,
   );
 }
 
 export function updateOuterbaseSource(
   workspaceId: string,
   sourceId: string,
-  source: OuterbaseAPISourceInput
+  source: OuterbaseAPISourceInput,
 ) {
   return requestOuterbase<OuterbaseAPISource>(
     `/api/v1/workspace/${workspaceId}/source/${sourceId}`,
     "PUT",
-    source
+    source,
   );
 }
 
 export function createOuterbaseSource(
   workspaceId: string,
-  source: OuterbaseAPISourceInput
+  source: OuterbaseAPISourceInput,
 ) {
   return requestOuterbase<OuterbaseAPISource>(
     `/api/v1/workspace/${workspaceId}/source`,
     "POST",
-    source
+    source,
   );
 }
 
 export async function updateOuterbaseSchemas(
   workspaceId: string,
-  sourceId: string
+  sourceId: string,
 ) {
   return await requestOuterbase<unknown>(
     `/api/v1/workspace/${workspaceId}/source/${sourceId}/schema?baseId=`,
-    "POST"
+    "POST",
   );
 }
 
 export async function getOuterbaseBaseCredential(
   workspaceId: string,
-  sourceId: string
+  sourceId: string,
 ) {
   return await requestOuterbase<OuterbaseAPIBaseCredential>(
     `/api/v1/workspace/${workspaceId}/source/${sourceId}/credential`,
-    "GET"
+    "GET",
   );
 }
 
 export async function updateOuterbaseCredential(
   workspaceId: string,
   sourceId: string,
-  source: OuterbaseAPISourceInput
+  source: OuterbaseAPISourceInput,
 ) {
   mutate("/source/${sourceId}/credential");
 
   return await requestOuterbase<OuterbaseAPISourceInput>(
     `/api/v1/workspace/${workspaceId}/source/${sourceId}`,
     "PUT",
-    source
+    source,
   );
 }

@@ -1,10 +1,10 @@
+import { useMemo } from "react";
 import { buttonVariants } from "@/components/ui/button";
 import {
   Popover,
-  PopoverTrigger,
   PopoverContent,
+  PopoverTrigger,
 } from "@/components/ui/popover";
-import { useMemo } from "react";
 
 interface Props {
   placeholders: Record<string, string>;
@@ -17,7 +17,7 @@ export function QueryPlaceholder({
 }: Props): JSX.Element {
   const placeholderCount = Object.keys(placeholders).length;
   const emptyPlaceholderCount = Object.values(placeholders).filter(
-    (v) => v === ""
+    (v) => v === "",
   ).length;
   const hasEmptyPlaceholder = emptyPlaceholderCount > 0;
 

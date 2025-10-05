@@ -1,8 +1,7 @@
-import { DatabaseTableColumnConstraint } from "@/drivers/base-driver";
-import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import { LucideSigma } from "lucide-react";
+import type { DatabaseTableColumnConstraint } from "@/drivers/base-driver";
 import { Button } from "../../ui/button";
-import { ColumnChangeEvent } from "./schema-editor-column-list";
+import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import {
   Select,
   SelectContent,
@@ -11,6 +10,7 @@ import {
   SelectValue,
 } from "../../ui/select";
 import { Textarea } from "../../ui/textarea";
+import type { ColumnChangeEvent } from "./schema-editor-column-list";
 
 export default function ColumnGeneratingPopup({
   constraint,

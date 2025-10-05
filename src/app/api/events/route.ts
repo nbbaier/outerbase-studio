@@ -15,7 +15,7 @@ const eventBodySchema = zod.object({
       zod.object({
         name: zod.string().max(255),
         data: zod.any().optional(),
-      })
+      }),
     )
     .min(1),
 });
@@ -67,6 +67,6 @@ export const POST = async (req: NextRequest) => {
         "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type, Authorization, x-od-id",
       },
-    }
+    },
   );
 };

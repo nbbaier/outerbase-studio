@@ -16,8 +16,8 @@ describe("split sql statements", () => {
   test("should parse a query with different statements in a single line", () => {
     expect(
       sqlite(
-        `INSERT INTO Persons (PersonID, Name) VALUES (1, 'Jack');SELECT * FROM Persons`
-      )
+        `INSERT INTO Persons (PersonID, Name) VALUES (1, 'Jack');SELECT * FROM Persons`,
+      ),
     ).toEqual([
       `INSERT INTO Persons (PersonID, Name) VALUES (1, 'Jack');`,
       `SELECT * FROM Persons`,
@@ -29,7 +29,7 @@ describe("split sql statements", () => {
       sqlite(`
         INSERT INTO Persons (PersonID, Name) VALUES (1, 'Jack');
         SELECT * FROM Persons';
-      `)
+      `),
     ).toEqual([
       `INSERT INTO Persons (PersonID, Name) VALUES (1, 'Jack');`,
       `SELECT * FROM Persons';\n      `,
@@ -54,7 +54,7 @@ INSTEAD OF UPDATE OF cust_addr ON customer_address
 BEGIN
   UPDATE customer SET cust_addr=NEW.cust_addr
    WHERE cust_id=NEW.cust_id;
-END ;`)
+END ;`),
     ).toEqual([
       `CREATE TABLE customer(\n  cust_id INTEGER PRIMARY KEY,\n  cust_name TEXT,\n  cust_addr TEXT\n);`,
       `CREATE VIEW customer_address AS\n   SELECT cust_id, cust_addr FROM customer;`,
@@ -72,7 +72,7 @@ BEGIN
     ELSEIF NEW.amount > 100 THEN
         SET NEW.amount = 100;
     END IF;
-END; SELECT * FROM hello`)
+END; SELECT * FROM hello`),
     ).toEqual([
       `CREATE TRIGGER upd_check BEFORE UPDATE ON account\nFOR EACH ROW\nBEGIN\n    IF NEW.amount < 0 THEN\n        SET NEW.amount = 0;\n    ELSEIF NEW.amount > 100 THEN\n        SET NEW.amount = 100;\n    END IF;\nEND;`,
       "SELECT * FROM hello",
@@ -87,7 +87,7 @@ BEGIN
     IF NEW.amount < 0 THEN
         SET NEW.amount = 0;
     ELSEIF NEW.amount > 100 THEN
-        SET NEW.amount = 100;`)
+        SET NEW.amount = 100;`),
     ).toEqual([
       "SELECT * FROM outerbase;",
       `CREATE TRIGGER upd_check BEFORE UPDATE ON account
@@ -105,7 +105,7 @@ BEGIN
       mysql(`create trigger hire_log after insert on employees 
 for each row insert into hiring values (new.id, current_time());
     
-insert into employees (first_name, last_name) values ("Tim", "Sehn");`)
+insert into employees (first_name, last_name) values ("Tim", "Sehn");`),
     ).toEqual([
       `create trigger hire_log after insert on employees \nfor each row insert into hiring values (new.id, current_time());`,
       `insert into employees (first_name, last_name) values ("Tim", "Sehn");`,
@@ -130,8 +130,8 @@ BEGIN
     EXECUTE IMMEDIATE 'CREATE TABLE TRUCKS (ID VARCHAR2(1), NAME VARCHAR2(10), TITLE 
     VARCHAR2(10))';
   END;
-END; SELECT * FROM outeerbase;`
-      )
+END; SELECT * FROM outeerbase;`,
+      ),
     ).toEqual([
       `CREATE PROCEDURE procCreateCarTable
 IS

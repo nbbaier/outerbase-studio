@@ -28,7 +28,7 @@ class ObjectRegistry {
     const obj = this.objects.get(id);
     if (obj === undefined) {
       throw new Error(
-        `Object reference not found: ${id} (available: ${[...this.objects.keys()].join(", ")})`
+        `Object reference not found: ${id} (available: ${[...this.objects.keys()].join(", ")})`,
       );
     }
     return obj;
@@ -73,7 +73,7 @@ export function deserializeV8(buffer: ArrayBuffer): DeserializationResponse {
 function deserializeValue(
   df: DataView,
   offset: number,
-  registry: ObjectRegistry = new ObjectRegistry()
+  registry: ObjectRegistry = new ObjectRegistry(),
 ): [unknown, number] {
   const type = df.getUint8(offset);
 
@@ -152,7 +152,7 @@ function deserializeValue(
 
     default:
       throw new Error(
-        `Unsupported type: ${String.fromCharCode(type)} (${type})`
+        `Unsupported type: ${String.fromCharCode(type)} (${type})`,
       );
   }
 }
@@ -166,7 +166,7 @@ function deserializeValue(
 function deserializeJSObject(
   df: DataView,
   offset: number,
-  registry: ObjectRegistry
+  registry: ObjectRegistry,
 ): [Record<string | number, unknown>, number] {
   const obj: Record<string | number, unknown> = {};
 
@@ -204,7 +204,7 @@ function deserializeJSObject(
   // Validate that we read the expected number of properties
   if (propertyCount !== numProperties) {
     throw new Error(
-      `Expected ${numProperties} properties, but read ${propertyCount}`
+      `Expected ${numProperties} properties, but read ${propertyCount}`,
     );
   }
 
@@ -220,7 +220,7 @@ function deserializeJSObject(
 function deserializeDenseJSArray(
   df: DataView,
   offset: number,
-  registry: ObjectRegistry
+  registry: ObjectRegistry,
 ): [unknown[], number] {
   const array: unknown[] = [];
 
@@ -318,7 +318,7 @@ function deserializeBigInt(df: DataView, offset: number): [bigint, number] {
 function deserializeString(
   df: DataView,
   offset: number,
-  encoding: string
+  encoding: string,
 ): [string, number] {
   const [length, lengthBytesRead] = decodeVarint(df, offset);
 
@@ -327,7 +327,7 @@ function deserializeString(
   const stringBytes = new Uint8Array(
     df.buffer,
     df.byteOffset + stringStart,
-    length
+    length,
   );
 
   // Decode using the specified encoding

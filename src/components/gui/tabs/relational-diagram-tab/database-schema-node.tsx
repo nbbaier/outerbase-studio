@@ -1,6 +1,6 @@
+import type { Node, NodeProps } from "@xyflow/react";
 import { BaseNode } from "@/components/base-node";
 import { TableBody } from "@/components/ui/table";
-import { Node, NodeProps } from "@xyflow/react";
 import ContextMenuERD from "./context-menu-diagram";
 import ERDTableColumn from "./erd-table-column";
 

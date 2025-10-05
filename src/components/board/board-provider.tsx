@@ -1,14 +1,14 @@
-import { BoardSourceDriver } from "@/drivers/board-source/base-source";
-import { IBoardStorageDriver } from "@/drivers/board-storage/base";
 import { noop } from "lodash";
 import {
   createContext,
-  Dispatch,
-  PropsWithChildren,
-  SetStateAction,
+  type Dispatch,
+  type PropsWithChildren,
+  type SetStateAction,
   useContext,
 } from "react";
-import { BoardEditorMode, DashboardProps } from ".";
+import type { BoardSourceDriver } from "@/drivers/board-source/base-source";
+import type { IBoardStorageDriver } from "@/drivers/board-storage/base";
+import type { BoardEditorMode, DashboardProps } from ".";
 
 interface BoardContextSettingProps {
   autoRefresh: string[];

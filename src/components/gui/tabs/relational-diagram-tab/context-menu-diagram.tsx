@@ -1,5 +1,5 @@
+import type { PropsWithChildren } from "react";
 import { useStudioContext } from "@/context/driver-provider";
-import { PropsWithChildren } from "react";
 
 import { scc } from "@/core/command";
 import {

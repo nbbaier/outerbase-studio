@@ -1,6 +1,6 @@
-import { Button } from "@/components/orbit/button";
-import { OuterbaseAPIUser } from "@/outerbase-cloud/api-type";
 import Image from "next/image";
+import { Button } from "@/components/orbit/button";
+import type { OuterbaseAPIUser } from "@/outerbase-cloud/api-type";
 
 export default function UserAvatar({ user }: { user: OuterbaseAPIUser }) {
   // not implement upload user avatar

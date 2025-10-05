@@ -9,7 +9,7 @@ export type TooltipDirectionary = Record<
 
 function getCursorTooltips(
   state: EditorState,
-  dict: TooltipDirectionary
+  dict: TooltipDirectionary,
 ): readonly Tooltip[] {
   const tree = syntaxTree(state);
   const pos = state.selection.main.head;

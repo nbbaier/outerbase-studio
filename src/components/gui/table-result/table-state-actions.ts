@@ -23,7 +23,7 @@ export default class TableStateActions {
   }
 
   static duplicateRowWithoutKey(
-    state: OptimizeTableState<TableHeaderMetadata>
+    state: OptimizeTableState<TableHeaderMetadata>,
   ) {
     const rowIndex = state.getFocus()?.y;
     if (!rowIndex) return;

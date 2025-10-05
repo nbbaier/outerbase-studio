@@ -1,5 +1,5 @@
-import { useTheme } from "next-themes";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 import { useMemo } from "react";
 
 export default function EmptyTermDefinition() {

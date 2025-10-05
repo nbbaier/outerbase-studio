@@ -1,10 +1,10 @@
-import OpacityLoading from "@/components/gui/loading-opacity";
-import { useStudioContext } from "@/context/driver-provider";
-import { DatabaseTableSchemaChange } from "@/drivers/base-driver";
-import { generateId } from "@/lib/generate-id";
-import { createTableSchemaDraft } from "@/lib/sql/sql-generate.schema";
 import { cloneDeep } from "lodash";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import OpacityLoading from "@/components/gui/loading-opacity";
+import { useStudioContext } from "@/context/driver-provider";
+import type { DatabaseTableSchemaChange } from "@/drivers/base-driver";
+import { generateId } from "@/lib/generate-id";
+import { createTableSchemaDraft } from "@/lib/sql/sql-generate.schema";
 import SchemaEditor from "../schema-editor";
 import SchemaSaveDialog from "../schema-editor/schema-save-dialog";
 
@@ -42,7 +42,7 @@ export default function SchemaEditorTab({
         .catch(console.error)
         .finally(() => setLoading(false));
     },
-    [databaseDriver, setSchema]
+    [databaseDriver],
   );
 
   useEffect(() => {
@@ -55,10 +55,7 @@ export default function SchemaEditorTab({
     return databaseDriver.createUpdateTableSchema(schema);
   }, [schema, databaseDriver]);
 
-  const onSaveToggle = useCallback(
-    () => setIsSaving((prev) => !prev),
-    [setIsSaving]
-  );
+  const onSaveToggle = useCallback(() => setIsSaving((prev) => !prev), []);
 
   const onDiscard = useCallback(() => {
     setSchema((prev) => {
@@ -79,7 +76,7 @@ export default function SchemaEditorTab({
         })),
       };
     });
-  }, [setSchema]);
+  }, []);
 
   if (loading) {
     return (

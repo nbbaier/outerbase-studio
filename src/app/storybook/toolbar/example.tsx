@@ -1,10 +1,10 @@
+import { LucideCopy, LucideFolder, LucideSave } from "lucide-react";
 import {
   Toolbar,
   ToolbarButton,
   ToolbarFiller,
   ToolbarSeparator,
 } from "@/components/gui/toolbar";
-import { LucideCopy, LucideFolder, LucideSave } from "lucide-react";
 
 export function StorybookToolbarExample() {
   return (

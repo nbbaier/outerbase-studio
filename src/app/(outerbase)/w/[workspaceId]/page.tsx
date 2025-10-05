@@ -1,10 +1,10 @@
 "use client";
 
-import { ConnectionTemplateDictionary } from "@/components/connection-config-editor/template";
-import { useOuterbaseDashboardList } from "@/outerbase-cloud/hook";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
 import { toast } from "sonner";
+import { ConnectionTemplateDictionary } from "@/components/connection-config-editor/template";
+import { useOuterbaseDashboardList } from "@/outerbase-cloud/hook";
 import NavigationHeader from "../../nav-header";
 import NavigationLayout from "../../nav-layout";
 import {
@@ -46,7 +46,8 @@ export default function WorkspaceListPage() {
       (dashboardList ?? [])
         .filter(
           (board) =>
-            board.workspace_id === currentWorkspace.id && board.base_id === null
+            board.workspace_id === currentWorkspace.id &&
+            board.base_id === null,
         )
         .map((board) => {
           return getResourceItemPropsFromBoard(currentWorkspace, board);
@@ -69,7 +70,7 @@ export default function WorkspaceListPage() {
         })
         .catch();
     },
-    [currentWorkspace, refreshDashboardList]
+    [currentWorkspace, refreshDashboardList],
   );
 
   const onDeleteBaseClicked = useCallback(
@@ -87,7 +88,7 @@ export default function WorkspaceListPage() {
         })
         .catch();
     },
-    [currentWorkspace, refreshWorkspace]
+    [currentWorkspace, refreshWorkspace],
   );
 
   const onCreateBoardClicked = useCallback(() => {
@@ -102,7 +103,7 @@ export default function WorkspaceListPage() {
 
         refreshDashboardList();
         router.push(
-          `/w/${currentWorkspace.short_name}/board/${createdBoard.id}`
+          `/w/${currentWorkspace.short_name}/board/${createdBoard.id}`,
         );
       });
   }, [currentWorkspace, router, refreshDashboardList]);
@@ -116,10 +117,10 @@ export default function WorkspaceListPage() {
       }
 
       router.push(
-        `/w/${currentWorkspace.short_name}/edit-base/${editResource.id}`
+        `/w/${currentWorkspace.short_name}/edit-base/${editResource.id}`,
       );
     },
-    [currentWorkspace, router]
+    [currentWorkspace, router],
   );
 
   return (

@@ -277,7 +277,7 @@ WHERE
       const table = tableRecord[tableKey];
       if (table.tableSchema?.constraints) {
         const pk = table.tableSchema.constraints.find(
-          (c) => c.primaryKey
+          (c) => c.primaryKey,
         ) as DatabaseTableColumnConstraint;
         if (pk) {
           table.tableSchema.pk = pk.primaryColumns ?? [];
@@ -290,11 +290,11 @@ WHERE
 
   async tableSchema(
     schemaName: string,
-    tableName: string
+    tableName: string,
   ): Promise<DatabaseTableSchema> {
     const columnsResult = (
       await this.query(
-        `SELECT * FROM information_schema.columns WHERE  table_schema = ${this.escapeValue(schemaName)} AND table_name = ${this.escapeValue(tableName)}`
+        `SELECT * FROM information_schema.columns WHERE  table_schema = ${this.escapeValue(schemaName)} AND table_name = ${this.escapeValue(tableName)}`,
       )
     ).rows as unknown as PostgresColumnRow[];
 
@@ -327,7 +327,7 @@ WHERE
 
     const constraintRecord: Record<string, DatabaseTableColumnConstraint> = {};
     for (const constraint of constraintResult.filter(
-      (f) => f.column_name !== null
+      (f) => f.column_name !== null,
     )) {
       const key = constraint.constraint_name;
       const constraintItem = constraintRecord[key] || {

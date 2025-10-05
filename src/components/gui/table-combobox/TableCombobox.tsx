@@ -1,7 +1,7 @@
-import { useSchema } from "@/context/schema-provider";
-import { cn } from "@/lib/utils";
 import { Check, ChevronsUpDown, LucideRefreshCw } from "lucide-react";
 import { useState } from "react";
+import { useSchema } from "@/context/schema-provider";
+import { cn } from "@/lib/utils";
 import { Button, buttonVariants } from "../../ui/button";
 import {
   Command,
@@ -41,7 +41,7 @@ export default function TableCombobox({
           <div
             className={cn(
               buttonVariants({ variant: "outline" }),
-              "flex w-full justify-between"
+              "flex w-full justify-between",
             )}
           >
             {value || "No table selected"}
@@ -67,7 +67,7 @@ export default function TableCombobox({
                 <Check
                   className={cn(
                     "mr-2 h-4 w-4",
-                    value === table.name ? "opacity-100" : "opacity-0"
+                    value === table.name ? "opacity-100" : "opacity-0",
                   )}
                 />
                 {table.name}

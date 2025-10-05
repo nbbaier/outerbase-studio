@@ -1,6 +1,6 @@
 export default function parseSafeJson<T = unknown>(
   str: string | null | undefined,
-  defaultValue: T
+  defaultValue: T,
 ): T {
   if (!str) return defaultValue;
 

@@ -15,7 +15,7 @@ export class CommunicationChannel<T = unknown, P = void> {
     this.listeners.push(receiver);
     return () => {
       this.listeners = this.listeners.filter(
-        (listener) => listener !== receiver
+        (listener) => listener !== receiver,
       );
     };
   }

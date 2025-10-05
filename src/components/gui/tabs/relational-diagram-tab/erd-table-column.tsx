@@ -1,3 +1,5 @@
+import { Position } from "@xyflow/react";
+import { Key } from "lucide-react";
 import { BaseHandle } from "@/components/base-handle";
 import { TableCell, TableRow } from "@/components/ui/table";
 import {
@@ -5,9 +7,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { Position } from "@xyflow/react";
-import { Key } from "lucide-react";
-import { ERDSchemaNodeColumnProps } from "./database-schema-node";
+import type { ERDSchemaNodeColumnProps } from "./database-schema-node";
 
 export default function ERDTableColumn({
   column,

@@ -1,4 +1,3 @@
-import { Fragment } from "react";
 import ThemeLayout from "../(theme)/theme_layout";
 
 export default async function RootLayout({
@@ -6,9 +5,5 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return (
-    <ThemeLayout overrideTheme="dark">
-      <Fragment>{children}</Fragment>
-    </ThemeLayout>
-  );
+  return <ThemeLayout overrideTheme="dark">{children}</ThemeLayout>;
 }

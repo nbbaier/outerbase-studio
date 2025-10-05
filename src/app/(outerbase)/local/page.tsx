@@ -1,17 +1,20 @@
 "use client";
 
+import { CaretDown } from "@phosphor-icons/react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useCallback, useMemo } from "react";
 import { MySQLIcon, SQLiteIcon } from "@/components/icons/outerbase-icon";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { CaretDown } from "@phosphor-icons/react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useCallback, useMemo } from "react";
 import NavigationLayout from "../nav-layout";
-import { ResourceItemList, ResourceItemProps } from "../resource-item-helper";
+import {
+  ResourceItemList,
+  type ResourceItemProps,
+} from "../resource-item-helper";
 import { deleteLocalBaseDialog } from "./dialog-base-delete";
 import { createLocalBoardDialog } from "./dialog-board-create";
 import { deleteLocalBoardDialog } from "./dialog-board-delete";
@@ -73,7 +76,7 @@ export default function LocalConnectionPage() {
         .then(refreshBase)
         .catch();
     },
-    [refreshBase]
+    [refreshBase],
   );
 
   const onBoardRemove = useCallback((deletedResource: ResourceItemProps) => {
@@ -145,7 +148,9 @@ export default function LocalConnectionPage() {
                 .fill("a")
                 .map(
                   () =>
-                    "abcdefghijklmnopqrstuvwxyz"[Math.floor(Math.random() * 26)]
+                    "abcdefghijklmnopqrstuvwxyz"[
+                      Math.floor(Math.random() * 26)
+                    ],
                 )
                 .join("");
 

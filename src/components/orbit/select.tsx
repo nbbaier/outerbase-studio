@@ -29,7 +29,7 @@ export const Select = ({
         {
           "text-muted-foreground!": !value,
         },
-        className
+        className,
       )}
       style={{
         backgroundImage: "url(/caret.svg)",

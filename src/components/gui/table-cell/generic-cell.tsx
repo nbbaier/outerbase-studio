@@ -1,18 +1,18 @@
+import type { ColumnType } from "@outerbase/sdk-transform";
+import { LucideArrowUpRight, LucideLoader } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useStudioContext } from "@/context/driver-provider";
-import { DatabaseResultSet, DatabaseValue } from "@/drivers/base-driver";
+import type { DatabaseResultSet, DatabaseValue } from "@/drivers/base-driver";
 import { convertDatabaseValueToString } from "@/drivers/sqlite/sql-helper";
 import { cn } from "@/lib/utils";
 import { isLinkString } from "@/lib/validation";
-import { ColumnType } from "@outerbase/sdk-transform";
-import { LucideArrowUpRight, LucideLoader } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
-import { OptimizeTableHeaderWithIndexProps } from "../table-optimized";
-import { TableHeaderMetadata } from "../table-result/type";
+import type { OptimizeTableHeaderWithIndexProps } from "../table-optimized";
+import type { TableHeaderMetadata } from "../table-result/type";
 import DisplayLinkCell from "./display-link-cell";
 
 interface TableCellProps<T = unknown> {
@@ -81,7 +81,7 @@ function SnippetRow({
             <div
               className={cn(
                 "line-clamp-1 block w-[350px] overflow-hidden font-mono text-sm text-ellipsis whitespace-nowrap",
-                colorClassName
+                colorClassName,
               )}
             >
               {convertDatabaseValueToString(value) || "EMPTY"}
@@ -125,7 +125,7 @@ export function prettifyBytes(bytes: Uint8Array) {
         ? "\\\\"
         : b >= 0x20 && b !== 0x7f
           ? String.fromCharCode(b)
-          : "\\x" + b.toString(16).toUpperCase().padStart(2, "0")
+          : `\\x${b.toString(16).toUpperCase().padStart(2, "0")}`,
     )
     .join("");
 }
@@ -184,7 +184,7 @@ export default function GenericCell({
 
   const textBaseStyle = cn(
     "flex grow text-neutral-500",
-    isAlignRight ? "justify-end" : ""
+    isAlignRight ? "justify-end" : "",
   );
 
   const fkContent = useMemo(() => {
@@ -231,7 +231,7 @@ export default function GenericCell({
         <span
           className={cn(
             "flex-1 overflow-hidden text-ellipsis whitespace-nowrap",
-            "text-neutral-950 dark:text-neutral-50"
+            "text-neutral-950 dark:text-neutral-50",
           )}
         >
           {value}
@@ -244,7 +244,7 @@ export default function GenericCell({
         <span
           className={cn(
             "flex-1 overflow-hidden text-ellipsis whitespace-nowrap",
-            "block grow text-right text-blue-700 dark:text-blue-300"
+            "block grow text-right text-blue-700 dark:text-blue-300",
           )}
         >
           {value.toString()}

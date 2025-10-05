@@ -1,6 +1,6 @@
-import { cn } from "@/lib/utils";
 import { LucideLoader } from "lucide-react";
-import { PropsWithChildren, ReactElement } from "react";
+import type { PropsWithChildren, ReactElement } from "react";
+import { cn } from "@/lib/utils";
 import { buttonVariants } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
@@ -45,7 +45,7 @@ export function ToolbarButton({
       className={cn(
         "flex gap-2",
         buttonVariants({ variant: "ghost", size: "sm" }),
-        destructive ? "text-red-500 hover:text-red-500" : ""
+        destructive ? "text-red-500 hover:text-red-500" : "",
       )}
       disabled={disabled}
       onClick={onClick}

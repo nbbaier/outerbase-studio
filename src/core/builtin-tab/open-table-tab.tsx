@@ -1,5 +1,5 @@
-import TableDataWindow from "@/components/gui/tabs/table-data-tab";
 import { Table } from "@phosphor-icons/react";
+import TableDataWindow from "@/components/gui/tabs/table-data-tab";
 import { createTabExtension } from "../extension-tab";
 
 export const builtinOpenTableTab = createTabExtension<{
@@ -8,7 +8,7 @@ export const builtinOpenTableTab = createTabExtension<{
 }>({
   name: "table",
   key: (options) => {
-    return options.schemaName + "-" + options?.tableName;
+    return `${options.schemaName}-${options?.tableName}`;
   },
   generate: (options) => ({
     title: options.tableName,

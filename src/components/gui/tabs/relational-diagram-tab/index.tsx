@@ -1,9 +1,3 @@
-import { DatabaseSchemaNode } from "@/components/gui/tabs/relational-diagram-tab/database-schema-node";
-import { DevTools } from "@/components/gui/tabs/relational-diagram-tab/devtools";
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { useSchema } from "@/context/schema-provider";
-import { DatabaseSchemas } from "@/drivers/base-driver";
 import Dagre from "@dagrejs/dagre";
 import {
   AlignCenterHorizontalSimple,
@@ -12,15 +6,21 @@ import {
 import {
   Background,
   Controls,
-  Edge,
+  type Edge,
   MarkerType,
   MiniMap,
-  Node,
+  type Node,
   ReactFlow,
   ReactFlowProvider,
   useEdgesState,
   useNodesState,
 } from "@xyflow/react";
+import { DatabaseSchemaNode } from "@/components/gui/tabs/relational-diagram-tab/database-schema-node";
+import { DevTools } from "@/components/gui/tabs/relational-diagram-tab/devtools";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { useSchema } from "@/context/schema-provider";
+import type { DatabaseSchemas } from "@/drivers/base-driver";
 import "@xyflow/react/dist/style.css";
 import { LucideRefreshCcw } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -36,7 +36,7 @@ const MAX_NODE_WIDTH = 300;
 function getLayoutElements(
   nodes: Node[],
   edges: Edge[],
-  options: Dagre.GraphLabel
+  options: Dagre.GraphLabel,
 ) {
   const g = new Dagre.graphlib.Graph().setDefaultEdgeLabel(() => ({}));
   g.setGraph(options);
@@ -47,7 +47,7 @@ function getLayoutElements(
       ...node,
       width: node.measured?.width ?? 0,
       height: node.measured?.height ?? 0,
-    })
+    }),
   );
 
   Dagre.layout(g);
@@ -68,7 +68,7 @@ function getLayoutElements(
 function mapSchema(
   schema: DatabaseSchemas,
   selectedSchema: string,
-  rankdir?: string
+  rankdir?: string,
 ): { initialNodes: Node[]; initialEdges: Edge[] } {
   const initialEdges: Edge[] = [];
 
@@ -81,10 +81,10 @@ function mapSchema(
 
     // Get the relationship via column constraint
     for (const column of item.tableSchema?.columns || []) {
-      if (column.constraint && column.constraint.foreignKey) {
+      if (column.constraint?.foreignKey) {
         tableNameWithRelationship.add(item.name);
         tableNameWithRelationship.add(
-          column.constraint.foreignKey.foreignTableName || ""
+          column.constraint.foreignKey.foreignTableName || "",
         );
 
         foreignKeyList.add(`${item.name}.${column.name}`);
@@ -120,7 +120,7 @@ function mapSchema(
       ) {
         tableNameWithRelationship.add(item.name);
         tableNameWithRelationship.add(
-          constraint.foreignKey.foreignTableName || ""
+          constraint.foreignKey.foreignTableName || "",
         );
 
         const columnName = constraint.foreignKey.columns
@@ -199,7 +199,7 @@ function mapSchema(
       rankdir: rankdir ? rankdir : "LR",
       marginx: NODE_MARGIN,
       marginy: NODE_MARGIN,
-    }
+    },
   );
 
   // Rearrange the nodes with relationship
@@ -221,14 +221,14 @@ function mapSchema(
     schemaWithoutRelationship.reduce(
       (a, b) =>
         (a = a + (b.tableSchema?.columns.length || 0) * 32 + 32 + NODE_MARGIN),
-      0
+      0,
     ) * MAX_NODE_WIDTH;
 
   // Calculate the number column to fit all the none relationship nodes
   const columnCount = Math.ceil(Math.sqrt(area) / MAX_NODE_WIDTH);
   const columnHeight = Array.from({ length: columnCount }).map(() => 0);
   const columnNodes: Node[][] = Array.from({ length: columnCount }).map(
-    () => []
+    () => [],
   );
 
   for (const node of schemaWithoutRelationship) {
@@ -325,7 +325,7 @@ function LayoutFlow() {
               if (selectedSchema) {
                 const { initialEdges, initialNodes } = mapSchema(
                   schema,
-                  selectedSchema
+                  selectedSchema,
                 );
                 setNodes(initialNodes);
                 setEdges(initialEdges);
@@ -342,7 +342,7 @@ function LayoutFlow() {
                 const { initialEdges, initialNodes } = mapSchema(
                   schema,
                   selectedSchema,
-                  "TB"
+                  "TB",
                 );
                 setNodes(initialNodes);
                 setEdges(initialEdges);

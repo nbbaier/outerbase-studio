@@ -1,11 +1,11 @@
 "use client";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 import { Studio } from "@/components/gui/studio";
 import ServerLoadingAnimation from "@/components/icons/server-loading";
 import { StudioExtensionManager } from "@/core/extension-manager";
 import { createMySQLExtensions } from "@/core/standard-extension";
 import MySQLPlaygroundDriver from "@/drivers/mysql/mysql-playground-driver";
-import { useSearchParams } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
 
 export default function MySQLPlaygroundPageClient({
   roomName,
@@ -21,7 +21,7 @@ export default function MySQLPlaygroundPageClient({
     return new MySQLPlaygroundDriver(roomName, {
       onReady: () => setReady(true),
     });
-  }, [setReady, roomName]);
+  }, [roomName]);
 
   const extensions = useMemo(() => {
     return new StudioExtensionManager(createMySQLExtensions());

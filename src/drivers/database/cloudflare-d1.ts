@@ -23,7 +23,7 @@ interface CloudflareResponse {
 export class CloudflareD1Queryable implements QueryableBaseDriver {
   constructor(
     protected url: string,
-    protected headers: Record<string, string>
+    protected headers: Record<string, string>,
   ) {
     this.headers = headers;
     this.url = url;

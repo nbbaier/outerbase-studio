@@ -7,8 +7,8 @@ export default function HighlightText({ text, highlight }: Props) {
   if (!highlight) return <span>{text}</span>;
 
   const regex = new RegExp(
-    "(" + (highlight ?? "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")",
-    "i"
+    `(${(highlight ?? "").replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`,
+    "i",
   );
 
   const splitedText = text.split(regex);

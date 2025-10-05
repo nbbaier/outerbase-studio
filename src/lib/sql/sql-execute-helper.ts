@@ -32,7 +32,7 @@ function generateTableChangePlan({
           condition[pkColumnName] = row.raw[pkColumnName];
           return condition;
         },
-        {}
+        {},
       );
 
       if (row.isNewRow) {
@@ -89,7 +89,7 @@ export async function commitChange({
       tableSchema.schemaName,
       tableName,
       plans.map((p) => p.plan),
-      tableSchema
+      tableSchema,
     );
 
     data.applyChanges(
@@ -98,7 +98,7 @@ export async function commitChange({
           row: p.row,
           updated: result[idx]?.record ?? {},
         };
-      })
+      }),
     );
   } catch (e) {
     return { errorMessage: (e as Error).message };

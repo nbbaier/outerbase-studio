@@ -1,7 +1,11 @@
-import { SavedConnectionRawLocalStorage } from "@/app/(theme)/connect/saved-connection-storage";
-import { BaseDriver, DatabaseResultSet, DatabaseSchemas } from "../base-driver";
+import type { SavedConnectionRawLocalStorage } from "@/app/(theme)/connect/saved-connection-storage";
+import type {
+  BaseDriver,
+  DatabaseResultSet,
+  DatabaseSchemas,
+} from "../base-driver";
 import { createLocalDriver } from "../helpers";
-import { BoardSource, BoardSourceDriver } from "./base-source";
+import { type BoardSource, BoardSourceDriver } from "./base-source";
 
 export default class LocalBoardSource extends BoardSourceDriver {
   protected sources: SavedConnectionRawLocalStorage[];

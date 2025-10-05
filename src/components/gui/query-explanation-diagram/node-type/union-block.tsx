@@ -1,6 +1,6 @@
-import { BaseHandle } from "@/components/base-handle";
-import { ExplainNodeProps } from "../build-query-explanation-flow";
 import { Position } from "@xyflow/react";
+import { BaseHandle } from "@/components/base-handle";
+import type { ExplainNodeProps } from "../build-query-explanation-flow";
 
 export function UnionBlock(props: ExplainNodeProps) {
   return (

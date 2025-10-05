@@ -9,9 +9,9 @@
  * Users can customize the templates to suit their specific requirements.
  */
 
-import { ConnectionTemplateList } from "@/app/(outerbase)/base-template";
-import { cn } from "@/lib/utils";
 import { produce } from "immer";
+import type { ConnectionTemplateList } from "@/app/(outerbase)/base-template";
+import { cn } from "@/lib/utils";
 import { CommonDialogProvider } from "../common-dialog";
 import FileHandlerPicker from "../filehandler-picker";
 import { Input } from "../orbit/input";
@@ -22,14 +22,14 @@ import { Textarea } from "../ui/textarea";
 
 export function validateTemplate(
   value: CommonConnectionConfig,
-  template: ConnectionTemplateList
+  template: ConnectionTemplateList,
 ): Record<string, string> {
   const templateRow = template.template;
 
   const validationErrors: Record<string, string> = {};
 
   if (!value.name) {
-    validationErrors["name"] = "Name is required";
+    validationErrors.name = "Name is required";
   }
 
   for (const row of templateRow) {
@@ -54,7 +54,7 @@ export function ConnectionConfigEditor({
   return (
     <div className="flex w-full gap-4">
       <div className="flex w-1/2 grow-0 flex-col gap-4">
-        <Label title="Name" requiredDescription={errors?.["name"]} required>
+        <Label title="Name" requiredDescription={errors?.name} required>
           <Input
             autoFocus
             size="lg"
@@ -64,7 +64,7 @@ export function ConnectionConfigEditor({
               onChange(
                 produce(value, (draft) => {
                   draft.name = e.target.value as never;
-                })
+                }),
               );
             }}
           />
@@ -92,7 +92,7 @@ export function ConnectionConfigEditor({
                           onChange(
                             produce(value, (draft) => {
                               draft[column.name] = e.target.value as never;
-                            })
+                            }),
                           );
                         }}
                       />
@@ -114,7 +114,7 @@ export function ConnectionConfigEditor({
                           onChange(
                             produce(value, (draft) => {
                               draft[column.name] = e.target.value as never;
-                            })
+                            }),
                           );
                         }}
                       />
@@ -129,7 +129,7 @@ export function ConnectionConfigEditor({
                           onChange(
                             produce(value, (draft) => {
                               draft[column.name] = checked as never;
-                            })
+                            }),
                           );
                         }}
                         toggled={!!value[column.name]}
@@ -153,7 +153,7 @@ export function ConnectionConfigEditor({
                               onChange(
                                 produce(value, (draft) => {
                                   draft[column.name] = fileId as never;
-                                })
+                                }),
                               );
                             }}
                           />
@@ -169,13 +169,13 @@ export function ConnectionConfigEditor({
                   return (
                     <div key={column.name}>
                       <MenuBar
-                        value={value["starbase_type"] ?? ""}
+                        value={value.starbase_type ?? ""}
                         items={column.options}
                         onChange={(e) => {
                           onChange(
                             produce(value, (draft) => {
                               draft[column.name] = e as never;
-                            })
+                            }),
                           );
                         }}
                       />

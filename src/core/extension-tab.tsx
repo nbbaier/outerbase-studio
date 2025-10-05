@@ -1,6 +1,6 @@
-import { WindowTabItemProps } from "@/components/gui/windows-tab";
-import { scc } from "./command";
+import type { WindowTabItemProps } from "@/components/gui/windows-tab";
 import { CommunicationChannel } from "./channel";
+import { scc } from "./command";
 
 interface TabExtensionConfig<T> {
   name: string;
@@ -20,7 +20,7 @@ export const tabReplaceChannel = new CommunicationChannel<WindowTabItemProps>();
 export const tabCloseChannel = new CommunicationChannel<string[]>();
 
 export function createTabExtension<T>(
-  config: TabExtensionConfig<T>
+  config: TabExtensionConfig<T>,
 ): TabExtensionCommand<T> {
   return Object.freeze({
     generate: (options: T) => {

@@ -1,10 +1,13 @@
-import { OptimizeTableHeaderProps } from "@/components/gui/table-optimized";
-import OptimizeTableState from "@/components/gui/table-optimized/optimize-table-state";
-import { TableHeaderMetadata } from "@/components/gui/table-result/type";
-import { DatabaseSchemaItem, DatabaseSchemas } from "@/drivers/base-driver";
-import { ReactElement } from "react";
-import { IStudioExtension } from "./extension-base";
-import { BeforeQueryPipeline } from "./query-pipeline";
+import type { ReactElement } from "react";
+import type { OptimizeTableHeaderProps } from "@/components/gui/table-optimized";
+import type OptimizeTableState from "@/components/gui/table-optimized/optimize-table-state";
+import type { TableHeaderMetadata } from "@/components/gui/table-result/type";
+import type {
+  DatabaseSchemaItem,
+  DatabaseSchemas,
+} from "@/drivers/base-driver";
+import type { IStudioExtension } from "./extension-base";
+import type { BeforeQueryPipeline } from "./query-pipeline";
 
 interface RegisterSidebarOption {
   key: string;
@@ -26,12 +29,12 @@ export interface StudioExtensionMenuItem {
 }
 
 type CreateResourceMenuHandler = (
-  resource: DatabaseSchemaItem
+  resource: DatabaseSchemaItem,
 ) => StudioExtensionMenuItem | undefined;
 
 type QueryHeaderResultMenuHandler = (
   header: OptimizeTableHeaderProps<TableHeaderMetadata>,
-  state: OptimizeTableState<TableHeaderMetadata>
+  state: OptimizeTableState<TableHeaderMetadata>,
 ) => StudioExtensionMenuItem | undefined;
 
 type AfterFetchSchemaHandler = (schema: DatabaseSchemas) => void;
@@ -78,7 +81,7 @@ export class StudioExtensionContext {
 
   registerResourceContextMenu(
     handler: CreateResourceMenuHandler,
-    group: "other" | "modification" = "other"
+    group: "other" | "modification" = "other",
   ) {
     if (!this.resourceContextMenu[group]) {
       this.resourceContextMenu[group] = [handler];
@@ -116,7 +119,7 @@ export class StudioExtensionManager extends StudioExtensionContext {
 
   getResourceContextMenu(
     resource: DatabaseSchemaItem,
-    group: "other" | "modification"
+    group: "other" | "modification",
   ) {
     return (this.resourceContextMenu[group] ?? [])
       .map((handler) => handler(resource))
@@ -125,7 +128,7 @@ export class StudioExtensionManager extends StudioExtensionContext {
 
   getQueryHeaderContextMenu(
     header: OptimizeTableHeaderProps<TableHeaderMetadata>,
-    state: OptimizeTableState<TableHeaderMetadata>
+    state: OptimizeTableState<TableHeaderMetadata>,
   ) {
     return this.queryResultHeaderContextMenu
       .map((handler) => handler(header, state))

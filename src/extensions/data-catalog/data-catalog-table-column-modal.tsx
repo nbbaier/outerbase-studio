@@ -1,3 +1,7 @@
+import { MagicWand } from "@phosphor-icons/react";
+import { produce } from "immer";
+import { LucideLoader } from "lucide-react";
+import { useCallback, useState } from "react";
 import { Button } from "@/components/orbit/button";
 import {
   DialogDescription,
@@ -8,12 +12,8 @@ import {
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useStudioContext } from "@/context/driver-provider";
-import { MagicWand } from "@phosphor-icons/react";
-import { produce } from "immer";
-import { LucideLoader } from "lucide-react";
-import { useCallback, useState } from "react";
 import { useDataCatalogContext } from "./data-model-tab";
-import { DataCatalogColumnInput } from "./driver";
+import type { DataCatalogColumnInput } from "./driver";
 
 interface DataCatalogTableColumnModalProps {
   schemaName: string;
@@ -44,14 +44,14 @@ export default function DataCatalogTableColumnModal({
     setSampleLoading(true);
     databaseDriver
       .query(
-        `SELECT DISTINCT ${databaseDriver.escapeId(columnName)} FROM ${databaseDriver.escapeId(schemaName)}.${databaseDriver.escapeId(tableName)} LIMIT 10`
+        `SELECT DISTINCT ${databaseDriver.escapeId(columnName)} FROM ${databaseDriver.escapeId(schemaName)}.${databaseDriver.escapeId(tableName)} LIMIT 10`,
       )
       .then((r) => {
         setColumn((prev) =>
           produce(prev, (draft) => {
             const row = r.rows.map((row) => row[columnName]);
             draft.samples = row as string[];
-          })
+          }),
         );
       })
       .finally(() => setSampleLoading(false));
@@ -95,7 +95,7 @@ export default function DataCatalogTableColumnModal({
               setColumn((prev) =>
                 produce(prev, (draft) => {
                   draft.definition = e.target.value;
-                })
+                }),
               );
             }}
             placeholder="Please provide the definition of a column. This is intended to enhance AI functionality."

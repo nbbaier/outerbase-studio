@@ -1,11 +1,11 @@
 "use client";
 import { produce } from "immer";
-import { Dispatch, SetStateAction, useMemo } from "react";
+import { type Dispatch, type SetStateAction, useMemo } from "react";
 import { MenuBar } from "../orbit/menu-bar";
 import { Select } from "../orbit/select";
 import { capitalizeFirstChar } from "./chart-background-selection";
 import ChartSeries from "./chart-series";
-import { ChartLabelDisplayY, ChartValue } from "./chart-type";
+import type { ChartLabelDisplayY, ChartValue } from "./chart-type";
 import SimpleInput from "./simple-input";
 
 interface ChartYAxisSectionProps {
@@ -42,7 +42,7 @@ export default function ChartYAxisSection({
               label: "Hidden",
             },
           ]}
-          setValue={function (value: string): void {
+          setValue={(value: string): void => {
             onChange((prev) => {
               return produce(prev, (draft) => {
                 draft.params.options.yAxisLabelDisplay =
@@ -51,7 +51,7 @@ export default function ChartYAxisSection({
             });
           }}
           value={capitalizeFirstChar(
-            value.params.options?.yAxisLabelDisplay ?? "left"
+            value.params.options?.yAxisLabelDisplay ?? "left",
           )}
         />
       </div>
@@ -102,7 +102,7 @@ export default function ChartYAxisSection({
       </div>
       <ChartSeries
         value={value}
-        onChange={function (value: SetStateAction<ChartValue>): void {
+        onChange={(value: SetStateAction<ChartValue>): void => {
           onChange(value);
         }}
         isNotChartComponent={isNotChartComponent}

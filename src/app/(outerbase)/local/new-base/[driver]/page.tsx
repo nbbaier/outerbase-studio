@@ -1,5 +1,9 @@
 "use client";
 
+import { ArrowLeft, ArrowRight, FloppyDisk } from "@phosphor-icons/react";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useMemo, useState } from "react";
+import { mutate } from "swr";
 import {
   type CommonConnectionConfig,
   ConnectionConfigEditor,
@@ -8,10 +12,6 @@ import {
 import { ConnectionTemplateDictionary } from "@/components/connection-config-editor/template";
 import { Button } from "@/components/orbit/button";
 import { getDatabaseFriendlyName } from "@/components/resource-card/utils";
-import { ArrowLeft, ArrowRight, FloppyDisk } from "@phosphor-icons/react";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useMemo, useState } from "react";
-import { mutate } from "swr";
 import { createLocalConnection } from "../../hooks";
 
 export default function LocalNewBasePage() {
@@ -30,7 +30,7 @@ export default function LocalNewBasePage() {
   });
   const [loading, setLoading] = useState(false);
   const [validateErrors, setValidateErrors] = useState<Record<string, string>>(
-    {}
+    {},
   );
 
   const template = useMemo(() => {
@@ -64,7 +64,7 @@ export default function LocalNewBasePage() {
     router.replace(
       newConnection.content.driver === "sqlite-filehandler"
         ? `/playground/client?s=${newConnection.id}`
-        : `/client/s/${newConnection.content.driver ?? "turso"}?p=${newConnection.id}`
+        : `/client/s/${newConnection.content.driver ?? "turso"}?p=${newConnection.id}`,
     );
   }, [template, value, router]);
 

@@ -1,10 +1,10 @@
-import { useStudioContext } from "@/context/driver-provider";
-import { cn } from "@/lib/utils";
 import { ArrowLeft } from "@phosphor-icons/react";
-import { useTheme } from "next-themes";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { ReactElement, useState } from "react";
+import { useTheme } from "next-themes";
+import { type ReactElement, useState } from "react";
+import { useStudioContext } from "@/context/driver-provider";
+import { cn } from "@/lib/utils";
 import ThemeToggle from "../theme-toggle";
 import {
   DropdownMenu,
@@ -136,7 +136,7 @@ export default function SidebarTab({ tabs }: Readonly<SidebarTabProps>) {
                       "cursor flex h-10 w-10 cursor-pointer flex-col items-center justify-center gap-0.5 text-neutral-400 hover:text-neutral-900 dark:text-neutral-600 dark:hover:text-neutral-100",
                       selectedIndex === idx
                         ? "rounded-xl bg-neutral-200 text-neutral-900 dark:bg-neutral-800 dark:text-neutral-100"
-                        : undefined
+                        : undefined,
                     )}
                   >
                     {icon}

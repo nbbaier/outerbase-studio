@@ -1,11 +1,11 @@
-import { useStudioContext } from "@/context/driver-provider";
-import { useSchema } from "@/context/schema-provider";
-import { scc } from "@/core/command";
-import { StudioExtensionMenuItem } from "@/core/extension-manager";
-import { cn } from "@/lib/utils";
 import { Plus } from "@phosphor-icons/react";
 import { LucideSearch } from "lucide-react";
 import { useMemo, useState } from "react";
+import { useStudioContext } from "@/context/driver-provider";
+import { useSchema } from "@/context/schema-provider";
+import { scc } from "@/core/command";
+import type { StudioExtensionMenuItem } from "@/core/extension-manager";
+import { cn } from "@/lib/utils";
 import { buttonVariants } from "../ui/button";
 import {
   DropdownMenu,
@@ -60,7 +60,7 @@ export default function SchemaView() {
             buttonVariants({
               size: "icon",
             }),
-            "h-8 w-8 rounded-full bg-neutral-800 dark:bg-neutral-200"
+            "h-8 w-8 rounded-full bg-neutral-800 dark:bg-neutral-200",
           )}
           onClick={contentMenu[0].onClick}
         >
@@ -77,7 +77,7 @@ export default function SchemaView() {
               buttonVariants({
                 size: "icon",
               }),
-              "h-8 w-8 rounded-full bg-neutral-800 dark:bg-neutral-200"
+              "h-8 w-8 rounded-full bg-neutral-800 dark:bg-neutral-200",
             )}
           >
             <Plus size={16} weight="bold" />

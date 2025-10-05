@@ -1,4 +1,4 @@
-import { StudioExtensionContext } from "./extension-manager";
+import type { StudioExtensionContext } from "./extension-manager";
 
 export abstract class IStudioExtension {
   abstract extensionName: string;

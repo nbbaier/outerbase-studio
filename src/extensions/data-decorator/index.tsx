@@ -1,5 +1,5 @@
 import { StudioExtension } from "@/core/extension-base";
-import { StudioExtensionContext } from "@/core/extension-manager";
+import type { StudioExtensionContext } from "@/core/extension-manager";
 import { DecoratorEditor } from "./editor";
 
 export default class DataDecoratorExtension extends StudioExtension {

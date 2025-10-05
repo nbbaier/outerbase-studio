@@ -1,5 +1,5 @@
-import ClientOnly from "@/components/client-only";
 import type { Metadata } from "next";
+import ClientOnly from "@/components/client-only";
 import ThemeLayout from "../../theme_layout";
 import PlaygroundEditorBody from "./page-client";
 

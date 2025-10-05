@@ -9,8 +9,8 @@ import { ChartPolar } from "@phosphor-icons/react/dist/icons/ChartPolar";
 import { Funnel } from "@phosphor-icons/react/dist/icons/Funnel";
 import { produce } from "immer";
 import { ChartLine, ChartScatter, Table } from "lucide-react";
-import { Dispatch, SetStateAction } from "react";
-import { ChartValue } from "./chart-type";
+import type { Dispatch, SetStateAction } from "react";
+import type { ChartValue } from "./chart-type";
 import { ChartTypeButton } from "./chart-type-button";
 
 interface ChartTypeSelectionProps {

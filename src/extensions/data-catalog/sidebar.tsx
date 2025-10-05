@@ -1,5 +1,5 @@
-import { SidebarMenuHeader, SidebarMenuItem } from "@/components/sidebar-menu";
 import { Database } from "@phosphor-icons/react";
+import { SidebarMenuHeader, SidebarMenuItem } from "@/components/sidebar-menu";
 import { dataCatalogModelTab, dataCatalogTab } from ".";
 
 export default function DataCatalogSidebar() {

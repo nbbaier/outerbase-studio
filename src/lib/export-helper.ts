@@ -15,7 +15,7 @@ import { toast } from "sonner";
 
 export function selectArrayFromIndexList<T = unknown>(
   data: T[],
-  indexList: number[]
+  indexList: number[],
 ): T[] {
   return indexList.map((index) => data[index]) as T[];
 }
@@ -25,7 +25,7 @@ export function exportRowsToSqlInsert(
   headers: string[],
   records: unknown[][],
   exportTarget?: ExportTarget,
-  nullValue?: string | "NULL"
+  nullValue?: string | "NULL",
 ): string {
   const result: string[] = [];
 
@@ -36,7 +36,7 @@ export function exportRowsToSqlInsert(
       .map((value) => escapeSqlValue(value, nullValue))
       .join(", ");
     const line = `INSERT INTO ${escapeIdentity(
-      tableName
+      tableName,
     )}(${headersPart}) VALUES(${valuePart});`;
 
     result.push(line);
@@ -59,7 +59,7 @@ function cellToExcelValue(value: unknown, nullValue: string = "NULL") {
 
 export function exportRowsToExcel(
   records: unknown[][],
-  nullValue: string = "NULL"
+  nullValue: string = "NULL",
 ) {
   const result: string[] = [];
 
@@ -78,7 +78,7 @@ export function exportToExcel(
   headers: string[],
   tablename: string,
   exportTarget: ExportTarget,
-  nullValue: string = "NULL"
+  nullValue: string = "NULL",
 ) {
   if (exportTarget === "clipboard") {
     exportDataAsDelimitedText(
@@ -88,7 +88,7 @@ export function exportToExcel(
       "\r\n",
       '"',
       "clipboard",
-      nullValue
+      nullValue,
     );
     return "";
   }
@@ -96,7 +96,7 @@ export function exportToExcel(
   const processedData = records.map((row) =>
     row.map((cell) => {
       return cellToExcelValue(cell, nullValue);
-    })
+    }),
   );
 
   const data = [headers, ...processedData];
@@ -116,12 +116,12 @@ export function exportRowsToJson(
   headers: string[],
   records: unknown[][],
   exportTarget?: ExportTarget,
-  nullValue?: string
+  nullValue?: string,
 ): string {
   const recordsWithBigIntAsString = records.map((record) =>
     record.map((value) =>
-      typeof value === "bigint" ? value.toString() : value
-    )
+      typeof value === "bigint" ? value.toString() : value,
+    ),
   );
 
   const recordsAsObjects = recordsWithBigIntAsString.map((record) =>
@@ -132,7 +132,7 @@ export function exportRowsToJson(
           value === null && nullValue ? parseUserInput(nullValue) : value;
       }
       return obj;
-    }, {})
+    }, {}),
   );
 
   const content = JSON.stringify(recordsAsObjects, null, 2);
@@ -152,13 +152,13 @@ export function exportDataAsDelimitedText(
   lineTerminator: string,
   textEncloser: string,
   exportTarget: ExportTarget,
-  nullValue: string = "NULL"
+  nullValue: string = "NULL",
 ): string {
   const result: string[] = [];
 
   // Add headers
   const escapedHeaders = headers.map((v) =>
-    escapeDelimitedValue(v, fieldSeparator, lineTerminator, textEncloser)
+    escapeDelimitedValue(v, fieldSeparator, lineTerminator, textEncloser),
   );
   const headerLine = escapedHeaders.join(fieldSeparator);
   if (headers.length > 0) result.push(headerLine);
@@ -171,8 +171,8 @@ export function exportDataAsDelimitedText(
         fieldSeparator,
         lineTerminator,
         textEncloser,
-        nullValue
-      )
+        nullValue,
+      ),
     );
     const recordLine = escapedRecord.join(fieldSeparator);
     result.push(recordLine);
@@ -192,7 +192,7 @@ export function getFormatHandlers(
   exportTarget: ExportTarget,
   exportSelection: ExportSelection,
   exportOptions: ExportOptions | null,
-  selectedRangeIndex: number
+  selectedRangeIndex: number,
 ): Record<string, (() => string) | undefined> {
   const tableName = getSingleTableName(data.getSql()) || "UnknownTable";
   let headers: string[] = [];
@@ -208,7 +208,7 @@ export function getFormatHandlers(
     headers = data.getHeaders().map((header) => header.name);
     records = selectArrayFromIndexList(
       data.getAllRows(),
-      data.getSelectedRowIndex()
+      data.getSelectedRowIndex(),
     ).map((row) => headers.map((header) => row.raw[header]));
   } else if (exportSelection === "selected_col") {
     headers = data
@@ -223,13 +223,13 @@ export function getFormatHandlers(
     headers = data
       .getHeaders()
       .filter(
-        (_, index) => index >= selectedRange.x1 && index <= selectedRange.x2
+        (_, index) => index >= selectedRange.x1 && index <= selectedRange.x2,
       )
       .map((header) => header.name);
     records = data
       .getAllRows()
       .filter(
-        (_, index) => index >= selectedRange.y1 && index <= selectedRange.y2
+        (_, index) => index >= selectedRange.y1 && index <= selectedRange.y2,
       )
       .map((row) => headers.map((header) => row.raw[header]));
   }
@@ -243,14 +243,14 @@ export function getFormatHandlers(
         "\n",
         '"',
         exportTarget,
-        exportOptions?.nullValue || "NULL"
+        exportOptions?.nullValue || "NULL",
       ),
     json: () =>
       exportRowsToJson(
         headers,
         records,
         exportTarget,
-        exportOptions?.nullValue ?? undefined
+        exportOptions?.nullValue ?? undefined,
       ),
     sql: () =>
       exportRowsToSqlInsert(
@@ -258,7 +258,7 @@ export function getFormatHandlers(
         headers,
         records,
         exportTarget,
-        exportOptions?.nullValue || "NULL"
+        exportOptions?.nullValue || "NULL",
       ),
     xlsx: () =>
       exportToExcel(
@@ -266,7 +266,7 @@ export function getFormatHandlers(
         headers,
         tableName,
         exportTarget,
-        exportOptions?.nullValue || "NULL"
+        exportOptions?.nullValue || "NULL",
       ),
     delimited: () =>
       exportDataAsDelimitedText(
@@ -276,7 +276,7 @@ export function getFormatHandlers(
         parseUserInput(exportOptions?.lineTerminator || "") || "\n",
         parseUserInput(exportOptions?.encloser || "") || '"',
         exportTarget,
-        exportOptions?.nullValue || "NULL"
+        exportOptions?.nullValue || "NULL",
       ),
   };
 }
@@ -308,10 +308,10 @@ export async function exportTableData(
   tableName: string,
   format: ExportFormat,
   exportTarget: ExportTarget,
-  options?: ExportOptions
+  options?: ExportOptions,
 ): Promise<string | Blob> {
   const result = await databaseDriver.query(
-    `SELECT * FROM ${databaseDriver.escapeId(schemaName)}.${databaseDriver.escapeId(tableName)}`
+    `SELECT * FROM ${databaseDriver.escapeId(schemaName)}.${databaseDriver.escapeId(tableName)}`,
   );
   console.log("QueryResults", result);
   if (!result.rows || result.rows.length === 0) {
@@ -320,7 +320,7 @@ export async function exportTableData(
 
   const headers = Object.keys(result.rows[0]);
   const records = result.rows.map((row: { [x: string]: string }) =>
-    headers.map((header) => row[header])
+    headers.map((header) => row[header]),
   );
 
   const formatHandlers = {
@@ -336,7 +336,7 @@ export async function exportTableData(
         options?.fieldSeparator || ",",
         options?.lineTerminator || "\n",
         options?.encloser || '"',
-        exportTarget
+        exportTarget,
       ),
   };
 

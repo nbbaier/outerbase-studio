@@ -1,5 +1,5 @@
-import { DatabaseTableColumn } from "@/drivers/base-driver";
-import { ColumnType } from "@outerbase/sdk-transform";
+import type { ColumnType } from "@outerbase/sdk-transform";
+import type { DatabaseTableColumn } from "@/drivers/base-driver";
 
 export interface TableHeaderMetadata {
   from?: {

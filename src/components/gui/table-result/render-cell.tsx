@@ -1,18 +1,18 @@
-import BlobCell from "@/components/gui/table-cell/blob-cell";
-import { DatabaseValue } from "@/drivers/base-driver";
-import parseSafeJson from "@/lib/json-safe";
-import { deserializeV8 } from "@/lib/v8-derialization";
 import { ColumnType } from "@outerbase/sdk-transform";
 import { useMemo } from "react";
+import BlobCell from "@/components/gui/table-cell/blob-cell";
+import type { DatabaseValue } from "@/drivers/base-driver";
+import parseSafeJson from "@/lib/json-safe";
+import { deserializeV8 } from "@/lib/v8-derialization";
 import BigNumberCell from "../table-cell/big-number-cell";
 import GenericCell from "../table-cell/generic-cell";
 import NumberCell from "../table-cell/number-cell";
 import TextCell from "../table-cell/text-cell";
-import { OptimizeTableCellRenderProps } from "../table-optimized";
-import { TableHeaderMetadata } from "./type";
+import type { OptimizeTableCellRenderProps } from "../table-optimized";
+import type { TableHeaderMetadata } from "./type";
 
 function detectTextEditorType(
-  value: DatabaseValue<string>
+  value: DatabaseValue<string>,
 ): "input" | "json" | "text" {
   if (typeof value !== "string") return "input";
 
@@ -59,7 +59,7 @@ function CloudflareKvValue({
       buffer = rawBuffer;
     } else if (rawBuffer instanceof Uint8Array) {
       buffer = rawBuffer.buffer as ArrayBuffer;
-    } else if (rawBuffer instanceof Array) {
+    } else if (Array.isArray(rawBuffer)) {
       buffer = new Uint8Array(rawBuffer).buffer;
     }
 
@@ -114,7 +114,7 @@ function CloudflareKvValue({
 }
 
 export default function tableResultCellRenderer(
-  props: OptimizeTableCellRenderProps<TableHeaderMetadata>
+  props: OptimizeTableCellRenderProps<TableHeaderMetadata>,
 ) {
   const { y, x, state, header, isFocus } = props;
 

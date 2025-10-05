@@ -1,4 +1,6 @@
 "use client";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useEffect, useMemo } from "react";
 import {
   updateLocalConnectionUsed,
   useLocalConnection,
@@ -14,8 +16,6 @@ import {
 import { createLocalDriver } from "@/drivers/helpers";
 import IndexdbSavedDoc from "@/drivers/saved-doc/indexdb-saved-doc";
 import { useAvailableAIAgents } from "@/lib/ai-agent-storage";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useMemo } from "react";
 
 export default function ClientPageBody() {
   const params = useSearchParams();

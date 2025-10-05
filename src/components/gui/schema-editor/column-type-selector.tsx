@@ -1,10 +1,10 @@
+import { useMemo, useState } from "react";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { ColumnTypeSuggestionGroup } from "@/drivers/base-driver";
-import { useMemo, useState } from "react";
+import type { ColumnTypeSuggestionGroup } from "@/drivers/base-driver";
 
 function ColumnTypeList({
   items,
@@ -49,7 +49,7 @@ function ColumnTypeList({
               onClick={() => {
                 if (parameters.length > 0) {
                   onChange(
-                    `${type.name.toUpperCase()}(${parameters.map((p) => p.default).join(",")})`
+                    `${type.name.toUpperCase()}(${parameters.map((p) => p.default).join(",")})`,
                   );
                 } else {
                   onChange(`${type.name.toUpperCase()}`);
@@ -95,27 +95,25 @@ export default function ColumnTypeSelector({
 
   const filteredSuggestions = suggestions
     .map((group) => {
-      {
-        return {
-          ...group,
-          suggestions: group.suggestions
-            .filter((type) => {
-              return (
-                type.name.toLowerCase().startsWith(parsedType.toLowerCase()) &&
-                type.name !== "uuid"
-              );
-            })
-            .map((x) => {
-              if (["enum", "set"].includes(x.name)) {
-                return {
-                  ...x,
-                  parameters: [{ name: "", default: "'Y','N'" }],
-                };
-              }
-              return x;
-            }),
-        };
-      }
+      return {
+        ...group,
+        suggestions: group.suggestions
+          .filter((type) => {
+            return (
+              type.name.toLowerCase().startsWith(parsedType.toLowerCase()) &&
+              type.name !== "uuid"
+            );
+          })
+          .map((x) => {
+            if (["enum", "set"].includes(x.name)) {
+              return {
+                ...x,
+                parameters: [{ name: "", default: "'Y','N'" }],
+              };
+            }
+            return x;
+          }),
+      };
     })
     .filter((group) => group.suggestions.length > 0);
 

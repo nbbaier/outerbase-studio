@@ -1,3 +1,6 @@
+import { produce } from "immer";
+import { useCallback, useMemo, useState } from "react";
+import { toast } from "sonner";
 import { createDialog } from "@/components/create-dialog";
 import TableColumnCombobox from "@/components/gui/table-combobox/TableColumnCombobox";
 import TableCombobox from "@/components/gui/table-combobox/TableCombobox";
@@ -9,10 +12,8 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
-import { produce } from "immer";
-import { useCallback, useMemo, useState } from "react";
-import { toast } from "sonner";
-import DataCatalogDriver, { DataCatalogTableRelationship } from "./driver";
+import type DataCatalogDriver from "./driver";
+import type { DataCatalogTableRelationship } from "./driver";
 
 interface IRelationship extends Omit<DataCatalogTableRelationship, "id"> {
   id?: string;
@@ -23,7 +24,7 @@ export const virtualJoinDialog = createDialog<{
 }>(({ driver, relation, close }) => {
   const [loading, setLoading] = useState(false);
   const [value, setValue] = useState<IRelationship>(() =>
-    structuredClone(relation)
+    structuredClone(relation),
   );
 
   const createUpdateVirtualJoin = useCallback(() => {
@@ -57,7 +58,7 @@ export const virtualJoinDialog = createDialog<{
       !value.referenceTableName ||
       !value.referenceColumnName ||
       !value.columnName,
-    [value]
+    [value],
   );
 
   return (
@@ -85,7 +86,7 @@ export const virtualJoinDialog = createDialog<{
             setValue((prev) =>
               produce(prev, (draft) => {
                 draft.columnName = value;
-              })
+              }),
             );
           }}
         />
@@ -102,7 +103,7 @@ export const virtualJoinDialog = createDialog<{
                 produce(prev, (draft) => {
                   draft.referenceTableName = value;
                   draft.referenceColumnName = "";
-                })
+                }),
               );
             }}
           />
@@ -120,7 +121,7 @@ export const virtualJoinDialog = createDialog<{
               setValue((prev) =>
                 produce(prev, (draft) => {
                   draft.referenceColumnName = value;
-                })
+                }),
               );
             }}
           />

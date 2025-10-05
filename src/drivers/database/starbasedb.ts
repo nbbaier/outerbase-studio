@@ -45,7 +45,7 @@ function transformRawResult(raw: StarbaseResult): DatabaseResultSet {
         headers.reduce((a, b, idx) => {
           a[b.name] = r[idx];
           return a;
-        }, {} as DatabaseRow)
+        }, {} as DatabaseRow),
       )
     : [];
 
@@ -68,7 +68,7 @@ export class StarbaseQuery implements QueryableBaseDriver {
   constructor(
     protected _url: string,
     protected token: string,
-    protected type: string = "internal"
+    protected type: string = "internal",
   ) {
     this.url = `${_url.replace(/\/$/, "")}/query/raw`;
     this.headers = {
@@ -92,7 +92,7 @@ export class StarbaseQuery implements QueryableBaseDriver {
 
     const json: StarbaseResponse = await r.json();
     return (Array.isArray(json.result) ? json.result : [json.result]).map(
-      transformRawResult
+      transformRawResult,
     );
   }
 
@@ -106,7 +106,7 @@ export class StarbaseQuery implements QueryableBaseDriver {
     const json: StarbaseResponse = await r.json();
 
     return transformRawResult(
-      Array.isArray(json.result) ? json.result[0] : json.result
+      Array.isArray(json.result) ? json.result[0] : json.result,
     );
   }
 }

@@ -41,7 +41,7 @@ export function useOuterbaseDashboardList() {
       revalidateOnReconnect: false,
       dedupingInterval: 5000,
       revalidateIfStale: false,
-    }
+    },
   );
 
   return { data, isLoading, mutate };
@@ -59,7 +59,7 @@ export function useOuterbaseBase(workspaceId: string, baseId: string) {
       revalidateOnReconnect: false,
       dedupingInterval: 5000,
       revalidateIfStale: false,
-    }
+    },
   );
 
   return { data, isLoading, mutate };
@@ -67,7 +67,7 @@ export function useOuterbaseBase(workspaceId: string, baseId: string) {
 
 export function useOuterbaseBaseCredential(
   workspaceId: string,
-  sourceId: string
+  sourceId: string,
 ) {
   const { data, isLoading, mutate } = useSWR(
     sourceId ? `/source/${sourceId}/credential` : null,
@@ -80,7 +80,7 @@ export function useOuterbaseBaseCredential(
       revalidateOnReconnect: false,
       dedupingInterval: 5000,
       revalidateIfStale: false,
-    }
+    },
   );
 
   return { data, isLoading, mutate };

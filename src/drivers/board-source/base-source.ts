@@ -11,10 +11,10 @@ export abstract class BoardSourceDriver {
   abstract getDriver(sourceId: string): BaseDriver;
   abstract query(
     sourceId: string,
-    statement: string
+    statement: string,
   ): Promise<DatabaseResultSet>;
   abstract schemas(
-    sourceId: string
+    sourceId: string,
   ): Promise<{ schema: DatabaseSchemas; selectedSchema?: string }>;
   abstract cleanup(): void;
 }

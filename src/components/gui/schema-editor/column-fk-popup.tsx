@@ -1,12 +1,12 @@
-import { DatabaseForeignKeyClause } from "@/drivers/base-driver";
-import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
 import { LucideArrowUpRight } from "lucide-react";
+import type { DatabaseForeignKeyClause } from "@/drivers/base-driver";
 import { Button } from "../../ui/button";
-import { ColumnChangeEvent } from "./schema-editor-column-list";
+import { Label } from "../../ui/label";
+import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
+import { Separator } from "../../ui/separator";
 import TableColumnCombobox from "../table-combobox/TableColumnCombobox";
 import TableCombobox from "../table-combobox/TableCombobox";
-import { Label } from "../../ui/label";
-import { Separator } from "../../ui/separator";
+import type { ColumnChangeEvent } from "./schema-editor-column-list";
 
 export default function ColumnForeignKeyPopup({
   constraint,

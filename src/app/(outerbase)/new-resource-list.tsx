@@ -10,10 +10,10 @@ import {
   TursoIcon,
   ValTownIcon,
 } from "@/components/resource-card/icon";
-import { NewResourceType } from "./new-resource-button";
+import type { NewResourceType } from "./new-resource-button";
 
 export function getCreateResourceTypeList(
-  workspaceId?: string
+  workspaceId?: string,
 ): NewResourceType[] {
   return [
     {

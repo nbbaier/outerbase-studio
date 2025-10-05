@@ -1,4 +1,7 @@
 "use client";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 import LabelInput from "@/components/label-input";
 import { Button } from "@/components/orbit/button";
 import {
@@ -7,11 +10,8 @@ import {
 } from "@/outerbase-cloud/api";
 import {
   OuterbaseAPIError,
-  OuterbaseAPISession,
+  type OuterbaseAPISession,
 } from "@/outerbase-cloud/api-type";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
 
 export function SignupForm() {
   const router = useRouter();

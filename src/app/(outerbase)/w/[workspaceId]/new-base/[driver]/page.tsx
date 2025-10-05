@@ -1,4 +1,7 @@
 "use client";
+import { ArrowLeft, ArrowRight, FloppyDisk } from "@phosphor-icons/react";
+import { useParams, useRouter } from "next/navigation";
+import { useCallback, useMemo, useState } from "react";
 import {
   type CommonConnectionConfig,
   ConnectionConfigEditor,
@@ -13,9 +16,6 @@ import {
   createOuterbaseSource,
   testOuterbaseSource,
 } from "@/outerbase-cloud/api-workspace";
-import { ArrowLeft, ArrowRight, FloppyDisk } from "@phosphor-icons/react";
-import { useParams, useRouter } from "next/navigation";
-import { useCallback, useMemo, useState } from "react";
 
 export default function WorkspaceNewBasePage() {
   const { driver, workspaceId } = useParams<{
@@ -27,7 +27,7 @@ export default function WorkspaceNewBasePage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [validateErrors, setValidateErrors] = useState<Record<string, string>>(
-    {}
+    {},
   );
 
   const template = useMemo(() => {
@@ -53,7 +53,7 @@ export default function WorkspaceNewBasePage() {
         const connResponse = await createOuterbaseConnection(
           workspaceId,
           baseResponse.id,
-          baseName
+          baseName,
         );
 
         await createOuterbaseSource(workspaceId, {
@@ -63,7 +63,7 @@ export default function WorkspaceNewBasePage() {
         });
 
         router.replace(
-          overrideRedirect ?? `/w/${workspaceId}/${baseResponse.short_name}`
+          overrideRedirect ?? `/w/${workspaceId}/${baseResponse.short_name}`,
         );
       };
 
@@ -78,7 +78,7 @@ export default function WorkspaceNewBasePage() {
         })
         .finally(() => setLoading(false));
     },
-    [workspaceId, template, value, router]
+    [workspaceId, template, value, router],
   );
 
   if (!template.remoteFrom || !template.remoteTo) {

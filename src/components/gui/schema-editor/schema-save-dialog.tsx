@@ -1,4 +1,11 @@
 import {
+  LucideAlertCircle,
+  LucideLoader,
+  LucideSave,
+  LucideTableProperties,
+} from "lucide-react";
+import { useCallback, useState } from "react";
+import {
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
@@ -8,14 +15,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useStudioContext } from "@/context/driver-provider";
 import { useSchema } from "@/context/schema-provider";
-import { DatabaseTableSchemaChange } from "@/drivers/base-driver";
-import {
-  LucideAlertCircle,
-  LucideLoader,
-  LucideSave,
-  LucideTableProperties,
-} from "lucide-react";
-import { useCallback, useState } from "react";
+import type { DatabaseTableSchemaChange } from "@/drivers/base-driver";
 import CodePreview from "../code-preview";
 import SchemaEditorTab from "../tabs/schema-editor-tab";
 import { useTabsContext } from "../windows-tab";
@@ -52,15 +52,15 @@ export default function SchemaSaveDialog({
                 schemaName={schema.schemaName}
               />
             ),
-            key: "_schema_" + schema.name.new,
-            identifier: "_schema_" + schema.name.new,
-            title: "Edit " + schema.name.new,
+            key: `_schema_${schema.name.new}`,
+            identifier: `_schema_${schema.name.new}`,
+            title: `Edit ${schema.name.new}`,
             icon: LucideTableProperties,
           });
         } else if (schema.name.old && schema.schemaName) {
           fetchTable(
             schema.schemaName,
-            schema.name?.new || schema.name?.old || ""
+            schema.name?.new || schema.name?.old || "",
           ).then(onClose);
         }
       })

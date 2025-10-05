@@ -1,3 +1,6 @@
+import { CaretDown, ChartBar, MagnifyingGlass } from "@phosphor-icons/react";
+import Link from "next/link";
+import { type PropsWithChildren, useMemo, useState } from "react";
 import { Button } from "@/components/orbit/button";
 import { Input } from "@/components/orbit/input";
 import {
@@ -6,9 +9,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { CaretDown, ChartBar, MagnifyingGlass } from "@phosphor-icons/react";
-import Link from "next/link";
-import { PropsWithChildren, useMemo, useState } from "react";
 import { getCreateResourceTypeList } from "./new-resource-list";
 
 function CreateResourceItem({
@@ -20,7 +20,7 @@ function CreateResourceItem({
       <div
         className={cn(
           "text-muted-foreground flex w-full cursor-pointer items-center justify-start rounded p-2 text-base",
-          { "bg-secondary": selected }
+          { "bg-secondary": selected },
         )}
       >
         <data.icon className={cn("mr-2 h-6 w-6", data.colorClassName)} />
@@ -40,7 +40,7 @@ function CreateResourceItem({
       href={data.href}
       className={cn(
         "hover:bg-secondary flex w-full cursor-pointer items-center justify-start rounded p-2 text-base",
-        { "bg-secondary": selected }
+        { "bg-secondary": selected },
       )}
     >
       <data.icon className={cn("mr-2 h-6 w-6", data.colorClassName)} />
@@ -123,7 +123,7 @@ export default function NewResourceType({
   const resourceSearch = useMemo(() => {
     const filteredResource = resourceTypeList
       .filter((resource) =>
-        resource.name.toLowerCase().includes(search.toLowerCase())
+        resource.name.toLowerCase().includes(search.toLowerCase()),
       )
       .sort((a, b) => {
         return a.name.localeCompare(b.name);

@@ -1,3 +1,5 @@
+import { LucideLoader } from "lucide-react";
+import { useCallback, useState } from "react";
 import CopyableText from "@/components/copyable-text";
 import { createDialog } from "@/components/create-dialog";
 import LabelInput from "@/components/label-input";
@@ -9,8 +11,6 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { deleteOuterbaseBase } from "@/outerbase-cloud/api";
-import { LucideLoader } from "lucide-react";
-import { useCallback, useState } from "react";
 
 export const deleteBaseDialog = createDialog<{
   workspaceId: string;

@@ -1,5 +1,3 @@
-import AgentDriverList from "@/drivers/agent/list";
-import { generateId } from "@/lib/generate-id";
 import { unifiedMergeView } from "@codemirror/merge";
 import {
   Compartment,
@@ -13,11 +11,13 @@ import {
   EditorView,
   keymap,
   showTooltip,
-  Tooltip,
+  type Tooltip,
   ViewPlugin,
   WidgetType,
 } from "@codemirror/view";
 import { createRoot } from "react-dom/client";
+import type AgentDriverList from "@/drivers/agent/list";
+import { generateId } from "@/lib/generate-id";
 import { resolveToNearestStatement } from "../gui/sql-editor/statement-highlight";
 import "./prompt-plugin.css";
 import { CodeMirrorPromptWidget } from "./prompt-widget";
@@ -45,7 +45,7 @@ export interface PromptSelectedFragment {
 
 export type PromptCallback = (
   promptQuery: string,
-  selected: PromptSelectedFragment
+  selected: PromptSelectedFragment,
 ) => Promise<string>;
 
 class PlaceholderWidget extends WidgetType {
@@ -69,7 +69,7 @@ class PromptWidget extends WidgetType {
   constructor(
     public plugin: CodeMirrorPromptPlugin,
     public from: number,
-    public to: number
+    public to: number,
   ) {
     super();
 
@@ -94,7 +94,7 @@ class PromptWidget extends WidgetType {
 
       return Array.from(
         { length: endLineNumber - startLineNumber + 1 },
-        (_, i) => startLineNumber + i
+        (_, i) => startLineNumber + i,
       );
     };
 
@@ -110,7 +110,7 @@ class PromptWidget extends WidgetType {
     // Reverse the suggestion that we have made
     const selectedOriginalText = view.state.sliceDoc(
       startPosition,
-      endPosition
+      endPosition,
     );
 
     const originalText = view.state.doc.toString();
@@ -160,7 +160,7 @@ class PromptWidget extends WidgetType {
           startLineNumber,
           sessionId,
           endLineNumber: view.state.doc.lineAt(
-            startPosition + suggestedText.length
+            startPosition + suggestedText.length,
           ).number,
           selectedModel,
         });
@@ -200,8 +200,8 @@ class PromptWidget extends WidgetType {
                     view.state.doc.lineAt(startPosition + suggestedText.length)
                       .number - startLineNumber,
                 },
-                (_, i) => startLineNumber + i
-              )
+                (_, i) => startLineNumber + i,
+              ),
             ),
           ],
         });
@@ -245,7 +245,7 @@ class PromptWidget extends WidgetType {
         onReject={onReject}
         onCancel={onCancel}
         agentDriver={plugin.agents}
-      />
+      />,
     );
   }
 
@@ -280,8 +280,8 @@ const promptSelectedLines = StateField.define({
       if (e.is(effectSelectedPromptLine)) {
         return Decoration.set(
           e.value.map((line) =>
-            decorationSelectedLine.range(tr.state.doc.line(line).from)
-          )
+            decorationSelectedLine.range(tr.state.doc.line(line).from),
+          ),
         );
       } else if (e.is(effectHidePrompt)) {
         return Decoration.none;
@@ -295,7 +295,7 @@ const promptSelectedLines = StateField.define({
 
 function getCursorTooltips(
   state: EditorState,
-  plugin: CodeMirrorPromptPlugin
+  plugin: CodeMirrorPromptPlugin,
 ): readonly Tooltip[] {
   return state.selection.ranges
     .filter((range) => !range.empty)
@@ -413,11 +413,11 @@ export class CodeMirrorPromptPlugin {
     const currentCursorLine = v.state.doc.lineAt(currentCursor);
     const nearestA = resolveToNearestStatement(
       v.state,
-      v.state.selection.main.from
+      v.state.selection.main.from,
     );
     const nearestB = resolveToNearestStatement(
       v.state,
-      v.state.selection.main.to
+      v.state.selection.main.to,
     );
 
     const startLine = v.state.doc.lineAt(nearestA?.from ?? 0);
@@ -455,8 +455,8 @@ export class CodeMirrorPromptPlugin {
           effectSelectedPromptLine.of(
             Array.from(
               { length: endLine.number - startLine.number + 1 },
-              (_, i) => startLine.number + i
-            )
+              (_, i) => startLine.number + i,
+            ),
           ),
         ],
         selection: { anchor: startLine.from, head: startLine.from },
@@ -474,7 +474,7 @@ export class CodeMirrorPromptPlugin {
         constructor(view: EditorView) {
           self.view = view;
         }
-      }
+      },
     );
   }
 
@@ -530,7 +530,7 @@ export class CodeMirrorPromptPlugin {
         create() {
           return Decoration.none;
         },
-        update: (v, tr) => {
+        update: (_v, tr) => {
           const cursorPosition = tr.state.selection.main.from;
           const line = tr.state.doc.lineAt(cursorPosition);
           const lineText = line.text;

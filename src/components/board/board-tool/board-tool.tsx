@@ -1,6 +1,6 @@
 "use client";
-import { Button } from "@/components/orbit/button";
 import { ChartLine, ImageUpscale } from "lucide-react";
+import { Button } from "@/components/orbit/button";
 import { useBoardContext } from "../board-provider";
 
 export function BoardTool() {

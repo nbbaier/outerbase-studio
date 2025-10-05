@@ -1,4 +1,6 @@
 "use client";
+import { useRouter } from "next/navigation";
+import { useCallback, useState } from "react";
 import { useWorkspaces } from "@/app/(outerbase)/workspace-provider";
 import OuterbaseLogo from "@/components/icons/outerbase";
 import { Button } from "@/components/orbit/button";
@@ -7,8 +9,6 @@ import { Label } from "@/components/orbit/label";
 import { strippedWorkspaceName } from "@/lib/utils";
 import { createOuterbaseWorkspace } from "@/outerbase-cloud/api-workspace";
 import useOuterbaseMutation from "@/outerbase-cloud/hook";
-import { useRouter } from "next/navigation";
-import { useCallback, useState } from "react";
 
 const FRIENDLY_ERROR_NAME: Record<string, string> = {
   SHORT_NAME_TAKEN: "Workspace URL is unavailable.",

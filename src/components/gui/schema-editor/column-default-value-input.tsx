@@ -1,3 +1,5 @@
+import { ChevronsUpDown } from "lucide-react";
+import { type ChangeEvent, useCallback, useMemo } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import {
@@ -6,9 +8,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { useStudioContext } from "@/context/driver-provider";
-import { DatabaseTableColumnConstraint } from "@/drivers/base-driver";
-import { ChevronsUpDown } from "lucide-react";
-import { ChangeEvent, useCallback, useMemo } from "react";
+import type { DatabaseTableColumnConstraint } from "@/drivers/base-driver";
 import { Input } from "../../ui/input";
 
 export default function ColumnDefaultValueInput({
@@ -46,7 +46,7 @@ export default function ColumnDefaultValueInput({
         });
       }
     },
-    [onChange]
+    [onChange],
   );
 
   const onDefaultValueChange = useCallback(
@@ -59,7 +59,7 @@ export default function ColumnDefaultValueInput({
         });
       }
     },
-    [onChange]
+    [onChange],
   );
 
   const onCustomValueCheckedChange = useCallback(
@@ -72,7 +72,7 @@ export default function ColumnDefaultValueInput({
         });
       }
     },
-    [onChange]
+    [onChange],
   );
 
   const onCustomValueChange = useCallback(
@@ -83,7 +83,7 @@ export default function ColumnDefaultValueInput({
         defaultValue: e.currentTarget.value,
       });
     },
-    [onChange]
+    [onChange],
   );
 
   const onExpressionCheckedChange = useCallback(
@@ -96,7 +96,7 @@ export default function ColumnDefaultValueInput({
         });
       }
     },
-    [onChange]
+    [onChange],
   );
 
   const onExpressionValueChange = useCallback(
@@ -107,7 +107,7 @@ export default function ColumnDefaultValueInput({
         defaultValue: undefined,
       });
     },
-    [onChange]
+    [onChange],
   );
 
   const noDefaultValue =

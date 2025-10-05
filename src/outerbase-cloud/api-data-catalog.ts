@@ -11,11 +11,11 @@ import {
 
 export async function getOuterbaseSchemas(
   workspaceId: string,
-  sourceId: string
+  sourceId: string,
 ) {
   //
   return await requestOuterbase<Record<string, OuterbaseDataCatalogSchemas[]>>(
-    `/api/v1/workspace/${workspaceId}/source/${sourceId}/schema?baseId=`
+    `/api/v1/workspace/${workspaceId}/source/${sourceId}/schema?baseId=`,
   );
 }
 
@@ -23,18 +23,18 @@ export async function getOuterbaseBaseComments(
   workspaceId: string,
   sourceId: string,
   baseId: string,
-  size: number = 1000
+  size: number = 1000,
 ) {
   return await requestOuterbase<
     OuterbaseDataCatalogResponse<OuterbaseDataCatalogComment[]>
   >(
-    `/api/v1/workspace/${workspaceId}/source/${sourceId}/comment?size=${size}&baseId=${baseId}`
+    `/api/v1/workspace/${workspaceId}/source/${sourceId}/comment?size=${size}&baseId=${baseId}`,
   );
 }
 
 export async function getOuterbaseDefinitions(
   workspaceId: string,
-  baseId: string
+  baseId: string,
 ) {
   return await requestOuterbase<
     OuterbaseDataCatalogResponse<OuterbaseDataCatalogDefinition[]>
@@ -45,12 +45,12 @@ export async function updateOuerbaseDefinition(
   workspaceId: string,
   baseId: string,
   definitionId: string,
-  data: OuterbaseDefinitionInput
+  data: OuterbaseDefinitionInput,
 ) {
   const result = await requestOuterbase<OuterbaseDataCatalogDefinition>(
     `/api/v1/workspace/${workspaceId}/base/${baseId}/definition/${definitionId}`,
     "PUT",
-    data
+    data,
   );
 
   return result;
@@ -58,7 +58,7 @@ export async function updateOuerbaseDefinition(
 export async function createOuterbaseDefinition(
   workspaceId: string,
   baseId: string,
-  data: OuterbaseDefinitionInput
+  data: OuterbaseDefinitionInput,
 ) {
   const result = await requestOuterbase<OuterbaseDataCatalogDefinition>(
     `/api/v1/workspace/${workspaceId}/base/${baseId}/definition`,
@@ -66,7 +66,7 @@ export async function createOuterbaseDefinition(
     {
       base_id: baseId,
       ...data,
-    }
+    },
   );
 
   return result;
@@ -75,11 +75,11 @@ export async function createOuterbaseDefinition(
 export async function deleteOuterbaseDefinition(
   workspaceId: string,
   baseId: string,
-  definitionId: string
+  definitionId: string,
 ) {
   const result = await requestOuterbase<OuterbaseAPIResponse>(
     `/api/v1/workspace/${workspaceId}/base/${baseId}/definition/${definitionId}`,
-    "DELETE"
+    "DELETE",
   );
 
   return result;
@@ -89,12 +89,12 @@ export async function updateOuterbaseDataCatalogVirtualColumn(
   workspaceId: string,
   sourceId: string,
   commentId: string,
-  data: OuterbaseDataCatalogVirtualColumnInput
+  data: OuterbaseDataCatalogVirtualColumnInput,
 ) {
   const result = await requestOuterbase<OuterbaseDataCatalogComment>(
     `/api/v1/workspace/${workspaceId}/source/${sourceId}/comment/${commentId}`,
     "PUT",
-    data
+    data,
   );
 
   return result;
@@ -103,12 +103,12 @@ export async function updateOuterbaseDataCatalogVirtualColumn(
 export async function createOuterbaseDataCatalogVirtualColumn(
   workspaceId: string,
   sourceId: string,
-  data: OuterbaseDataCatalogVirtualColumnInput
+  data: OuterbaseDataCatalogVirtualColumnInput,
 ) {
   const result = await requestOuterbase<OuterbaseDataCatalogComment>(
     `/api/v1/workspace/${workspaceId}/source/${sourceId}/comment`,
     "POST",
-    data
+    data,
   );
 
   return result;
@@ -117,12 +117,12 @@ export async function createOuterbaseDataCatalogVirtualColumn(
 export async function deleteOutebaseDataCatalogVirtualColumn(
   workspaceId: string,
   sourceId: string,
-  commentId: string
+  commentId: string,
 ) {
   try {
     await requestOuterbase<boolean>(
       `/api/v1/workspace/${workspaceId}/source/${sourceId}/comment/${commentId}`,
-      "DELETE"
+      "DELETE",
     );
     return true;
   } catch {

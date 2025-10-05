@@ -97,7 +97,7 @@ export default class ElectronSavedDocs implements SavedDocDriver {
     await this.getNamespaces();
 
     this.cacheNamespaceList = (this.cacheNamespaceList ?? []).filter(
-      (n) => n.id !== id
+      (n) => n.id !== id,
     );
 
     this.save();
@@ -106,7 +106,7 @@ export default class ElectronSavedDocs implements SavedDocDriver {
   async createDoc(
     type: SavedDocType,
     namespace: string,
-    data: SavedDocInput
+    data: SavedDocInput,
   ): Promise<SavedDocData> {
     await this.getNamespaces();
 
@@ -117,7 +117,7 @@ export default class ElectronSavedDocs implements SavedDocDriver {
       createdAt: now,
       updatedAt: now,
       namespace: (this.cacheNamespaceList ?? []).find(
-        (n) => n.id === namespace
+        (n) => n.id === namespace,
       )!,
       type,
       id: generateId(),
@@ -170,7 +170,7 @@ export default class ElectronSavedDocs implements SavedDocDriver {
 
     for (const namespaceId of Object.keys(this.cacheDocs)) {
       this.cacheDocs[namespaceId] = this.cacheDocs[namespaceId].filter(
-        (d) => d.id !== id
+        (d) => d.id !== id,
       );
     }
 

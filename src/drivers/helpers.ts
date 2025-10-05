@@ -10,7 +10,7 @@ import { SqliteLikeBaseDriver } from "./sqlite-base-driver";
 export function createLocalDriver(conn: SavedConnectionRawLocalStorage) {
   if (conn.driver === "rqlite") {
     return new SqliteLikeBaseDriver(
-      new RqliteQueryable(conn.url!, conn.username, conn.password)
+      new RqliteQueryable(conn.url!, conn.username, conn.password),
     );
   } else if (conn.driver === "valtown") {
     return new SqliteLikeBaseDriver(new ValtownQueryable(conn.token!));
@@ -20,7 +20,7 @@ export function createLocalDriver(conn: SavedConnectionRawLocalStorage) {
         Authorization: "Bearer " + conn.token,
         "x-account-id": conn.username ?? "",
         "x-database-id": conn.database ?? "",
-      })
+      }),
     );
   } else if (conn.driver === "starbase") {
     return new SqliteLikeBaseDriver(new StarbaseQuery(conn.url!, conn.token!));

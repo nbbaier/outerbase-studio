@@ -49,7 +49,7 @@ export default class LocalBoardStorage implements IBoardStorageDriver {
 
   async update(
     chartId: string,
-    chart: ChartValue
+    chart: ChartValue,
   ): Promise<ChartValue | undefined> {
     const index = this.board.charts.findIndex((v) => v.id === chartId);
     if (index === -1) return Promise.resolve(undefined);

@@ -153,7 +153,7 @@ export class CursorV2 {
 
 function parseColumnDef(
   schemaName: string,
-  cursor: CursorV2
+  cursor: CursorV2,
 ): DatabaseTableColumn | null {
   const columnName = cursor.consumeIdentifier();
   if (!columnName) return null;
@@ -178,7 +178,7 @@ function parseColumnDef(
 }
 
 function parseConstraintConflict(
-  cursor: CursorV2
+  cursor: CursorV2,
 ): DatabaseColumnConflict | undefined {
   if (!cursor.match("ON")) return;
   cursor.next();
@@ -210,7 +210,7 @@ export function parseColumnList(columnPtr: CursorV2) {
 
 export function parseColumnConstraint(
   schemaName: string,
-  cursor: CursorV2
+  cursor: CursorV2,
 ): DatabaseTableColumnConstraint | undefined {
   if (cursor.match("CONSTRAINT")) {
     cursor.next();
@@ -417,7 +417,7 @@ export function parseColumnConstraint(
 
 function parseTableDefinition(
   schemaName: string,
-  cursor: CursorV2
+  cursor: CursorV2,
 ): {
   columns: DatabaseTableColumn[];
   constraints: DatabaseTableColumnConstraint[];
@@ -465,7 +465,7 @@ function parseTableDefinition(
     if (constraint.primaryKey && constraint.primaryColumns) {
       for (const pkColumn of constraint.primaryColumns) {
         const column = columns.find(
-          (col) => pkColumn.toLowerCase() === col.name.toLowerCase()
+          (col) => pkColumn.toLowerCase() === col.name.toLowerCase(),
         );
 
         if (column) {
@@ -554,7 +554,7 @@ function parseTableOption(cursor: CursorV2):
 // https://www.sqlite.org/lang_createtable.html
 export function parseCreateTableScript(
   schemaName: string,
-  sql: string
+  sql: string,
 ): DatabaseTableSchema {
   const cursor = new CursorV2(tokenizeSql(sql, "sqlite"));
 
@@ -586,7 +586,7 @@ export function parseCreateTableScript(
   const pk = defs.columns.filter((col) => col.pk).map((col) => col.name);
 
   const autoIncrement = defs.columns.some(
-    (col) => !!col.constraint?.autoIncrement
+    (col) => !!col.constraint?.autoIncrement,
   );
 
   return {

@@ -1,12 +1,12 @@
 "use client";
+import { useParams } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 import NavigationDashboardLayout from "@/app/(outerbase)/nav-board-layout";
 import Board, { type DashboardProps } from "@/components/board";
 import type { BoardSourceDriver } from "@/drivers/board-source/base-source";
 import LocalBoardSource from "@/drivers/board-source/local";
 import LocalBoardStorage from "@/drivers/board-storage/local";
 import type { LocalDashboardData } from "@/indexdb";
-import { useParams } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
 import { getLocalConnectionList, useLocalDashboardList } from "../../hooks";
 
 function LocalBoardWithDataPage({

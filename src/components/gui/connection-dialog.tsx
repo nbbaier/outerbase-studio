@@ -1,6 +1,6 @@
+import { useMemo } from "react";
 import { Button } from "@/components/ui/button";
 import { useStudioContext } from "@/context/driver-provider";
-import { useMemo } from "react";
 import ServerLoadingAnimation from "../icons/server-loading";
 
 export default function ConnectingDialog({

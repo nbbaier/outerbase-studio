@@ -32,7 +32,7 @@ export interface MultipleQueryResult {
 export async function multipleQuery(
   driver: BaseDriver,
   statements: string[],
-  onProgress?: (progress: MultipleQueryProgress) => void
+  onProgress?: (progress: MultipleQueryProgress) => void,
 ): Promise<{
   result: MultipleQueryResult[];
   logs: MultipleQueryProgressItem[];

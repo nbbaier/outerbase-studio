@@ -22,7 +22,7 @@ export const Label = ({
     <label
       className={cn(
         "text-ob-base-200 relative block w-full items-center gap-1 text-sm transition-colors *:w-full",
-        className
+        className,
       )}
       {...props}
     >

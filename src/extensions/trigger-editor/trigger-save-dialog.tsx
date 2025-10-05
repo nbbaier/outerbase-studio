@@ -1,3 +1,5 @@
+import { LucideAlertCircle, LucideLoader, LucideSave } from "lucide-react";
+import { useCallback, useState } from "react";
 import CodePreview from "@/components/gui/code-preview";
 import {
   AlertDialog,
@@ -9,9 +11,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useStudioContext } from "@/context/driver-provider";
 import { useSchema } from "@/context/schema-provider";
-import { DatabaseTriggerSchema } from "@/drivers/base-driver";
-import { LucideAlertCircle, LucideLoader, LucideSave } from "lucide-react";
-import { useCallback, useState } from "react";
+import type { DatabaseTriggerSchema } from "@/drivers/base-driver";
 import { triggerEditorExtensionTab } from ".";
 
 interface Props {

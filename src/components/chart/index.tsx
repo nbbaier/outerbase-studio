@@ -1,10 +1,10 @@
 "use client";
-import { cn } from "@/lib/utils";
+import type { EChartsOption } from "echarts";
 import * as echarts from "echarts";
-import { EChartsOption } from "echarts";
 import { useTheme } from "next-themes";
 import { useEffect, useRef } from "react";
-import { ChartData, ChartValue, outerBaseUrl } from "./chart-type";
+import { cn } from "@/lib/utils";
+import { type ChartData, type ChartValue, outerBaseUrl } from "./chart-type";
 import EchartOptionsBuilder from "./echart-options-builder";
 
 interface OuterbaseChartProps {
@@ -73,7 +73,7 @@ const SingleValueComponent = ({ value, data }: OuterbaseChartProps) => {
     // Convert to a Date object to validate the input
     const date = new Date(stringDate);
 
-    if (!isNaN(date.getTime())) {
+    if (!Number.isNaN(date.getTime())) {
       // Check if the date is valid
       // Extract the date components
       const year = date.getUTCFullYear();
@@ -213,7 +213,7 @@ const ChartComponent = ({ value, data }: OuterbaseChartProps) => {
         }
       };
     }
-  }, [domRef, value, data, forcedTheme, resolvedTheme]);
+  }, [value, data, forcedTheme, resolvedTheme]);
 
   return <div ref={domRef} className="h-full w-full"></div>;
 };

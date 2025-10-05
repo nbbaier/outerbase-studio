@@ -62,7 +62,7 @@ export default function TableHeaderResizeHandler({
 
             if (table) {
               const columns = table.style.gridTemplateColumns.split(" ");
-              columns[idx] = width + "px";
+              columns[idx] = `${width}px`;
               table.style.gridTemplateColumns = columns.join(" ");
             }
 
@@ -84,7 +84,7 @@ export default function TableHeaderResizeHandler({
         };
       }
     }
-  }, [handlerRef, idx, resizing, setResizing, onResize]);
+  }, [idx, resizing, onResize]);
 
   return (
     <div

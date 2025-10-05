@@ -49,7 +49,7 @@ export function transformRawResult(raw: RqliteResult): DatabaseResultSet {
         headers.reduce((a, b, idx) => {
           a[b.name] = r[idx];
           return a;
-        }, {} as DatabaseRow)
+        }, {} as DatabaseRow),
       )
     : [];
 
@@ -71,7 +71,7 @@ export class RqliteQueryable implements QueryableBaseDriver {
   constructor(
     protected endpoint: string,
     protected username?: string,
-    protected password?: string
+    protected password?: string,
   ) {}
 
   async transaction(stmts: string[]): Promise<DatabaseResultSet[]> {
@@ -93,7 +93,7 @@ export class RqliteQueryable implements QueryableBaseDriver {
       body: JSON.stringify(
         stmts.map((s) => {
           return [s];
-        })
+        }),
       ),
     });
 

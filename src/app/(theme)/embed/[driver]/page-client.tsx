@@ -1,4 +1,6 @@
 "use client";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useMemo } from "react";
 import { Studio } from "@/components/gui/studio";
 import { StudioExtensionManager } from "@/core/extension-manager";
 import {
@@ -14,8 +16,6 @@ import { SqliteLikeBaseDriver } from "@/drivers/sqlite-base-driver";
 import DoltExtension from "@/extensions/dolt";
 import LocalSettingSidebar from "@/extensions/local-setting-sidebar";
 import { useAvailableAIAgents } from "@/lib/ai-agent-storage";
-import { useSearchParams } from "next/navigation";
-import { useEffect, useMemo } from "react";
 
 export default function EmbedPageClient({
   driverName,

@@ -8,7 +8,7 @@ import { CursorV2, parseColumnList } from "./sql-parse-table";
 
 export function parseCreateTriggerScript(
   schemaName: string,
-  sql: string
+  sql: string,
 ): DatabaseTriggerSchema {
   const cursor = new CursorV2(tokenizeSql(sql, "sqlite"));
 

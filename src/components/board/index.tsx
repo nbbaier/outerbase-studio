@@ -1,11 +1,11 @@
-import { BoardSourceDriver } from "@/drivers/board-source/base-source";
-import { IBoardStorageDriver } from "@/drivers/board-storage/base";
 import { useEffect, useMemo, useState } from "react";
-import { ChartValue } from "../chart/chart-type";
+import type { BoardSourceDriver } from "@/drivers/board-source/base-source";
+import type { IBoardStorageDriver } from "@/drivers/board-storage/base";
+import type { ChartValue } from "../chart/chart-type";
 import { BoardCanvas } from "./board-canvas";
 import BoardChartEditor from "./board-chart-editor";
 import { BoardFilter } from "./board-filter";
-import { BoardFilterProps } from "./board-filter-dialog";
+import type { BoardFilterProps } from "./board-filter-dialog";
 import { BoardProvider } from "./board-provider";
 import { BoardTool } from "./board-tool/board-tool";
 

@@ -1,5 +1,5 @@
 import { produce } from "immer";
-import { DashboardProps } from "..";
+import type { DashboardProps } from "..";
 
 interface Props {
   value: DashboardProps;
@@ -17,7 +17,7 @@ export function BoardTitleMenu(props: Props) {
           props.onChange(
             produce(props.value, (draft) => {
               draft.name = e.target.value;
-            })
+            }),
           )
         }
         onBlur={props.onSave}

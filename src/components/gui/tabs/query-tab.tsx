@@ -1,4 +1,15 @@
-import { PromptSelectedFragment } from "@/components/editor/prompt-plugin";
+import { tokenizeSql } from "@outerbase/sdk-transform";
+import { CaretDown } from "@phosphor-icons/react";
+import type { ReactCodeMirrorRef } from "@uiw/react-codemirror";
+import {
+  LucideGrid,
+  LucideMessageSquareWarning,
+  LucidePlay,
+} from "lucide-react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { toast } from "sonner";
+import { format } from "sql-formatter";
+import type { PromptSelectedFragment } from "@/components/editor/prompt-plugin";
 import SqlEditor from "@/components/gui/sql-editor";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
@@ -21,30 +32,19 @@ import {
 import { TAB_PREFIX_SAVED_QUERY } from "@/const";
 import { useStudioContext } from "@/context/driver-provider";
 import { useSchema } from "@/context/schema-provider";
-import {
+import type {
   SavedDocData,
   SavedDocInput,
 } from "@/drivers/saved-doc/saved-doc-driver";
 import { escapeSqlValue, extractInputValue } from "@/drivers/sqlite/sql-helper";
 import { KEY_BINDING } from "@/lib/key-matcher";
 import {
+  type MultipleQueryProgress,
+  type MultipleQueryResult,
   multipleQuery,
-  MultipleQueryProgress,
-  MultipleQueryResult,
 } from "@/lib/sql/multiple-query";
 import { sendAnalyticEvents } from "@/lib/tracking";
 import { cn } from "@/lib/utils";
-import { tokenizeSql } from "@outerbase/sdk-transform";
-import { CaretDown } from "@phosphor-icons/react";
-import { ReactCodeMirrorRef } from "@uiw/react-codemirror";
-import {
-  LucideGrid,
-  LucideMessageSquareWarning,
-  LucidePlay,
-} from "lucide-react";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { toast } from "sonner";
-import { format } from "sql-formatter";
 import { isExplainQueryPlan } from "../query-explanation";
 import QueryProgressLog from "../query-progress-log";
 import SaveDocButton from "../save-doc-button";
@@ -54,7 +54,10 @@ import {
 } from "../sql-editor/statement-highlight";
 import ExplainResultTab from "../tabs-result/explain-result-tab";
 import QueryResult from "../tabs-result/query-result-tab";
-import WindowTabs, { useTabsContext, WindowTabItemProps } from "../windows-tab";
+import WindowTabs, {
+  useTabsContext,
+  type WindowTabItemProps,
+} from "../windows-tab";
 import { QueryPlaceholder } from "./query-placeholder";
 
 interface QueryWindowProps {
@@ -86,7 +89,7 @@ export default function QueryWindow({
   const { changeCurrentTab } = useTabsContext();
 
   const [namespaceName, setNamespaceName] = useState(
-    initialNamespace ?? "Unsaved Query"
+    initialNamespace ?? "Unsaved Query",
   );
   const [savedKey, setSavedKey] = useState<string | undefined>(initialSavedKey);
   const [placeholders, setPlaceholders] = useState<Record<string, string>>({});
@@ -119,7 +122,7 @@ export default function QueryWindow({
         format(code, {
           language: "sqlite",
           tabWidth: 2,
-        })
+        }),
       );
     } catch (e) {
       toast.error((e as Error).message);
@@ -146,11 +149,11 @@ export default function QueryWindow({
         statement.toLowerCase().indexOf("explain query plan") !== 0
       ) {
         if (databaseDriver.getFlags().dialect === "sqlite") {
-          statement = "explain query plan " + statement;
+          statement = `explain query plan ${statement}`;
         } else if (databaseDriver.getFlags().dialect === "mysql") {
-          statement = "explain format=json " + statement;
+          statement = `explain format=json ${statement}`;
         } else if (databaseDriver.getFlags().dialect === "postgres") {
-          statement = "explain (format json) " + statement;
+          statement = `explain (format json) ${statement}`;
         }
       }
 
@@ -168,7 +171,7 @@ export default function QueryWindow({
       for (let i = 0; i < finalStatements.length; i++) {
         const token = tokenizeSql(
           finalStatements[i],
-          databaseDriver.getFlags().dialect
+          databaseDriver.getFlags().dialect,
         );
 
         // Defensive measurement
@@ -198,7 +201,7 @@ export default function QueryWindow({
           .map((t) => {
             if (t.type === "PLACEHOLDER") {
               return escapeSqlValue(
-                extractInputValue(placeholders[t.value.slice(1)])
+                extractInputValue(placeholders[t.value.slice(1)]),
               );
             }
             return t.value;
@@ -251,7 +254,7 @@ export default function QueryWindow({
       setSavedKey(doc.id);
       changeCurrentTab({ identifier: TAB_PREFIX_SAVED_QUERY + doc.id });
     },
-    [changeCurrentTab]
+    [changeCurrentTab],
   );
 
   const onPrepareSaveContent = useCallback((): SavedDocInput => {
@@ -267,8 +270,8 @@ export default function QueryWindow({
       ) {
         queryTabs.push({
           component: <ExplainResultTab data={queryResult.result} />,
-          key: "explain_" + queryResult.order,
-          identifier: "explain_" + queryResult.order,
+          key: `explain_${queryResult.order}`,
+          identifier: `explain_${queryResult.order}`,
           title: "Explain (Visual)",
           icon: LucideMessageSquareWarning,
         });
@@ -276,10 +279,10 @@ export default function QueryWindow({
 
       queryTabs.push({
         component: <QueryResult result={queryResult} key={queryResult.order} />,
-        key: "query_" + queryResult.order,
-        identifier: "query_" + queryResult.order,
+        key: `query_${queryResult.order}`,
+        identifier: `query_${queryResult.order}`,
         title:
-          `${getSingleTableName(queryResult.sql) ?? "Query " + (queryResult.order + 1)}` +
+          `${getSingleTableName(queryResult.sql) ?? `Query ${queryResult.order + 1}`}` +
           ` (${queryResult.result.rows.length}x${queryResult.result.headers.length})`,
         icon: LucideGrid,
       });
@@ -316,7 +319,7 @@ export default function QueryWindow({
       setLineNumber(line);
       setColumnNumber(col);
     },
-    []
+    [],
   );
 
   const onPrompt = useCallback(
@@ -330,12 +333,12 @@ export default function QueryWindow({
         {
           selected: option?.text ?? "",
           schema: schema,
-        }
+        },
       );
 
       return agentResponse;
     },
-    [agentDriver, schema]
+    [agentDriver, schema],
   );
 
   return (
@@ -380,7 +383,7 @@ export default function QueryWindow({
                   onClick={() => onRunClicked()}
                   className={cn(
                     buttonVariants({ size: "sm" }),
-                    "rounded-r-none"
+                    "rounded-r-none",
                   )}
                 >
                   <LucidePlay className="mr-2 h-4 w-4" />
@@ -391,7 +394,7 @@ export default function QueryWindow({
                     <button
                       className={cn(
                         buttonVariants({ size: "sm" }),
-                        "rounded-l-none border-l"
+                        "rounded-l-none border-l",
                       )}
                     >
                       <CaretDown size={12} />
@@ -491,7 +494,7 @@ export function getSingleTableName(query: string): string | null {
 
     // Match the table names after "from" keyword
     const fromMatch = normalizedQuery.match(
-      /from\s+([^\s,;]+(?:\s*,\s*[^\s,;]+)*)/i
+      /from\s+([^\s,;]+(?:\s*,\s*[^\s,;]+)*)/i,
     );
     const joinMatches = normalizedQuery.match(/join\s+([^\s,;]+)/gi);
 
@@ -515,7 +518,7 @@ export function getSingleTableName(query: string): string | null {
 
     // No table found
     return null;
-  } catch (e) {
+  } catch (_e) {
     return null;
   }
 }

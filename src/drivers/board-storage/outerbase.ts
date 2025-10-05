@@ -15,7 +15,7 @@ export default class OuterbaseBoardStorageDriver
 {
   constructor(
     protected workspaceId: string,
-    protected boardId: string
+    protected boardId: string,
   ) {}
 
   async save(value: DashboardProps): Promise<unknown> {
@@ -31,7 +31,7 @@ export default class OuterbaseBoardStorageDriver
     return await updateOuterbaseDashboard(
       this.workspaceId,
       this.boardId,
-      input
+      input,
     );
   }
 
@@ -79,7 +79,7 @@ export default class OuterbaseBoardStorageDriver
     return await updateOuterbaseDashboardChart(
       this.workspaceId,
       chartId,
-      input
+      input,
     );
   }
 }

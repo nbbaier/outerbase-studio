@@ -33,7 +33,7 @@ export abstract class SavedDocDriver {
   abstract createNamespace(name: string): Promise<SavedDocNamespace>;
   abstract updateNamespace(
     id: string,
-    name: string
+    name: string,
   ): Promise<SavedDocNamespace>;
   abstract removeNamespace(id: string): Promise<void>;
 
@@ -41,7 +41,7 @@ export abstract class SavedDocDriver {
   abstract createDoc(
     type: SavedDocType,
     namespace: string,
-    data: SavedDocInput
+    data: SavedDocInput,
   ): Promise<SavedDocData>;
   abstract updateDoc(id: string, data: SavedDocInput): Promise<SavedDocData>;
   abstract removeDoc(id: string): Promise<void>;

@@ -1,8 +1,8 @@
-import { cn } from "@/lib/utils";
 import { useMemo, useRef, useState } from "react";
+import { cn } from "@/lib/utils";
 
 export const inputClasses = cn(
-  "bg-ob-btn-secondary-bg text-ob-base-300 border-ob-border focus:border-ob-border-active placeholder:text-ob-base-100 ob-disable border border transition-colors focus:outline-none"
+  "bg-ob-btn-secondary-bg text-ob-base-300 border-ob-border focus:border-ob-border-active placeholder:text-ob-base-100 ob-disable border border transition-colors focus:outline-none",
 );
 
 export type InputProps = Omit<
@@ -66,7 +66,7 @@ export const Input = ({
           "ob-size-base": size === "base",
           "ob-size-lg": size === "lg",
         },
-        className
+        className,
       )}
       onClick={handlePreTextInputClick}
     >
@@ -79,7 +79,7 @@ export const Input = ({
           "placeholder:text-ob-base-100 w-full bg-transparent focus:outline-none",
           {
             "text-ob-destructive": !isValid,
-          }
+          },
         )}
         onChange={updateCurrentValue}
         ref={inputRef}
@@ -101,7 +101,7 @@ export const Input = ({
           "ob-size-base": size === "base",
           "ob-size-lg": size === "lg",
         },
-        className
+        className,
       )}
       onChange={updateCurrentValue}
       value={currentValue}

@@ -1,8 +1,8 @@
 "use client";
-import { ListView, ListViewItem } from "@/components/listview";
-import { Input } from "@/components/ui/input";
 import { LucideDatabase, LucideTable } from "lucide-react";
 import { useCallback, useMemo, useState } from "react";
+import { ListView, type ListViewItem } from "@/components/listview";
+import { Input } from "@/components/ui/input";
 
 export function StorybookListviewExample() {
   const [filter, setFilter] = useState("");
@@ -14,7 +14,7 @@ export function StorybookListviewExample() {
       if (filter === "") return true;
       return item.name.toLowerCase().indexOf(filter.toLowerCase()) >= 0;
     },
-    [filter]
+    [filter],
   );
 
   const items = useMemo(() => {

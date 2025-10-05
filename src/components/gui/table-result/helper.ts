@@ -8,7 +8,7 @@ import { TableHeaderMetadata } from "./type";
 export function createTableStateFromResult(props: BuildTableResultProps) {
   const r = new OptimizeTableState<TableHeaderMetadata>(
     buildTableResultHeader(props),
-    props.result.rows.map((r) => ({ ...r }))
+    props.result.rows.map((r) => ({ ...r })),
   );
 
   if (r.getRowsCount() >= 1000) {

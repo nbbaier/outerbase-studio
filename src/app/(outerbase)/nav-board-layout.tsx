@@ -1,12 +1,12 @@
 "use client";
+import { CaretLeft, ChartBar } from "@phosphor-icons/react";
+import { useParams, useRouter } from "next/navigation";
+import type { PropsWithChildren } from "react";
 import {
   SidebarMenuHeader,
   SidebarMenuItem,
   SidebarMenuLoadingItem,
 } from "@/components/sidebar-menu";
-import { CaretLeft, ChartBar } from "@phosphor-icons/react";
-import { useParams, useRouter } from "next/navigation";
-import { PropsWithChildren } from "react";
 
 interface NavigationDashboardLayoutProps {
   boards?: {

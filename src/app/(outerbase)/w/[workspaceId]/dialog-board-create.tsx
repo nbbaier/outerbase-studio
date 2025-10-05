@@ -1,3 +1,5 @@
+import { LucideLoader } from "lucide-react";
+import { useCallback, useState } from "react";
 import { createDialog } from "@/components/create-dialog";
 import LabelInput from "@/components/label-input";
 import { Button } from "@/components/orbit/button";
@@ -8,9 +10,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { createOuterbaseDashboard } from "@/outerbase-cloud/api";
-import { OuterbaseAPIDashboardDetail } from "@/outerbase-cloud/api-type";
-import { LucideLoader } from "lucide-react";
-import { useCallback, useState } from "react";
+import type { OuterbaseAPIDashboardDetail } from "@/outerbase-cloud/api-type";
 
 export const createBoardDialog = createDialog<
   { workspaceId: string },

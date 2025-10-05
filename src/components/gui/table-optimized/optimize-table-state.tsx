@@ -1,6 +1,6 @@
-import { selectArrayFromIndexList } from "@/lib/export-helper";
 import deepEqual from "deep-equal";
-import { OptimizeTableHeaderProps, TableCellDecorator } from ".";
+import { selectArrayFromIndexList } from "@/lib/export-helper";
+import type { OptimizeTableHeaderProps, TableCellDecorator } from ".";
 
 export interface OptimizeTableRowValue {
   raw: Record<string, unknown>;
@@ -51,7 +51,7 @@ export default class OptimizeTableState<HeaderMetadata = unknown> {
 
   constructor(
     headers: OptimizeTableHeaderProps<HeaderMetadata>[],
-    data: Record<string, unknown>[]
+    data: Record<string, unknown>[],
   ) {
     this.headers = headers;
     this.data = data.map((row) => ({
@@ -130,7 +130,7 @@ export default class OptimizeTableState<HeaderMetadata = unknown> {
 
   protected splitSelectionRange(
     selection: TableSelectionRange,
-    deselection: TableSelectionRange
+    deselection: TableSelectionRange,
   ): TableSelectionRange[] {
     const result: TableSelectionRange[] = [];
 
@@ -181,7 +181,7 @@ export default class OptimizeTableState<HeaderMetadata = unknown> {
 
   updateHeaderDecorator(
     header: OptimizeTableHeaderProps,
-    decorator: TableCellDecorator | undefined
+    decorator: TableCellDecorator | undefined,
   ) {
     const idx = this.headers.findIndex((h) => h.name === header.name);
 
@@ -303,7 +303,7 @@ export default class OptimizeTableState<HeaderMetadata = unknown> {
     updatedRows: {
       row: OptimizeTableRowValue;
       updated: Record<string, unknown>;
-    }[]
+    }[],
   ) {
     const rowChanges = this.getChangedRows();
     const removedRows = rowChanges.filter((row) => row.isRemoved);
@@ -363,7 +363,7 @@ export default class OptimizeTableState<HeaderMetadata = unknown> {
     if (row) {
       if (row.isNewRow && row.changeKey) {
         delete this.changeLogs[row.changeKey];
-        this.data = this.data.filter((dataRow) => dataRow != row);
+        this.data = this.data.filter((dataRow) => dataRow !== row);
       } else {
         row.isRemoved = true;
         if (!row.changeKey) {
@@ -480,7 +480,7 @@ export default class OptimizeTableState<HeaderMetadata = unknown> {
   scrollToCell(
     horizontal: "left" | "right",
     vertical: "top" | "bottom",
-    cell: { x: number; y: number }
+    cell: { x: number; y: number },
   ) {
     if (this.container && cell) {
       const cellX = cell.x;
@@ -544,7 +544,7 @@ export default class OptimizeTableState<HeaderMetadata = unknown> {
 
   getSelectedRowsArray(): unknown[][] {
     return selectArrayFromIndexList(this.data, this.getSelectedRowIndex()).map(
-      (row) => this.headers.map((header) => row.raw[header.name])
+      (row) => this.headers.map((header) => row.raw[header.name]),
     );
   }
 
@@ -665,7 +665,7 @@ export default class OptimizeTableState<HeaderMetadata = unknown> {
         r.x1 <= range.x1 &&
         r.x2 >= range.x2 &&
         r.y1 <= range.y1 &&
-        r.y2 >= range.y2
+        r.y2 >= range.y2,
     );
   }
 

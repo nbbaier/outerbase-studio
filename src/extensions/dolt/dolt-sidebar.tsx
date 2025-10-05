@@ -1,3 +1,7 @@
+import { GitBranch, Minus, Plus, Table } from "@phosphor-icons/react";
+import { ChevronDown, Loader, MoreHorizontal, RefreshCcw } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
+import { toast } from "sonner";
 import { useCommonDialog } from "@/components/common-dialog";
 import {
   Toolbar,
@@ -22,10 +26,6 @@ import {
 import { useStudioContext } from "@/context/driver-provider";
 import { useSchema } from "@/context/schema-provider";
 import { cn } from "@/lib/utils";
-import { GitBranch, Minus, Plus, Table } from "@phosphor-icons/react";
-import { ChevronDown, Loader, MoreHorizontal, RefreshCcw } from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
-import { toast } from "sonner";
 import useDoltCreateBranchModal from "./dolt-create-branch";
 
 interface DoltStatusResultItem {
@@ -73,7 +73,7 @@ function DoltCommitLog({
             text: "Reset",
             onClick: async () => {
               await databaseDriver.query(
-                `CALL DOLT_RESET(${databaseDriver.escapeValue(commit.commit_hash)});`
+                `CALL DOLT_RESET(${databaseDriver.escapeValue(commit.commit_hash)});`,
               );
             },
             onComplete: () => {
@@ -83,7 +83,7 @@ function DoltCommitLog({
         ],
       });
     },
-    [refreshStatus, showCommonDialog, databaseDriver]
+    [refreshStatus, showCommonDialog, databaseDriver],
   );
 
   return (
@@ -178,7 +178,7 @@ function DoltChangeItem({
         .then(refreshStatus)
         .finally(() => setLoading(false));
     },
-    [databaseDriver, refreshStatus]
+    [databaseDriver, refreshStatus],
   );
 
   const onResetClicked = useCallback(
@@ -189,7 +189,7 @@ function DoltChangeItem({
         .then(refreshStatus)
         .finally(() => setLoading(false));
     },
-    [databaseDriver, refreshStatus]
+    [databaseDriver, refreshStatus],
   );
 
   let itemClassName = "";
@@ -231,7 +231,7 @@ function DoltChangeItem({
       <span
         className={cn(
           "flex-1 text-sm",
-          status.status === "deleted" ? "line-through" : ""
+          status.status === "deleted" ? "line-through" : "",
         )}
       >
         {status.table_name}
@@ -264,7 +264,7 @@ function DoltChanges({
       setLoading(true);
 
       await databaseDriver.query(
-        `CALL DOLT_COMMIT("-m", ${databaseDriver.escapeValue(commitMessage)});`
+        `CALL DOLT_COMMIT("-m", ${databaseDriver.escapeValue(commitMessage)});`,
       );
 
       setCommitMessage("");
@@ -354,29 +354,29 @@ export default function DoltSidebar() {
     if (currentSchemaName) {
       const branchResult = (
         await databaseDriver.query(
-          `SELECT name, (name = active_branch()) AS active FROM dolt_branches;`
+          `SELECT name, (name = active_branch()) AS active FROM dolt_branches;`,
         )
       ).rows as { name: string; active: number }[];
 
       setBranchList(branchResult.map((row) => row.name));
 
       setSelectedBranch(
-        branchResult.find((row) => !!row.active)?.name ?? "main"
+        branchResult.find((row) => !!row.active)?.name ?? "main",
       );
 
       setCommitList(
         (await databaseDriver.query(`SELECT * FROM dolt_log LIMIT 30;`))
-          .rows as unknown as DoltCommitResultItem[]
+          .rows as unknown as DoltCommitResultItem[],
       );
 
       setStatusList(
         (await databaseDriver.query(`SELECT * FROM dolt_status;`))
-          .rows as unknown as DoltStatusResultItem[]
+          .rows as unknown as DoltStatusResultItem[],
       );
     } else {
       setBranchList([]);
     }
-  }, [databaseDriver, setBranchList, currentSchemaName]);
+  }, [databaseDriver, currentSchemaName]);
 
   const { modal: createBranchModal, openModal: openCreateBranchModal } =
     useDoltCreateBranchModal(refreshDoltSchema);
@@ -387,12 +387,12 @@ export default function DoltSidebar() {
         .query(`CALL DOLT_CHECKOUT(${databaseDriver.escapeValue(branchName)});`)
         .then(refreshDoltSchema);
     },
-    [databaseDriver, refreshDoltSchema]
+    [databaseDriver, refreshDoltSchema],
   );
 
   useEffect(() => {
     refreshDoltSchema().then().catch();
-  }, [refreshDoltSchema, currentSchemaName]);
+  }, [refreshDoltSchema]);
 
   if (!currentSchemaName) {
     return (

@@ -32,7 +32,7 @@ describe("parse trigger", () => {
   it("when: BEFORE", () => {
     const deleteOutput = parseCreateTriggerScript(
       "main",
-      generateSql({ name, operation: "DELETE", tableName, statement })
+      generateSql({ name, operation: "DELETE", tableName, statement }),
     );
     expect(deleteOutput).toMatchObject({
       name: name,
@@ -49,7 +49,7 @@ describe("parse trigger", () => {
         operation: "INSERT",
         tableName,
         statement: statement + statement,
-      })
+      }),
     );
     expect(insert).toMatchObject({
       name: name,
@@ -67,7 +67,7 @@ describe("parse trigger", () => {
         columnNames: "cust_addr",
         tableName,
         statement,
-      })
+      }),
     );
     expect(updateOf).toMatchObject({
       name: name,
@@ -88,7 +88,7 @@ describe("parse trigger", () => {
         operation: "DELETE",
         tableName,
         statement,
-      })
+      }),
     );
     expect(deleteOutput).toMatchObject({
       name: name,
@@ -106,7 +106,7 @@ describe("parse trigger", () => {
         operation: "INSERT",
         tableName,
         statement,
-      })
+      }),
     );
     expect(insert).toMatchObject({
       name: name,
@@ -125,7 +125,7 @@ describe("parse trigger", () => {
         columnNames: "cust_addr",
         tableName,
         statement,
-      })
+      }),
     );
     expect(updateOf).toMatchObject({
       name: name,
@@ -146,7 +146,7 @@ describe("parse trigger", () => {
         operation: "DELETE",
         tableName,
         statement,
-      })
+      }),
     );
     expect(deleteOutput).toMatchObject({
       name: name,
@@ -164,7 +164,7 @@ describe("parse trigger", () => {
         operation: "INSERT",
         tableName,
         statement,
-      })
+      }),
     );
     expect(insert).toMatchObject({
       name: name,
@@ -183,7 +183,7 @@ describe("parse trigger", () => {
         columnNames: "cust_addr",
         tableName,
         statement,
-      })
+      }),
     );
     expect(updateOf).toMatchObject({
       name: name,

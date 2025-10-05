@@ -19,17 +19,17 @@ export function getVisibleCellRange(
   totalRowCount: number,
   rowHeight: number,
   renderAhead: number,
-  gutterWidth: number
+  gutterWidth: number,
 ) {
   const currentRowStart = Math.max(
     0,
-    Math.floor(e.scrollTop / rowHeight) - 1 - renderAhead
+    Math.floor(e.scrollTop / rowHeight) - 1 - renderAhead,
   );
   const currentRowEnd = Math.min(
     totalRowCount,
     currentRowStart +
       Math.ceil(e.getBoundingClientRect().height / rowHeight) +
-      renderAhead
+      renderAhead,
   );
 
   let currentColStart = -1;
@@ -102,11 +102,11 @@ export default function useTableVisibilityRecalculation({
           totalRowCount,
           rowHeight,
           renderAhead,
-          state.gutterColumnWidth
-        )
+          state.gutterColumnWidth,
+        ),
       );
     },
-    [setVisibleDebounce, totalRowCount, rowHeight, renderAhead, headers, state]
+    [setVisibleDebounce, totalRowCount, rowHeight, renderAhead, headers, state],
   );
 
   const onHeaderResize = useCallback(
@@ -116,7 +116,7 @@ export default function useTableVisibilityRecalculation({
         recalculateVisible(containerRef.current);
       }
     },
-    [state, recalculateVisible, containerRef]
+    [state, recalculateVisible, containerRef],
   );
 
   // Recalculate the visibility again when we scroll the container

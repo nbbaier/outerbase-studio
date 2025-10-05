@@ -21,7 +21,7 @@ function generateSet(dialect: BaseDriver, where: Record<string, unknown>) {
 
 function generateInsertValue(
   dialect: BaseDriver,
-  values: Record<string, unknown>
+  values: Record<string, unknown>,
 ) {
   const columnNameList: string[] = [];
   const valueList: string[] = [];
@@ -46,7 +46,7 @@ export function selectFrom(
   schema: string,
   table: string,
   where: Record<string, unknown>,
-  options?: { limit?: number; offset?: number }
+  options?: { limit?: number; offset?: number },
 ): string {
   return [
     "SELECT",
@@ -66,7 +66,7 @@ export function insertInto(
   table: string,
   value: Record<string, unknown>,
   supportReturning: boolean,
-  supportRowId: boolean
+  supportRowId: boolean,
 ) {
   return [
     "INSERT INTO",
@@ -83,7 +83,7 @@ export function updateTable(
   value: Record<string, unknown>,
   where: Record<string, unknown>,
   supportReturning: boolean,
-  supportRowId: boolean
+  supportRowId: boolean,
 ): string {
   return [
     "UPDATE",
@@ -101,7 +101,7 @@ export function deleteFrom(
   dialect: BaseDriver,
   schema: string,
   table: string,
-  where: Record<string, unknown>
+  where: Record<string, unknown>,
 ): string {
   return [
     "DELETE FROM",

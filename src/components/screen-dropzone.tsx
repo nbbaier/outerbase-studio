@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
 import Link from "next/link";
+import { useEffect } from "react";
 
 interface Props {
   onFileDrop: (file?: File, handler?: FileSystemFileHandle) => void;
@@ -73,7 +73,7 @@ export default function ScreenDropZone({ onFileDrop }: Props) {
           .then((handler: FileSystemFileHandle) => {
             onFileDrop(undefined, handler);
           });
-      } catch (error) {
+      } catch (_error) {
         const file = e.dataTransfer.files[0];
         if (!file) return;
         onFileDrop(file);

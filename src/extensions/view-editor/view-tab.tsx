@@ -1,12 +1,12 @@
-import { useCommonDialog } from "@/components/common-dialog";
-import OpacityLoading from "@/components/gui/loading-opacity";
-import { useStudioContext } from "@/context/driver-provider";
-import { useSchema } from "@/context/schema-provider";
-import { DatabaseViewSchema } from "@/drivers/base-driver";
 import { produce } from "immer";
 import { isEqual } from "lodash";
 import { LucideLoader, LucideSave } from "lucide-react";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCommonDialog } from "@/components/common-dialog";
+import OpacityLoading from "@/components/gui/loading-opacity";
+import { useStudioContext } from "@/context/driver-provider";
+import { useSchema } from "@/context/schema-provider";
+import type { DatabaseViewSchema } from "@/drivers/base-driver";
 import { viewEditorExtensionTab } from ".";
 import { ViewController } from "./view-controller";
 import ViewEditor from "./view-editor";
@@ -68,12 +68,12 @@ export default function ViewTab(props: ViewTabProps) {
     ) {
       const oldSchemaName = currentSchemaName;
       await databaseDriver.query(
-        "USE " + databaseDriver.escapeId(value.schemaName)
+        `USE ${databaseDriver.escapeId(value.schemaName)}`,
       );
       await databaseDriver.transaction(previewScript);
       if (oldSchemaName !== "") {
         await databaseDriver.query(
-          "USE " + databaseDriver.escapeId(oldSchemaName)
+          `USE ${databaseDriver.escapeId(oldSchemaName)}`,
         );
       }
     } else {

@@ -3,7 +3,7 @@ export class BeforeQueryPipeline {
 
   constructor(
     protected type: "query" | "transaction" | "batch",
-    protected statements: string[]
+    protected statements: string[],
   ) {}
 
   getMetadata(name: string) {

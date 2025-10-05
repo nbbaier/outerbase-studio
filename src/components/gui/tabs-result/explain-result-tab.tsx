@@ -1,5 +1,5 @@
 import { useStudioContext } from "@/context/driver-provider";
-import { DatabaseResultSet } from "@/drivers/base-driver";
+import type { DatabaseResultSet } from "@/drivers/base-driver";
 import { QueryExplanation } from "../query-explanation";
 
 export default function ExplainResultTab({

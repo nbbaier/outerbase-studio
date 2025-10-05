@@ -2,7 +2,7 @@ import { json } from "@codemirror/lang-json";
 import { tags as t } from "@lezer/highlight";
 import { indentationMarkers } from "@replit/codemirror-indentation-markers";
 import createTheme from "@uiw/codemirror-themes";
-import CodeMirror, { ReactCodeMirrorRef } from "@uiw/react-codemirror";
+import CodeMirror, { type ReactCodeMirrorRef } from "@uiw/react-codemirror";
 import { useTheme } from "next-themes";
 import { forwardRef, useMemo } from "react";
 
@@ -96,7 +96,7 @@ const JsonEditor = forwardRef<ReactCodeMirrorRef, JsonEditorProps>(
         extensions={[json(), indentationMarkers()]}
       />
     );
-  }
+  },
 );
 
 export default JsonEditor;

@@ -1,10 +1,10 @@
 "use client";
+import { TrashIcon } from "lucide-react";
 import {
   CommonDialogProvider,
   useCommonDialog,
 } from "@/components/common-dialog";
 import { Button } from "@/components/ui/button";
-import { TrashIcon } from "lucide-react";
 
 function StorybookBody() {
   const { showDialog } = useCommonDialog();
@@ -47,7 +47,7 @@ function StorybookBody() {
                 onClick: async () => {
                   await new Promise((resolve) => setTimeout(resolve, 3000));
                   throw new Error(
-                    "Failed to delete. You do not have permission"
+                    "Failed to delete. You do not have permission",
                   );
                 },
               },

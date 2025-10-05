@@ -62,7 +62,7 @@ async function CodeBlock(props: MDXCodeBlockProps) {
 
   const codeElement = React.Children.toArray(props.children).find(
     (child) =>
-      React.isValidElement(child) && (child as any).type().type === "code"
+      React.isValidElement(child) && (child as any).type().type === "code",
   ) as React.ReactElement | undefined;
 
   if (codeElement && typeof codeElement.props.children === "string") {

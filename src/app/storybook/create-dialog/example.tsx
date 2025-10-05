@@ -1,4 +1,6 @@
 "use client";
+import { DialogTitle } from "@radix-ui/react-dialog";
+import { useState } from "react";
 import { createDialog } from "@/components/create-dialog";
 import { Button } from "@/components/ui/button";
 import {
@@ -7,8 +9,6 @@ import {
   DialogHeader,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { DialogTitle } from "@radix-ui/react-dialog";
-import { useState } from "react";
 
 const testingDialog = createDialog<{ color: string }, string>(
   ({ close, color }) => {
@@ -40,7 +40,7 @@ const testingDialog = createDialog<{ color: string }, string>(
       </>
     );
   },
-  { defaultValue: "close" }
+  { defaultValue: "close" },
 );
 
 export function StorybookCreateDialogExample() {

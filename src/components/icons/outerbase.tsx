@@ -1,4 +1,4 @@
-import { SVGProps } from "react";
+import type { SVGProps } from "react";
 
 export function OuterbaseIcon(props: { className?: string }) {
   return (

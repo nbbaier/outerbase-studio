@@ -1,8 +1,8 @@
+import type { Metadata } from "next";
+import Link from "next/link";
 import { MySQLIcon } from "@/components/icons/outerbase-icon";
 import WebsiteLayout from "@/components/website-layout";
 import { WEBSITE_NAME } from "@/const";
-import { Metadata } from "next";
-import Link from "next/link";
 
 const siteDescription = `${WEBSITE_NAME} is a fully-featured, lightweight GUI client for managing MySQL databases`;
 

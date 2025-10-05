@@ -1,4 +1,6 @@
 // import { Button, buttonVariants } from "../../ui/button";
+
+import { useCallback, useEffect, useState } from "react";
 import { Button } from "@/components/orbit/button";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -10,11 +12,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { getFormatHandlers } from "@/lib/export-helper";
-import { useCallback, useEffect, useState } from "react";
 import { Popover, PopoverContent, PopoverTrigger } from "../../ui/popover";
-import OptimizeTableState, {
-  TableSelectionRange,
-} from "../table-optimized/optimize-table-state";
+import type OptimizeTableState from "../table-optimized/optimize-table-state";
+import type { TableSelectionRange } from "../table-optimized/optimize-table-state";
 
 export type ExportTarget = "clipboard" | "file";
 export type ExportFormat = "csv" | "delimited" | "json" | "sql" | "xlsx";
@@ -108,7 +108,7 @@ export default function ExportResultButton({
   }, [getDefaultOption]);
 
   const [exportSetting, setExportSetting] = useState<ExportSettings>(
-    getSettingFromStorage()
+    getSettingFromStorage(),
   );
 
   const [selectionCount, setSelectionCount] = useState<selectionCount>({
@@ -120,11 +120,11 @@ export default function ExportResultButton({
     () => {
       const savedSelection = exportSetting.selection;
       return validateExportSelection(savedSelection, selectionCount);
-    }
+    },
   );
 
   const [selectedRangeIndex, setSelectedRangeIndex] = useState<number>(
-    selectionCount.ranges.length > 0 ? 0 : -1
+    selectionCount.ranges.length > 0 ? 0 : -1,
   );
   const [open, setOpen] = useState(false);
 
@@ -138,7 +138,7 @@ export default function ExportResultButton({
       exportSetting.target,
       exportSelection,
       exportSetting.options!,
-      selectedRangeIndex
+      selectedRangeIndex,
     );
 
     const handler = formatHandlers[exportSetting.format];
@@ -182,13 +182,13 @@ export default function ExportResultButton({
 
   useEffect(() => {
     setExportSelection(
-      validateExportSelection(exportSetting.selection, selectionCount)
+      validateExportSelection(exportSetting.selection, selectionCount),
     );
   }, [exportSetting, selectionCount]);
 
   useEffect(() => {
     saveSettingToStorage(exportSetting);
-  }, [exportSelection, exportSetting]);
+  }, [exportSetting, saveSettingToStorage]);
 
   const SelectedRange = ({
     ranges,
@@ -393,7 +393,7 @@ export default function ExportResultButton({
                             : "0"
                         }
                         onChange={(value) => {
-                          setSelectedRangeIndex(parseInt(value));
+                          setSelectedRangeIndex(parseInt(value, 10));
                         }}
                       />
                     )}
@@ -505,7 +505,7 @@ function buildSelectionRangeLabel(range: TableSelectionRange): string {
 
 function validateExportSelection(
   savedSelection: string | null,
-  selectionCount: selectionCount
+  selectionCount: selectionCount,
 ): ExportSelection {
   if (!savedSelection) {
     return "complete";

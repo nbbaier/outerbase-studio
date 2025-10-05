@@ -1,5 +1,7 @@
 "use client";
 
+import { useParams } from "next/navigation";
+import { useEffect, useMemo, useState } from "react";
 import { Studio } from "@/components/gui/studio";
 import PageLoading from "@/components/page-loading";
 import { StudioExtensionManager } from "@/core/extension-manager";
@@ -22,8 +24,6 @@ import { getOuterbaseBaseCredential } from "@/outerbase-cloud/api-workspace";
 import DataCatalogOuterbaseDriver from "@/outerbase-cloud/data-catalog-driver";
 import { OuterbaseQueryable } from "@/outerbase-cloud/database/query";
 import OuterbaseQueryDriver from "@/outerbase-cloud/query-driver";
-import { useParams } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
 
 export default function OuterbaseSourcePage() {
   const { workspaceId, baseId } = useParams<{
@@ -42,7 +42,7 @@ export default function OuterbaseSourcePage() {
 
       setName(base.name);
       getOuterbaseBaseCredential(workspaceId, base.sources[0]?.id ?? "").then(
-        setCredential
+        setCredential,
       );
     });
   }, [workspaceId, baseId]);
@@ -85,7 +85,7 @@ export default function OuterbaseSourcePage() {
       return [
         new MySQLLikeDriver(
           new OuterbaseQueryable(outerbaseConfig),
-          credential.database
+          credential.database,
         ),
         new StudioExtensionManager([
           ...createMySQLExtensions(),

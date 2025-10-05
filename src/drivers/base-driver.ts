@@ -308,28 +308,28 @@ export abstract class BaseDriver {
   abstract schemas(): Promise<DatabaseSchemas>;
   abstract tableSchema(
     schemaName: string,
-    tableName: string
+    tableName: string,
   ): Promise<DatabaseTableSchema>;
 
   abstract inferTypeFromHeader(
-    header?: DatabaseTableColumn
+    header?: DatabaseTableColumn,
   ): ColumnType | undefined;
 
   abstract trigger(
     schemaName: string,
-    name: string
+    name: string,
   ): Promise<DatabaseTriggerSchema>;
 
   abstract findFirst(
     schemaName: string,
     tableName: string,
-    key: Record<string, DatabaseValue>
+    key: Record<string, DatabaseValue>,
   ): Promise<DatabaseResultSet>;
 
   abstract selectTable(
     schemaName: string,
     tableName: string,
-    options: SelectFromTableOptions
+    options: SelectFromTableOptions,
   ): Promise<{ data: DatabaseResultSet; schema: DatabaseTableSchema }>;
 
   abstract updateTableData(
@@ -339,7 +339,7 @@ export abstract class BaseDriver {
 
     // Using table scheam to determine and throw error
     // if the operation is unsafe
-    validateSchema?: DatabaseTableSchema
+    validateSchema?: DatabaseTableSchema,
   ): Promise<DatabaseTableOperationReslt[]>;
 
   abstract dropTable(schemaName: string, tableName: string): Promise<void>;

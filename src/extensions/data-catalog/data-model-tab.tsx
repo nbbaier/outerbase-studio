@@ -1,15 +1,15 @@
+import { MagnifyingGlass } from "@phosphor-icons/react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import SchemaNameSelect from "@/components/gui/schema-editor/schema-name-select";
 import { Toolbar, ToolbarFiller } from "@/components/gui/toolbar";
 import { Input } from "@/components/orbit/input";
 import { Toggle } from "@/components/orbit/toggle";
 import { useStudioContext } from "@/context/driver-provider";
 import { useSchema } from "@/context/schema-provider";
-import { DatabaseTableSchema } from "@/drivers/base-driver";
-import { MagnifyingGlass } from "@phosphor-icons/react";
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import DataCatalogExtension from ".";
+import type { DatabaseTableSchema } from "@/drivers/base-driver";
+import type DataCatalogExtension from ".";
 import DataCatalogTableAccordion from "./data-catalog-table-accordion";
-import DataCatalogDriver from "./driver";
+import type DataCatalogDriver from "./driver";
 
 const DataCatalogContext = createContext<{
   driver: DataCatalogDriver;
@@ -45,7 +45,7 @@ export default function DataCatalogModelTab() {
       .map((table) => table.tableSchema)
       .filter(Boolean) as DatabaseTableSchema[];
 
-    result.sort((a, b) => a.tableName!.localeCompare(b.tableName!));
+    result.sort((a, b) => a.tableName?.localeCompare(b.tableName!));
 
     return result;
   }, [selectedSchema, schemaList]);
@@ -54,7 +54,7 @@ export default function DataCatalogModelTab() {
     return driver.listen(() => {
       setRevision((prev) => prev + 1);
     });
-  }, [driver, setRevision]);
+  }, [driver]);
 
   return (
     <div className="flex h-full flex-1 flex-col overflow-hidden">

@@ -16,7 +16,7 @@ import {
 export async function requestOuterbase<T = unknown>(
   url: string,
   method: "GET" | "POST" | "DELETE" | "PUT" = "GET",
-  body?: unknown
+  body?: unknown,
 ) {
   const raw = await fetch(url, {
     method,
@@ -45,7 +45,7 @@ export async function getOuterbaseBase(workspaceId: string, baseId: string) {
     "/api/v1/workspace/" +
       workspaceId +
       "/connection?" +
-      new URLSearchParams({ baseId })
+      new URLSearchParams({ baseId }),
   );
 
   return baseList.items[0];
@@ -54,7 +54,7 @@ export async function getOuterbaseBase(workspaceId: string, baseId: string) {
 export async function deleteOuterbaseBase(workspaceId: string, baseId: string) {
   return requestOuterbase(
     `/api/v1/workspace/${workspaceId}/base/${baseId}`,
-    "DELETE"
+    "DELETE",
   );
 }
 
@@ -62,23 +62,23 @@ export async function getOuterbaseDashboardList(workspaceId?: string) {
   return requestOuterbase<OuterbaseAPIDashboardListResponse>(
     workspaceId
       ? `/api/v1/workspace/${workspaceId}/dashboard`
-      : "/api/v1/workspace/dashboard"
+      : "/api/v1/workspace/dashboard",
   );
 }
 
 export async function getOuterbaseDashboard(
   workspaceId: string,
-  dashboardId: string
+  dashboardId: string,
 ) {
   return requestOuterbase<OuterbaseAPIDashboardDetail>(
-    `/api/v1/workspace/${workspaceId}/dashboard/${dashboardId}`
+    `/api/v1/workspace/${workspaceId}/dashboard/${dashboardId}`,
   );
 }
 
 export async function createOuterbaseDashboard(
   workspaceId: string,
   baseId: string | undefined,
-  name: string
+  name: string,
 ) {
   return requestOuterbase<OuterbaseAPIDashboardDetail>(
     `/api/v1/workspace/${workspaceId}/dashboard` +
@@ -96,106 +96,106 @@ export async function createOuterbaseDashboard(
       layout: [],
       directory_index: 0,
       type: "dashboard",
-    }
+    },
   );
 }
 
 export async function deleteOuterbaseDashboard(
   workspaceId: string,
-  dashboardId: string
+  dashboardId: string,
 ) {
   return requestOuterbase(
     `/api/v1/workspace/${workspaceId}/dashboard/${dashboardId}`,
-    "DELETE"
+    "DELETE",
   );
 }
 
 export async function updateOuterbaseDashboard(
   workspaceId: string,
   dashboardId: string,
-  data: any
+  data: any,
 ) {
   return requestOuterbase(
     `/api/v1/workspace/${workspaceId}/dashboard/${dashboardId}`,
     "PUT",
-    data
+    data,
   );
 }
 
 export async function deleteOuterbaseDashboardChart(
   workspaceId: string,
-  chartId: string
+  chartId: string,
 ) {
   return requestOuterbase(
     `/api/v1/workspace/${workspaceId}/chart/${chartId}`,
-    "DELETE"
+    "DELETE",
   );
 }
 
 export async function runOuterbaseQueryRaw(
   workspaceId: string,
   sourceId: string,
-  query: string
+  query: string,
 ) {
   return requestOuterbase<OuterbaseAPIQueryRaw>(
     `/api/v1/workspace/${workspaceId}/source/${sourceId}/query/raw`,
     "POST",
-    { query }
+    { query },
   );
 }
 
 export async function runOuterbaseQueryBatch(
   workspaceId: string,
   sourceId: string,
-  queries: string[]
+  queries: string[],
 ) {
   return requestOuterbase<OuterbaseAPIQueryRaw[]>(
     `/api/v1/workspace/${workspaceId}/source/${sourceId}/query/batch`,
     "POST",
-    { query: queries }
+    { query: queries },
   );
 }
 
 export async function getOuterbaseQueryList(
   workspaceId: string,
-  baseId: string
+  baseId: string,
 ) {
   return requestOuterbase<OuterbaseAPIQueryListResponse>(
-    `/api/v1/workspace/${workspaceId}/query?${new URLSearchParams({ baseId })}`
+    `/api/v1/workspace/${workspaceId}/query?${new URLSearchParams({ baseId })}`,
   );
 }
 
 export async function createOuterbaseQuery(
   workspaceId: string,
   baseId: string,
-  options: { source_id: string; name: string; baseId: string; query: string }
+  options: { source_id: string; name: string; baseId: string; query: string },
 ) {
   return requestOuterbase<OuterbaseAPIQuery>(
     `/api/v1/workspace/${workspaceId}/query?${new URLSearchParams({ baseId })}`,
     "POST",
-    options
+    options,
   );
 }
 
 export async function deleteOuterbaseQuery(
   workspaceId: string,
-  queryId: string
+  queryId: string,
 ) {
   return requestOuterbase(
     `/api/v1/workspace/${workspaceId}/query/${queryId}`,
-    "DELETE"
+    "DELETE",
   );
 }
 
 export async function updateOuterbaseQuery(
   workspaceId: string,
   queryId: string,
-  options: { name: string; query: string }
+  options: { name: string; query: string },
 ) {
   return requestOuterbase<OuterbaseAPIQuery>(
     `/api/v1/workspace/${workspaceId}/query/${queryId}`,
     "PUT",
-    options
+    options,
   );
 }
 
@@ -208,7 +208,7 @@ export async function getOuterbaseSession() {
 
 export async function loginOuterbaseByPassword(
   email: string,
-  password: string
+  password: string,
 ) {
   return requestOuterbase<OuterbaseAPISession>("/api/v1/auth/login", "POST", {
     email,
@@ -218,7 +218,7 @@ export async function loginOuterbaseByPassword(
 
 export async function registerOuterbaseByPassword(
   email: string,
-  password: string
+  password: string,
 ) {
   return requestOuterbase<OuterbaseAPISession>(
     "/api/v1/auth/register",
@@ -226,7 +226,7 @@ export async function registerOuterbaseByPassword(
     {
       email,
       password,
-    }
+    },
   );
 }
 
@@ -235,20 +235,20 @@ export async function verifyOuterbaseRequestEmail() {
 }
 
 export async function verifyOuterbaseSubmitEmail(
-  email_confirmation_token: string
+  email_confirmation_token: string,
 ) {
   return requestOuterbase<{ response: unknown; success: boolean }>(
     "/api/v1/me/email/verify/submit",
     "POST",
     {
       email_confirmation_token,
-    }
+    },
   );
 }
 
 export async function getOuterbaseEmbedChart(
   chartId: string,
-  apiKey: string
+  apiKey: string,
 ): Promise<OuterbaseAPIResponse<OuterbaseAPIDashboardChart>> {
   const result = await fetch(
     `${process.env.NEXT_PUBLIC_OB_API}/chart/${chartId}`,
@@ -258,7 +258,7 @@ export async function getOuterbaseEmbedChart(
         "Content-Type": "application/json",
         "x-chart-api-key": apiKey,
       },
-    }
+    },
   );
 
   return await result.json();
@@ -266,7 +266,7 @@ export async function getOuterbaseEmbedChart(
 
 export async function sendOuterbaseBaseAnalytics(
   workspaceId: string,
-  baseId: string
+  baseId: string,
 ) {
   return requestOuterbase(
     `/api/v1/workspace/${workspaceId}/base/${baseId}/analytics`,
@@ -276,6 +276,6 @@ export async function sendOuterbaseBaseAnalytics(
         path: "/[workspaceId]/[baseId]/settings/database",
       },
       type: "page_view",
-    }
+    },
   );
 }

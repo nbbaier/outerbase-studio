@@ -1,4 +1,4 @@
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import ServerLoadingAnimation from "./icons/server-loading";
 
 export default function PageLoading({ children }: PropsWithChildren) {

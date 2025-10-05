@@ -12,7 +12,7 @@ describe("Operation Validation", () => {
           id: 5,
         },
       },
-      { autoIncrement: false, schemaName: "main", columns: [], pk: ["id"] }
+      { autoIncrement: false, schemaName: "main", columns: [], pk: ["id"] },
     );
 
     expect(result.valid).toBe(true);
@@ -29,7 +29,7 @@ describe("Operation Validation", () => {
           id: 5,
         },
       },
-      { autoIncrement: false, schemaName: "main", columns: [], pk: [""] }
+      { autoIncrement: false, schemaName: "main", columns: [], pk: [""] },
     );
 
     expect(result.valid).toBe(false);
@@ -46,7 +46,7 @@ describe("Operation Validation", () => {
           id: null,
         },
       },
-      { autoIncrement: false, schemaName: "main", columns: [], pk: ["id"] }
+      { autoIncrement: false, schemaName: "main", columns: [], pk: ["id"] },
     );
 
     expect(result.valid).toBe(false);
@@ -69,7 +69,7 @@ describe("Operation Validation", () => {
         schemaName: "main",
         columns: [],
         pk: ["id", "name"],
-      }
+      },
     );
 
     expect(result.valid).toBe(false);
@@ -86,7 +86,7 @@ describe("Operation Validation", () => {
           id: 5,
         },
       },
-      { autoIncrement: false, schemaName: "main", columns: [], pk: ["id"] }
+      { autoIncrement: false, schemaName: "main", columns: [], pk: ["id"] },
     );
 
     expect(result.valid).toBe(false);
@@ -100,7 +100,7 @@ describe("Operation Validation", () => {
           id: 5,
         },
       },
-      { autoIncrement: false, schemaName: "main", columns: [], pk: ["id"] }
+      { autoIncrement: false, schemaName: "main", columns: [], pk: ["id"] },
     );
 
     expect(result.valid).toBe(true);
@@ -114,7 +114,7 @@ describe("Operation Validation", () => {
           id: 5,
         },
       },
-      { autoIncrement: false, schemaName: "main", columns: [], pk: [] }
+      { autoIncrement: false, schemaName: "main", columns: [], pk: [] },
     );
 
     expect(result.valid).toBe(false);
@@ -128,7 +128,7 @@ describe("Operation Validation", () => {
           id: null,
         },
       },
-      { autoIncrement: false, schemaName: "main", columns: [], pk: [] }
+      { autoIncrement: false, schemaName: "main", columns: [], pk: [] },
     );
 
     expect(result.valid).toBe(false);
@@ -143,7 +143,7 @@ describe("Operation Validation", () => {
           name: "Visal",
         },
       },
-      { autoIncrement: false, schemaName: "main", columns: [], pk: ["id"] }
+      { autoIncrement: false, schemaName: "main", columns: [], pk: ["id"] },
     );
 
     expect(result.valid).toBe(true);
@@ -158,7 +158,7 @@ describe("Operation Validation", () => {
           name: "Visal",
         },
       },
-      { autoIncrement: false, schemaName: "main", columns: [], pk: ["id"] }
+      { autoIncrement: false, schemaName: "main", columns: [], pk: ["id"] },
     );
 
     expect(result.valid).toBe(false);
@@ -173,7 +173,7 @@ describe("Operation Validation", () => {
           name: "Visal",
         },
       },
-      { autoIncrement: true, schemaName: "main", columns: [], pk: ["id"] }
+      { autoIncrement: true, schemaName: "main", columns: [], pk: ["id"] },
     );
 
     expect(result.valid).toBe(false);
@@ -193,7 +193,7 @@ describe("Operation Validation", () => {
         schemaName: "main",
         columns: [],
         pk: ["id", "name"],
-      }
+      },
     );
 
     expect(result.valid).toBe(false);
@@ -207,7 +207,7 @@ describe("Operation Validation", () => {
           name: "Visal",
         },
       },
-      { autoIncrement: true, schemaName: "main", columns: [], pk: ["id"] }
+      { autoIncrement: true, schemaName: "main", columns: [], pk: ["id"] },
     );
 
     expect(result.valid).toBe(true);

@@ -18,7 +18,7 @@ export interface BuildTableResultProps {
 
 function pipeAttachColumnViaSchemas(
   headers: OptimizeTableHeaderProps<TableHeaderMetadata>[],
-  { tableSchema, schemas, driver }: BuildTableResultProps
+  { tableSchema, schemas, driver }: BuildTableResultProps,
 ) {
   // If there is already table schema, we use it instead because it is more accurate.
   if (tableSchema) return;
@@ -42,7 +42,7 @@ function pipeAttachColumnViaSchemas(
     }
 
     const columnSchema = currentTableSchema.columns.find(
-      (c) => c.name.toLowerCase() === from.column.toLowerCase()
+      (c) => c.name.toLowerCase() === from.column.toLowerCase(),
     );
 
     if (!columnSchema) continue;
@@ -56,13 +56,13 @@ function pipeAttachColumnViaSchemas(
 
 function pipeWithTableSchema(
   headers: OptimizeTableHeaderProps<TableHeaderMetadata>[],
-  { tableSchema, driver }: BuildTableResultProps
+  { tableSchema, driver }: BuildTableResultProps,
 ) {
   if (!tableSchema) return;
 
   for (const header of headers) {
     const columnSchema = tableSchema.columns.find(
-      (c) => c.name.toLowerCase() === header.name.toLowerCase()
+      (c) => c.name.toLowerCase() === header.name.toLowerCase(),
     );
 
     header.metadata.columnSchema = columnSchema;
@@ -124,7 +124,7 @@ function pipeWithTableSchema(
  */
 function pipeEditableTable(
   headers: OptimizeTableHeaderProps<TableHeaderMetadata>[],
-  { schemas }: BuildTableResultProps
+  { schemas }: BuildTableResultProps,
 ) {
   const tables: {
     schema: string;
@@ -138,7 +138,7 @@ function pipeEditableTable(
 
     if (from && header.metadata.isPrimaryKey) {
       const table = tables.find(
-        (t) => t.schema === from.schema && t.table === from.table
+        (t) => t.schema === from.schema && t.table === from.table,
       );
 
       if (table) {
@@ -161,7 +161,7 @@ function pipeEditableTable(
   for (const table of tables) {
     let editable = false;
     const matchedColumns = table.columns.filter((c) =>
-      table.pkColumns.includes(c)
+      table.pkColumns.includes(c),
     );
 
     // Mark table as editable if all primary key columns are matched
@@ -198,7 +198,7 @@ function pipeEditableTable(
 }
 
 export function pipeVirtualColumnAsReadOnly(
-  headers: OptimizeTableHeaderProps<TableHeaderMetadata>[]
+  headers: OptimizeTableHeaderProps<TableHeaderMetadata>[],
 ) {
   for (const header of headers) {
     if (header.metadata.columnSchema?.constraint?.generatedExpression) {
@@ -208,7 +208,7 @@ export function pipeVirtualColumnAsReadOnly(
 }
 
 export function pipeCloudflareSpecialTable(
-  headers: OptimizeTableHeaderProps<TableHeaderMetadata>[]
+  headers: OptimizeTableHeaderProps<TableHeaderMetadata>[],
 ) {
   for (const header of headers) {
     if (header.metadata.from?.table === "_cf_KV") {
@@ -219,7 +219,7 @@ export function pipeCloudflareSpecialTable(
 
 export function pipeCalculateInitialSize(
   headers: OptimizeTableHeaderProps<TableHeaderMetadata>[],
-  { result }: BuildTableResultProps
+  { result }: BuildTableResultProps,
 ) {
   for (const header of headers) {
     const dataType = header.metadata.type;
@@ -236,7 +236,7 @@ export function pipeCalculateInitialSize(
         if (currentCell) {
           maxSize = Math.max(
             (currentCell[header.name ?? ""]?.toString() ?? "").length,
-            maxSize
+            maxSize,
           );
         }
       }
@@ -249,7 +249,7 @@ export function pipeCalculateInitialSize(
 }
 
 export function pipeColumnIcon(
-  headers: OptimizeTableHeaderProps<TableHeaderMetadata>[]
+  headers: OptimizeTableHeaderProps<TableHeaderMetadata>[],
 ) {
   for (const header of headers) {
     if (header.metadata.isPrimaryKey) {
@@ -266,7 +266,7 @@ export function pipeColumnIcon(
 }
 
 export function buildTableResultHeader(
-  props: BuildTableResultProps
+  props: BuildTableResultProps,
 ): OptimizeTableHeaderProps<TableHeaderMetadata>[] {
   const { result } = props;
 

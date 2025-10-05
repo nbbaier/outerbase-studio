@@ -5,7 +5,7 @@ import type {
 
 export function validateOperation(
   op: DatabaseTableOperation,
-  validateSchema: DatabaseTableSchema
+  validateSchema: DatabaseTableSchema,
 ): { valid: boolean; reason?: string } {
   const operation = op.operation;
   const primaryKey = validateSchema.pk;
@@ -21,7 +21,7 @@ export function validateOperation(
     .map((pkColumnName) =>
       changeValue[pkColumnName] === undefined
         ? originalValue[pkColumnName]
-        : changeValue[pkColumnName]
+        : changeValue[pkColumnName],
     )
     .some((value) => value === null || value === undefined);
 

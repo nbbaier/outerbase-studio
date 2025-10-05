@@ -1,5 +1,5 @@
+import type React from "react";
 import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
-import React from "react";
 import { SchemaDatabaseCreateForm } from "./schema-create-form";
 
 interface Props {
@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function SchemaCreateDialog(
-  props: React.PropsWithChildren<Props>
+  props: React.PropsWithChildren<Props>,
 ) {
   return (
     <Dialog defaultOpen onOpenChange={props.onClose}>
@@ -16,7 +16,7 @@ export default function SchemaCreateDialog(
         <DialogHeader>
           {!props.schemaName
             ? "New Schema/Database"
-            : props.schemaName + "-Schema"}
+            : `${props.schemaName}-Schema`}
         </DialogHeader>
         <SchemaDatabaseCreateForm
           schemaName={props.schemaName}

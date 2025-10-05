@@ -1,16 +1,15 @@
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { Sheet, SheetContent } from "@/components/ui/sheet";
+import { noop } from "lodash";
 import {
   createContext,
-  Fragment,
-  PropsWithChildren,
+  type PropsWithChildren,
   useContext,
   useMemo,
   useState,
 } from "react";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import { Sheet, SheetContent } from "@/components/ui/sheet";
 import JsonEditor from "../json-editor";
-import { noop } from "lodash";
 
 interface FullEditorContextValue {
   openEditor: (option: FullEditorOption) => void;
@@ -75,7 +74,6 @@ function FullEditorSheet({ option }: { option: FullEditorOption }) {
 
           {option.format === "text" && (
             <textarea
-              autoFocus
               className="grow p-4 w-full outline-hidden bg-inherit font-mono"
               value={value}
               onChange={(e) => setValue(e.currentTarget.value)}
@@ -126,12 +124,12 @@ export function FullEditorProvider({ children }: PropsWithChildren) {
         setOption(null);
       },
     };
-  }, [setOption]);
+  }, []);
 
   return (
     <FullEditorContext.Provider value={props}>
       {option && <FullEditorSheet option={option} />}
-      <Fragment>{children}</Fragment>
+      {children}
     </FullEditorContext.Provider>
   );
 }

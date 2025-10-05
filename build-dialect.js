@@ -26,7 +26,7 @@ function build_dialect(dialectName) {
 
   fs.writeFileSync(
     path.join(dialectFolder, "function-tooltip.json"),
-    JSON.stringify(functions, undefined, 2)
+    JSON.stringify(functions, undefined, 2),
   );
 }
 

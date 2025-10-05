@@ -1,22 +1,22 @@
+import { useEffect, useRef, useState } from "react";
 import {
   ContextMenu,
-  ContextMenuTrigger,
+  ContextMenuCheckboxItem,
   ContextMenuContent,
   ContextMenuItem,
   ContextMenuSeparator,
-  ContextMenuCheckboxItem,
   ContextMenuShortcut,
   ContextMenuSub,
-  ContextMenuSubTrigger,
   ContextMenuSubContent,
+  ContextMenuSubTrigger,
+  ContextMenuTrigger,
 } from "@/components/ui/context-menu";
-import { useEffect, useRef, useState } from "react";
-import { cn } from "@/lib/utils";
 import {
   contextMenuChannel,
-  OpenContextMenuList,
-  OpenContextMenuOptions,
+  type OpenContextMenuList,
+  type OpenContextMenuOptions,
 } from "@/core/channel-builtin";
+import { cn } from "@/lib/utils";
 
 export function ContextMenuList({ menu }: { menu: OpenContextMenuList }) {
   return menu.map((item, menuIndex) => {
@@ -62,7 +62,7 @@ export function ContextMenuList({ menu }: { menu: OpenContextMenuList }) {
           <item.icon
             className={cn(
               "mr-2 h-4 w-4",
-              item.destructive ? "text-red-500" : undefined
+              item.destructive ? "text-red-500" : undefined,
             )}
           />
         )}
@@ -87,7 +87,7 @@ export default function ContextMenuHandler() {
     return contextMenuChannel.listen((data) => {
       setMenu(data);
     });
-  }, [setMenu]);
+  }, []);
 
   useEffect(() => {
     if (menu && contextRef.current) {
@@ -103,7 +103,7 @@ export default function ContextMenuHandler() {
 
       contextRef.current.dispatchEvent(ev);
     }
-  }, [menu, contextRef]);
+  }, [menu]);
 
   return (
     <div style={{ position: "fixed", left: -20, top: -20 }}>

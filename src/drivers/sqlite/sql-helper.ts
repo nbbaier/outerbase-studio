@@ -52,7 +52,7 @@ export function extractInputValue(input: string): string | number {
 }
 
 export function convertSqliteType(
-  type: string | undefined
+  type: string | undefined,
 ): ColumnType | undefined {
   // https://www.sqlite.org/datatype3.html
   if (type === "") return undefined;
@@ -85,7 +85,7 @@ export function escapeDelimitedValue(
   fieldSeparator: string,
   lineTerminator: string,
   encloser: string,
-  nullValue: string = "NULL"
+  nullValue: string = "NULL",
 ): string {
   if (value === null || value === undefined) {
     return nullValue;
@@ -117,8 +117,8 @@ export function convertDatabaseValueToString(value: DatabaseValue) {
     return btoa(
       new Uint8Array(value).reduce(
         (data, byte) => data + String.fromCharCode(byte),
-        ""
-      )
+        "",
+      ),
     );
   }
 

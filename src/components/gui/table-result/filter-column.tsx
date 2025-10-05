@@ -1,4 +1,8 @@
 // import { Button } from "@/components/ui/button";
+
+import { Check, ListChecks, LucideSettings2 } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Button } from "@/components/orbit/button";
 import {
   Command,
   CommandGroup,
@@ -12,11 +16,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
-import { Check, ListChecks, LucideSettings2 } from "lucide-react";
-import { useEffect, useState } from "react";
-import OptimizeTableState from "../table-optimized/optimize-table-state";
-
-import { Button } from "@/components/orbit/button";
+import type OptimizeTableState from "../table-optimized/optimize-table-state";
 
 export default function useTableResultColumnFilter({
   state,
@@ -80,7 +80,7 @@ export default function useTableResultColumnFilter({
                   onSelect={() => {
                     if (isChecked) {
                       setColumnIndexList(
-                        columnIndexList.filter((cidx) => cidx !== idx)
+                        columnIndexList.filter((cidx) => cidx !== idx),
                       );
                     } else {
                       const tmpSet = new Set(columnIndexList);
@@ -94,7 +94,7 @@ export default function useTableResultColumnFilter({
                   <Check
                     className={cn(
                       "mr-2 h-4 w-4",
-                      isChecked ? "opacity-100" : "opacity-0"
+                      isChecked ? "opacity-100" : "opacity-0",
                     )}
                   />
                   {header.display.text}

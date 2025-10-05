@@ -11,10 +11,10 @@ import { syntaxTree } from "@codemirror/language";
 const underlineMark = Decoration.mark({ class: "cm-table-name" });
 
 export default function createSQLTableNameHighlightPlugin(
-  tableNameList: string[]
+  tableNameList: string[],
 ) {
   const tableNameSet = new Set(
-    tableNameList.map((table) => table.toLowerCase())
+    tableNameList.map((table) => table.toLowerCase()),
   );
 
   function highlightTableName(view: EditorView) {
@@ -34,7 +34,7 @@ export default function createSQLTableNameHighlightPlugin(
               ? view.state.doc
                   .sliceString(
                     node.node.prevSibling.from,
-                    node.node.prevSibling.to
+                    node.node.prevSibling.to,
                   )
                   .toLowerCase()
               : "";
@@ -62,6 +62,6 @@ export default function createSQLTableNameHighlightPlugin(
         this.decorations = highlightTableName(update.view);
       }
     },
-    { decorations: (v) => v.decorations }
+    { decorations: (v) => v.decorations },
   );
 }

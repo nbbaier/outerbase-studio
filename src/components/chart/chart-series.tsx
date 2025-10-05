@@ -1,9 +1,9 @@
 import { produce } from "immer";
 import { useTheme } from "next-themes";
-import { Dispatch, SetStateAction } from "react";
+import type { Dispatch, SetStateAction } from "react";
 import { ButtonGroupItem } from "../button-group";
 import { ChartSeriesCombobox } from "./chart-series-combobox";
-import { ChartValue, ThemeColors, THEMES } from "./chart-type";
+import { type ChartValue, THEMES, type ThemeColors } from "./chart-type";
 import { generateGradientColors } from "./echart-options-builder";
 
 interface ChartSeriesProps {
@@ -37,8 +37,8 @@ export default function ChartSeries({
                 if (!draft.params.options.yAxisKeys) return;
                 draft.params.options.yAxisKeys.push(
                   columns.filter(
-                    (key) => !draft.params.options.yAxisKeys?.includes(key)
-                  )[0]
+                    (key) => !draft.params.options.yAxisKeys?.includes(key),
+                  )[0],
                 );
               });
             });
@@ -67,7 +67,7 @@ export default function ChartSeries({
               }
               selected={key ?? ""}
               placeholder="Select axis key..."
-              onChange={function (v: string): void {
+              onChange={(v: string): void => {
                 onChange((prev) => {
                   return produce(prev, (draft) => {
                     if (!draft.params.options.yAxisKeys) return;
@@ -83,13 +83,13 @@ export default function ChartSeries({
                     } else {
                       draft.params.options.yAxisKeys =
                         draft.params.options.yAxisKeys?.filter(
-                          (k) => k !== series
+                          (k) => k !== series,
                         );
                     }
                   });
                 });
               }}
-              onChangeColor={function (color: string): void {
+              onChangeColor={(color: string): void => {
                 onChange((prev) => {
                   return produce(prev, (draft) => {
                     draft.params.options.yAxisKeyColors = {
@@ -100,7 +100,7 @@ export default function ChartSeries({
                   });
                 });
               }}
-              onThemeChange={function (theme: ThemeColors): void {
+              onThemeChange={(theme: ThemeColors): void => {
                 onChange((prev) => {
                   const appTheme: "light" | "dark" = (forcedTheme ||
                     resolvedTheme) as "light" | "dark";
@@ -109,14 +109,14 @@ export default function ChartSeries({
                   const colors = generateGradientColors(
                     themeColor[0],
                     themeColor[1],
-                    columns.length
+                    columns.length,
                   );
                   const newColors = columns?.reduce(
                     (acc, col, i) => {
                       acc[col] = colors[i];
                       return acc;
                     },
-                    {} as Record<string, string>
+                    {} as Record<string, string>,
                   );
                   return produce(prev, (draft) => {
                     draft.params.options.theme = theme;

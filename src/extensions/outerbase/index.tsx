@@ -2,8 +2,8 @@
  * Outerbase Cloud extension for studio functionality.
  */
 import { StudioExtension } from "@/core/extension-base";
-import { StudioExtensionContext } from "@/core/extension-manager";
-import { OuterbaseDatabaseConfig } from "@/outerbase-cloud/api-type";
+import type { StudioExtensionContext } from "@/core/extension-manager";
+import type { OuterbaseDatabaseConfig } from "@/outerbase-cloud/api-type";
 import { updateOuterbaseSchemas } from "@/outerbase-cloud/api-workspace";
 
 export default class OuterbaseExtension extends StudioExtension {

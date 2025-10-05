@@ -1,6 +1,6 @@
-import { Button, ButtonProps } from "@/components/orbit/button";
-import { cn } from "@/lib/utils";
 import { ArrowsClockwise } from "@phosphor-icons/react";
+import { Button, type ButtonProps } from "@/components/orbit/button";
+import { cn } from "@/lib/utils";
 
 export const RefreshButton = ({ ...props }: ButtonProps) => (
   <Button shape="square" toggled={props.toggled} {...props}>

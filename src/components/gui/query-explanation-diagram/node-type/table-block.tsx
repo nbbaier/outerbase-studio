@@ -1,6 +1,9 @@
-import { BaseHandle } from "@/components/base-handle";
 import { Position } from "@xyflow/react";
-import { ExplainNodeProps, formatCost } from "../build-query-explanation-flow";
+import { BaseHandle } from "@/components/base-handle";
+import {
+  type ExplainNodeProps,
+  formatCost,
+} from "../build-query-explanation-flow";
 import { TooltipExplainHandle } from "./tooltip-handle";
 
 export function TableBlock(props: ExplainNodeProps) {
@@ -64,7 +67,7 @@ export function TableBlock(props: ExplainNodeProps) {
             <small>
               {formatCost(
                 Number(props.data.cost_info.read_cost) +
-                  Number(props.data.cost_info.eval_cost)
+                  Number(props.data.cost_info.eval_cost),
               )}
             </small>
           </div>

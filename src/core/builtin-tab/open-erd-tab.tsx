@@ -1,5 +1,5 @@
-import RelationalDiagramTab from "@/components/gui/tabs/relational-diagram-tab";
 import { TreeStructure } from "@phosphor-icons/react";
+import RelationalDiagramTab from "@/components/gui/tabs/relational-diagram-tab";
 import { createTabExtension } from "../extension-tab";
 
 export const builtinOpenERDTab = createTabExtension({

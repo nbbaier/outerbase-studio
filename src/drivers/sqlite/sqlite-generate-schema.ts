@@ -25,7 +25,7 @@ function generateCreateColumn(col: DatabaseTableColumn): string {
         col.constraint.autoIncrement ? "AUTOINCREMENT" : undefined,
       ]
         .filter(Boolean)
-        .join(" ")
+        .join(" "),
     );
   }
 
@@ -38,7 +38,7 @@ function generateCreateColumn(col: DatabaseTableColumn): string {
           : undefined,
       ]
         .filter(Boolean)
-        .join(" ")
+        .join(" "),
     );
   }
 
@@ -51,19 +51,19 @@ function generateCreateColumn(col: DatabaseTableColumn): string {
           : undefined,
       ]
         .filter(Boolean)
-        .join(" ")
+        .join(" "),
     );
   }
 
   if (col.constraint?.defaultValue) {
     tokens.push(
-      ["DEFAULT", escapeSqlValue(col.constraint.defaultValue)].join(" ")
+      ["DEFAULT", escapeSqlValue(col.constraint.defaultValue)].join(" "),
     );
   }
 
   if (col.constraint?.defaultExpression) {
     tokens.push(
-      ["DEFAULT", wrapParen(col.constraint.defaultExpression)].join(" ")
+      ["DEFAULT", wrapParen(col.constraint.defaultExpression)].join(" "),
     );
   }
 
@@ -73,7 +73,7 @@ function generateCreateColumn(col: DatabaseTableColumn): string {
         "GENERATED ALWAYS AS",
         wrapParen(col.constraint.generatedExpression),
         col.constraint.generatedType,
-      ].join(" ")
+      ].join(" "),
     );
   }
 
@@ -92,7 +92,7 @@ function generateCreateColumn(col: DatabaseTableColumn): string {
         "REFERENCES",
         escapeIdentity(foreignTableName) +
           `(${escapeIdentity(foreignColumnName)})`,
-      ].join(" ")
+      ].join(" "),
     );
   }
 
@@ -116,7 +116,7 @@ function generateConstraintScript(con: DatabaseTableColumnConstraint) {
 }
 
 export default function generateSqlSchemaChange(
-  change: DatabaseTableSchemaChange
+  change: DatabaseTableSchemaChange,
 ): string[] {
   const isCreateScript = !change.name.old;
 
@@ -135,15 +135,15 @@ export default function generateSqlSchemaChange(
       if (col.new.name !== col.old.name) {
         lines.push(
           `RENAME COLUMN ${escapeIdentity(col.old.name)} TO ${escapeIdentity(
-            col.new.name
-          )}`
+            col.new.name,
+          )}`,
         );
       }
 
       // check if there is any changed except name
       if (!isEqual(omit(col.old, ["name"]), omit(col.new, ["name"]))) {
         lines.push(
-          `ALTER COLUMN ${escapeIdentity(col.new.name)} TO ${generateCreateColumn(col.new)}`
+          `ALTER COLUMN ${escapeIdentity(col.new.name)} TO ${generateCreateColumn(col.new)}`,
         );
       }
     }
@@ -166,7 +166,7 @@ export default function generateSqlSchemaChange(
   if (isCreateScript) {
     return [
       `CREATE TABLE ${escapeIdentity(change.schemaName ?? "main")}.${escapeIdentity(
-        change.name.new || "no_table_name"
+        change.name.new || "no_table_name",
       )}(\n${lines.map((line) => "  " + line).join(",\n")}\n)`,
     ];
   } else {

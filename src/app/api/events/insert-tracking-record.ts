@@ -8,7 +8,7 @@ import { type TrackEventItem } from "../../../lib/tracking";
 
 export async function insertTrackingRecord(
   deviceId: string,
-  events: TrackEventItem[]
+  events: TrackEventItem[],
 ) {
   if (!env.DATABASE_ANALYTIC_URL || !env.DATABASE_ANALYTIC_AUTH_TOKEN) {
     return {
@@ -19,7 +19,7 @@ export async function insertTrackingRecord(
 
   const trackingDb = new StarbaseQuery(
     env.DATABASE_ANALYTIC_URL,
-    env.DATABASE_ANALYTIC_AUTH_TOKEN
+    env.DATABASE_ANALYTIC_AUTH_TOKEN,
   );
 
   const sql = [
@@ -37,7 +37,7 @@ export async function insertTrackingRecord(
           ]
             .map(escapeSqlValue)
             .join(", ") +
-          ")"
+          ")",
       )
       .join(", "),
   ].join("");

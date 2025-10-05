@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { FileImage } from "@phosphor-icons/react";
 import {
   getNodesBounds,
@@ -6,6 +5,7 @@ import {
   useReactFlow,
 } from "@xyflow/react";
 import { toPng } from "html-to-image";
+import { Button } from "@/components/ui/button";
 
 function downloadImage(dataUrl: string) {
   const a = document.createElement("a");
@@ -30,7 +30,7 @@ export function DownloadImageDiagram() {
       imageHeight,
       0.5,
       2,
-      0
+      0,
     );
 
     const doc: any = document.querySelector(".react-flow__viewport");

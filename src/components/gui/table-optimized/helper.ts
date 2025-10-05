@@ -2,7 +2,7 @@ import OptimizeTableState from "./optimize-table-state";
 
 export function createSimpleTableState(
   headers: string[],
-  data: Record<string, unknown>[]
+  data: Record<string, unknown>[],
 ) {
   return new OptimizeTableState(
     headers.map((header) => ({
@@ -21,6 +21,6 @@ export function createSimpleTableState(
       },
       store: new Map(),
     })),
-    data
+    data,
   );
 }

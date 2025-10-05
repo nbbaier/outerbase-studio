@@ -1,6 +1,6 @@
-import { ReactElement } from "react";
-import { OptimizeTableHeaderWithIndexProps } from ".";
-import OptimizeTableState from "./optimize-table-state";
+import type { ReactElement } from "react";
+import type { OptimizeTableHeaderWithIndexProps } from ".";
+import type OptimizeTableState from "./optimize-table-state";
 import TableHeader from "./table-header";
 
 export default function TableHeaderList<HeaderMetadata = unknown>({
@@ -13,13 +13,13 @@ export default function TableHeaderList<HeaderMetadata = unknown>({
 }: {
   headers: OptimizeTableHeaderWithIndexProps<HeaderMetadata>[];
   renderHeader: (
-    props: OptimizeTableHeaderWithIndexProps<HeaderMetadata>
+    props: OptimizeTableHeaderWithIndexProps<HeaderMetadata>,
   ) => ReactElement;
   onHeaderResize: (idx: number, newWidth: number) => void;
   sticky: boolean;
   onHeaderContextMenu?: (
     e: React.MouseEvent,
-    header: OptimizeTableHeaderWithIndexProps<HeaderMetadata>
+    header: OptimizeTableHeaderWithIndexProps<HeaderMetadata>,
   ) => void;
   state: OptimizeTableState<HeaderMetadata>;
 }) {

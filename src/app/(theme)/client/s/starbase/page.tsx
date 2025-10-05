@@ -1,5 +1,7 @@
 "use client";
 
+import { useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useLocalConnection } from "@/app/(outerbase)/local/hooks";
 import ClientOnly from "@/components/client-only";
 import { Studio } from "@/components/gui/studio";
@@ -17,8 +19,6 @@ import PostgresLikeDriver from "@/drivers/postgres/postgres-driver";
 import IndexdbSavedDoc from "@/drivers/saved-doc/indexdb-saved-doc";
 import { SqliteLikeBaseDriver } from "@/drivers/sqlite-base-driver";
 import { useAvailableAIAgents } from "@/lib/ai-agent-storage";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useMemo, useState } from "react";
 
 function StarbasePageBody() {
   const params = useSearchParams();
@@ -40,8 +40,8 @@ function StarbasePageBody() {
         new StarbaseQuery(
           conn.content.url!,
           conn.content.token!,
-          conn.content.starbase_type ?? "internal"
-        )
+          conn.content.starbase_type ?? "internal",
+        ),
       );
     }
   }, [conn]);

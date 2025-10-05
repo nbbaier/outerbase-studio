@@ -19,13 +19,13 @@ function decorateVariable(view: EditorView) {
     const text = view.state.doc.sliceString(from, to);
 
     for (const match of text.matchAll(
-      /(\{\{[\w\d-_]+\}\})|(\[\[[\w\d-_]+\]\])/g
+      /(\{\{[\w\d-_]+\}\})|(\[\[[\w\d-_]+\]\])/g,
     )) {
       decorationList.push(
         variableMark.range(
           from + match.index,
-          from + match.index + match[0].length
-        )
+          from + match.index + match[0].length,
+        ),
       );
     }
   }
@@ -43,7 +43,7 @@ const variableHighlightView = ViewPlugin.fromClass(
       this.decorations = decorateVariable(update.view);
     }
   },
-  { decorations: (v) => v.decorations }
+  { decorations: (v) => v.decorations },
 );
 
 const variableHighlightTheme = EditorView.baseTheme({

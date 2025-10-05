@@ -1,9 +1,9 @@
+import { useTheme } from "next-themes";
+import { useState } from "react";
 import SqlEditor from "@/components/gui/sql-editor";
 import { Button } from "@/components/orbit/button";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
-import { useTheme } from "next-themes";
-import { useState } from "react";
 
 function EditorTheme() {
   const [selectedTheme, setSelectedTheme] = useState("");
@@ -48,7 +48,7 @@ function EditorTheme() {
                 "relative flex h-[200px] w-full items-center justify-center overflow-hidden rounded-2xl border bg-white p-2 dark:bg-neutral-950",
                 isSelected
                   ? "border border-neutral-500 opacity-100"
-                  : "opacity-50 hover:opacity-100"
+                  : "opacity-50 hover:opacity-100",
               )}
             >
               <div className="pointer-events-none">

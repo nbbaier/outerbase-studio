@@ -1,4 +1,3 @@
-import { cn } from "@/lib/utils";
 import {
   Circle,
   Database,
@@ -6,7 +5,8 @@ import {
   Triangle,
 } from "@phosphor-icons/react";
 import Link from "next/link";
-import { PropsWithChildren, useState } from "react";
+import { type PropsWithChildren, useState } from "react";
+import { cn } from "@/lib/utils";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -44,7 +44,7 @@ export default function ResourceCard({
       href={href}
       className={cn(
         "group relative flex h-36 w-[302px] flex-col justify-between overflow-hidden rounded-md border border-neutral-200 bg-white p-3.5 hover:border-neutral-300 focus:outline-none focus:*:opacity-100 focus-visible:ring focus-visible:ring-blue-600 dark:border-neutral-800 dark:bg-neutral-900 dark:hover:border-neutral-700/75",
-        className
+        className,
       )}
     >
       {/* content */}
@@ -70,7 +70,7 @@ export default function ResourceCard({
 
               "from-fuchsia-500/30 via-teal-500/30 to-yellow-500/30 *:mix-blend-overlay dark:from-fuchsia-800/50 dark:via-teal-800/50 dark:to-yellow-800/50":
                 color === "rainbow",
-            }
+            },
           )}
         >
           {IconComponent && <IconComponent className="h-6 w-6" />}
@@ -92,7 +92,7 @@ export default function ResourceCard({
           {
             "text-teal-700 dark:text-teal-600": status === "success",
             "text-orange-700 dark:text-orange-600": status === "error",
-          }
+          },
         )}
       >
         {status === "success" ? (
@@ -116,7 +116,7 @@ export default function ResourceCard({
             "from-emerald-500 to-teal-500": color === "green",
             "from-sky-500 to-indigo-500": color === "blue",
             "from-fuchsia-500 via-sky-500 to-yellow-500": color === "rainbow",
-          }
+          },
         )}
       />
 
@@ -130,7 +130,7 @@ export default function ResourceCard({
               }}
               className={cn(
                 "absolute top-2 right-2 z-10 flex size-8 cursor-pointer items-center justify-center rounded border border-neutral-200 bg-white opacity-0 duration-100 group-hover:opacity-100 hover:bg-neutral-50 focus:opacity-100 focus:outline-none focus-visible:ring focus-visible:ring-blue-600 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-800",
-                { "opacity-100": open }
+                { "opacity-100": open },
               )}
             >
               <DotsThreeVertical size={18} weight="bold" />

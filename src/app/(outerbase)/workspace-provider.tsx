@@ -1,17 +1,17 @@
 "use client";
-import { getOuterbaseWorkspace } from "@/outerbase-cloud/api";
-import { OuterbaseAPIWorkspace } from "@/outerbase-cloud/api-type";
 import { produce } from "immer";
 import { noop } from "lodash";
 import { useParams } from "next/navigation";
 import {
   createContext,
-  PropsWithChildren,
+  type PropsWithChildren,
   useCallback,
   useContext,
   useMemo,
 } from "react";
 import useSWR from "swr";
+import { getOuterbaseWorkspace } from "@/outerbase-cloud/api";
+import type { OuterbaseAPIWorkspace } from "@/outerbase-cloud/api-type";
 import { useSession } from "./session-provider";
 
 const WorkspaceContext = createContext<{
@@ -58,7 +58,7 @@ export function WorkspaceProvider({ children }: PropsWithChildren) {
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
       errorRetryCount: 0,
-    }
+    },
   );
 
   const { workspaceId } = useParams<{ workspaceId?: string }>();
@@ -69,7 +69,7 @@ export function WorkspaceProvider({ children }: PropsWithChildren) {
 
     return data?.items.find(
       (workspace) =>
-        workspace.short_name === workspaceId || workspace.id === workspaceId
+        workspace.short_name === workspaceId || workspace.id === workspaceId,
     );
   }, [workspaceId, data]);
 
@@ -93,7 +93,7 @@ export function WorkspaceProvider({ children }: PropsWithChildren) {
         optimisticData: newData,
       });
     },
-    [mutate, data]
+    [mutate, data],
   );
 
   const refreshWorkspace = useCallback(async () => {

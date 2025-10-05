@@ -1,11 +1,3 @@
-import { useSchema } from "@/context/schema-provider";
-import {
-  DatabaseTableColumnConstraint,
-  DatabaseTableConstraintChange,
-  DatabaseTableSchemaChange,
-} from "@/drivers/base-driver";
-import { generateId } from "@/lib/generate-id";
-import { cn } from "@/lib/utils";
 import {
   LucideArrowUpRight,
   LucideCheck,
@@ -15,12 +7,20 @@ import {
   LucideTrash2,
 } from "lucide-react";
 import {
-  Dispatch,
-  PropsWithChildren,
-  SetStateAction,
+  type Dispatch,
+  type PropsWithChildren,
+  type SetStateAction,
   useCallback,
   useMemo,
 } from "react";
+import { useSchema } from "@/context/schema-provider";
+import type {
+  DatabaseTableColumnConstraint,
+  DatabaseTableConstraintChange,
+  DatabaseTableSchemaChange,
+} from "@/drivers/base-driver";
+import { generateId } from "@/lib/generate-id";
+import { cn } from "@/lib/utils";
 import { Button } from "../../ui/button";
 import {
   DropdownMenu,
@@ -33,7 +33,7 @@ import TableCombobox from "../table-combobox/TableCombobox";
 import { useColumnList } from "./column-provider";
 
 type ConstraintChangeHandler = (
-  constraint: DatabaseTableColumnConstraint
+  constraint: DatabaseTableColumnConstraint,
 ) => void;
 
 function ColumnCheck({
@@ -90,7 +90,7 @@ function ColumnForeignKey({
 
     if (fkTableName) {
       const fkTableSchema = (schema[schemaName] ?? []).find(
-        (s) => s.type === "table" && s.name === fkTableName
+        (s) => s.type === "table" && s.name === fkTableName,
       );
 
       if (fkTableSchema) {
@@ -108,7 +108,7 @@ function ColumnForeignKey({
         foreignKey: { ...constraint.foreignKey, columns: newColumn },
       });
     },
-    [onChange, constraint]
+    [onChange, constraint],
   );
 
   const onFkConstraintChange = useCallback(
@@ -118,7 +118,7 @@ function ColumnForeignKey({
         foreignKey: { ...constraint.foreignKey, foreignColumns: newColumn },
       });
     },
-    [onChange, constraint]
+    [onChange, constraint],
   );
 
   const onFkTableNameChange = useCallback(
@@ -128,7 +128,7 @@ function ColumnForeignKey({
         foreignKey: { ...constraint.foreignKey, foreignTableName: fkTableName },
       });
     },
-    [onChange, constraint]
+    [onChange, constraint],
   );
 
   return (
@@ -186,7 +186,7 @@ function ColumnPrimaryKey({
     (newColumn: string[]) => {
       onChange({ ...constraint, primaryColumns: newColumn });
     },
-    [onChange, constraint]
+    [onChange, constraint],
   );
 
   return (
@@ -228,7 +228,7 @@ function ColumnUnique({
     (newColumn: string[]) => {
       onChange({ ...constraint, uniqueColumns: newColumn });
     },
-    [onChange, constraint]
+    [onChange, constraint],
   );
 
   return (
@@ -315,7 +315,7 @@ function ColumnItemBody({
         };
       });
     },
-    [onChange, constraint]
+    [onChange, constraint],
   );
 
   const currentConstraint = constraint.new ?? constraint.old;
@@ -418,7 +418,7 @@ export default function SchemaEditorConstraintList({
         ],
       }));
     },
-    [onChange]
+    [onChange],
   );
 
   return (

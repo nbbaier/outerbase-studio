@@ -1,15 +1,16 @@
 "use client";
-import { cn } from "@/lib/utils";
-import { Icon } from "@phosphor-icons/react";
-import React, {
-  ReactElement,
+import type { Icon } from "@phosphor-icons/react";
+import type React from "react";
+import {
+  type ReactElement,
   useCallback,
   useEffect,
   useMemo,
   useRef,
   useState,
 } from "react";
-import OptimizeTableState from "./optimize-table-state";
+import { cn } from "@/lib/utils";
+import type OptimizeTableState from "./optimize-table-state";
 import OptimizeTableCell from "./table-cell";
 import TableFakeBodyPadding from "./table-fake-body-padding";
 import TableFakeRowPadding from "./table-fake-row-padding";
@@ -58,15 +59,15 @@ export interface OptimizeTableCellRenderProps<MetadataType = unknown> {
 interface TableCellListCommonProps<MetadataType = unknown> {
   internalState: OptimizeTableState<MetadataType>;
   renderHeader: (
-    props: OptimizeTableHeaderWithIndexProps<MetadataType>
+    props: OptimizeTableHeaderWithIndexProps<MetadataType>,
   ) => ReactElement;
   renderCell: (
-    props: OptimizeTableCellRenderProps<MetadataType>
+    props: OptimizeTableCellRenderProps<MetadataType>,
   ) => ReactElement;
   rowHeight: number;
   onHeaderContextMenu?: (
     e: React.MouseEvent,
-    header: OptimizeTableHeaderWithIndexProps<MetadataType>
+    header: OptimizeTableHeaderWithIndexProps<MetadataType>,
   ) => void;
   onContextMenu?: (props: {
     state: OptimizeTableState<MetadataType>;
@@ -113,7 +114,7 @@ function renderCellList<HeaderMetadata = unknown>({
 
   const templateSizes =
     `${internalState.gutterColumnWidth}px ` +
-    headers.map((header) => headerSizes[header.index] + "px").join(" ");
+    headers.map((header) => `${headerSizes[header.index]}px`).join(" ");
 
   const onHeaderSizeWithRemap = (idx: number, newWidth: number) => {
     onHeaderResize(headers[idx]?.index ?? 0, newWidth);
@@ -135,7 +136,7 @@ function renderCellList<HeaderMetadata = unknown>({
       if (internalState.isFullSelectionRow(absoluteRowIndex)) {
         textClass = cn(
           "flex items-center justify-end h-full pr-2 font-mono",
-          "bg-neutral-100 dark:bg-neutral-900 border-red-900 text-black dark:text-white font-bold"
+          "bg-neutral-100 dark:bg-neutral-900 border-red-900 text-black dark:text-white font-bold",
         );
         tdClass =
           "sticky left-0 bg-neutral-100 dark:bg-blue-800 border-r border-b";
@@ -260,11 +261,11 @@ export default function OptimizeTable<HeaderMetadata = unknown>({
 
   const rerender = useCallback(() => {
     setRevision((prev) => prev + 1);
-  }, [setRevision]);
+  }, []);
 
   useEffect(() => {
     internalState.setContainer(containerRef.current);
-  }, [internalState, containerRef]);
+  }, [internalState]);
 
   useEffect(() => {
     const changeCallback = () => {

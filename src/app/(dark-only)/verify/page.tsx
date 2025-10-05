@@ -1,10 +1,10 @@
 "use client";
-import LabelInput from "@/components/label-input";
-import { Button } from "@/components/orbit/button";
-import { verifyOuterbaseOTP } from "@/outerbase-cloud/api-account";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
+import LabelInput from "@/components/label-input";
+import { Button } from "@/components/orbit/button";
+import { verifyOuterbaseOTP } from "@/outerbase-cloud/api-account";
 import { LoginBaseSpaceship } from "../signin/starbase-portal";
 
 export default function VerifyPage() {

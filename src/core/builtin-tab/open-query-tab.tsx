@@ -1,6 +1,6 @@
+import { Binoculars } from "@phosphor-icons/react";
 import QueryWindow from "@/components/gui/tabs/query-tab";
 import { generateId } from "@/lib/generate-id";
-import { Binoculars } from "@phosphor-icons/react";
 import { createTabExtension } from "../extension-tab";
 
 let QUERY_COUNTER = 2;
@@ -26,7 +26,7 @@ export const builtinOpenQueryTab = createTabExtension<
   generate: (options) => {
     const title = options?.saved
       ? (options.name ?? "Query")
-      : "Query " + (QUERY_COUNTER++).toString();
+      : `Query ${(QUERY_COUNTER++).toString()}`;
 
     const component = options?.saved ? (
       <QueryWindow

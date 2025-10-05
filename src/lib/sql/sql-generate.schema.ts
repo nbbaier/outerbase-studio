@@ -25,7 +25,7 @@ export function checkSchemaChange(change: DatabaseTableSchemaChange) {
 
 export function createTableSchemaDraft(
   schemaName: string,
-  schema: DatabaseTableSchema
+  schema: DatabaseTableSchema,
 ): DatabaseTableSchemaChange {
   return {
     schemaName,

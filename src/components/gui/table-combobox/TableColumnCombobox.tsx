@@ -1,9 +1,9 @@
-import { useStudioContext } from "@/context/driver-provider";
-import type { DatabaseTableSchema } from "@/drivers/base-driver";
-import { cn } from "@/lib/utils";
 import { Popover, PopoverTrigger } from "@radix-ui/react-popover";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { useEffect, useState } from "react";
+import { useStudioContext } from "@/context/driver-provider";
+import type { DatabaseTableSchema } from "@/drivers/base-driver";
+import { cn } from "@/lib/utils";
 import { buttonVariants } from "../../ui/button";
 import {
   Command,
@@ -63,7 +63,7 @@ export default function TableColumnCombobox({
           <div
             className={cn(
               buttonVariants({ variant: "outline" }),
-              "flex w-full justify-between"
+              "flex w-full justify-between",
             )}
           >
             {value || "No table selected"}
@@ -89,7 +89,7 @@ export default function TableColumnCombobox({
                 <Check
                   className={cn(
                     "mr-2 h-4 w-4",
-                    value === column.name ? "opacity-100" : "opacity-0"
+                    value === column.name ? "opacity-100" : "opacity-0",
                   )}
                 />
                 {column.name}

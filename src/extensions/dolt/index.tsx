@@ -1,9 +1,9 @@
+import { Table } from "lucide-react";
 import { DoltIcon } from "@/components/icons/outerbase-icon";
 import { StudioExtension } from "@/core/extension-base";
-import { StudioExtensionContext } from "@/core/extension-manager";
-import DoltSidebar from "./dolt-sidebar";
-import { Table } from "lucide-react";
+import type { StudioExtensionContext } from "@/core/extension-manager";
 import { createTabExtension } from "@/core/extension-tab";
+import DoltSidebar from "./dolt-sidebar";
 
 export const doltCommitTab = createTabExtension<{
   commitHash: string;
@@ -12,7 +12,7 @@ export const doltCommitTab = createTabExtension<{
   name: "dolt-commit",
   key: (options) => options?.commitHash ?? "",
   generate: (options) => ({
-    title: "Commit " + options?.commitMessage,
+    title: `Commit ${options?.commitMessage}`,
     icon: Table,
     component: <div>Testing</div>,
   }),

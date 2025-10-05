@@ -1,4 +1,4 @@
-import { DatabaseColumnConflict } from "@/drivers/base-driver";
+import type { DatabaseColumnConflict } from "@/drivers/base-driver";
 import {
   Select,
   SelectContent,

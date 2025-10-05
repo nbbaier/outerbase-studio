@@ -1,7 +1,7 @@
 "use client";
+import { StackMinus, TreeStructure } from "@phosphor-icons/react";
 import { scc } from "@/core/command";
 import ListButtonItem from "../list-button-item";
-import { StackMinus, TreeStructure } from "@phosphor-icons/react";
 
 export default function SettingSidebar() {
   return (

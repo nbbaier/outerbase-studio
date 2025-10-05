@@ -107,7 +107,7 @@ function parseDetailLiteToMysql(detail: string) {
 }
 
 export function convertSQLiteRowToMySQL(
-  rows: ExplanationRow[]
+  rows: ExplanationRow[],
 ): ExplanationMysql {
   const haveUnion = rows.some((row) => row.detail.includes("UNION"));
   const tables: { table: ExplanationMysqlTable }[] = [];
@@ -195,7 +195,7 @@ export function convertSQLiteRowToMySQL(
 function getLayoutedExplanationElements(
   nodes: Node[],
   edges: Edge[],
-  direction = "TB"
+  direction = "TB",
 ) {
   const isHorizontal = direction === "LR";
 
@@ -452,7 +452,7 @@ export function buildQueryExplanationFlow(item: ExplanationMysql, id?: number) {
         edges: Edge[] | unknown[];
       } = buildQueryExplanationFlow(
         union as unknown as ExplanationMysql,
-        (union as unknown as ExplanationMysql).query_block.select_id || 0
+        (union as unknown as ExplanationMysql).query_block.select_id || 0,
       );
       union_flow.push(unionNodeEdge);
     }
@@ -460,7 +460,7 @@ export function buildQueryExplanationFlow(item: ExplanationMysql, id?: number) {
     const layout = getLayoutedExplanationElements(
       [...nodes, ...union_flow.map((x) => x.nodes).flat()],
       [...edges, ...union_flow.map((x) => x.edges).flat()],
-      "LR"
+      "LR",
     );
 
     return {

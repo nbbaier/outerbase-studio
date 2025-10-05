@@ -1,3 +1,5 @@
+import { GitBranch, Loader } from "lucide-react";
+import { useCallback, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -9,8 +11,6 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { useStudioContext } from "@/context/driver-provider";
-import { GitBranch, Loader } from "lucide-react";
-import { useCallback, useMemo, useState } from "react";
 
 export default function useDoltCreateBranchModal(refreshStatus: () => void) {
   const { databaseDriver } = useStudioContext();

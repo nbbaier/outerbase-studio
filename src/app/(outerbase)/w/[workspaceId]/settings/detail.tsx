@@ -1,11 +1,11 @@
 "use client";
+import { useRouter } from "next/navigation";
+import { useCallback, useState } from "react";
 import { useWorkspaces } from "@/app/(outerbase)/workspace-provider";
 import LabelInput from "@/components/label-input";
 import { Button } from "@/components/orbit/button";
-import { OuterbaseAPIWorkspace } from "@/outerbase-cloud/api-type";
+import type { OuterbaseAPIWorkspace } from "@/outerbase-cloud/api-type";
 import { updateOuterbaseWorkspace } from "@/outerbase-cloud/api-workspace";
-import { useRouter } from "next/navigation";
-import { useCallback, useState } from "react";
 
 export default function WorkspaceDetailSection({
   workspace,

@@ -1,9 +1,9 @@
+import { produce } from "immer";
+import { useMemo } from "react";
 import { Input } from "@/components/ui/input";
 import { useStudioContext } from "@/context/driver-provider";
 import { useSchema } from "@/context/schema-provider";
-import { DatabaseViewSchema } from "@/drivers/base-driver";
-import { produce } from "immer";
-import { useMemo } from "react";
+import type { DatabaseViewSchema } from "@/drivers/base-driver";
 import SchemaNameSelect from "../../components/gui/schema-editor/schema-name-select";
 import SqlEditor from "../../components/gui/sql-editor";
 
@@ -34,7 +34,7 @@ export default function ViewEditor(props: Props) {
             onChange(
               produce(value, (draft) => {
                 draft.name = e.currentTarget.value;
-              })
+              }),
             )
           }
         />
@@ -45,7 +45,7 @@ export default function ViewEditor(props: Props) {
               onChange(
                 produce(value, (draft) => {
                   draft.schemaName = schemaName;
-                })
+                }),
               );
             }}
           />
@@ -61,7 +61,7 @@ export default function ViewEditor(props: Props) {
               onChange(
                 produce(value, (draft) => {
                   draft.statement = newStatement;
-                })
+                }),
               )
             }
           />

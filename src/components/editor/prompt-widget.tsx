@@ -1,9 +1,9 @@
 "use client";
 
-import AgentDriverList from "@/drivers/agent/list";
-import { cn } from "@/lib/utils";
 import { Check, X } from "@phosphor-icons/react";
 import { useCallback, useMemo, useRef, useState } from "react";
+import type AgentDriverList from "@/drivers/agent/list";
+import { cn } from "@/lib/utils";
 import { CloudflareIcon } from "../icons/outerbase-icon";
 import { Button } from "../orbit/button";
 import {
@@ -43,7 +43,7 @@ export function CodeMirrorPromptWidget({
     return agentDriver.list();
   }, [agentDriver]);
   const [selectedAgent, setSelectedAgent] = useState(() =>
-    agentDriver?.getDefaultModelName()
+    agentDriver?.getDefaultModelName(),
   );
 
   const [previousPrompt, setPreviousPrompt] = useState("");
@@ -60,11 +60,11 @@ export function CodeMirrorPromptWidget({
       fakeTextareaRef.current.value = e.currentTarget.value;
       const newHeight = Math.max(
         minHeight,
-        fakeTextareaRef.current.scrollHeight
+        fakeTextareaRef.current.scrollHeight,
       );
 
       setHeight(Math.max(minHeight, fakeTextareaRef.current.scrollHeight));
-      textareaRef.current.style.height = newHeight + "px";
+      textareaRef.current.style.height = `${newHeight}px`;
     }
   };
 
@@ -143,7 +143,7 @@ export function CodeMirrorPromptWidget({
       <div className="flex">
         <div
           className="relative flex-1 overflow-hidden"
-          style={{ height: height + "px" }}
+          style={{ height: `${height}px` }}
         >
           <textarea
             ref={fakeTextareaRef}
@@ -153,10 +153,9 @@ export function CodeMirrorPromptWidget({
           <textarea
             ref={textareaRef}
             placeholder="Editing instruction"
-            autoFocus
             className={cn(
               textareaClassName,
-              "text-foreground top-0 bottom-0 overflow-hidden"
+              "text-foreground top-0 bottom-0 overflow-hidden",
             )}
             onPaste={(e) => {
               e.stopPropagation();

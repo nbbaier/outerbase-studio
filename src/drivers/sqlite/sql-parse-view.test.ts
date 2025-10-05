@@ -4,7 +4,7 @@ describe("parse", () => {
   test("parsing simple view", () => {
     const view = parseCreateViewScript(
       "main",
-      `CREATE VIEW COMPANY_VIEW AS SELECT ID, NAME, AGE FROM COMPANY;`
+      `CREATE VIEW COMPANY_VIEW AS SELECT ID, NAME, AGE FROM COMPANY;`,
     );
     expect(view).toMatchObject({
       schemaName: "main",
@@ -16,7 +16,7 @@ describe("parse", () => {
   test("parsing view with temporary keyword", () => {
     const view = parseCreateViewScript(
       "main",
-      `CREATE TEMPORARY VIEW TEMP_VIEW AS SELECT * FROM USERS;`
+      `CREATE TEMPORARY VIEW TEMP_VIEW AS SELECT * FROM USERS;`,
     );
     expect(view).toMatchObject({
       schemaName: "main",
@@ -28,7 +28,7 @@ describe("parse", () => {
   test("parsing view with temp keyword", () => {
     const view = parseCreateViewScript(
       "main",
-      `CREATE TEMP VIEW TEMP_VIEW AS SELECT * FROM USERS;`
+      `CREATE TEMP VIEW TEMP_VIEW AS SELECT * FROM USERS;`,
     );
     expect(view).toMatchObject({
       schemaName: "main",
@@ -40,7 +40,7 @@ describe("parse", () => {
   test("parsing view with IF NOT EXISTS", () => {
     const view = parseCreateViewScript(
       "custom",
-      `CREATE VIEW IF NOT EXIST USER_STATS AS SELECT COUNT(*) AS user_count FROM USERS;`
+      `CREATE VIEW IF NOT EXIST USER_STATS AS SELECT COUNT(*) AS user_count FROM USERS;`,
     );
     expect(view).toMatchObject({
       schemaName: "custom",
@@ -56,7 +56,7 @@ describe("parse", () => {
        SELECT o.id, o.date, c.name, p.title 
        FROM orders o 
        JOIN customers c ON o.customer_id = c.id 
-       JOIN products p ON o.product_id = p.id;`
+       JOIN products p ON o.product_id = p.id;`,
     );
     expect(view).toMatchObject({
       schemaName: "main",
@@ -75,7 +75,7 @@ describe("parse", () => {
        SELECT customer_id, SUM(amount) as total 
        FROM (SELECT * FROM transactions WHERE status = 'completed') 
        GROUP BY customer_id 
-       ORDER BY total DESC;`
+       ORDER BY total DESC;`,
     );
     expect(view).toMatchObject({
       schemaName: "analytics",

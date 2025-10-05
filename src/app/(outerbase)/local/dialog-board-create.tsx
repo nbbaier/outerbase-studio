@@ -1,3 +1,5 @@
+import { LucideLoader } from "lucide-react";
+import { useCallback, useState } from "react";
 import { createDialog } from "@/components/create-dialog";
 import LabelInput from "@/components/label-input";
 import { Button } from "@/components/orbit/button";
@@ -7,9 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { LocalDashboardData } from "@/indexdb";
-import { LucideLoader } from "lucide-react";
-import { useCallback, useState } from "react";
+import type { LocalDashboardData } from "@/indexdb";
 import { createLocalDashboard } from "./hooks";
 
 export const createLocalBoardDialog = createDialog<

@@ -1,5 +1,5 @@
+import type { PropsWithChildren } from "react";
 import { cn } from "@/lib/utils";
-import { PropsWithChildren } from "react";
 import { DocNavigation } from "./docs-navigation";
 
 interface DocTableContentGroup {

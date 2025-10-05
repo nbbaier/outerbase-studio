@@ -1,6 +1,6 @@
-import { HttpStatus } from "@/constants/http-status";
 import { headers } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
+import { HttpStatus } from "@/constants/http-status";
 
 export async function POST(req: NextRequest) {
   const headerStore = await headers();
@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
       {
         error: "Please provide account id or database id",
       },
-      { status: HttpStatus.BAD_REQUEST }
+      { status: HttpStatus.BAD_REQUEST },
     );
   }
 
@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
       {
         error: "Please provide authorization header",
       },
-      { status: HttpStatus.BAD_REQUEST }
+      { status: HttpStatus.BAD_REQUEST },
     );
   }
 
@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
         {
           error: await response.text(),
         },
-        { status: response.status }
+        { status: response.status },
       );
     }
 
@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
       {
         error: (e as Error).message,
       },
-      { status: HttpStatus.BAD_REQUEST }
+      { status: HttpStatus.BAD_REQUEST },
     );
   }
 }

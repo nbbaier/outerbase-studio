@@ -1,10 +1,10 @@
-import { DatabaseValue } from "@/drivers/base-driver";
-import { ColumnType } from "@outerbase/sdk-transform";
+import type { ColumnType } from "@outerbase/sdk-transform";
 import { useCallback, useEffect, useRef, useState } from "react";
+import type { DatabaseValue } from "@/drivers/base-driver";
 import { useFullEditor } from "../providers/full-editor-provider";
-import { OptimizeTableHeaderWithIndexProps } from "../table-optimized";
-import OptimizeTableState from "../table-optimized/optimize-table-state";
-import { TableHeaderMetadata } from "../table-result/type";
+import type { OptimizeTableHeaderWithIndexProps } from "../table-optimized";
+import type OptimizeTableState from "../table-optimized/optimize-table-state";
+import type { TableHeaderMetadata } from "../table-result/type";
 import GenericCell from "./generic-cell";
 
 export interface TableEditableCell<T = unknown> {
@@ -50,12 +50,11 @@ function InputCellEditor({
       inputRef.current.select();
       inputRef.current.focus();
     }
-  }, [inputRef]);
+  }, []);
 
   return (
     <input
       ref={inputRef}
-      autoFocus
       readOnly={readOnly}
       onBlur={() => {
         applyChange(value, shouldExit.current);
@@ -116,13 +115,13 @@ export default function createEditableCell<T = unknown>({
     header,
   }: TableEditableCell<T>) {
     const [editValue, setEditValue] = useState<DatabaseValue<string>>(
-      toString(value)
+      toString(value),
     );
     const { openEditor } = useFullEditor();
 
     useEffect(() => {
       setEditValue(toString(value));
-    }, [value]);
+    }, [value, toString]);
 
     const applyChange = useCallback(
       (v: DatabaseValue<string>, shouldExitEdit = true) => {
@@ -131,13 +130,13 @@ export default function createEditableCell<T = unknown>({
           state.exitEditMode();
         }
       },
-      [onChange, state]
+      [onChange, state, toValue],
     );
 
     const discardChange = useCallback(() => {
       setEditValue(toString(value));
       state.exitEditMode();
-    }, [setEditValue, state, value]);
+    }, [state, value, toString]);
 
     const uneditableColumn = header.setting.readonly;
 

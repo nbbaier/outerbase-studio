@@ -1,15 +1,15 @@
 "use client";
+import { useEffect, useMemo, useRef } from "react";
 import MainScreen from "@/components/gui/main-connection";
 import {
-  StudioContextProps,
+  type StudioContextProps,
   StudioContextProvider,
 } from "@/context/driver-provider";
 import { StudioExtensionManager } from "@/core/extension-manager";
 import { BeforeQueryPipeline } from "@/core/query-pipeline";
-import AgentDriverList from "@/drivers/agent/list";
+import type AgentDriverList from "@/drivers/agent/list";
 import type { BaseDriver } from "@/drivers/base-driver";
-import { SavedDocDriver } from "@/drivers/saved-doc/saved-doc-driver";
-import { useEffect, useMemo, useRef } from "react";
+import type { SavedDocDriver } from "@/drivers/saved-doc/saved-doc-driver";
 import { CommonDialogProvider } from "../common-dialog";
 import { FullEditorProvider } from "./providers/full-editor-provider";
 
@@ -36,7 +36,7 @@ export function Studio({
   agentDriver,
 }: Readonly<StudioProps>) {
   const extensionRef = useRef<StudioExtensionManager | undefined | null>(
-    extensions
+    extensions,
   );
 
   useEffect(() => {
@@ -77,7 +77,7 @@ export function Studio({
         return Reflect.get(...arg);
       },
     });
-  }, [driver, extensionRef]);
+  }, [driver]);
 
   const finalExtensionManager = useMemo(() => {
     return extensions ?? new StudioExtensionManager([]);

@@ -54,7 +54,7 @@ class IframeConnection {
           id,
           statement: stmt,
         },
-        "*"
+        "*",
       );
     });
   }
@@ -70,7 +70,7 @@ class IframeConnection {
           id,
           statements: stmts,
         },
-        "*"
+        "*",
       );
     });
   }

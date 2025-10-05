@@ -1,21 +1,21 @@
+import type { Icon } from "@phosphor-icons/react";
+import { LucideChevronDown, LucideChevronRight } from "lucide-react";
+import React, {
+  type Dispatch,
+  Fragment,
+  type MutableRefObject,
+  type SetStateAction,
+  useRef,
+  useState,
+} from "react";
 import { ContextMenuList } from "@/components/gui/context-menu-handler";
 import {
   ContextMenu,
   ContextMenuContent,
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
-import { OpenContextMenuList } from "@/core/channel-builtin";
+import type { OpenContextMenuList } from "@/core/channel-builtin";
 import { cn } from "@/lib/utils";
-import { Icon } from "@phosphor-icons/react";
-import { LucideChevronDown, LucideChevronRight } from "lucide-react";
-import React, {
-  Dispatch,
-  Fragment,
-  MutableRefObject,
-  SetStateAction,
-  useRef,
-  useState,
-} from "react";
 import HighlightText from "../ui/highlight-text";
 
 export interface ListViewItem<T = unknown> {
@@ -87,7 +87,7 @@ function CollapsedButton({
 
 function matchFilter<T = unknown>(
   item: ListViewItem<T>,
-  filter?: (item: ListViewItem<T>) => boolean
+  filter?: (item: ListViewItem<T>) => boolean,
 ): boolean {
   if (!filter) return true;
 
@@ -117,7 +117,7 @@ function renderList<T>(props: ListViewRendererProps<T>): React.ReactElement {
 
   if (items.length === 0) return <Fragment></Fragment>;
   const listCollapsed = items.some(
-    (item) => item.children && item.children.length > 0
+    (item) => item.children && item.children.length > 0,
   );
 
   return (
@@ -175,7 +175,7 @@ function renderList<T>(props: ListViewRendererProps<T>): React.ReactElement {
                       : "border border-transparent",
                     "w-full",
                     "justify-start",
-                    "cursor-pointer"
+                    "cursor-pointer",
                   )}
                 >
                   <Indentation depth={depth} />
@@ -193,7 +193,7 @@ function renderList<T>(props: ListViewRendererProps<T>): React.ReactElement {
                         <div
                           className={cn(
                             "absolute -right-0.5 -bottom-0.5 h-2 w-2 rounded-full",
-                            item.iconBadgeColor
+                            item.iconBadgeColor,
                           )}
                         ></div>
                       )}
@@ -206,7 +206,7 @@ function renderList<T>(props: ListViewRendererProps<T>): React.ReactElement {
                       <span
                         className={cn(
                           "ml-1 rounded p-0.5 px-1 font-mono text-sm font-normal",
-                          item.badgeClassName ?? "bg-red-500 text-white"
+                          item.badgeClassName ?? "bg-red-500 text-white",
                         )}
                       >
                         {item.badgeContent}
@@ -219,14 +219,13 @@ function renderList<T>(props: ListViewRendererProps<T>): React.ReactElement {
                       <div
                         className="h-[20px] rounded-sm border border-neutral-200 bg-neutral-100 dark:border-neutral-700 dark:bg-neutral-800"
                         style={{
-                          width:
-                            Math.max(
-                              Math.ceil(
-                                (item.progressBarValue / item.progressBarMax) *
-                                  100
-                              ),
-                              5
-                            ) + "%",
+                          width: `${Math.max(
+                            Math.ceil(
+                              (item.progressBarValue / item.progressBarMax) *
+                                100,
+                            ),
+                            5,
+                          )}%`,
                         }}
                       ></div>
                       <span className="absolute right-0">
@@ -265,7 +264,6 @@ export function ListView<T = unknown>(props: ListViewProps<T>) {
     <ContextMenu modal={false} onOpenChange={setContextOpen}>
       <ContextMenuTrigger asChild>
         <div
-          tabIndex={0}
           className={cn(full ? "grow overflow-auto" : "", "select-none")}
           onContextMenu={(e) => {
             if (stopParentPropagation.current) {

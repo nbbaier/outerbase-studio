@@ -24,7 +24,7 @@ export default function useCodeEditorTheme({
           gutterForeground: "#4D4D4C",
           gutterBorder: "transparent",
           lineHighlight: "var(--accent)",
-          fontSize: fontSize + "rem",
+          fontSize: `${fontSize}rem`,
           fontFamily:
             'Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace',
         },
@@ -57,7 +57,7 @@ export default function useCodeEditorTheme({
           gutterBackground: "var(--background)",
           gutterForeground: "#838383",
           gutterActiveForeground: "#fff",
-          fontSize: fontSize + "rem",
+          fontSize: `${fontSize}rem`,
           fontFamily:
             'Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace',
         },

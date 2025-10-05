@@ -71,7 +71,7 @@ const WAEGenericColumns: DatabaseTableColumn[] = [
 class WAEQueryable implements QueryableBaseDriver {
   constructor(
     protected accountId: string,
-    protected token: string
+    protected token: string,
   ) {}
 
   async query(stmt: string): Promise<DatabaseResultSet> {
@@ -106,7 +106,7 @@ class WAEQueryable implements QueryableBaseDriver {
                 Float64: ColumnType.REAL,
                 DateTime: ColumnType.TEXT,
               }[m.type] ?? ColumnType.TEXT,
-          }) as ColumnHeader
+          }) as ColumnHeader,
       ),
       stat: {
         rowsAffected: 0,
@@ -142,7 +142,7 @@ export default class CloudflareWAEDriver extends PostgresLikeDriver {
 
   constructor(
     protected accountId: string,
-    protected token: string
+    protected token: string,
   ) {
     super(new WAEQueryable(accountId, token));
   }
@@ -170,7 +170,7 @@ export default class CloudflareWAEDriver extends PostgresLikeDriver {
 
   async tableSchema(
     schemaName: string,
-    tableName: string
+    tableName: string,
   ): Promise<DatabaseTableSchema> {
     return {
       columns: structuredClone(WAEGenericColumns),
@@ -184,7 +184,7 @@ export default class CloudflareWAEDriver extends PostgresLikeDriver {
   async selectTable(
     schemaName: string,
     tableName: string,
-    options: SelectFromTableOptions
+    options: SelectFromTableOptions,
   ): Promise<{ data: DatabaseResultSet; schema: DatabaseTableSchema }> {
     // Similar to the common SQL driver implementation,
     // but without the schema name as Cloudflare Worker Analytics Engine does not support schemas

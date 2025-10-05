@@ -1,3 +1,13 @@
+import {
+  CalendarDots,
+  MagnifyingGlass,
+  Pencil,
+  SortAscending,
+  SortDescending,
+  Trash,
+} from "@phosphor-icons/react";
+import { AnimatePresence, motion } from "framer-motion";
+import { useMemo, useState } from "react";
 import { Input } from "@/components/orbit/input";
 import { MenuBar } from "@/components/orbit/menu-bar";
 import ResourceCard from "@/components/resource-card";
@@ -12,21 +22,11 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { timeSince } from "@/lib/utils-datetime";
-import {
+import type {
   OuterbaseAPIBase,
   OuterbaseAPIDashboard,
   OuterbaseAPIWorkspace,
 } from "@/outerbase-cloud/api-type";
-import {
-  CalendarDots,
-  MagnifyingGlass,
-  Pencil,
-  SortAscending,
-  SortDescending,
-  Trash,
-} from "@phosphor-icons/react";
-import { AnimatePresence, motion } from "framer-motion";
-import { useMemo, useState } from "react";
 import NewResourceButton from "./new-resource-button";
 import ResourceCardLoading from "./resource-card-loading";
 
@@ -42,7 +42,7 @@ export interface ResourceItemProps {
 
 export function getResourceItemPropsFromBase(
   workspace: OuterbaseAPIWorkspace,
-  base: OuterbaseAPIBase
+  base: OuterbaseAPIBase,
 ): ResourceItemProps {
   return {
     id: base.id,
@@ -58,7 +58,7 @@ export function getResourceItemPropsFromBase(
 
 export function getResourceItemPropsFromBoard(
   workspace: OuterbaseAPIWorkspace,
-  board: OuterbaseAPIDashboard
+  board: OuterbaseAPIDashboard,
 ): ResourceItemProps {
   return {
     id: board.id,
@@ -116,13 +116,13 @@ export function ResourceItemList({
 
   const baseMatchedCount = useMemo(() => {
     return bases.filter((base) =>
-      (base.name ?? "").toLowerCase().includes(search.toLowerCase())
+      (base.name ?? "").toLowerCase().includes(search.toLowerCase()),
     ).length;
   }, [bases, search]);
 
   const boardMatchedCount = useMemo(() => {
     return boards.filter((board) =>
-      (board.name ?? "").toLowerCase().includes(search.toLowerCase())
+      (board.name ?? "").toLowerCase().includes(search.toLowerCase()),
     ).length;
   }, [boards, search]);
 

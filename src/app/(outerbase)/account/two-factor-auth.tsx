@@ -1,3 +1,7 @@
+import { CheckCircle2 } from "lucide-react";
+import Image from "next/image";
+import { useCallback, useState } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/orbit/button";
 import { Input } from "@/components/orbit/input";
 import { CountryCodePicker } from "@/components/picker/country-code-picker";
@@ -9,10 +13,6 @@ import {
   submitVerifyPhone2FA,
   verifyOuterbase2FAOTP,
 } from "@/outerbase-cloud/api-account";
-import { CheckCircle2 } from "lucide-react";
-import Image from "next/image";
-import { useCallback, useState } from "react";
-import { toast } from "sonner";
 import { useSession } from "../session-provider";
 
 interface HasOTPProps {
@@ -116,7 +116,7 @@ export default function TwoFactorAuth() {
         toast.success(msg);
       });
     },
-    [refreshSession]
+    [refreshSession, onClear],
   );
 
   const onSendRequestPhone2FA = useCallback(() => {
@@ -147,7 +147,7 @@ export default function TwoFactorAuth() {
           .finally();
       }
     },
-    [qrcode]
+    [qrcode],
   );
 
   const onVerifyOuterbaseOTP = useCallback(() => {

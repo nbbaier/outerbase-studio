@@ -19,7 +19,7 @@ const BlobCell = createEditableCell<number[]>({
           ? 0x5c
           : letter !== undefined
             ? letter.codePointAt(0)
-            : parseInt(hex, 16)
+            : parseInt(hex, 16),
     ) as number[];
   },
 });

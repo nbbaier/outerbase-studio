@@ -1,6 +1,6 @@
 "use client";
-import SqlEditor from "@/components/gui/sql-editor";
 import { useState } from "react";
+import SqlEditor from "@/components/gui/sql-editor";
 
 export default function StorybookEditorPage() {
   const [value, setValue] = useState(`CREATE TABLE customer(
@@ -28,7 +28,7 @@ END;
         dialect="sqlite"
         value={value}
         onChange={setValue}
-        onPrompt={async (prompt, selected) => {
+        onPrompt={async (_prompt, selected) => {
           const selectedText = selected?.text;
 
           // do some fake delay
@@ -43,7 +43,7 @@ END;
 
           for (let i = 0; i < lines.length; i++) {
             if (Math.random() > 0.5) {
-              lines.splice(i, 0, "some random text " + Math.random());
+              lines.splice(i, 0, `some random text ${Math.random()}`);
               i++;
             }
           }
@@ -51,7 +51,7 @@ END;
           for (let i = 0; i < 5; i++) {
             // add random lines at the end
             if (Math.random() > 0.5) {
-              lines.push("some random text " + Math.random());
+              lines.push(`some random text ${Math.random()}`);
             }
           }
 

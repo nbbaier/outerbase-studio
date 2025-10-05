@@ -1,4 +1,9 @@
 "use client";
+import { SendHorizonal } from "lucide-react";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useCallback, useMemo, useState } from "react";
+import { toast } from "sonner";
 import OuterbaseLogo from "@/components/icons/outerbase";
 import { Button } from "@/components/orbit/button";
 import { Input } from "@/components/orbit/input";
@@ -8,11 +13,6 @@ import {
   requestResetPassword,
   resetPassword,
 } from "@/outerbase-cloud/api-account";
-import { SendHorizonal } from "lucide-react";
-import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useMemo, useState } from "react";
-import { toast } from "sonner";
 
 export default function PasswordResetPage() {
   const param = useSearchParams();

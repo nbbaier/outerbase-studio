@@ -1,3 +1,4 @@
+import { useCallback, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -7,11 +8,10 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { useStudioContext } from "@/context/driver-provider";
-import {
+import type {
   SavedDocData,
   SavedDocNamespace,
 } from "@/drivers/saved-doc/saved-doc-driver";
-import { useCallback, useState } from "react";
 
 interface Props {
   onClose: () => void;
@@ -39,7 +39,7 @@ export default function RemoveNamespaceDialog({
             .then(() => {
               onClose();
               onComplete(
-                docs.find((n) => n.namespace.id === value.id)?.docs ?? []
+                docs.find((n) => n.namespace.id === value.id)?.docs ?? [],
               );
             })
             .finally(() => {

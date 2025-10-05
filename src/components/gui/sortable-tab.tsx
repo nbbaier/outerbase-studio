@@ -1,10 +1,10 @@
+import { useSortable } from "@dnd-kit/sortable";
+import { type LucideIcon, LucideX } from "lucide-react";
+import { forwardRef } from "react";
 import { CSS } from "@/lib/dnd-kit";
 import { cn } from "@/lib/utils";
-import { useSortable } from "@dnd-kit/sortable";
-import { LucideIcon, LucideX } from "lucide-react";
-import { forwardRef } from "react";
-import { ButtonProps } from "../ui/button";
-import { WindowTabItemProps } from "./windows-tab";
+import type { ButtonProps } from "../ui/button";
+import type { WindowTabItemProps } from "./windows-tab";
 
 interface SortableTabProps {
   tab: WindowTabItemProps;
@@ -46,7 +46,7 @@ export const WindowTabItemButton = forwardRef<
         selected
           ? "text-primary bg-neutral-50 dark:bg-neutral-950"
           : "border-b border-x-transparent",
-        index === 0 ? "border-l-0" : ""
+        index === 0 ? "border-l-0" : "",
       )}
       onAuxClick={({ button }) => button === 1 && onClose && onClose()}
       ref={ref}
@@ -57,7 +57,7 @@ export const WindowTabItemButton = forwardRef<
       {onClose && (
         <div
           className={cn(
-            "ml-2 flex h-5 w-5 items-center justify-center rounded hover:bg-neutral-800 hover:text-white"
+            "ml-2 flex h-5 w-5 items-center justify-center rounded hover:bg-neutral-800 hover:text-white",
           )}
           onClick={(e) => {
             e.stopPropagation();

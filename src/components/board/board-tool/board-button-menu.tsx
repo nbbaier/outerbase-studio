@@ -1,3 +1,5 @@
+import { ChevronDown, RefreshCcw } from "lucide-react";
+import { useEffect, useState } from "react";
 import { CircularProgressBar } from "@/components/circular-progress-bar";
 import { Button } from "@/components/orbit/button";
 import { buttonVariants } from "@/components/ui/button";
@@ -9,8 +11,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { convertTimeToMilliseconds } from "@/lib/convertNumber";
 import { cn } from "@/lib/utils";
-import { ChevronDown, RefreshCcw } from "lucide-react";
-import { useEffect, useState } from "react";
 import { useBoardContext } from "../board-provider";
 
 interface Props {
@@ -29,7 +29,7 @@ function useAutoRefresh(interval: number) {
   useEffect(() => {
     setIsReset(true);
     setTimeLeft(0);
-  }, [interval]);
+  }, []);
 
   useEffect(() => {
     if (interval > 0 && isReset) {
@@ -55,7 +55,7 @@ function useAutoRefresh(interval: number) {
 
       return () => clearInterval(run);
     }
-  }, [interval, isActive, timeLeft]);
+  }, [isActive, timeLeft]);
 
   return timeLeft;
 }
@@ -78,7 +78,7 @@ export function BoardButtonMenu(props: Props) {
   }
 
   const autoIntervalSelected = setting?.autoRefresh.find(
-    (f) => convertTimeToMilliseconds(f) === props.interval
+    (f) => convertTimeToMilliseconds(f) === props.interval,
   );
 
   const progress = (timeleft * 100000) / props.interval;
@@ -88,7 +88,7 @@ export function BoardButtonMenu(props: Props) {
       <button
         className={buttonVariants({ size: "sm", variant: "ghost" })}
         onClick={() => {
-          props.onRefresh && props.onRefresh();
+          props.onRefresh?.();
         }}
       >
         <div className="flex items-center gap-2">
@@ -103,7 +103,7 @@ export function BoardButtonMenu(props: Props) {
           <button
             className={cn(
               buttonVariants({ size: "sm", variant: "ghost" }),
-              "gap-2"
+              "gap-2",
             )}
           >
             {props.interval > 0 && (

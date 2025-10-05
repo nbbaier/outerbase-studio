@@ -1,3 +1,4 @@
+import { useCallback, useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -8,8 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { useStudioContext } from "@/context/driver-provider";
-import { SavedDocNamespace } from "@/drivers/saved-doc/saved-doc-driver";
-import { useCallback, useState } from "react";
+import type { SavedDocNamespace } from "@/drivers/saved-doc/saved-doc-driver";
 
 interface CreateNamespaceButtonProps {
   onCreated: (v: SavedDocNamespace) => void;

@@ -1,10 +1,10 @@
-import {
+import type { ReactElement } from "react";
+import type {
   CommonConnectionConfig,
   CommonConnectionConfigTemplate,
 } from "@/components/connection-config-editor";
-import { OuterbaseAPISourceInput } from "@/outerbase-cloud/api-type";
-import { ReactElement } from "react";
-import { SavedConnectionRawLocalStorage } from "../(theme)/connect/saved-connection-storage";
+import type { OuterbaseAPISourceInput } from "@/outerbase-cloud/api-type";
+import type { SavedConnectionRawLocalStorage } from "../(theme)/connect/saved-connection-storage";
 
 export interface ConnectionTemplateList {
   template: CommonConnectionConfigTemplate;

@@ -1,8 +1,8 @@
 import { produce } from "immer";
-import { Dispatch, SetStateAction, useMemo } from "react";
+import { type Dispatch, type SetStateAction, useMemo } from "react";
 import { MenuBar } from "../orbit/menu-bar";
 import ChartBackGroundImage from "./chart-background-image";
-import { ChartValue } from "./chart-type";
+import type { ChartValue } from "./chart-type";
 import SimpleInput from "./simple-input";
 
 const PRESET_GRADIENTS = [
@@ -43,7 +43,7 @@ export default function ChartBackgroundSelection({
             <p className="mb-1.5 text-xs font-bold opacity-70">Start Color</p>
             <SimpleInput
               value={value.params.options.gradientStart || ""}
-              onSumit={function (v: string): void {
+              onSumit={(v: string): void => {
                 setValue((prev) => {
                   return produce(prev, (draft) => {
                     draft.params.options.gradientStart = v;
@@ -56,7 +56,7 @@ export default function ChartBackgroundSelection({
             <p className="mb-1.5 text-xs font-bold opacity-70">Stop Color</p>
             <SimpleInput
               value={value.params.options.gradientStop || ""}
-              onSumit={function (v: string): void {
+              onSumit={(v: string): void => {
                 setValue((prev) => {
                   return produce(prev, (draft) => {
                     draft.params.options.gradientStop = v;

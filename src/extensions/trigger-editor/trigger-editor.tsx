@@ -1,3 +1,5 @@
+import { produce } from "immer";
+import { useMemo } from "react";
 import SchemaNameSelect from "@/components/gui/schema-editor/schema-name-select";
 import SqlEditor from "@/components/gui/sql-editor";
 import TableCombobox from "@/components/gui/table-combobox/TableCombobox";
@@ -11,13 +13,11 @@ import {
 } from "@/components/ui/select";
 import { useStudioContext } from "@/context/driver-provider";
 import { useSchema } from "@/context/schema-provider";
-import {
+import type {
   DatabaseTriggerSchema,
   TriggerOperation,
   TriggerWhen,
 } from "@/drivers/base-driver";
-import { produce } from "immer";
-import { useMemo } from "react";
 
 export interface TriggerEditorProps {
   onChange: (value: DatabaseTriggerSchema) => void;
@@ -33,7 +33,7 @@ export default function TriggerEditor({ value, onChange }: TriggerEditorProps) {
     if (!currentSchema) return autoCompleteSchema;
 
     const currentTable = currentSchema.find(
-      (t) => t.name.toLowerCase() === value.tableName.toLowerCase()
+      (t) => t.name.toLowerCase() === value.tableName.toLowerCase(),
     )?.tableSchema;
     if (!currentTable) return autoCompleteSchema;
 
@@ -57,7 +57,7 @@ export default function TriggerEditor({ value, onChange }: TriggerEditorProps) {
             onChange(
               produce(value, (draft) => {
                 draft.name = e.currentTarget.value;
-              })
+              }),
             )
           }
         />
@@ -71,7 +71,7 @@ export default function TriggerEditor({ value, onChange }: TriggerEditorProps) {
                 onChange(
                   produce(value, (draft) => {
                     draft.when = e as TriggerWhen;
-                  })
+                  }),
                 )
               }
             >
@@ -93,7 +93,7 @@ export default function TriggerEditor({ value, onChange }: TriggerEditorProps) {
                 onChange(
                   produce(value, (draft) => {
                     draft.operation = newOperation;
-                  })
+                  }),
                 );
               }}
             >
@@ -115,7 +115,7 @@ export default function TriggerEditor({ value, onChange }: TriggerEditorProps) {
                 onChange(
                   produce(value, (draft) => {
                     draft.schemaName = schemaName;
-                  })
+                  }),
                 );
               }}
             />
@@ -128,7 +128,7 @@ export default function TriggerEditor({ value, onChange }: TriggerEditorProps) {
                 onChange(
                   produce(value, (draft) => {
                     draft.tableName = newTableName;
-                  })
+                  }),
                 );
               }}
             />
@@ -151,7 +151,7 @@ export default function TriggerEditor({ value, onChange }: TriggerEditorProps) {
               onChange(
                 produce(value, (draft) => {
                   draft.statement = newStatement;
-                })
+                }),
               )
             }
           />

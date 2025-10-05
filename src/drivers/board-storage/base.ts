@@ -7,6 +7,6 @@ export abstract class IBoardStorageDriver {
   abstract add(chart: ChartValue): Promise<ChartValue | undefined>;
   abstract update(
     chartId: string,
-    chart: ChartValue
+    chart: ChartValue,
   ): Promise<ChartValue | undefined>;
 }

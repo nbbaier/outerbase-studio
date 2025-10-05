@@ -1,3 +1,6 @@
+import { produce } from "immer";
+import { useCallback, useState } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/orbit/button";
 import { Input } from "@/components/orbit/input";
 import {
@@ -8,11 +11,8 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { produce } from "immer";
-import { useCallback, useState } from "react";
-import { toast } from "sonner";
 import { useDataCatalogContext } from "./data-model-tab";
-import { DataCatalogTableMetadata } from "./driver";
+import type { DataCatalogTableMetadata } from "./driver";
 
 interface DataCatalogTableColumnModalProps {
   schemaName: string;
@@ -40,7 +40,7 @@ export default function TableMetadataModal({
         schemaName: schemaName,
         hide: false,
       };
-    }
+    },
   );
 
   const [loading, setLoading] = useState(false);
@@ -87,7 +87,7 @@ export default function TableMetadataModal({
               setMetadataInput((prev) =>
                 produce(prev, (draft) => {
                   draft.alias = value;
-                })
+                }),
               );
             }}
             placeholder="Add a Pseudonym"

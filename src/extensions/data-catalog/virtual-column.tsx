@@ -1,3 +1,6 @@
+import { Edit3, LucideMoreHorizontal, Trash } from "lucide-react";
+import { useCallback, useState } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/orbit/button";
 import { Toggle } from "@/components/orbit/toggle";
 import {
@@ -8,11 +11,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import { Edit3, LucideMoreHorizontal, Trash } from "lucide-react";
-import { useCallback, useState } from "react";
-import { toast } from "sonner";
 import { useDataCatalogContext } from "./data-model-tab";
-import { DataCatalogTableRelationship } from "./driver";
+import type { DataCatalogTableRelationship } from "./driver";
 import { virtualJoinDialog } from "./virtual-join-modal";
 
 interface Props {
@@ -46,7 +46,7 @@ export default function VirtualJoinColumn({ data }: Props) {
         .updateVirtualJoin({ ...column, id: data.id })
         .then(() => {
           toast.success(
-            `${data.columnName} is turned ${isActive ? "off" : "on"}`
+            `${data.columnName} is turned ${isActive ? "off" : "on"}`,
           );
         })
         .catch((error) => {
@@ -63,7 +63,7 @@ export default function VirtualJoinColumn({ data }: Props) {
     <div
       className={cn(
         "border-accent flex items-center border-t pt-2 pb-2",
-        isActive ? "opacity-100" : "opacity-50"
+        isActive ? "opacity-100" : "opacity-50",
       )}
     >
       <Toggle size="sm" toggled={isActive} onChange={handleClickToggle} />

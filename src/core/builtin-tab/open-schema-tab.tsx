@@ -1,5 +1,5 @@
-import SchemaEditorTab from "@/components/gui/tabs/schema-editor-tab";
 import { LucideTableProperties } from "lucide-react";
+import SchemaEditorTab from "@/components/gui/tabs/schema-editor-tab";
 import { createTabExtension } from "../extension-tab";
 
 export const builtinOpenSchemaTab = createTabExtension<

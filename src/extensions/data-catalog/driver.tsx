@@ -53,42 +53,42 @@ export default abstract class DataCatalogDriver {
     schemaName: string,
     tableName: string,
     columnName: string,
-    data: DataCatalogColumnInput
+    data: DataCatalogColumnInput,
   ): Promise<DataCatalogColumn>;
 
   abstract updateTable(
     schemaName: string,
     tableName: string,
-    data: DataCatalogTableMetadata
+    data: DataCatalogTableMetadata,
   ): Promise<DataCatalogTable | undefined>;
 
   abstract getColumn(
     schemaName: string,
     tableName: string,
-    columnName: string
+    columnName: string,
   ): DataCatalogColumn | undefined;
 
   abstract getTable(
     schemaName: string,
-    tableName: string
+    tableName: string,
   ): DataCatalogTable | undefined;
 
   abstract deleteVirtualColumn(id: string): Promise<boolean>;
 
   abstract addVirtualJoin(
-    data: Omit<DataCatalogTableRelationship, "id">
+    data: Omit<DataCatalogTableRelationship, "id">,
   ): Promise<DataCatalogTableRelationship>;
 
   abstract updateVirtualJoin(
-    data: DataCatalogTableRelationship
+    data: DataCatalogTableRelationship,
   ): Promise<boolean>;
 
   abstract addTermDefinition(
-    data: Omit<DataCatalogTermDefinition, "id">
+    data: Omit<DataCatalogTermDefinition, "id">,
   ): Promise<DataCatalogTermDefinition | undefined>;
 
   abstract updateTermDefinition(
-    data: DataCatalogTermDefinition
+    data: DataCatalogTermDefinition,
   ): Promise<DataCatalogTermDefinition | undefined>;
 
   abstract getTermDefinitions(): DataCatalogTermDefinition[];

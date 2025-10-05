@@ -1,4 +1,7 @@
 "use client";
+import { ArrowLeft, ArrowRight, FloppyDisk } from "@phosphor-icons/react";
+import { useParams, useRouter } from "next/navigation";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import type { ConnectionTemplateList } from "@/app/(outerbase)/base-template";
 import {
   type CommonConnectionConfig,
@@ -17,9 +20,6 @@ import {
   useOuterbaseBase,
   useOuterbaseBaseCredential,
 } from "@/outerbase-cloud/hook";
-import { ArrowLeft, ArrowRight, FloppyDisk } from "@phosphor-icons/react";
-import { useParams, useRouter } from "next/navigation";
-import { useCallback, useEffect, useMemo, useState } from "react";
 
 function WorkspaceEditBaseBody({
   base,
@@ -45,7 +45,7 @@ function WorkspaceEditBaseBody({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [validateErrors, setValidateErrors] = useState<Record<string, string>>(
-    {}
+    {},
   );
 
   useEffect(() => {});
@@ -67,11 +67,11 @@ function WorkspaceEditBaseBody({
         await updateOuterbaseSource(
           workspaceId,
           base.sources[0]?.id ?? "",
-          source
+          source,
         );
 
         router.replace(
-          overrideRedirect ?? `/w/${workspaceId}/${base.short_name}`
+          overrideRedirect ?? `/w/${workspaceId}/${base.short_name}`,
         );
       };
 
@@ -86,7 +86,7 @@ function WorkspaceEditBaseBody({
         })
         .finally(() => setLoading(false));
     },
-    [workspaceId, template, value, router, base]
+    [workspaceId, template, value, router, base],
   );
 
   if (!template.remoteFrom || !template.remoteTo) {
@@ -165,7 +165,7 @@ export default function WorkspaceEditBasePage() {
 
   const { isLoading: isBaseLoading, data: base } = useOuterbaseBase(
     workspaceId,
-    baseId
+    baseId,
   );
 
   const { isLoading: isCredentialLoading, data: credential } =

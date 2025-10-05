@@ -1,11 +1,11 @@
 "use client";
 
+import { useCallback, useMemo } from "react";
 import OptimizeTable, {
-  OptimizeTableCellRenderProps,
-  OptimizeTableHeaderWithIndexProps,
+  type OptimizeTableCellRenderProps,
+  type OptimizeTableHeaderWithIndexProps,
 } from "@/components/gui/table-optimized";
 import { createSimpleTableState } from "@/components/gui/table-optimized/helper";
-import { useCallback, useMemo } from "react";
 
 export default function TableStorybookPage() {
   const state = useMemo(() => {
@@ -22,7 +22,7 @@ export default function TableStorybookPage() {
         { id: 8, name: "Eve", age: 29 },
         { id: 9, name: "Frank", age: 31 },
         { id: 10, name: "Grace", age: 26 },
-      ]
+      ],
     );
   }, []);
 
@@ -31,7 +31,7 @@ export default function TableStorybookPage() {
       const value = (state.getValue(y, x) as string).toString();
       return <div className="flex h-[36px] items-center p-1">{value}</div>;
     },
-    []
+    [],
   );
 
   const renderHeader = useCallback(
@@ -42,7 +42,7 @@ export default function TableStorybookPage() {
         </div>
       );
     },
-    []
+    [],
   );
 
   return (

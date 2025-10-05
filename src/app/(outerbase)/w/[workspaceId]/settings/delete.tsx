@@ -1,3 +1,5 @@
+import { useRouter } from "next/navigation";
+import { useCallback, useState } from "react";
 import { useWorkspaces } from "@/app/(outerbase)/workspace-provider";
 import CopyableText from "@/components/copyable-text";
 import { createDialog } from "@/components/create-dialog";
@@ -9,10 +11,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { OuterbaseAPIWorkspace } from "@/outerbase-cloud/api-type";
+import type { OuterbaseAPIWorkspace } from "@/outerbase-cloud/api-type";
 import { deleteOuterbaseWorkspace } from "@/outerbase-cloud/api-workspace";
-import { useRouter } from "next/navigation";
-import { useCallback, useState } from "react";
 
 function DeleteWorkspaceDialog({
   workspace,
@@ -85,7 +85,7 @@ const deleteWorkspaceDialog = createDialog<
   ({ workspace, close }) => {
     return <DeleteWorkspaceDialog workspace={workspace} close={close} />;
   },
-  { defaultValue: false, slot: "workspace" }
+  { defaultValue: false, slot: "workspace" },
 );
 
 export default function WorkspaceDeleteSection({

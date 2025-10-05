@@ -15,7 +15,7 @@ function wrapParen(str: string) {
 function generateCreateColumn(
   driver: BaseDriver,
   col: DatabaseTableColumn,
-  edit?: boolean
+  edit?: boolean,
 ): string {
   const tokens: string[] = edit
     ? [
@@ -40,7 +40,7 @@ function generateCreateColumn(
           : undefined,
       ]
         .filter(Boolean)
-        .join(" ")
+        .join(" "),
     );
   }
 
@@ -53,7 +53,7 @@ function generateCreateColumn(
           : undefined,
       ]
         .filter(Boolean)
-        .join(" ")
+        .join(" "),
     );
   }
 
@@ -66,19 +66,19 @@ function generateCreateColumn(
           : undefined,
       ]
         .filter(Boolean)
-        .join(" ")
+        .join(" "),
     );
   }
 
   if (col.constraint?.defaultValue) {
     tokens.push(
-      ["DEFAULT", driver.escapeValue(col.constraint.defaultValue)].join(" ")
+      ["DEFAULT", driver.escapeValue(col.constraint.defaultValue)].join(" "),
     );
   }
 
   if (col.constraint?.defaultExpression) {
     tokens.push(
-      ["DEFAULT", wrapParen(col.constraint.defaultExpression)].join(" ")
+      ["DEFAULT", wrapParen(col.constraint.defaultExpression)].join(" "),
     );
   }
 
@@ -88,7 +88,7 @@ function generateCreateColumn(
         "GENERATED ALWAYS AS",
         wrapParen(col.constraint.generatedExpression),
         col.constraint.generatedType,
-      ].join(" ")
+      ].join(" "),
     );
   }
 
@@ -111,7 +111,7 @@ function generateCreateColumn(
         "FOREIGN KEY REFERENCES",
         driver.escapeId(foreignTableName) +
           `(${driver.escapeId(foreignColumnName)})`,
-      ].join(" ")
+      ].join(" "),
     );
   }
 
@@ -120,7 +120,7 @@ function generateCreateColumn(
 
 function generateConstraintScript(
   driver: BaseDriver,
-  con: DatabaseTableColumnConstraint
+  con: DatabaseTableColumnConstraint,
 ) {
   if (con.primaryKey) {
     return `PRIMARY KEY (${con.primaryColumns?.map(driver.escapeId).join(", ")})`;
@@ -140,7 +140,7 @@ function generateConstraintScript(
 function generateConstraintModifyScript(
   driver: BaseDriver,
   con: DatabaseTableColumnConstraint,
-  tableName: string
+  tableName: string,
 ) {
   let keyName = "";
   if (con?.primaryKey) {
@@ -162,7 +162,7 @@ function generateConstraintModifyScript(
 //https://www.postgresql.org/docs/current/sql-createtable.html
 export function generatePostgresSchemaChange(
   driver: BaseDriver,
-  change: DatabaseTableSchemaChange
+  change: DatabaseTableSchemaChange,
 ): string[] {
   const isCreateScript = !change.name.old;
 
@@ -181,8 +181,8 @@ export function generatePostgresSchemaChange(
       if (col.new.name !== col.old.name) {
         lines.push(
           `RENAME COLUMN ${driver.escapeId(col.old.name)} TO ${driver.escapeId(
-            col.new.name
-          )}`
+            col.new.name,
+          )}`,
         );
       }
 
@@ -197,8 +197,8 @@ export function generatePostgresSchemaChange(
               pk: col.new.pk,
               constraint: {},
             },
-            true
-          )}`
+            true,
+          )}`,
         );
         if (col.new.constraint) {
           for (const s of generateConstraintModifyScript(
@@ -212,7 +212,7 @@ export function generatePostgresSchemaChange(
                 columns: [col.new.name],
               },
             },
-            change.name.old ?? ""
+            change.name.old ?? "",
           )) {
             lines.push(s);
           }
@@ -232,7 +232,7 @@ export function generatePostgresSchemaChange(
   if (!isCreateScript) {
     if (change.name.new !== change.name.old) {
       lines.push(
-        `RENAME TO ${driver.escapeId(change.schemaName ?? "main")}.${driver.escapeId(change.name.new ?? "")}`
+        `RENAME TO ${driver.escapeId(change.schemaName ?? "main")}.${driver.escapeId(change.name.new ?? "")}`,
       );
     }
   }
@@ -240,7 +240,7 @@ export function generatePostgresSchemaChange(
   if (isCreateScript) {
     return [
       `CREATE TABLE ${driver.escapeId(change.schemaName ?? "main")}.${driver.escapeId(
-        change.name.new || "no_table_name"
+        change.name.new || "no_table_name",
       )}(\n${lines.map((line) => "  " + line).join(",\n")}\n)`,
     ];
   } else {

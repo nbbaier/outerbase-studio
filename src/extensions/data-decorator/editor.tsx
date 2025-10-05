@@ -1,5 +1,8 @@
-import { OptimizeTableHeaderProps } from "@/components/gui/table-optimized";
-import OptimizeTableState from "@/components/gui/table-optimized/optimize-table-state";
+import { Check } from "@phosphor-icons/react";
+import { useState } from "react";
+import z from "zod";
+import type { OptimizeTableHeaderProps } from "@/components/gui/table-optimized";
+import type OptimizeTableState from "@/components/gui/table-optimized/optimize-table-state";
 import {
   DropdownMenuItem,
   DropdownMenuSeparator,
@@ -7,9 +10,6 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Check } from "@phosphor-icons/react";
-import { useState } from "react";
-import z from "zod";
 
 function currencyDecorator(value: unknown) {
   if (typeof value === "number" || typeof value === "bigint") {

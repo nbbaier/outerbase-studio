@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useState } from "react";
 import { createDialog } from "@/components/create-dialog";
 import LabelInput from "@/components/label-input";
 import { Button } from "@/components/orbit/button";
@@ -11,7 +12,6 @@ import {
   getAgentFromLocalStorage,
   updateAgentFromLocalStorage,
 } from "@/lib/ai-agent-storage";
-import { useCallback, useEffect, useState } from "react";
 
 export const localSettingDialog = createDialog(({ close }) => {
   const [token, setToken] = useState<string>("");

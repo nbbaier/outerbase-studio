@@ -21,6 +21,6 @@ export abstract class AgentBaseDriver {
   abstract run(
     message: string,
     previousId: string | undefined,
-    option: AgentPromptOption
+    option: AgentPromptOption,
   ): Promise<string>;
 }

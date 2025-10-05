@@ -1,3 +1,13 @@
+import {
+  CaretDown,
+  Gear,
+  SignOut,
+  ToggleLeft,
+  ToggleRight,
+} from "@phosphor-icons/react";
+import { useRouter } from "next/navigation";
+import { useTheme } from "next-themes";
+import { useCallback } from "react";
 import { Avatar } from "@/components/orbit/avatar";
 import { buttonVariants } from "@/components/ui/button";
 import {
@@ -7,16 +17,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { cn } from "@/lib/utils";
-import {
-  CaretDown,
-  Gear,
-  SignOut,
-  ToggleLeft,
-  ToggleRight,
-} from "@phosphor-icons/react";
-import { useTheme } from "next-themes";
-import { useRouter } from "next/navigation";
-import { useCallback } from "react";
 import { localSettingDialog } from "./local-setting-dialog";
 import { useSession } from "./session-provider";
 
@@ -39,7 +39,7 @@ export default function NavigationProfile() {
       e.stopPropagation();
       e.preventDefault();
     },
-    [theme, setTheme]
+    [theme, setTheme],
   );
 
   return (
@@ -51,14 +51,14 @@ export default function NavigationProfile() {
               size: "lg",
               variant: "ghost",
             }),
-            "flex items-center justify-start gap-2 p-1"
+            "flex items-center justify-start gap-2 p-1",
           )}
         >
           <Avatar username="Guest" as="div" />
           {!isLoading && (
             <div className="flex-1 text-left text-sm">
               {session
-                ? session.user.first_name + " " + session?.user.last_name
+                ? `${session.user.first_name} ${session?.user.last_name}`
                 : "Guest"}
             </div>
           )}
@@ -78,7 +78,7 @@ export default function NavigationProfile() {
           <div className="flex flex-col justify-center">
             <div className="text-sm font-semibold">
               {session
-                ? session.user.first_name + " " + session?.user.last_name
+                ? `${session.user.first_name} ${session?.user.last_name}`
                 : "Guest"}
             </div>
             {session && <div className="text-sm">{session.user.email}</div>}

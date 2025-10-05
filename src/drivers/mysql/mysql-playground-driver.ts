@@ -12,7 +12,7 @@ class MySQLPlaygroundQueryable implements QueryableBaseDriver {
 
   constructor(
     protected ws: WebSocket,
-    onReady: () => void
+    onReady: () => void,
   ) {
     this.ws.addEventListener("message", (e) => {
       const data = JSON.parse(e.data);
@@ -45,7 +45,7 @@ class MySQLPlaygroundQueryable implements QueryableBaseDriver {
           id: this.counter,
           type: "query",
           statement: stmt,
-        })
+        }),
       );
     });
   }
@@ -60,7 +60,7 @@ class MySQLPlaygroundQueryable implements QueryableBaseDriver {
           id: this.counter,
           type: "transaction",
           statements: stmts,
-        })
+        }),
       );
     });
   }
@@ -82,7 +82,7 @@ export default class MySQLPlaygroundDriver extends MySQLLikeDriver {
     this.ws.send(
       JSON.stringify({
         type: "ping",
-      })
+      }),
     );
   }
 

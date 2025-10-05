@@ -1,6 +1,6 @@
-import { buttonVariants } from "../ui/button";
-import { Icon } from "@phosphor-icons/react";
+import type { Icon } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
+import { buttonVariants } from "../ui/button";
 
 export default function ListButtonItem({
   selected,
@@ -22,7 +22,7 @@ export default function ListButtonItem({
           size: "sm",
         }),
         "justify-start",
-        "cursor-pointer"
+        "cursor-pointer",
       )}
     >
       {Icon ? (

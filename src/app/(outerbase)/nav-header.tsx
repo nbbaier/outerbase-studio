@@ -1,7 +1,7 @@
-import { cn } from "@/lib/utils";
 import { Database, Gear } from "@phosphor-icons/react";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
+import { cn } from "@/lib/utils";
 import { useWorkspaces } from "./workspace-provider";
 
 export default function NavigationHeader() {

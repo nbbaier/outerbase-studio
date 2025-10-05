@@ -8,7 +8,6 @@ import {
   Search,
 } from "lucide-react";
 import { useCallback, useState } from "react";
-import { DashboardProps } from ".";
 import { buttonVariants } from "../ui/button";
 import {
   DropdownMenu,
@@ -16,10 +15,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
-import { BoardFilterDialog } from "./board-filter-dialog";
+import type { DashboardProps } from ".";
 import { BoardFilterDate } from "./board-filter/board-filter-date";
 import { BoardFilterEnum } from "./board-filter/board-filter-enum";
 import { BoardFilterInput } from "./board-filter/board-filter-input";
+import { BoardFilterDialog } from "./board-filter-dialog";
 import { useBoardContext } from "./board-provider";
 import { BoardToolbar } from "./board-tool/board-toolbar";
 
@@ -80,7 +80,7 @@ export function BoardFilter(props: Props) {
             onFilterValueChange(
               produce(filterValue, (draft) => {
                 draft[x.name] = v;
-              })
+              }),
             );
           }}
         />
@@ -94,7 +94,7 @@ export function BoardFilter(props: Props) {
             onFilterValueChange(
               produce(filterValue, (draft) => {
                 draft[x.name] = v;
-              })
+              }),
             );
           }}
         />
@@ -107,7 +107,7 @@ export function BoardFilter(props: Props) {
             onFilterValueChange(
               produce(filterValue, (draft) => {
                 draft[x.name] = v;
-              })
+              }),
             );
           }}
         />
@@ -149,7 +149,7 @@ export function BoardFilter(props: Props) {
               onClick={() => {
                 const value = produce(props.value, (draft) => {
                   draft.data.filters = props.value.data.filters.filter(
-                    (_, idx) => idx !== i
+                    (_, idx) => idx !== i,
                   );
                 });
                 storage
@@ -169,70 +169,68 @@ export function BoardFilter(props: Props) {
   });
 
   return (
-    <>
-      <div className="sticky top-0 z-50 bg-neutral-100 px-1 pt-0 pb-2 dark:bg-neutral-950">
-        <BoardToolbar
-          show={show}
-          onChangeShow={setShow}
-          interval={props.interval}
-          onChange={props.onChangeInterval}
-          onRefresh={props.onRefresh}
-          onSave={onSave}
-          onCancel={props.onCancel}
-          value={props.value}
-          onChangeValue={props.onChange}
-        />
-        <div className={show ? "px-2 pt-4" : "hidden"}>
-          {open && selectIndex !== undefined && (
-            <BoardFilterDialog
-              onClose={() => {
-                setOpen(false);
-                if (props.value.data.filters[selectIndex].new === true) {
-                  const value = produce(props.value, (draft) => {
-                    draft.data.filters = props.value.data.filters.filter(
-                      (_, i) => i !== selectIndex
-                    );
-                  });
-                  props.onChange(value);
-                  setSelectIndex(undefined);
-                }
-              }}
-              filter={props.value.data.filters[selectIndex]}
-              onFilter={(v) => {
-                const data = structuredClone(props.value.data.filters);
-                data[selectIndex] = v;
+    <div className="sticky top-0 z-50 bg-neutral-100 px-1 pt-0 pb-2 dark:bg-neutral-950">
+      <BoardToolbar
+        show={show}
+        onChangeShow={setShow}
+        interval={props.interval}
+        onChange={props.onChangeInterval}
+        onRefresh={props.onRefresh}
+        onSave={onSave}
+        onCancel={props.onCancel}
+        value={props.value}
+        onChangeValue={props.onChange}
+      />
+      <div className={show ? "px-2 pt-4" : "hidden"}>
+        {open && selectIndex !== undefined && (
+          <BoardFilterDialog
+            onClose={() => {
+              setOpen(false);
+              if (props.value.data.filters[selectIndex].new === true) {
                 const value = produce(props.value, (draft) => {
-                  draft.data.filters = data;
+                  draft.data.filters = props.value.data.filters.filter(
+                    (_, i) => i !== selectIndex,
+                  );
                 });
                 props.onChange(value);
-              }}
-              onAddFilter={() => {
-                const data = structuredClone(props.value.data.filters);
-                data[selectIndex].new = false;
-                setOpen(false);
-                const value = produce(props.value, (draft) => {
-                  draft.data.filters = data;
+                setSelectIndex(undefined);
+              }
+            }}
+            filter={props.value.data.filters[selectIndex]}
+            onFilter={(v) => {
+              const data = structuredClone(props.value.data.filters);
+              data[selectIndex] = v;
+              const value = produce(props.value, (draft) => {
+                draft.data.filters = data;
+              });
+              props.onChange(value);
+            }}
+            onAddFilter={() => {
+              const data = structuredClone(props.value.data.filters);
+              data[selectIndex].new = false;
+              setOpen(false);
+              const value = produce(props.value, (draft) => {
+                draft.data.filters = data;
+              });
+              storage
+                ?.save(value)
+                .then()
+                .finally(() => {
+                  props.onChange(value);
                 });
-                storage
-                  ?.save(value)
-                  .then()
-                  .finally(() => {
-                    props.onChange(value);
-                  });
-              }}
-            />
-          )}
-          <div className="flex flex-wrap gap-3">
-            {mapFilterItem}
-            <button
-              className={buttonVariants({ size: "sm", variant: "ghost" })}
-              onClick={onFilter}
-            >
-              <ListFilter className="h-4 w-4" />
-            </button>
-          </div>
+            }}
+          />
+        )}
+        <div className="flex flex-wrap gap-3">
+          {mapFilterItem}
+          <button
+            className={buttonVariants({ size: "sm", variant: "ghost" })}
+            onClick={onFilter}
+          >
+            <ListFilter className="h-4 w-4" />
+          </button>
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -1,13 +1,13 @@
 "use client";
 import {
   createContext,
-  PropsWithChildren,
+  type PropsWithChildren,
   useCallback,
   useContext,
 } from "react";
 import useSWR, { mutate } from "swr";
 import { getOuterbaseSession } from "../../outerbase-cloud/api";
-import {
+import type {
   OuterbaseAPISession,
   OuterbaseAPIUser,
 } from "../../outerbase-cloud/api-type";
@@ -42,7 +42,7 @@ export function OuterbaseSessionProvider({ children }: PropsWithChildren) {
     isLoading,
     mutate: mutateSession,
   } = useSWR(
-    token ? "session-" + token : undefined,
+    token ? `session-${token}` : undefined,
     () => {
       return getOuterbaseSession();
     },
@@ -51,12 +51,12 @@ export function OuterbaseSessionProvider({ children }: PropsWithChildren) {
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
       errorRetryCount: 0,
-    }
+    },
   );
 
   const refreshSession = useCallback(async () => {
     if (!token) return;
-    await mutate("session-" + token);
+    await mutate(`session-${token}`);
   }, [token]);
 
   const logout = useCallback(() => {

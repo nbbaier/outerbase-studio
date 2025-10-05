@@ -6,14 +6,14 @@ import { CursorV2, parseColumnConstraint } from "./sql-parse-table";
 function pcc(sql: string) {
   return parseColumnConstraint(
     "main",
-    new CursorV2(tokenizeSql(sql, "sqlite"))
+    new CursorV2(tokenizeSql(sql, "sqlite")),
   );
 }
 
 describe("parse column constraint", () => {
   test("constraint this_is_primary_key primary key autoincrement", () => {
     expect(
-      pcc("constraint this_is_primary_key primary key autoincrement")
+      pcc("constraint this_is_primary_key primary key autoincrement"),
     ).toEqual({
       name: "this_is_primary_key",
       primaryKey: true,
@@ -91,7 +91,9 @@ describe("parse column constraint", () => {
 
   test("foreign key with references", () => {
     expect(
-      pcc(`foreign key ("user_id") references "users" on delete cascade ("id")`)
+      pcc(
+        `foreign key ("user_id") references "users" on delete cascade ("id")`,
+      ),
     ).toEqual({
       foreignKey: {
         foreignSchemaName: "main",

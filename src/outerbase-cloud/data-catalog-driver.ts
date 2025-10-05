@@ -52,20 +52,20 @@ export default class DataCatalogOuterbaseDriver implements DataCatalogDriver {
 
   private async createUpdateColumn(
     id: string | undefined,
-    data: OuterbaseDataCatalogVirtualColumnInput
+    data: OuterbaseDataCatalogVirtualColumnInput,
   ) {
     if (id) {
       return await updateOuterbaseDataCatalogVirtualColumn(
         this.config.workspaceId,
         this.config.sourceId,
         id,
-        data
+        data,
       );
     } else {
       return await createOuterbaseDataCatalogVirtualColumn(
         this.config.workspaceId,
         this.config.sourceId,
-        data
+        data,
       );
     }
   }
@@ -78,7 +78,7 @@ export default class DataCatalogOuterbaseDriver implements DataCatalogDriver {
     schemaName: string,
     tableName: string,
     columnName: string,
-    isVirtualKey: boolean
+    isVirtualKey: boolean,
   ): OuterbaseDataCatalogComment | undefined {
     const normalizedSchemaName = schemaName.toLowerCase();
     const normalizedTableName = tableName.toLowerCase();
@@ -89,7 +89,7 @@ export default class DataCatalogOuterbaseDriver implements DataCatalogDriver {
         c.schema?.toLowerCase() === normalizedSchemaName &&
         c.table?.toLowerCase() === normalizedTableName &&
         c.column?.toLowerCase() === normalizedColumnName &&
-        c.flags.isVirtualKey === isVirtualKey
+        c.flags.isVirtualKey === isVirtualKey,
     );
 
     return comment;
@@ -99,7 +99,7 @@ export default class DataCatalogOuterbaseDriver implements DataCatalogDriver {
     schemaName: string,
     tableName: string,
     columnName: string,
-    data: DataCatalogColumnInput
+    data: DataCatalogColumnInput,
   ): Promise<DataCatalogColumn> {
     // Check if it exists in the outerbase comment
     const comment = this.getComment(schemaName, tableName, columnName, false);
@@ -147,7 +147,7 @@ export default class DataCatalogOuterbaseDriver implements DataCatalogDriver {
   }
 
   async addVirtualJoin(
-    data: Omit<DataCatalogTableRelationship, "id">
+    data: Omit<DataCatalogTableRelationship, "id">,
   ): Promise<DataCatalogTableRelationship> {
     const inputData: OuterbaseDataCatalogVirtualColumnInput = {
       body: "",
@@ -184,7 +184,7 @@ export default class DataCatalogOuterbaseDriver implements DataCatalogDriver {
     const success = await deleteOutebaseDataCatalogVirtualColumn(
       this.config.workspaceId,
       this.config.sourceId,
-      id
+      id,
     );
 
     if (success) {
@@ -198,7 +198,7 @@ export default class DataCatalogOuterbaseDriver implements DataCatalogDriver {
   }
 
   async updateVirtualJoin(
-    data: DataCatalogTableRelationship
+    data: DataCatalogTableRelationship,
   ): Promise<boolean> {
     const comment = this.getCommentById(data.id);
     if (!comment) return false;
@@ -242,7 +242,7 @@ export default class DataCatalogOuterbaseDriver implements DataCatalogDriver {
   async updateTable(
     schemaName: string,
     tableName: string,
-    data: DataCatalogTableMetadata
+    data: DataCatalogTableMetadata,
   ): Promise<DataCatalogTable | undefined> {
     const normalizedSchemaName = schemaName.toLowerCase();
     const normalizedTableName = tableName.toLowerCase();
@@ -251,7 +251,7 @@ export default class DataCatalogOuterbaseDriver implements DataCatalogDriver {
         c.schema?.toLowerCase() === normalizedSchemaName &&
         c.table?.toLowerCase() === normalizedTableName &&
         !c.flags.isVirtualKey &&
-        !!c.alias
+        !!c.alias,
     );
 
     const inputData: OuterbaseDataCatalogVirtualColumnInput = {
@@ -294,7 +294,7 @@ export default class DataCatalogOuterbaseDriver implements DataCatalogDriver {
   getColumn(
     schemaName: string,
     tableName: string,
-    columnName: string
+    columnName: string,
   ): DataCatalogColumn | undefined {
     const comment = this.getComment(schemaName, tableName, columnName, false);
     if (!comment) return;
@@ -313,7 +313,7 @@ export default class DataCatalogOuterbaseDriver implements DataCatalogDriver {
 
   getTable(
     schemaName: string,
-    tableName: string
+    tableName: string,
   ): DataCatalogTable | undefined {
     const normalizedSchemaName = schemaName.toLowerCase();
     const normalizedTableName = tableName.toLowerCase();
@@ -321,14 +321,14 @@ export default class DataCatalogOuterbaseDriver implements DataCatalogDriver {
       (c) =>
         c.schema?.toLowerCase() === normalizedSchemaName &&
         c.table?.toLowerCase() === normalizedTableName &&
-        !c.flags.isVirtualKey
+        !c.flags.isVirtualKey,
     );
 
     const relations = this.comments.filter(
       (c) =>
         c.schema?.toLowerCase() === normalizedSchemaName &&
         c.table?.toLowerCase() === normalizedTableName &&
-        c.flags?.isVirtualKey
+        c.flags?.isVirtualKey,
     );
 
     const metadata = this.comments.find(
@@ -336,7 +336,7 @@ export default class DataCatalogOuterbaseDriver implements DataCatalogDriver {
         c.schema?.toLowerCase() === normalizedSchemaName &&
         c.table?.toLowerCase() === normalizedTableName &&
         !c.flags.isVirtualKey &&
-        !!c.alias
+        !!c.alias,
     );
 
     const table: DataCatalogTable = {
@@ -383,7 +383,7 @@ export default class DataCatalogOuterbaseDriver implements DataCatalogDriver {
   }
 
   async addTermDefinition(
-    data: Omit<DataCatalogTermDefinition, "id">
+    data: Omit<DataCatalogTermDefinition, "id">,
   ): Promise<DataCatalogTermDefinition | undefined> {
     if (!data) return;
     const inputData = {
@@ -395,7 +395,7 @@ export default class DataCatalogOuterbaseDriver implements DataCatalogDriver {
     const result = await createOuterbaseDefinition(
       this.config.workspaceId,
       this.config.baseId!,
-      inputData
+      inputData,
     );
 
     if (result) {
@@ -406,7 +406,7 @@ export default class DataCatalogOuterbaseDriver implements DataCatalogDriver {
     return result;
   }
   async updateTermDefinition(
-    data: DataCatalogTermDefinition
+    data: DataCatalogTermDefinition,
   ): Promise<OuterbaseDataCatalogDefinition | undefined> {
     if (!data) return;
     const inputData = {
@@ -419,7 +419,7 @@ export default class DataCatalogOuterbaseDriver implements DataCatalogDriver {
       this.config.workspaceId,
       this.config.baseId!,
       data.id,
-      inputData
+      inputData,
     );
     if (result) {
       const updatedDefinitions = this.definitions;
@@ -441,7 +441,7 @@ export default class DataCatalogOuterbaseDriver implements DataCatalogDriver {
       await deleteOuterbaseDefinition(
         this.config.workspaceId,
         this.config.baseId!,
-        id
+        id,
       );
 
       const newDefinitions = this.definitions.filter((def) => def.id !== id);

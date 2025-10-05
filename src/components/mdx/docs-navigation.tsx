@@ -1,10 +1,10 @@
 "use client";
-import { cn } from "@/lib/utils";
-import Link from "next/link";
-import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { LucideAlignJustify } from "lucide-react";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { DocTableContent } from "./docs";
+import { cn } from "@/lib/utils";
+import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
+import type { DocTableContent } from "./docs";
 
 export function DocNavigation({
   content,
@@ -43,7 +43,7 @@ export function DocNavigation({
                       key={content.title}
                       className={cn(
                         "border-l border-gray-200 pl-4 py-1.5",
-                        pathname === content.href ? "font-bold" : ""
+                        pathname === content.href ? "font-bold" : "",
                       )}
                     >
                       <Link href={content.href ?? ""}>{content.title}</Link>

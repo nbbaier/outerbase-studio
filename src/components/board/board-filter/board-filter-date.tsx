@@ -1,11 +1,11 @@
+import { Check } from "lucide-react";
+import { useEffect, useState } from "react";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Check } from "lucide-react";
-import { useEffect, useState } from "react";
 import { DEFAULT_DATE_FILTER } from "../board-filter-dialog";
 
 interface Props {

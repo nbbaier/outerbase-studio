@@ -1,3 +1,5 @@
+import { Check, Spinner, Table, Trash, XCircle } from "@phosphor-icons/react";
+import { type ReactElement, useCallback, useEffect, useState } from "react";
 import { SelectableTable } from "@/components/selectable-table";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,9 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useStudioContext } from "@/context/driver-provider";
 import { useSchema } from "@/context/schema-provider";
-import { DatabaseSchemaItem } from "@/drivers/base-driver";
-import { Check, Spinner, Table, Trash, XCircle } from "@phosphor-icons/react";
-import { ReactElement, useCallback, useEffect, useState } from "react";
+import type { DatabaseSchemaItem } from "@/drivers/base-driver";
 import { Toolbar, ToolbarButton } from "../toolbar";
 
 function ConfirmDialog({
@@ -90,11 +90,11 @@ export default function MassDropTableTab() {
   const [currentSchema, setCurrentSchema] = useState<DatabaseSchemaItem[]>([]);
 
   const [itemStatusList, setItemStatusList] = useState<Record<string, string>>(
-    {}
+    {},
   );
 
   const [operationType, setOperationType] = useState<"drop" | "empty" | null>(
-    null
+    null,
   );
 
   const [completed, setCompleted] = useState(false);
@@ -104,7 +104,7 @@ export default function MassDropTableTab() {
   useEffect(() => {
     setSelectedItems([]);
     setCurrentSchema(
-      schema[selectedSchema].sort((a, b) => a.name.localeCompare(b.name))
+      schema[selectedSchema].sort((a, b) => a.name.localeCompare(b.name)),
     );
   }, [schema, selectedSchema]);
 
@@ -157,7 +157,7 @@ export default function MassDropTableTab() {
       setCompleted(true);
       refresh();
     },
-    [operationType, currentSchemaName, databaseDriver, refresh]
+    [operationType, currentSchemaName, databaseDriver, refresh],
   );
 
   // How to render each row in the table
@@ -195,7 +195,7 @@ export default function MassDropTableTab() {
         </>
       );
     },
-    [itemStatusList]
+    [itemStatusList],
   );
 
   const extractItemKey = useCallback((t: DatabaseSchemaItem) => t.name, []);

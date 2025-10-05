@@ -1,14 +1,17 @@
-import ConnectingDialog from "@/components/gui/connection-dialog";
-import { DatabaseSchemaItem, DatabaseSchemas } from "@/drivers/base-driver";
 import {
-  PropsWithChildren,
   createContext,
+  type PropsWithChildren,
   useCallback,
   useContext,
   useEffect,
   useMemo,
   useState,
 } from "react";
+import ConnectingDialog from "@/components/gui/connection-dialog";
+import type {
+  DatabaseSchemaItem,
+  DatabaseSchemas,
+} from "@/drivers/base-driver";
 import { useAutoComplete } from "./auto-complete-provider";
 import { useStudioContext } from "./driver-provider";
 
@@ -31,7 +34,7 @@ const SchemaContext = createContext<{
 });
 
 function generateAutoCompleteFromSchemaItems(
-  items?: DatabaseSchemaItem[]
+  items?: DatabaseSchemaItem[],
 ): Record<string, string[]> {
   if (!items) return {};
 
@@ -42,13 +45,13 @@ function generateAutoCompleteFromSchemaItems(
         a[b.name] = (b.tableSchema?.columns ?? []).map((c) => c.name);
         return a;
       },
-      {} as Record<string, string[]>
+      {} as Record<string, string[]>,
     );
 }
 
 export function generateAutoComplete(
   currentSchemaName: string,
-  schema: DatabaseSchemas
+  schema: DatabaseSchemas,
 ) {
   return {
     ...generateAutoCompleteFromSchemaItems(schema[currentSchemaName]),
@@ -72,7 +75,7 @@ export function SchemaProvider({ children }: Readonly<PropsWithChildren>) {
   const [schema, setSchema] = useState<DatabaseSchemas>({});
   const [currentSchema, setCurrentSchema] = useState<DatabaseSchemaItem[]>([]);
   const [currentSchemaName, setCurrentSchemaName] = useState(
-    () => databaseDriver.getFlags().defaultSchema
+    () => databaseDriver.getFlags().defaultSchema,
   );
 
   const fetchSchema = useCallback(
@@ -110,14 +113,14 @@ export function SchemaProvider({ children }: Readonly<PropsWithChildren>) {
           setLoading(false);
         });
     },
-    [databaseDriver, setError]
+    [databaseDriver],
   );
 
   useEffect(() => {
     if (schema[currentSchemaName]) {
       setCurrentSchema(schema[currentSchemaName]);
     }
-  }, [currentSchemaName, schema, setCurrentSchema]);
+  }, [currentSchemaName, schema]);
 
   /**
    * Triggered when re-fetching the database schema.

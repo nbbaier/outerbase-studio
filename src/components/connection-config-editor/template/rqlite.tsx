@@ -1,5 +1,5 @@
-import { ConnectionTemplateList } from "@/app/(outerbase)/base-template";
-import { CommonConnectionConfigTemplate } from "..";
+import type { ConnectionTemplateList } from "@/app/(outerbase)/base-template";
+import type { CommonConnectionConfigTemplate } from "..";
 
 const template: CommonConnectionConfigTemplate = [
   {

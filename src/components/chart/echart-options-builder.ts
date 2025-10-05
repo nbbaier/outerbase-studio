@@ -50,7 +50,7 @@ export default class EchartOptionsBuilder {
       const colors = generateGradientColors(
         themeColor[0],
         themeColor[1],
-        numColors || 20
+        numColors || 20,
       );
       return colors;
     }
@@ -72,14 +72,14 @@ export default class EchartOptionsBuilder {
       const colors = generateGradientColors(
         themeColor[0],
         themeColor[1],
-        this.columns.length
+        this.columns.length,
       );
       return this.columns.reduce(
         (acc, col, i) => {
           acc[col] = colors[i];
           return acc;
         },
-        {} as Record<string, string>
+        {} as Record<string, string>,
       );
     }
   }
@@ -353,7 +353,7 @@ export default class EchartOptionsBuilder {
           color: this.getColorRange(
             (this.chartValue.params.options?.theme ??
               DEFAULT_THEME) as ThemeColors,
-            this.chartData.length
+            this.chartData.length,
           ),
         });
         break;
@@ -381,7 +381,7 @@ export default class EchartOptionsBuilder {
           color: this.getColorRange(
             (this.chartValue.params.options?.theme ??
               DEFAULT_THEME) as ThemeColors,
-            this.chartData.length
+            this.chartData.length,
           ),
           tooltip: {
             trigger: "item",
@@ -399,7 +399,7 @@ export default class EchartOptionsBuilder {
 
   private constructSeries<T extends SeriesOption>(
     seriesType: T["type"],
-    additionalOptions: Partial<Omit<T, "type">> = {}
+    additionalOptions: Partial<Omit<T, "type">> = {},
   ): T[] {
     return this.columns.slice(1).map((col) => {
       const baseSeries = {
@@ -420,13 +420,13 @@ export default class EchartOptionsBuilder {
         return baseSeries as unknown as T;
       } else {
         throw new Error(
-          `The series option is invalid for series type "${seriesType}".`
+          `The series option is invalid for series type "${seriesType}".`,
         );
       }
     });
   }
   private isValidSeriesOption<T extends SeriesOption>(
-    series: any
+    series: any,
   ): series is T {
     return (
       series &&
@@ -450,7 +450,7 @@ export function isDate(dateString: string): boolean {
 function interpolateColor(
   color1: string,
   color2: string,
-  factor: number
+  factor: number,
 ): string {
   const c1 = parseInt(color1.slice(1), 16);
   const c2 = parseInt(color2.slice(1), 16);
@@ -473,7 +473,7 @@ function interpolateColor(
 export function generateGradientColors(
   startColor: string,
   endColor: string,
-  numColors: number
+  numColors: number,
 ): string[] {
   const colors = [];
   for (let i = 0; i < numColors; i++) {

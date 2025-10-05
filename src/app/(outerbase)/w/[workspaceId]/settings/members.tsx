@@ -1,6 +1,6 @@
 "use client";
-import { Button } from "@/components/orbit/button";
 import { Plus } from "@phosphor-icons/react";
+import { Button } from "@/components/orbit/button";
 
 export default function WorkspaceMemberSection() {
   return (

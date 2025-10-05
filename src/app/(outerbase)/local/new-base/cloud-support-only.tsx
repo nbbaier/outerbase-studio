@@ -1,19 +1,20 @@
 "use client";
+import {
+  ArrowLeft,
+  ChartBar,
+  Folder,
+  type Icon,
+  MagicWand,
+  ShieldCheck,
+  UsersThree,
+} from "@phosphor-icons/react";
+import Image from "next/image";
+import Link from "next/link";
 import { useSession } from "@/app/(outerbase)/session-provider";
 import { useWorkspaces } from "@/app/(outerbase)/workspace-provider";
 import { Button } from "@/components/orbit/button";
 import { Loader } from "@/components/orbit/loader";
 import { getDatabaseFriendlyName } from "@/components/resource-card/utils";
-import {
-  ArrowLeft,
-  ChartBar,
-  Folder,
-  Icon,
-  MagicWand,
-  ShieldCheck,
-  UsersThree,
-} from "@phosphor-icons/react";
-import Link from "next/link";
 
 function OuterbaseHighlightCard({
   title,
@@ -140,9 +141,11 @@ export function CloudDriverSupportOnly({ type }: { type: string }) {
             href="https://github.com/outerbase/studio-desktop/releases"
             className="relative w-full"
           >
-            <img
+            <Image
               src="/outerbase-banner.jpg"
               alt=""
+              width={1000}
+              height={1000}
               className="w-full rounded-lg"
             />
 

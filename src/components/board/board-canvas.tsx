@@ -1,5 +1,4 @@
 "use client";
-import { cn } from "@/lib/utils";
 import {
   EditIcon,
   EllipsisVertical,
@@ -12,7 +11,7 @@ import {
 } from "lucide-react";
 import { useCallback } from "react";
 import RGL, { WidthProvider } from "react-grid-layout";
-import { DashboardProps } from ".";
+import { cn } from "@/lib/utils";
 import { buttonVariants } from "../ui/button";
 import {
   DropdownMenu,
@@ -20,6 +19,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "../ui/dropdown-menu";
+import type { DashboardProps } from ".";
 import BoardChart from "./board-chart";
 import { deleteChartDialog } from "./board-delete-dialog";
 import { useBoardContext } from "./board-provider";
@@ -81,7 +81,7 @@ export function BoardCanvas({ value, onChange }: BoardProps) {
         }
       }
     },
-    [boardValue, onBoardChange, storage, value.charts]
+    [boardValue, onBoardChange, storage, value.charts],
   );
 
   const menus = [
@@ -126,7 +126,7 @@ export function BoardCanvas({ value, onChange }: BoardProps) {
       dummy[index].h = h;
       onChange(dummy);
     },
-    [onChange, value.layout]
+    [onChange, value.layout],
   );
 
   const mapItem: JSX.Element[] = value.layout.map((_, i) => {
@@ -147,7 +147,7 @@ export function BoardCanvas({ value, onChange }: BoardProps) {
                   <button
                     className={cn(
                       buttonVariants({ variant: "secondary", size: "icon" }),
-                      "cancelSelectorName h-6 w-6 p-0"
+                      "cancelSelectorName h-6 w-6 p-0",
                     )}
                     onClick={() =>
                       handleClickResize(x.w as number, x.h as number, i)
@@ -165,7 +165,7 @@ export function BoardCanvas({ value, onChange }: BoardProps) {
               <button
                 className={cn(
                   buttonVariants({ variant: "default", size: "icon" }),
-                  "cancelSelectorName h-6 w-6 cursor-pointer rounded-full"
+                  "cancelSelectorName h-6 w-6 cursor-pointer rounded-full",
                 )}
                 onClick={() => onRemove(_.i)}
               >

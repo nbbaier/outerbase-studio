@@ -1,13 +1,13 @@
 "use client";
+import { Database, List, Plus } from "@phosphor-icons/react";
+import { useParams, usePathname, useRouter } from "next/navigation";
+import { type PropsWithChildren, useState } from "react";
 import {
   SidebarMenuHeader,
   SidebarMenuItem,
   SidebarMenuLoadingItem,
 } from "@/components/sidebar-menu";
 import { cn } from "@/lib/utils";
-import { Database, List, Plus } from "@phosphor-icons/react";
-import { useParams, usePathname, useRouter } from "next/navigation";
-import { PropsWithChildren, useState } from "react";
 import NavigationProfile from "./nav-profile";
 import NavigationSigninBanner from "./nav-signin-banner";
 import { useSession } from "./session-provider";
@@ -48,7 +48,7 @@ export default function NavigationLayout({ children }: PropsWithChildren) {
             "bg-background fixed right-0 z-50 flex hidden h-screen w-2/3 flex-1 overflow-scroll border-b border-l pb-2 md:w-1/2 lg:relative lg:z-0 lg:block lg:h-auto lg:w-auto",
             {
               block: mobileToggle,
-            }
+            },
           )}
         >
           <div className="flex flex-1 flex-col">

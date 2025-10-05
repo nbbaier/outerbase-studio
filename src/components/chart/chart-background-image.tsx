@@ -1,6 +1,6 @@
 import { produce } from "immer";
-import { Dispatch, SetStateAction } from "react";
-import { ChartValue, outerBaseUrl } from "./chart-type";
+import type { Dispatch, SetStateAction } from "react";
+import { type ChartValue, outerBaseUrl } from "./chart-type";
 
 const PRESET_IMAGES = [
   "/assets/charts/outerbase1.png",

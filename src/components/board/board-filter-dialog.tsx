@@ -65,7 +65,7 @@ export function BoardFilterDialog(props: Props) {
   }
 
   const onAddFilter = useCallback(() => {
-    props.onAddFilter && props.onAddFilter(props.filter);
+    props.onAddFilter?.(props.filter);
   }, [props]);
 
   return (

@@ -1,8 +1,8 @@
 "use client";
 
-import { Loader } from "@/components/orbit/loader";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { Loader } from "@/components/orbit/loader";
 import { useSession } from "../session-provider";
 
 export default function SignoutPage() {

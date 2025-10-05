@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { SketchPicker } from "react-color";
-import { ThemeColors, THEMES } from "./chart-type";
+import { THEMES, type ThemeColors } from "./chart-type";
 
 const presetColors = [
   "#D0021B",
@@ -28,7 +28,7 @@ export default function SimpleColorPicker({
   onThemeChange,
 }: SimpleColorPickerProps) {
   const [selectedColor, setSelectedColor] = useState<string | "">(
-    selected || ""
+    selected || "",
   );
   useEffect(() => {
     if (selected) {

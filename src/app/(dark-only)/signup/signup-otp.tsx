@@ -1,10 +1,10 @@
 "use client";
-import LabelInput from "@/components/label-input";
-import { Button } from "@/components/orbit/button";
-import { verifyOuterbaseSubmitEmail } from "@/outerbase-cloud/api";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
+import LabelInput from "@/components/label-input";
+import { Button } from "@/components/orbit/button";
+import { verifyOuterbaseSubmitEmail } from "@/outerbase-cloud/api";
 
 export function SignupOtp() {
   const [code, setCode] = useState("");

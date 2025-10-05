@@ -15,7 +15,7 @@ export function throttleEvent(name: string, time: number, interval: number) {
     THROTTLE_COUNT,
     THROTTLE_TIMESTAMP,
     name,
-    (THROTTLE_COUNT[name] ?? 0) > time
+    (THROTTLE_COUNT[name] ?? 0) > time,
   );
 
   if (Date.now() - (THROTTLE_TIMESTAMP[name] ?? 0) < interval) {

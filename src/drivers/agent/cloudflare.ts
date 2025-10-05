@@ -7,7 +7,7 @@ export default class CloudflareAgentDriver extends CommonAgentDriverImplementati
     protected driver: BaseDriver,
     protected model:
       | "@cf/defog/sqlcoder-7b-2"
-      | "@cf/meta/llama-3.3-70b-instruct-fp8-fast"
+      | "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
   ) {
     super(driver);
   }
@@ -24,7 +24,7 @@ export default class CloudflareAgentDriver extends CommonAgentDriverImplementati
           model: this.model,
           messages: messages,
         }),
-      }
+      },
     );
 
     const jsonResponse = (await response.json()) as { response: string };

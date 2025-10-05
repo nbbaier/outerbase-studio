@@ -35,7 +35,7 @@ export function updateAgentFromLocalStorage(data: LocalAgentType) {
 export function useAvailableAIAgents(databaseDriver?: BaseDriver | null) {
   const { data: agentConfig } = useSWR(
     "/local-agent-setting",
-    getAgentFromLocalStorage
+    getAgentFromLocalStorage,
   );
 
   return useMemo(() => {

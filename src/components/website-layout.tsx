@@ -1,5 +1,5 @@
-import { PropsWithChildren } from "react";
 import Link from "next/link";
+import type { PropsWithChildren } from "react";
 import {
   NavigationMenu,
   NavigationMenuItem,

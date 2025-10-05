@@ -1,3 +1,6 @@
+import { produce } from "immer";
+import { useCallback, useId, useState } from "react";
+import { toast } from "sonner";
 import { useSession } from "@/app/(outerbase)/session-provider";
 import { Button } from "@/components/orbit/button";
 import { Input } from "@/components/orbit/input";
@@ -6,10 +9,7 @@ import {
   updateOuterbaseUserPassword,
   updateOuterbaseUserProfile,
 } from "@/outerbase-cloud/api-account";
-import { OuterbaseAPIUser } from "@/outerbase-cloud/api-type";
-import { produce } from "immer";
-import { useCallback, useState } from "react";
-import { toast } from "sonner";
+import type { OuterbaseAPIUser } from "@/outerbase-cloud/api-type";
 
 interface Props {
   user: OuterbaseAPIUser;
@@ -66,11 +66,11 @@ export default function UserFormInput({ user }: Props) {
             setUserData((prev) =>
               produce(prev, (draft) => {
                 draft.first_name = v;
-              })
+              }),
             );
           }}
           placeholder="First name..."
-          id="first_name"
+          id={useId()}
           size="lg"
         />
       </Label>
@@ -81,11 +81,11 @@ export default function UserFormInput({ user }: Props) {
             setUserData((prev) =>
               produce(prev, (draft) => {
                 draft.last_name = v;
-              })
+              }),
             );
           }}
           placeholder="Last name..."
-          id="last_name"
+          id={useId()}
           size="lg"
         />
       </Label>
@@ -104,7 +104,7 @@ export default function UserFormInput({ user }: Props) {
         <Input
           value={user.email}
           placeholder="Enter email..."
-          id="email"
+          id={useId()}
           disabled
           size="lg"
         />
@@ -113,7 +113,7 @@ export default function UserFormInput({ user }: Props) {
         <Input
           value={currentPassword}
           onValueChange={setCurrentPassword}
-          id="currentpassword"
+          id={useId()}
           size="lg"
           type="password"
         />
@@ -121,7 +121,7 @@ export default function UserFormInput({ user }: Props) {
       <Label title="New Password" htmlFor="lastname">
         <Input
           value={newPassword}
-          id="lastname"
+          id={useId()}
           size="lg"
           onValueChange={setNewPassword}
           type="password"

@@ -17,7 +17,7 @@ function wrapParen(str: string) {
 
 function generateCreateColumn(
   driver: BaseDriver,
-  col: DatabaseTableColumn
+  col: DatabaseTableColumn,
 ): string {
   const tokens: string[] = [driver.escapeId(col.name), col.type];
 
@@ -32,7 +32,7 @@ function generateCreateColumn(
         col.constraint.autoIncrement ? "AUTO_INCREMENT" : undefined,
       ]
         .filter(Boolean)
-        .join(" ")
+        .join(" "),
     );
   }
 
@@ -45,7 +45,7 @@ function generateCreateColumn(
           : undefined,
       ]
         .filter(Boolean)
-        .join(" ")
+        .join(" "),
     );
   }
 
@@ -58,19 +58,19 @@ function generateCreateColumn(
           : undefined,
       ]
         .filter(Boolean)
-        .join(" ")
+        .join(" "),
     );
   }
 
   if (col.constraint?.defaultValue) {
     tokens.push(
-      ["DEFAULT", driver.escapeValue(col.constraint.defaultValue)].join(" ")
+      ["DEFAULT", driver.escapeValue(col.constraint.defaultValue)].join(" "),
     );
   }
 
   if (col.constraint?.defaultExpression) {
     tokens.push(
-      ["DEFAULT", wrapParen(col.constraint.defaultExpression)].join(" ")
+      ["DEFAULT", wrapParen(col.constraint.defaultExpression)].join(" "),
     );
   }
 
@@ -80,7 +80,7 @@ function generateCreateColumn(
         "GENERATED ALWAYS AS",
         wrapParen(col.constraint.generatedExpression),
         col.constraint.generatedType,
-      ].join(" ")
+      ].join(" "),
     );
   }
 
@@ -103,7 +103,7 @@ function generateCreateColumn(
         "REFERENCES",
         driver.escapeId(foreignTableName) +
           `(${driver.escapeId(foreignColumnName)})`,
-      ].join(" ")
+      ].join(" "),
     );
   }
 
@@ -112,7 +112,7 @@ function generateCreateColumn(
 
 function generateConstraintScript(
   driver: BaseDriver,
-  con: DatabaseTableColumnConstraint
+  con: DatabaseTableColumnConstraint,
 ) {
   if (con.primaryKey) {
     return `PRIMARY KEY (${con.primaryColumns?.map(driver.escapeId).join(", ")})`;
@@ -131,7 +131,7 @@ function generateConstraintScript(
 
 export function generateMysqlTriggerSchema(
   driver: BaseDriver,
-  change: DatabaseTriggerSchema
+  change: DatabaseTriggerSchema,
 ): string[] {
   return [
     `CREATE TRIGGER ${driver.escapeId(change.schemaName || "")}.${driver.escapeId(change.name ?? "")} \n${change.when} ${change.operation} ON ${driver.escapeId(change.tableName)} \nFOR EACH ROW \nBEGIN \n\t${change.statement} \nEND`,
@@ -140,7 +140,7 @@ export function generateMysqlTriggerSchema(
 
 export function generateMysqlDatabaseSchema(
   driver: BaseDriver,
-  change: DatabaseSchemaChange
+  change: DatabaseSchemaChange,
 ): string[] {
   const isCreateScript = !change.name.old;
   let line = "";
@@ -159,7 +159,7 @@ export function generateMysqlDatabaseSchema(
 // https://dev.mysql.com/doc/refman/8.4/en/create-table.html
 export function generateMySqlSchemaChange(
   driver: BaseDriver,
-  change: DatabaseTableSchemaChange
+  change: DatabaseTableSchemaChange,
 ): string[] {
   const isCreateScript = !change.name.old;
 
@@ -178,8 +178,8 @@ export function generateMySqlSchemaChange(
       if (col.new.name !== col.old.name) {
         lines.push(
           `RENAME COLUMN ${driver.escapeId(col.old.name)} TO ${driver.escapeId(
-            col.new.name
-          )}`
+            col.new.name,
+          )}`,
         );
       }
 
@@ -201,7 +201,7 @@ export function generateMySqlSchemaChange(
   if (!isCreateScript) {
     if (change.name.new !== change.name.old) {
       lines.push(
-        `RENAME TO ${driver.escapeId(change.schemaName ?? "main")}.${driver.escapeId(change.name.new ?? "")}`
+        `RENAME TO ${driver.escapeId(change.schemaName ?? "main")}.${driver.escapeId(change.name.new ?? "")}`,
       );
     }
   }
@@ -209,7 +209,7 @@ export function generateMySqlSchemaChange(
   if (isCreateScript) {
     return [
       `CREATE TABLE ${driver.escapeId(change.schemaName ?? "main")}.${driver.escapeId(
-        change.name.new || "no_table_name"
+        change.name.new || "no_table_name",
       )}(\n${lines.map((line) => "  " + line).join(",\n")}\n)`,
     ];
   } else {
