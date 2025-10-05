@@ -34,5 +34,5 @@ export const PixelFilter = () => {
         </filter>
       </defs>
     </svg>
-  )
-}
+  );
+};

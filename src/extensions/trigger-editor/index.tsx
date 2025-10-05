@@ -9,18 +9,22 @@ export const triggerEditorExtensionTab = createTabExtension<{
   name?: string;
   tableName?: string;
 }>({
-  name: 'trigger',
+  name: "trigger",
   key: (options) => {
     return `${options.schemaName}.${options.name}`;
   },
   generate: (options) => ({
-    title: options.name || 'New Trigger',
+    title: options.name || "New Trigger",
     component: (
-      <TriggerTab schemaName={options.schemaName ?? ''} name={options.name ?? ''} tableName={options.tableName ?? ''}/>
+      <TriggerTab
+        schemaName={options.schemaName ?? ""}
+        name={options.name ?? ""}
+        tableName={options.tableName ?? ""}
+      />
     ),
     icon: LucideCog,
-  })
-})
+  }),
+});
 
 export default class TriggerEditorExtension extends StudioExtension {
   extensionName = "trigger-editor";
@@ -43,7 +47,7 @@ export default class TriggerEditorExtension extends StudioExtension {
           triggerEditorExtensionTab.open({
             schemaName: resource.schemaName,
             name: resource.name,
-            tableName: resource.tableName
+            tableName: resource.tableName,
           });
         },
       };

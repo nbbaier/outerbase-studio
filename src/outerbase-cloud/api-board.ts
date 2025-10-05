@@ -26,8 +26,10 @@ export async function updateOuterbaseDashboardChart(
     params: ChartParams;
     name: string;
   }
-): Promise<ChartValue>{
+): Promise<ChartValue> {
   return requestOuterbase<ChartValue>(
-    `/api/v1/workspace/${workspaceId}/chart/${chartId}`, 'PUT', options
-  )
+    `/api/v1/workspace/${workspaceId}/chart/${chartId}`,
+    "PUT",
+    options
+  );
 }

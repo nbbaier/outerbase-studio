@@ -3,8 +3,8 @@ import {
   useState,
   type Dispatch,
   type SetStateAction,
-  useCallback
-} from 'react';
+  useCallback,
+} from "react";
 
 import {
   useNodes,
@@ -15,18 +15,16 @@ import {
   type NodeChange,
   type XYPosition,
   ViewportPortal,
-  useReactFlow
-} from '@xyflow/react';
+  useReactFlow,
+} from "@xyflow/react";
 
-import {
-  ToggleGroup,
-} from "@/components/ui/toggle-group"
-import { Button } from '../../../ui/button';
+import { ToggleGroup } from "@/components/ui/toggle-group";
+import { Button } from "../../../ui/button";
 
 export function ViewportLogger() {
   const viewport = useStore(
     (s) =>
-      `x: ${s.transform[0].toFixed(2)}, y: ${s.transform[1].toFixed(2)}, zoom: ${s.transform[2].toFixed(2)}`,
+      `x: ${s.transform[0].toFixed(2)}, y: ${s.transform[1].toFixed(2)}, zoom: ${s.transform[2].toFixed(2)}`
   );
 
   return <div>{viewport}</div>;
@@ -42,22 +40,22 @@ type ChangeInfoProps = {
 };
 
 function ChangeInfo({ change }: ChangeInfoProps) {
-  const id = 'id' in change ? change.id : '-';
+  const id = "id" in change ? change.id : "-";
   const { type } = change;
 
   return (
     <div className="mb-3">
       <div>node id: {id}</div>
       <div>
-        {type === 'add' ? JSON.stringify(change.item, null, 2) : null}
-        {type === 'dimensions'
+        {type === "add" ? JSON.stringify(change.item, null, 2) : null}
+        {type === "dimensions"
           ? `dimensions: ${change.dimensions?.width} × ${change.dimensions?.height}`
           : null}
-        {type === 'position'
+        {type === "position"
           ? `position: ${change.position?.x.toFixed(1)}, ${change.position?.y.toFixed(1)}`
           : null}
-        {type === 'remove' ? 'remove' : null}
-        {type === 'select' ? (change.selected ? 'select' : 'unselect') : null}
+        {type === "remove" ? "remove" : null}
+        {type === "select" ? (change.selected ? "select" : "unselect") : null}
       </div>
     </div>
   );
@@ -70,7 +68,9 @@ export function ChangeLogger({ limit = 20 }: ChangeLoggerProps) {
   // Memoize the callback for handling node changes
   const handleNodeChanges: OnNodesChange = useCallback(
     (newChanges: NodeChange[]) => {
-      setChanges((prevChanges) => [...newChanges, ...prevChanges].slice(0, limit));
+      setChanges((prevChanges) =>
+        [...newChanges, ...prevChanges].slice(0, limit)
+      );
     },
     [limit]
   );
@@ -88,7 +88,9 @@ export function ChangeLogger({ limit = 20 }: ChangeLoggerProps) {
       {changes.length === 0 ? (
         <NoChanges />
       ) : (
-        changes.map((change, index) => <ChangeInfo key={index} change={change} />)
+        changes.map((change, index) => (
+          <ChangeInfo key={index} change={change} />
+        ))
       )}
     </>
   );
@@ -100,7 +102,7 @@ export function NodeInspector() {
 
   return (
     <ViewportPortal>
-      <div className='text-secondary-foreground'>
+      <div className="text-secondary-foreground">
         {nodes.map((node) => {
           const internalNode = getInternalNode(node.id);
           if (!internalNode) {
@@ -114,7 +116,7 @@ export function NodeInspector() {
               key={node.id}
               id={node.id}
               selected={!!node.selected}
-              type={node.type || 'default'}
+              type={node.type || "default"}
               position={node.position}
               absPosition={absPosition}
               width={node.measured?.width ?? 0}
@@ -154,16 +156,16 @@ function NodeInfo({
   const absoluteTransform = `translate(${absPosition.x}px, ${absPosition.y + height}px)`;
   const formattedPosition = `${position.x.toFixed(1)}, ${position.y.toFixed(1)}`;
   const formattedDimensions = `${width} × ${height}`;
-  const selectionStatus = selected ? 'Selected' : 'Not Selected';
+  const selectionStatus = selected ? "Selected" : "Not Selected";
 
   return (
     <div
       style={{
-        position: 'absolute',
+        position: "absolute",
         transform: absoluteTransform,
         width: width * 2,
       }}
-      className='text-xs'
+      className="text-xs"
     >
       <div>id: {id}</div>
       <div>type: {type}</div>
@@ -174,7 +176,6 @@ function NodeInfo({
     </div>
   );
 }
-
 
 type Tool = {
   active: boolean;
@@ -192,29 +193,44 @@ function DevToolsToggle({ tools }: DevToolsToggleProps) {
     <ToggleGroup type="multiple">
       {tools.map(({ active, setActive, label, value }) => (
         <Button
-          variant={'ghost'}
+          variant={"ghost"}
           size="sm"
           onClick={() => setActive((prev) => !prev)}
           key={value}
           aria-pressed={active}
-          className={`${active ? 'bg-secondary' : ''}`}
-        >{label}</Button>
+          className={`${active ? "bg-secondary" : ""}`}
+        >
+          {label}
+        </Button>
       ))}
     </ToggleGroup>
-  )
+  );
 }
-
 
 export function DevTools() {
   const [nodeInspectorActive, setNodeInspectorActive] = useState(false);
   const [changeLoggerActive, setChangeLoggerActive] = useState(false);
   const [viewportLoggerActive, setViewportLoggerActive] = useState(false);
 
-
   const tools = [
-    { active: nodeInspectorActive, setActive: setNodeInspectorActive, label: 'Node Inspector', value: 'node-inspector' },
-    { active: changeLoggerActive, setActive: setChangeLoggerActive, label: 'Change Logger', value: 'change-logger' },
-    { active: viewportLoggerActive, setActive: setViewportLoggerActive, label: 'Viewport Logger', value: 'viewport-logger' },
+    {
+      active: nodeInspectorActive,
+      setActive: setNodeInspectorActive,
+      label: "Node Inspector",
+      value: "node-inspector",
+    },
+    {
+      active: changeLoggerActive,
+      setActive: setChangeLoggerActive,
+      label: "Change Logger",
+      value: "change-logger",
+    },
+    {
+      active: viewportLoggerActive,
+      setActive: setViewportLoggerActive,
+      label: "Viewport Logger",
+      value: "viewport-logger",
+    },
   ];
 
   return (
@@ -222,7 +238,10 @@ export function DevTools() {
       <DevToolsToggle tools={tools} />
 
       {changeLoggerActive && (
-        <Panel className="text-xs p-5 bg-white rounded shadow-md overflow-y-auto max-h-[50%] mt-20" position="bottom-right">
+        <Panel
+          className="text-xs p-5 bg-white rounded shadow-md overflow-y-auto max-h-[50%] mt-20"
+          position="bottom-right"
+        >
           <ChangeLogger />
         </Panel>
       )}

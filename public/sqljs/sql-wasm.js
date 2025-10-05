@@ -2914,7 +2914,6 @@ var initSqlJs = function (moduleConfig) {
             for (
               "function" == typeof e.postRun && (e.postRun = [e.postRun]);
               e.postRun.length;
-
             ) {
               var b = e.postRun.shift();
               bb.unshift(b);
@@ -2927,7 +2926,6 @@ var initSqlJs = function (moduleConfig) {
           for (
             "function" == typeof e.preRun && (e.preRun = [e.preRun]);
             e.preRun.length;
-
           )
             cb();
         kb($a);
@@ -2948,7 +2946,6 @@ var initSqlJs = function (moduleConfig) {
       for (
         "function" == typeof e.preInit && (e.preInit = [e.preInit]);
         0 < e.preInit.length;
-
       )
         e.preInit.pop()();
     fd();

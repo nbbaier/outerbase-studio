@@ -1,7 +1,7 @@
 type BlockProps = {
-  children: React.ReactNode
-  title?: string
-}
+  children: React.ReactNode;
+  title?: string;
+};
 
 const Block = ({ children, title }: BlockProps) => {
   return (
@@ -17,7 +17,7 @@ const Block = ({ children, title }: BlockProps) => {
         {children}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default Block
+export default Block;

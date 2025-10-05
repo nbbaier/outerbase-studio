@@ -13,7 +13,7 @@ export async function getOuterbaseSchemas(
   workspaceId: string,
   sourceId: string
 ) {
-  // 
+  //
   return await requestOuterbase<Record<string, OuterbaseDataCatalogSchemas[]>>(
     `/api/v1/workspace/${workspaceId}/source/${sourceId}/schema?baseId=`
   );

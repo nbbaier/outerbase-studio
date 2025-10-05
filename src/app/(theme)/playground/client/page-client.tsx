@@ -229,7 +229,7 @@ export default function PlaygroundEditorBody({
       handler
         .createWritable()
         .then((writable) => {
-          writable.write(nativeDriver.export());
+          writable.write(new Uint8Array(nativeDriver.export()));
           writable.close();
           toast.success(
             <div>
@@ -242,7 +242,7 @@ export default function PlaygroundEditorBody({
     } else {
       // Fallback to file download instead of direct file save.
       saveAs(
-        new Blob([nativeDriver.export()], {
+        new Blob([new Uint8Array(nativeDriver.export())], {
           type: "application/x-sqlite3",
         }),
         "sqlite-dump.db"

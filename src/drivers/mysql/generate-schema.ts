@@ -102,7 +102,7 @@ function generateCreateColumn(
       [
         "REFERENCES",
         driver.escapeId(foreignTableName) +
-        `(${driver.escapeId(foreignColumnName)})`,
+          `(${driver.escapeId(foreignColumnName)})`,
       ].join(" ")
     );
   }

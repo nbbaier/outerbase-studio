@@ -7,29 +7,29 @@ import WorkspaceDeleteSection from "./delete";
 import WorkspaceDetailSection from "./detail";
 
 export default function WorkspaceBillingPage() {
-	const { currentWorkspace } = useWorkspaces();
+  const { currentWorkspace } = useWorkspaces();
 
-	return (
-		<NavigationLayout>
-			<NavigationHeader />
+  return (
+    <NavigationLayout>
+      <NavigationHeader />
 
-			<div className="container mt-10 flex flex-col p-4">
-				<h1 className="text-lg font-bold">Workspace settings</h1>
+      <div className="container mt-10 flex flex-col p-4">
+        <h1 className="text-lg font-bold">Workspace settings</h1>
 
-				{currentWorkspace ? (
-					<>
-						<WorkspaceDetailSection workspace={currentWorkspace} />
-						{/* <WorkspaceMemberSection />
+        {currentWorkspace ? (
+          <>
+            <WorkspaceDetailSection workspace={currentWorkspace} />
+            {/* <WorkspaceMemberSection />
             <WorkspaceGatewaySection /> */}
-						<WorkspaceDeleteSection workspace={currentWorkspace} />
-					</>
-				) : (
-					<div className="my-12 flex flex-col items-center justify-center gap-4">
-						<Loader size={50} />
-						Loading workspace...
-					</div>
-				)}
-			</div>
-		</NavigationLayout>
-	);
+            <WorkspaceDeleteSection workspace={currentWorkspace} />
+          </>
+        ) : (
+          <div className="my-12 flex flex-col items-center justify-center gap-4">
+            <Loader size={50} />
+            Loading workspace...
+          </div>
+        )}
+      </div>
+    </NavigationLayout>
+  );
 }

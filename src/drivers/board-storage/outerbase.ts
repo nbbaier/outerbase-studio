@@ -1,7 +1,13 @@
 import { DashboardProps } from "@/components/board";
 import { ChartParams, ChartValue } from "@/components/chart/chart-type";
-import { deleteOuterbaseDashboardChart, updateOuterbaseDashboard } from "@/outerbase-cloud/api";
-import { createOuterbaseDashboardChart, updateOuterbaseDashboardChart } from "@/outerbase-cloud/api-board";
+import {
+  deleteOuterbaseDashboardChart,
+  updateOuterbaseDashboard,
+} from "@/outerbase-cloud/api";
+import {
+  createOuterbaseDashboardChart,
+  updateOuterbaseDashboardChart,
+} from "@/outerbase-cloud/api-board";
 import { IBoardStorageDriver } from "./base";
 
 export default class OuterbaseBoardStorageDriver
@@ -20,9 +26,13 @@ export default class OuterbaseBoardStorageDriver
       layout: value.layout.map(({ w, h, i, x, y }) => ({ w, h, x, y, i })),
       directory_index: (value as any).directory_index,
       name: value.name,
-      type: 'dashboard',
+      type: "dashboard",
     };
-    return await updateOuterbaseDashboard(this.workspaceId, this.boardId, input);
+    return await updateOuterbaseDashboard(
+      this.workspaceId,
+      this.boardId,
+      input
+    );
   }
 
   async remove(chartId: string): Promise<unknown> {
@@ -45,7 +55,7 @@ export default class OuterbaseBoardStorageDriver
       } as ChartParams,
       type: chart.type!,
       name: chart.name ?? "",
-    }
+    };
     return await createOuterbaseDashboardChart(this.workspaceId, input);
   }
 
@@ -65,7 +75,11 @@ export default class OuterbaseBoardStorageDriver
       } as ChartParams,
       type: chart.type!,
       name: chart.name ?? "",
-    }
-    return await updateOuterbaseDashboardChart(this.workspaceId, chartId, input);
+    };
+    return await updateOuterbaseDashboardChart(
+      this.workspaceId,
+      chartId,
+      input
+    );
   }
 }

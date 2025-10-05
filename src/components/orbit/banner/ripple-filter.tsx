@@ -19,7 +19,7 @@ const RippleFilter = () => {
         <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="2" />
       </filter>
     </svg>
-  )
-}
+  );
+};
 
-export default RippleFilter
+export default RippleFilter;
