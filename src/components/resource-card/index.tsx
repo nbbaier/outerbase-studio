@@ -108,7 +108,7 @@ export default function ResourceCard({
 
       <div
         className={cn(
-          "absolute right-0 bottom-0 z-[2] h-full w-1/2 bg-gradient-to-br mix-blend-hue",
+          "absolute right-0 bottom-0 z-2 h-full w-1/2 bg-linear-to-br mix-blend-hue",
           {
             "from-white to-white": color === "default",
             "from-yellow-500 to-red-500":

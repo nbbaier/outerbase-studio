@@ -47,7 +47,7 @@ function EditorTheme() {
               className={cn(
                 "relative flex h-[200px] w-full items-center justify-center overflow-hidden rounded-2xl border bg-white p-2 dark:bg-neutral-950",
                 isSelected
-                  ? "border-1 border-neutral-500 opacity-100"
+                  ? "border border-neutral-500 opacity-100"
                   : "opacity-50 hover:opacity-100"
               )}
             >

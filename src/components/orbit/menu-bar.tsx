@@ -48,7 +48,7 @@ export function MenuBar({
   return (
     <nav
       className={cn(
-        "bg-ob-base-300 border-ob-border flex w-max rounded-lg border !p-0.5 transition-colors",
+        "bg-ob-base-300 border-ob-border flex w-max rounded-lg border p-0.5! transition-colors",
         {
           "ob-size-sm": size === "sm",
           "ob-size-base": size === "base",

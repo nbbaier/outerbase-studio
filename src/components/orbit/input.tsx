@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { useMemo, useRef, useState } from "react";
 
 export const inputClasses = cn(
-  "bg-ob-btn-secondary-bg text-ob-base-300 border-ob-border focus:border-ob-border-active placeholder:text-ob-base-100 ob-disable border border-1 transition-colors focus:outline-none"
+  "bg-ob-btn-secondary-bg text-ob-base-300 border-ob-border focus:border-ob-border-active placeholder:text-ob-base-100 ob-disable border border transition-colors focus:outline-none"
 );
 
 export type InputProps = Omit<
@@ -59,7 +59,7 @@ export const Input = ({
   return preText ? (
     <div
       className={cn(
-        "has-[:disabled]:ob-disable has-[:enabled]:active:border-ob-border-active has-[:focus]:border-ob-border-active flex cursor-text",
+        "has-[:disabled]:ob-disable has-enabled:active:border-ob-border-active has-focus:border-ob-border-active flex cursor-text",
         inputClasses,
         {
           "ob-size-sm": size === "sm",

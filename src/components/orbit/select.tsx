@@ -22,12 +22,12 @@ export const Select = ({
       className={cn(
         "ob-focus ob-btn btn-secondary interactive relative appearance-none truncate bg-no-repeat",
         {
-          "ob-size-sm !pr-6.5": size === "sm",
-          "ob-size-base !pr-8": size === "base",
-          "ob-size-lg !pr-9": size === "lg",
+          "ob-size-sm pr-6.5!": size === "sm",
+          "ob-size-base pr-8!": size === "base",
+          "ob-size-lg pr-9!": size === "lg",
         },
         {
-          "!text-muted-foreground": !value,
+          "text-muted-foreground!": !value,
         },
         className
       )}

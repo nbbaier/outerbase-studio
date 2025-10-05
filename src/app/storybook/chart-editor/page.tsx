@@ -97,7 +97,7 @@ export default function StorybookChartEditorPage() {
       <div className="w-full flex-1 border-r p-4">
         <Chart value={chartValue} data={data} />
       </div>
-      <div className="w-[400px] flex-shrink-0 p-4">
+      <div className="w-[400px] shrink-0 p-4">
         {/* render chart editor menu here */}
         <EditChartMenu
           value={chartValue}
