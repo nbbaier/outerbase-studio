@@ -2,7 +2,7 @@ import createEditableCell from "./create-editable-cell";
 
 const NumberCell = createEditableCell<number>({
   align: "right",
-  toString: (v) => {
+  valueToString: (v) => {
     if (v === null) return null;
     if (v === undefined) return undefined;
     return v.toString();

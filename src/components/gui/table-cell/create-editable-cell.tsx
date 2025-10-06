@@ -20,7 +20,7 @@ export interface TableEditableCell<T = unknown> {
 }
 
 interface TabeEditableCellProps<T = unknown> {
-  toString: (v: DatabaseValue<T>) => DatabaseValue<string>;
+  valueToString: (v: DatabaseValue<T>) => DatabaseValue<string>;
   toValue: (v: DatabaseValue<string>) => DatabaseValue<T>;
   align?: "left" | "right";
 }
@@ -100,7 +100,7 @@ function InputCellEditor({
 }
 
 export default function createEditableCell<T = unknown>({
-  toString,
+  valueToString,
   toValue,
   align,
 }: TabeEditableCellProps<T>): React.FC<TableEditableCell<T>> {
@@ -115,13 +115,13 @@ export default function createEditableCell<T = unknown>({
     header,
   }: TableEditableCell<T>) {
     const [editValue, setEditValue] = useState<DatabaseValue<string>>(
-      toString(value),
+      valueToString(value),
     );
     const { openEditor } = useFullEditor();
 
     useEffect(() => {
-      setEditValue(toString(value));
-    }, [value, toString]);
+      setEditValue(valueToString(value));
+    }, [value, valueToString]);
 
     const applyChange = useCallback(
       (v: DatabaseValue<string>, shouldExitEdit = true) => {
@@ -134,9 +134,9 @@ export default function createEditableCell<T = unknown>({
     );
 
     const discardChange = useCallback(() => {
-      setEditValue(toString(value));
+      setEditValue(valueToString(value));
       state.exitEditMode();
-    }, [state, value, toString]);
+    }, [state, value, valueToString]);
 
     const uneditableColumn = header.setting.readonly;
 

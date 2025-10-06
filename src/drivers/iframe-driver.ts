@@ -82,11 +82,17 @@ class ElectronConnection {
   }
 
   query(stmt: string): Promise<DatabaseResultSet> {
-    return window.outerbaseIpc?.query(stmt);
+    if (!window.outerbaseIpc) {
+      throw new Error("outerbaseIpc is not defined");
+    }
+    return window.outerbaseIpc.query(stmt);
   }
 
   transaction(stmts: string[]): Promise<DatabaseResultSet[]> {
-    return window.outerbaseIpc?.transaction(stmts);
+    if (!window.outerbaseIpc) {
+      throw new Error("outerbaseIpc is not defined");
+    }
+    return window.outerbaseIpc.transaction(stmts);
   }
 }
 
