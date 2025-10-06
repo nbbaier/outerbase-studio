@@ -61,7 +61,7 @@ export function useLocalConnectionList() {
         if (legacyList.length) {
           const list = legacyList.map((conn) => {
             return {
-              id: conn.id!,
+              id: conn.id ?? generateId(),
               content: conn,
               created_at: Date.now(),
               updated_at: conn.last_used ?? Date.now(),
@@ -75,6 +75,7 @@ export function useLocalConnectionList() {
           }
 
           localStorage.removeItem("connections");
+
           return list;
         }
 

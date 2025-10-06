@@ -315,7 +315,10 @@ function getCursorTooltips(
           editButton.innerHTML = "Edit <span>⌘B</span>";
 
           editButton.onclick = () => {
-            plugin.openPrompt(plugin.getEditorView()!);
+            const view = plugin.getEditorView();
+            if (view) {
+              plugin.openPrompt(view);
+            }
           };
 
           dom.appendChild(editButton);

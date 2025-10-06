@@ -1,8 +1,16 @@
+import { useId } from "react";
+
 export const PixelFilter = () => {
   return (
-    <svg width="0" height="0" className="absolute top-0 left-0">
+    <svg
+      width="0"
+      height="0"
+      className="absolute top-0 left-0"
+      aria-label="Pixel Filter"
+    >
+      <title>Pixel Filter</title>
       <defs>
-        <filter id="pixelate" x="0%" y="0%" width="100%" height="100%">
+        <filter id={useId()} x="0%" y="0%" width="100%" height="100%">
           <feGaussianBlur
             stdDeviation="0"
             in="SourceGraphic"

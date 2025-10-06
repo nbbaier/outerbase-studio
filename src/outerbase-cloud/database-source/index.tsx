@@ -30,9 +30,9 @@ export default class OuterbaseBoardSourceDriver implements BoardSourceDriver {
       .filter((base) => base.sources && base.sources.length > 0)
       .map((base) => {
         return {
-          id: base.sources[0].id!,
+          id: base.sources[0].id,
           name: base.name,
-          type: base.sources[0].type!,
+          type: base.sources[0].type,
         };
       });
   }
@@ -54,13 +54,13 @@ export default class OuterbaseBoardSourceDriver implements BoardSourceDriver {
       this.sourceDrivers[sourceId] = createOuterbaseDatabaseDriver(
         source.type,
         {
-          workspaceId: this.workspace.id!,
+          workspaceId: this.workspace.id,
           sourceId,
         },
       );
     }
 
-    return this.sourceDrivers[sourceId]!;
+    return this.sourceDrivers[sourceId];
   }
 
   async schemas(sourceId: string) {

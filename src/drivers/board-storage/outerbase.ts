@@ -40,8 +40,12 @@ export default class OuterbaseBoardStorageDriver
   }
 
   async add(chart: ChartValue): Promise<ChartValue> {
+    if (!chart.source_id || !chart.type) {
+      throw new Error("Chart source_id and type are required");
+    }
+
     const input = {
-      source_id: chart.source_id!,
+      source_id: chart.source_id,
       params: {
         ...chart.params,
         source_id: chart.source_id,
@@ -49,19 +53,23 @@ export default class OuterbaseBoardStorageDriver
         layers: chart.params.layers.map((layer) => {
           return {
             ...layer,
-            type: chart.type!,
+            type: chart.type ?? "",
           };
         }),
       } as ChartParams,
-      type: chart.type!,
+      type: chart.type,
       name: chart.name ?? "",
     };
     return await createOuterbaseDashboardChart(this.workspaceId, input);
   }
 
   async update(chartId: string, chart: ChartValue): Promise<ChartValue> {
+    if (!chart.source_id || !chart.type) {
+      throw new Error("Chart source_id and type are required");
+    }
+
     const input = {
-      source_id: chart.source_id!,
+      source_id: chart.source_id,
       params: {
         ...chart.params,
         source_id: chart.source_id,
@@ -69,11 +77,11 @@ export default class OuterbaseBoardStorageDriver
         layers: chart.params.layers.map((layer) => {
           return {
             ...layer,
-            type: chart.type!,
+            type: chart.type ?? "",
           };
         }),
       } as ChartParams,
-      type: chart.type!,
+      type: chart.type,
       name: chart.name ?? "",
     };
     return await updateOuterbaseDashboardChart(

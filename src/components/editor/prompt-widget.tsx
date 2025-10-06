@@ -142,7 +142,7 @@ export function CodeMirrorPromptWidget({
     <div className="max-w-[500px] rounded border font-sans text-base">
       <div className="flex">
         <div
-          className="relative flex-1 overflow-hidden"
+          className="overflow-hidden relative flex-1"
           style={{ height: `${height}px` }}
         >
           <textarea
@@ -155,7 +155,7 @@ export function CodeMirrorPromptWidget({
             placeholder="Editing instruction"
             className={cn(
               textareaClassName,
-              "text-foreground top-0 bottom-0 overflow-hidden",
+              "overflow-hidden top-0 bottom-0 text-foreground",
             )}
             onPaste={(e) => {
               e.stopPropagation();
@@ -175,19 +175,23 @@ export function CodeMirrorPromptWidget({
           />
         </div>
         <div>
-          <button className="cursor-pointer p-2" onClick={onClose}>
+          <button
+            type="button"
+            className="p-2 cursor-pointer"
+            onClick={onClose}
+          >
             <X weight="bold" />
           </button>
         </div>
       </div>
 
       {error && (
-        <div className="line-clamp-1 p-2 text-sm text-red-500">
+        <div className="p-2 text-sm text-red-500 line-clamp-1">
           {error.split("\n")[0]}
         </div>
       )}
 
-      <div className="flex h-10 items-center gap-1 p-2">
+      <div className="flex gap-1 items-center p-2 h-10">
         {(showSubmitButton || showSubmitEditButton) && (
           <Button
             variant="primary"
@@ -224,7 +228,7 @@ export function CodeMirrorPromptWidget({
             <DropdownMenuTrigger asChild>
               <Button variant="ghost" size="sm">
                 {selectedAgent !== "gpt-4o mini" && (
-                  <CloudflareIcon className="inline-flex h-4 w-4 text-orange-500" />
+                  <CloudflareIcon className="inline-flex w-4 h-4 text-orange-500" />
                 )}
                 {selectedAgent}
               </Button>
@@ -247,12 +251,12 @@ export function CodeMirrorPromptWidget({
                       }}
                     >
                       {agent.name === selectedAgent ? (
-                        <Check className="mr-2 h-4 w-4" />
+                        <Check className="mr-2 w-4 h-4" />
                       ) : null}
                       {agent.name}
                       {agent.free ? (
                         <div className="flex flex-1 justify-end">
-                          <span className="bg-secondary text-secondary-foreground rounded px-2 text-sm">
+                          <span className="px-2 text-sm rounded bg-secondary text-secondary-foreground">
                             free tier
                           </span>
                         </div>
@@ -266,7 +270,7 @@ export function CodeMirrorPromptWidget({
         )}
 
         {!previousPrompt && !loading ? (
-          <span className="text-muted-foreground ml-2 text-sm">
+          <span className="ml-2 text-sm text-muted-foreground">
             Esc to close
           </span>
         ) : null}

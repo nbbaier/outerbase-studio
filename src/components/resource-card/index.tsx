@@ -48,7 +48,7 @@ export default function ResourceCard({
       )}
     >
       {/* content */}
-      <header className="z-10 flex items-center gap-3">
+      <header className="flex z-10 gap-3 items-center">
         <div
           className={cn(
             "relative flex size-10 shrink-0 items-center justify-center rounded bg-linear-to-br after:absolute after:size-full after:rounded after:border after:border-black/5 dark:after:border-white/10",
@@ -73,10 +73,10 @@ export default function ResourceCard({
             },
           )}
         >
-          {IconComponent && <IconComponent className="h-6 w-6" />}
+          {IconComponent && <IconComponent className="w-6 h-6" />}
         </div>
-        <div className="flex-1 overflow-x-hidden">
-          <p className="line-clamp-1 w-full text-sm font-semibold tracking-tight">
+        <div className="overflow-x-hidden flex-1">
+          <p className="w-full text-sm font-semibold tracking-tight line-clamp-1">
             {title}
           </p>
           {subtitle && (
@@ -124,12 +124,13 @@ export default function ResourceCard({
         <DropdownMenu modal={false} onOpenChange={setOpen}>
           <DropdownMenuTrigger asChild>
             <button
+              type="button"
               onClick={(e) => {
                 e.stopPropagation();
                 e.preventDefault();
               }}
               className={cn(
-                "absolute top-2 right-2 z-10 flex size-8 cursor-pointer items-center justify-center rounded border border-neutral-200 bg-white opacity-0 duration-100 group-hover:opacity-100 hover:bg-neutral-50 focus:opacity-100 focus:outline-none focus-visible:ring focus-visible:ring-blue-600 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-800",
+                "flex absolute top-2 right-2 z-10 justify-center items-center bg-white rounded border opacity-0 duration-100 cursor-pointer size-8 border-neutral-200 group-hover:opacity-100 hover:bg-neutral-50 focus:opacity-100 focus:outline-none focus-visible:ring focus-visible:ring-blue-600 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-800",
                 { "opacity-100": open },
               )}
             >

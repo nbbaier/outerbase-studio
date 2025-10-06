@@ -17,15 +17,15 @@ interface SidebarMenuHeader {
 
 export function SidebarMenuLoadingItem() {
   const className =
-    "flex p-2 pl-4 text-sm hover:cursor-pointer h-8 items-center";
+    "flex items-center p-2 pl-4 h-8 text-sm hover:cursor-pointer";
 
   return (
     <div className={className}>
-      <span className="mr-2 h-4 w-4">
-        <span className="bg-muted inline-flex h-4 w-4 animate-pulse rounded-full"></span>
+      <span className="mr-2 w-4 h-4">
+        <span className="inline-flex w-4 h-4 rounded-full animate-pulse bg-muted"></span>
       </span>
       <span className="flex flex-1 items-center text-left">
-        <span className="bg-muted mr-5 inline-flex h-3 w-full animate-pulse rounded-sm"></span>
+        <span className="inline-flex mr-5 w-full h-3 rounded-sm animate-pulse bg-muted"></span>
       </span>
     </div>
   );
@@ -40,14 +40,14 @@ export function SidebarMenuItem({
   selected,
 }: SidebarMenuItemProps) {
   const className =
-    "flex p-2 pl-4 text-sm hover:cursor-pointer hover:bg-secondary h-8 items-center";
+    "flex items-center p-2 pl-4 h-8 text-sm hover:cursor-pointer hover:bg-secondary";
 
   const body = (
     <>
       {IconComponent ? (
-        <IconComponent className="mr-2 h-4 w-4" />
+        <IconComponent className="mr-2 w-4 h-4" />
       ) : (
-        <span className="mr-2 h-4 w-4"></span>
+        <span className="mr-2 w-4 h-4"></span>
       )}
 
       <span className="flex-1 text-left">{text}</span>
@@ -81,6 +81,7 @@ export function SidebarMenuItem({
 
   return (
     <button
+      type="button"
       className={cn(className, selected ? "bg-selected" : "")}
       onClick={onClick}
     >
@@ -90,5 +91,5 @@ export function SidebarMenuItem({
 }
 
 export function SidebarMenuHeader({ text }: SidebarMenuHeader) {
-  return <div className="mt-2 flex p-2 pl-4 text-sm font-bold">{text}</div>;
+  return <div className="flex p-2 pl-4 mt-2 text-sm font-bold">{text}</div>;
 }

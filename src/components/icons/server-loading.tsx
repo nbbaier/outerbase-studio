@@ -13,7 +13,9 @@ export default function ServerLoadingAnimation({
         height="300"
         viewBox="40 40 220 220"
         xmlns="http://www.w3.org/2000/svg"
+        aria-label="Server Loading Animation"
       >
+        <title>Server Loading Animation</title>
         <rect width="300" height="300" fill="none" />
         <rect
           x="62"

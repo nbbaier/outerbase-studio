@@ -193,7 +193,7 @@ export default class MySQLLikeDriver extends CommonSQLImplement {
       rows: { db?: string | null }[];
     };
 
-    return result.rows[0].db!;
+    return result.rows[0]?.db ?? null;
   }
 
   async schemas(): Promise<DatabaseSchemas> {

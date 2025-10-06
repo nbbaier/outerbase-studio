@@ -16,9 +16,10 @@ const MenuItem = ({
   onClick: () => void;
 }) => (
   <button
+    type="button"
     aria-label={typeof content === "string" ? content : aria}
     className={cn(
-      "text-ob-base-200 hover:text-ob-base-300 ob-focus block h-full cursor-pointer rounded-sm border border-transparent px-2 transition-colors",
+      "block px-2 h-full rounded-sm border border-transparent transition-colors cursor-pointer text-ob-base-200 hover:text-ob-base-300 ob-focus",
       {
         "bg-ob-base-100 border-ob-border text-ob-base-300 dark:bg-ob-base-500 dark:border-neutral-700":
           selected,

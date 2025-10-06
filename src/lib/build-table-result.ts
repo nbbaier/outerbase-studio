@@ -70,9 +70,11 @@ function pipeWithTableSchema(
     header.metadata.type =
       header.metadata.type ?? driver.inferTypeFromHeader(columnSchema);
 
+    if (!tableSchema.tableName) return;
+
     header.metadata.from = {
       schema: tableSchema.schemaName,
-      table: tableSchema.tableName!,
+      table: tableSchema.tableName,
       column: header.name,
     };
 
@@ -87,10 +89,14 @@ function pipeWithTableSchema(
 
     // Attaching the foreign key from column constraint
     if (columnSchema?.constraint?.foreignKey?.foreignColumns) {
+      if (!columnSchema.constraint.foreignKey.foreignSchemaName) return;
+      if (!columnSchema.constraint.foreignKey.foreignTableName) return;
+      if (!columnSchema.constraint.foreignKey.foreignColumns[0]) return;
+
       header.metadata.referenceTo = {
-        schema: columnSchema.constraint.foreignKey.foreignSchemaName!,
-        table: columnSchema.constraint.foreignKey.foreignTableName!,
-        column: columnSchema.constraint.foreignKey.foreignColumns[0]!,
+        schema: columnSchema.constraint.foreignKey.foreignSchemaName,
+        table: columnSchema.constraint.foreignKey.foreignTableName,
+        column: columnSchema.constraint.foreignKey.foreignColumns[0],
       };
     }
 
@@ -100,10 +106,14 @@ function pipeWithTableSchema(
         if (constraint.foreignKey?.columns) {
           const foundIndex = constraint.foreignKey.columns.indexOf(header.name);
           if (foundIndex !== -1) {
+            if (!constraint.foreignKey.foreignSchemaName) return;
+            if (!constraint.foreignKey.foreignTableName) return;
+            if (!constraint.foreignKey.columns[foundIndex]) return;
+
             header.metadata.referenceTo = {
-              schema: constraint.foreignKey.foreignSchemaName!,
-              table: constraint.foreignKey.foreignTableName!,
-              column: constraint.foreignKey.columns[foundIndex]!,
+              schema: constraint.foreignKey.foreignSchemaName,
+              table: constraint.foreignKey.foreignTableName,
+              column: constraint.foreignKey.columns[foundIndex],
             };
           }
         }

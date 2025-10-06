@@ -47,8 +47,8 @@ function ColumnCheck({
 }>) {
   return (
     <>
-      <td className="border p-2">
-        <LucideCheck className="mr-2 inline h-4 w-4" /> Check
+      <td className="p-2 border">
+        <LucideCheck className="inline mr-2 w-4 h-4" /> Check
       </td>
       <td className="border" colSpan={2}>
         <input
@@ -60,7 +60,7 @@ function ColumnCheck({
           }}
           readOnly={disabled}
           value={constraint.checkExpression}
-          className="w-full p-2 font-mono outline-hidden"
+          className="p-2 w-full font-mono outline-hidden"
         />
       </td>
     </>
@@ -133,8 +133,8 @@ function ColumnForeignKey({
 
   return (
     <>
-      <td className="border p-2">
-        <LucideArrowUpRight className="mr-2 inline h-4 w-4" />
+      <td className="p-2 border">
+        <LucideArrowUpRight className="inline mr-2 w-4 h-4" />
         Foreign Key
       </td>
       <td className="border">
@@ -147,7 +147,7 @@ function ColumnForeignKey({
         />
       </td>
       <td className="border">
-        <div className="flex items-center gap-2 p-1 px-2">
+        <div className="flex gap-2 items-center p-1 px-2">
           <ColumnListEditor
             disabled={disabled}
             value={constraint.foreignKey?.columns ?? []}
@@ -191,8 +191,8 @@ function ColumnPrimaryKey({
 
   return (
     <>
-      <td className="border p-2">
-        <LucideKeySquare className="mr-2 inline h-4 w-4" />
+      <td className="p-2 border">
+        <LucideKeySquare className="inline mr-2 w-4 h-4" />
         Primary Key
       </td>
       <td className="border" colSpan={2}>
@@ -233,8 +233,8 @@ function ColumnUnique({
 
   return (
     <>
-      <td className="border p-2">
-        <LucideFingerprint className="mr-2 inline h-4 w-4" />
+      <td className="p-2 border">
+        <LucideFingerprint className="inline mr-2 w-4 h-4" />
         Unique
       </td>
       <td className="border" colSpan={2}>
@@ -281,8 +281,8 @@ function RemovableConstraintItem({
     <tr className="text-sm">
       {children}
       <td className="border">
-        <button className="p-1" onClick={onRemoveClicked}>
-          <LucideTrash2 className="h-4 w-4 text-red-500" />
+        <button type="button" className="p-1" onClick={onRemoveClicked}>
+          <LucideTrash2 className="w-4 h-4 text-red-500" />
         </button>
       </td>
     </tr>
@@ -447,11 +447,11 @@ export default function SchemaEditorConstraintList({
           })}
           {!disabled && (
             <tr>
-              <td colSpan={4} className="border px-4 py-2">
+              <td colSpan={4} className="px-4 py-2 border">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button size={"sm"}>
-                      <LucideShieldPlus className="mr-1 h-4 w-4" />
+                      <LucideShieldPlus className="mr-1 w-4 h-4" />
                       Add Constraint
                     </Button>
                   </DropdownMenuTrigger>

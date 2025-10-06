@@ -55,10 +55,14 @@ export function DataCatalogEntryModal({ onClose, driver, definition }: Props) {
 
     setDeleting(true);
 
-    driver
-      ?.deleteTermDefinition(definition.id!)
-      .then()
-      .finally(() => onClose());
+    if (definition.id) {
+      driver
+        ?.deleteTermDefinition(definition.id)
+        .then()
+        .finally(() => onClose());
+    } else {
+      onClose();
+    }
   }
 
   const onChangeValue = useCallback(

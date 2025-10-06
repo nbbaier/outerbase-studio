@@ -23,8 +23,14 @@ export const CircularProgressBar: React.FC<CircularProgressBarProps> = ({
   const strokeDashoffset = circumference - (progress / 100) * circumference;
 
   return (
-    <div className="relative inline-flex items-center justify-center">
-      <svg className="-rotate-90 transform" width={size} height={size}>
+    <div className="inline-flex relative justify-center items-center">
+      <svg
+        aria-label="Circular Progress Bar"
+        className="transform -rotate-90"
+        width={size}
+        height={size}
+      >
+        <title>Circular Progress Bar</title>
         <circle
           className="text-secondary"
           strokeWidth={strokeWidth}

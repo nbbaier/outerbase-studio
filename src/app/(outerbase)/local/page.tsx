@@ -88,19 +88,22 @@ export default function LocalConnectionPage() {
 
   return (
     <NavigationLayout>
-      <div className="flex flex-1 flex-col content-start gap-4 overflow-x-hidden overflow-y-auto p-4">
-        <div className="mb-4 flex gap-4">
+      <div className="flex overflow-y-auto overflow-x-hidden flex-col flex-1 gap-4 content-start p-4">
+        <div className="flex gap-4 mb-4">
           <DropdownMenu modal={false}>
             <DropdownMenuTrigger asChild>
-              <button className="bg-background dark:bg-secondary flex cursor-pointer items-center gap-2 rounded-lg border p-4">
-                <SQLiteIcon className="h-10 w-10" />
+              <button
+                type="button"
+                className="flex gap-2 items-center p-4 rounded-lg border cursor-pointer bg-background dark:bg-secondary"
+              >
+                <SQLiteIcon className="w-10 h-10" />
                 <div className="flex flex-col gap-1 text-left">
                   <span className="text-base font-bold">SQLite Playground</span>
                   <span className="text-sm">
                     Launch in-memory SQLite on browser
                   </span>
                 </div>
-                <CaretDown className="ml-4 h-4 w-4" />
+                <CaretDown className="ml-4 w-4 h-4" />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent
@@ -109,7 +112,7 @@ export default function LocalConnectionPage() {
             >
               <Link
                 href="/playground/client"
-                className="bg-secondary hover:bg-primary hover:text-primary-foreground flex cursor-pointer flex-col gap-2 rounded p-2 py-4 text-base font-bold"
+                className="flex flex-col gap-2 p-2 py-4 text-base font-bold rounded cursor-pointer bg-secondary hover:bg-primary hover:text-primary-foreground"
               >
                 Open Empty SQLite Database
               </Link>
@@ -117,7 +120,7 @@ export default function LocalConnectionPage() {
               <div className="flex gap-4">
                 <Link
                   href="/playground/client?template=northwind"
-                  className="bg-secondary hover:bg-primary hover:text-primary-foreground flex cursor-pointer flex-col gap-2 rounded p-2 text-left text-base"
+                  className="flex flex-col gap-2 p-2 text-base text-left rounded cursor-pointer bg-secondary hover:bg-primary hover:text-primary-foreground"
                 >
                   <span className="font-bold">Northwind</span>
                   <span className="text-sm">
@@ -128,7 +131,7 @@ export default function LocalConnectionPage() {
 
                 <Link
                   href="/playground/client?template=chinook"
-                  className="bg-secondary hover:bg-primary hover:text-primary-foreground flex cursor-pointer flex-col gap-2 rounded p-2 text-left text-base"
+                  className="flex flex-col gap-2 p-2 text-base text-left rounded cursor-pointer bg-secondary hover:bg-primary hover:text-primary-foreground"
                 >
                   <span className="font-bold">Chinook</span>
                   <span className="text-sm">
@@ -141,7 +144,8 @@ export default function LocalConnectionPage() {
           </DropdownMenu>
 
           <button
-            className="bg-background dark:bg-secondary flex cursor-pointer items-center gap-2 rounded-lg border p-4"
+            type="button"
+            className="flex gap-2 items-center p-4 rounded-lg border cursor-pointer bg-background dark:bg-secondary"
             onClick={() => {
               // Random 8 character alphabeth string
               const roomName = new Array(8)
@@ -157,7 +161,7 @@ export default function LocalConnectionPage() {
               router.push(`/playground/mysql/${roomName}`);
             }}
           >
-            <MySQLIcon className="h-10 w-10" />
+            <MySQLIcon className="w-10 h-10" />
             <div className="flex flex-col gap-1 text-left">
               <span className="text-base font-bold">MySQL Playgorund</span>
               <span className="text-sm">

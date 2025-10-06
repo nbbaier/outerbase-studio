@@ -147,7 +147,9 @@ export default function BoardChartEditor({
 
       // Decide if we are updating or creating a new chart
       if (value.id) {
-        const newValue = produce(boardValue!, (draft) => {
+        if (!boardValue) return;
+
+        const newValue = produce(boardValue, (draft) => {
           const index = draft?.charts.findIndex((c) => c.id === value.id);
           if (index === -1) return;
 
@@ -162,8 +164,8 @@ export default function BoardChartEditor({
         setSaveLoading(false);
       } else {
         const newChart = await storage.add(value);
-        if (newChart) {
-          const newValue = produce(boardValue!, (draft) => {
+        if (newChart && boardValue && newChart.id) {
+          const newValue = produce(boardValue, (draft) => {
             if (!draft?.charts) draft.charts = [];
             draft?.charts.push(newChart);
 
@@ -178,7 +180,7 @@ export default function BoardChartEditor({
               y,
               w: 2,
               h: 2,
-              i: newChart.id!,
+              i: newChart.id ?? "",
             });
           });
           await storage.save(newValue);

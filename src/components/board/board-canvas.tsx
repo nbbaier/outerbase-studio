@@ -49,19 +49,19 @@ export function BoardCanvas({ value, onChange }: BoardProps) {
     setBoardMode,
   } = useBoardContext();
   const sizes = [
-    { w: 1, h: 1, name: "1", icon: <Square className="h-3 w-3" /> },
+    { w: 1, h: 1, name: "1", icon: <Square className="w-3 h-3" /> },
     {
       w: 2,
       h: 1,
       name: "2",
-      icon: <RectangleHorizontal className="h-4 w-4" />,
+      icon: <RectangleHorizontal className="w-4 h-4" />,
     },
-    { w: 2, h: 2, name: "3", icon: <Square className="h-4 w-4" /> },
+    { w: 2, h: 2, name: "3", icon: <Square className="w-4 h-4" /> },
     {
       w: 4,
       h: 2,
       name: "4",
-      icon: <RectangleHorizontal className="h-4 w-4" />,
+      icon: <RectangleHorizontal className="w-4 h-4" />,
     },
   ];
 
@@ -87,7 +87,7 @@ export function BoardCanvas({ value, onChange }: BoardProps) {
   const menus = [
     {
       name: "Edit chart",
-      icon: <EditIcon className="h-4 w-4" />,
+      icon: <EditIcon className="w-4 h-4" />,
       onclick: (key: string) => {
         setBoardMode({
           mode: "ADD_CHART",
@@ -97,24 +97,24 @@ export function BoardCanvas({ value, onChange }: BoardProps) {
     },
     {
       name: "Refresh data",
-      icon: <RefreshCcw className="h-4 w-4" />,
+      icon: <RefreshCcw className="w-4 h-4" />,
       onclick: () => {},
     },
     {
       name: "Rearrange layout",
-      icon: <ImageUpscale className="h-4 w-4" />,
+      icon: <ImageUpscale className="w-4 h-4" />,
       onclick: () => {
         setBoardMode({ mode: "REARRANGING_CHART" });
       },
     },
     {
       name: "Embed chart",
-      icon: <HandHelping className="h-4 w-4" />,
+      icon: <HandHelping className="w-4 h-4" />,
       onclick: () => {},
     },
     {
       name: "Delete chart",
-      icon: <Trash2 className="h-4 w-4" />,
+      icon: <Trash2 className="w-4 h-4" />,
       onclick: onRemove,
     },
   ];
@@ -133,7 +133,7 @@ export function BoardCanvas({ value, onChange }: BoardProps) {
     return (
       <div
         key={_.i}
-        className="group relative flex items-center justify-center overflow-hidden rounded-xl bg-white shadow hover:bg-gray-50 dark:bg-neutral-900 dark:text-white"
+        className="flex overflow-hidden relative justify-center items-center bg-white rounded-xl shadow group hover:bg-gray-50 dark:bg-neutral-900 dark:text-white"
         data-grid={_}
       >
         <BoardChart
@@ -141,13 +141,14 @@ export function BoardCanvas({ value, onChange }: BoardProps) {
         />
         {boardMode?.mode === "REARRANGING_CHART" ? (
           <>
-            <div className="absolute top-2 right-2 z-40 hidden gap-2 group-hover:flex">
+            <div className="hidden absolute top-2 right-2 z-40 gap-2 group-hover:flex">
               {sizes.map((x, index) => {
                 return (
                   <button
+                    type="button"
                     className={cn(
                       buttonVariants({ variant: "secondary", size: "icon" }),
-                      "cancelSelectorName h-6 w-6 p-0",
+                      "p-0 w-6 h-6 cancelSelectorName",
                     )}
                     onClick={() =>
                       handleClickResize(x.w as number, x.h as number, i)
@@ -161,15 +162,16 @@ export function BoardCanvas({ value, onChange }: BoardProps) {
                 );
               })}
             </div>
-            <div className="absolute top-2 left-2 z-40 hidden group-hover:block">
+            <div className="hidden absolute top-2 left-2 z-40 group-hover:block">
               <button
+                type="button"
                 className={cn(
                   buttonVariants({ variant: "default", size: "icon" }),
-                  "cancelSelectorName h-6 w-6 cursor-pointer rounded-full",
+                  "w-6 h-6 rounded-full cursor-pointer cancelSelectorName",
                 )}
                 onClick={() => onRemove(_.i)}
               >
-                <Trash2 className="h-4 w-4" />
+                <Trash2 className="w-4 h-4" />
               </button>
             </div>
           </>
@@ -178,9 +180,10 @@ export function BoardCanvas({ value, onChange }: BoardProps) {
             <DropdownMenu key={_.i}>
               <DropdownMenuTrigger asChild>
                 <button
+                  type="button"
                   className={buttonVariants({ size: "icon", variant: "ghost" })}
                 >
-                  <EllipsisVertical className="h-4 w-4" />
+                  <EllipsisVertical className="w-4 h-4" />
                 </button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
@@ -210,7 +213,7 @@ export function BoardCanvas({ value, onChange }: BoardProps) {
         cols={4}
         rowHeight={220}
         draggableCancel=".cancelSelectorName"
-        className="layout overflow-x-hidden"
+        className="overflow-x-hidden layout"
         layout={value.layout}
         onLayoutChange={onChange}
         isDraggable={boardMode?.mode === "REARRANGING_CHART"}

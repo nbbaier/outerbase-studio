@@ -12,7 +12,10 @@ export const Loader = ({ className, size = 24 }: LoaderProps) => (
     stroke="currentColor"
     className={className}
     style={{ height: size ?? undefined, width: size ?? undefined }}
+    role="img"
+    aria-label="Loading"
   >
+    <title>Loading</title>
     <circle
       cx="12"
       cy="12"

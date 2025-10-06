@@ -342,7 +342,7 @@ function decodeVarint(df: DataView, offset: number): [number, number] {
   let result = 0;
   let shift = 0;
   let bytesRead = 0;
-  let currentByte;
+  let currentByte: number;
 
   do {
     if (shift >= 32) {

@@ -42,6 +42,7 @@ export function ToolbarButton({
 }) {
   const buttonContent = (
     <button
+      type="button"
       className={cn(
         "flex gap-2",
         buttonVariants({ variant: "ghost", size: "sm" }),
@@ -50,12 +51,12 @@ export function ToolbarButton({
       disabled={disabled}
       onClick={onClick}
     >
-      {loading ? <LucideLoader className="h-4 w-4 animate-spin" /> : icon}
+      {loading ? <LucideLoader className="w-4 h-4 animate-spin" /> : icon}
       {text && <span>{text}</span>}
       {badge && (
         <span
           className={
-            "ml-2 h-5 w-5 rounded-full bg-red-500 leading-5 text-white"
+            "ml-2 w-5 h-5 leading-5 text-white bg-red-500 rounded-full"
           }
           style={{ fontSize: 9 }}
         >

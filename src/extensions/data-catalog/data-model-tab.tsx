@@ -1,9 +1,10 @@
-import { MagnifyingGlass } from "@phosphor-icons/react";
+import { MagnifyingGlassIcon } from "@phosphor-icons/react";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import SchemaNameSelect from "@/components/gui/schema-editor/schema-name-select";
 import { Toolbar, ToolbarFiller } from "@/components/gui/toolbar";
 import { Input } from "@/components/orbit/input";
 import { Toggle } from "@/components/orbit/toggle";
+import { Label } from "@/components/ui/label";
 import { useStudioContext } from "@/context/driver-provider";
 import { useSchema } from "@/context/schema-provider";
 import type { DatabaseTableSchema } from "@/drivers/base-driver";
@@ -45,7 +46,7 @@ export default function DataCatalogModelTab() {
       .map((table) => table.tableSchema)
       .filter(Boolean) as DatabaseTableSchema[];
 
-    result.sort((a, b) => a.tableName?.localeCompare(b.tableName!));
+    result.sort((a, b) => a.tableName?.localeCompare(b.tableName ?? "") || 0);
 
     return result;
   }, [selectedSchema, schemaList]);
@@ -71,14 +72,14 @@ export default function DataCatalogModelTab() {
                 size="sm"
                 onChange={setHasDefinitionOnly}
               />
-              <label className="text-base">Definition only?</label>
+              <Label className="text-base">Definition only?</Label>
             </div>
             <ToolbarFiller />
             <div>
               <Input
                 value={search}
                 onValueChange={setSearch}
-                preText={<MagnifyingGlass className="mr-2" />}
+                preText={<MagnifyingGlassIcon className="mr-2" />}
                 placeholder="Search tables, columns"
               />
             </div>

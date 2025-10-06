@@ -64,7 +64,7 @@ export const deleteLocalBoardDialog = createDialog<{
           disabled={loading || boardName !== name}
           onClick={deleteClicked}
         >
-          {loading && <LucideLoader className="mr-2 h-4 w-4 animate-spin" />}I
+          {loading && <LucideLoader className="mr-2 w-4 h-4 animate-spin" />}I
           understand, delete this board
         </Button>
         <Button variant={"secondary"} onClick={() => close(undefined)}>

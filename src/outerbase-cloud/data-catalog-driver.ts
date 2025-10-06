@@ -38,9 +38,11 @@ export default class DataCatalogOuterbaseDriver implements DataCatalogDriver {
     definitions: OuterbaseDataCatalogDefinition[];
   }> {
     const { sourceId, workspaceId, baseId } = this.config;
+    if (!baseId) return { definitions: [] };
+
     const [comments, definition] = await Promise.all([
-      getOuterbaseBaseComments(workspaceId, sourceId, baseId!),
-      getOuterbaseDefinitions(workspaceId, baseId!),
+      getOuterbaseBaseComments(workspaceId, sourceId, baseId),
+      getOuterbaseDefinitions(workspaceId, baseId),
     ]);
 
     this.definitions = definition.items;
@@ -386,21 +388,23 @@ export default class DataCatalogOuterbaseDriver implements DataCatalogDriver {
     data: Omit<DataCatalogTermDefinition, "id">,
   ): Promise<DataCatalogTermDefinition | undefined> {
     if (!data) return;
+    if (!this.config.baseId) return;
+    if (!data.definition) return;
+
     const inputData = {
       name: data.name,
       otherNames: data.otherNames,
-      definition: data.definition!,
+      definition: data.definition,
     };
 
     const result = await createOuterbaseDefinition(
       this.config.workspaceId,
-      this.config.baseId!,
+      this.config.baseId,
       inputData,
     );
 
     if (result) {
       this.definitions.unshift(result);
-      //notify update driver
       this.notify();
     }
     return result;
@@ -409,15 +413,18 @@ export default class DataCatalogOuterbaseDriver implements DataCatalogDriver {
     data: DataCatalogTermDefinition,
   ): Promise<OuterbaseDataCatalogDefinition | undefined> {
     if (!data) return;
+    if (!this.config.baseId) return;
+    if (!data.definition) return;
+
     const inputData = {
       name: data.name,
       otherNames: data.otherNames,
-      definition: data.definition!,
+      definition: data.definition,
     };
 
     const result = await updateOuerbaseDefinition(
       this.config.workspaceId,
-      this.config.baseId!,
+      this.config.baseId,
       data.id,
       inputData,
     );
@@ -438,9 +445,10 @@ export default class DataCatalogOuterbaseDriver implements DataCatalogDriver {
 
   async deleteTermDefinition(id: string): Promise<boolean> {
     try {
+      if (!this.config.baseId) return false;
       await deleteOuterbaseDefinition(
         this.config.workspaceId,
-        this.config.baseId!,
+        this.config.baseId,
         id,
       );
 

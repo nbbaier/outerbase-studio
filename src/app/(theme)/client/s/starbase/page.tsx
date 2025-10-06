@@ -36,13 +36,15 @@ function StarbasePageBody() {
         setDriverType("sqlite");
       }
 
-      setQueryable(
-        new StarbaseQuery(
-          conn.content.url!,
-          conn.content.token!,
-          conn.content.starbase_type ?? "internal",
-        ),
-      );
+      if (conn.content.url && conn.content.token) {
+        setQueryable(
+          new StarbaseQuery(
+            conn.content.url,
+            conn.content.token,
+            conn.content.starbase_type ?? "internal",
+          ),
+        );
+      }
     }
   }, [conn]);
 

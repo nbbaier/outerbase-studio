@@ -18,6 +18,7 @@ import { Input } from "../orbit/input";
 import { Label } from "../orbit/label";
 import { MenuBar } from "../orbit/menu-bar";
 import { Toggle } from "../orbit/toggle";
+import { Label as UIlabel } from "../ui/label";
 import { Textarea } from "../ui/textarea";
 
 export function validateTemplate(
@@ -122,7 +123,7 @@ export function ConnectionConfigEditor({
                   );
                 } else if (column.type === "checkbox") {
                   content = (
-                    <label className="mx-1 flex flex-1 items-center justify-start gap-2 text-base select-none">
+                    <UIlabel className="mx-1 flex flex-1 items-center justify-start gap-2 text-base select-none">
                       <Toggle
                         size="sm"
                         onChange={(checked) => {
@@ -136,7 +137,7 @@ export function ConnectionConfigEditor({
                       />
 
                       {column.label}
-                    </label>
+                    </UIlabel>
                   );
                 } else if (column.type === "file") {
                   content = (

@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 import {
   Popover,
   PopoverContent,
@@ -65,9 +66,7 @@ export function BoardFilterEnum(props: Props) {
                     }}
                   />
                 </div>
-                <label htmlFor={v + idx} className="text-left">
-                  {v}
-                </label>
+                <Label className="text-left">{v}</Label>
               </div>
             );
           })}

@@ -1,7 +1,15 @@
+import { useId } from "react";
+
 const RippleFilter = () => {
   return (
-    <svg width="0" height="0" className="absolute top-0 left-0">
-      <filter id="ripple" x="0" y="0" width="100%" height="100%">
+    <svg
+      width="0"
+      height="0"
+      className="absolute top-0 left-0"
+      aria-label="Ripple Filter"
+    >
+      <title>Ripple Filter</title>
+      <filter id={useId()} x="0" y="0" width="100%" height="100%">
         <feTurbulence
           type="fractalNoise"
           baseFrequency="0.1"

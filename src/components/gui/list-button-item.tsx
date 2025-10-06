@@ -15,6 +15,7 @@ export default function ListButtonItem({
 }>) {
   return (
     <button
+      type="button"
       onClick={onClick}
       className={cn(
         buttonVariants({
@@ -26,9 +27,9 @@ export default function ListButtonItem({
       )}
     >
       {Icon ? (
-        <Icon className="w-4 h-4 mr-2" />
+        <Icon className="mr-2 w-4 h-4" />
       ) : (
-        <div className="w-4 h-4 mr-2"></div>
+        <div className="mr-2 w-4 h-4"></div>
       )}
       {text}
     </button>

@@ -222,7 +222,7 @@ function mapSchema(
   const area =
     schemaWithoutRelationship.reduce(
       (a, b) =>
-        (a = a + (b.tableSchema?.columns.length || 0) * 32 + 32 + NODE_MARGIN),
+        a + ((b.tableSchema?.columns.length || 0) * 32 + 32 + NODE_MARGIN),
       0,
     ) * MAX_NODE_WIDTH;
 

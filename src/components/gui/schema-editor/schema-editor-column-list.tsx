@@ -125,7 +125,7 @@ function ColumnItemType({
         onValueChange={onChange}
         disabled={disabled}
       >
-        <SelectTrigger className="rounded-none border-0 bg-inherit text-sm shadow-none">
+        <SelectTrigger className="text-sm rounded-none border-0 shadow-none bg-inherit">
           <SelectValue placeholder="Select datatype" />
         </SelectTrigger>
         <SelectContent>
@@ -214,7 +214,7 @@ function ColumnItem({
         className={cn("border-t border-b border-l")}
       >
         <div
-          className={cn("ml-1 h-[30px] w-[12px] rounded", highlightClassName)}
+          className={cn("ml-1 rounded h-[30px] w-[12px]", highlightClassName)}
         ></div>
       </td>
       <td className="border-t border-r border-b">
@@ -250,7 +250,7 @@ function ColumnItem({
           }
         />
       </td>
-      <td className="border px-2">
+      <td className="px-2 border">
         <div className="flex gap-2">
           {column.constraint?.primaryKey && (
             <ColumnPrimaryKeyPopup
@@ -295,8 +295,8 @@ function ColumnItem({
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <button className="rounded border p-1 shadow-sm">
-                <LucidePlus className="h-4 w-4" />
+              <button type="button" className="p-1 rounded border shadow-sm">
+                <LucidePlus className="w-4 h-4" />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent>
@@ -379,14 +379,15 @@ function ColumnItem({
           />
         </td>
       )}
-      <td className="border px-1">
+      <td className="px-1 border">
         <button
+          type="button"
           className="p-1"
           onClick={() => {
             change(null);
           }}
         >
-          <LucideTrash2 className="h-4 w-4 text-red-500" />
+          <LucideTrash2 className="w-4 h-4 text-red-500" />
         </button>
       </td>
     </tr>
@@ -454,7 +455,7 @@ export default function SchemaEditorColumnList({
         onDragEnd={handleDragEnd}
         modifiers={[restrictToVerticalAxis]}
       >
-        <table className="w-full overflow-hidden rounded">
+        <table className="overflow-hidden w-full rounded">
           <thead>
             <tr>
               <td className={cn(headerStyle, "w-[20px]")}></td>
@@ -491,9 +492,9 @@ export default function SchemaEditorColumnList({
           </tbody>
           <tfoot>
             <tr>
-              <td colSpan={headerCounter} className="border px-4 py-2">
+              <td colSpan={headerCounter} className="px-4 py-2 border">
                 <Button size="sm" onClick={onAddColumn}>
-                  <LucidePlus className="mr-1 h-4 w-4" /> Add Column
+                  <LucidePlus className="mr-1 w-4 h-4" /> Add Column
                 </Button>
               </td>
             </tr>

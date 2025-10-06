@@ -20,7 +20,7 @@ export function parseCreateViewScript(
 
   let statement = "";
   const fromStatement = cursor.getPointer();
-  let toStatement;
+  let toStatement: number | undefined;
 
   while (!cursor.end()) {
     toStatement = cursor.getPointer();

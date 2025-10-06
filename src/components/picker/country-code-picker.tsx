@@ -220,6 +220,7 @@ export function CountryCodePicker({
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <button
+          type="button"
           className={cn(
             "border-input bg-background ring-offset-background placeholder:text-muted-foreground focus:ring-ring flex h-10 w-full items-center justify-between rounded-md border px-3 py-2 text-sm focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
             !value && "text-muted-foreground",
@@ -233,11 +234,11 @@ export function CountryCodePicker({
           ) : (
             "Select country code"
           )}
-          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          <ChevronsUpDown className="ml-2 w-4 h-4 opacity-50 shrink-0" />
         </button>
       </PopoverTrigger>
       <PopoverContent
-        className={cn("max-h-[300px] w-[300px] overflow-y-auto p-0", className)}
+        className={cn("overflow-y-auto p-0 max-h-[300px] w-[300px]", className)}
       >
         <Command>
           <CommandInput placeholder="Search country..." />

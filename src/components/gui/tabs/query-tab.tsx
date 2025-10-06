@@ -295,7 +295,7 @@ export default function QueryWindow({
         title: "Summary",
         icon: LucideMessageSquareWarning,
         component: (
-          <div className="h-full w-full overflow-x-hidden overflow-y-auto">
+          <div className="overflow-y-auto overflow-x-hidden w-full h-full">
             <QueryProgressLog progress={progress} />
           </div>
         ),
@@ -344,12 +344,12 @@ export default function QueryWindow({
   return (
     <ResizablePanelGroup direction="vertical">
       <ResizablePanel style={{ position: "relative" }}>
-        <div className="absolute top-0 right-0 bottom-0 left-0 flex flex-col">
-          <div className="flex border-b bg-neutral-50 py-3 pr-1 pl-3 dark:bg-neutral-950">
-            <div className="text-secondary-foreground flex shrink-0 items-center p-1 text-sm">
+        <div className="flex absolute top-0 right-0 bottom-0 left-0 flex-col">
+          <div className="flex py-3 pr-1 pl-3 border-b bg-neutral-50 dark:bg-neutral-950">
+            <div className="flex items-center p-1 text-sm text-secondary-foreground shrink-0">
               {namespaceName} /
             </div>
-            <div className="relative inline-block">
+            <div className="inline-block relative">
               <span className="border-background inline-block min-w-[175px] border p-1 text-sm font-semibold opacity-0 outline-hidden">
                 &nbsp;{name}
               </span>
@@ -361,7 +361,7 @@ export default function QueryWindow({
                 }}
                 placeholder="Please name your query"
                 spellCheck="false"
-                className="focus:border-secondary-foreground absolute top-0 right-0 bottom-0 left-0 rounded bg-transparent p-1 text-sm font-semibold outline-hidden"
+                className="absolute top-0 right-0 bottom-0 left-0 p-1 text-sm font-semibold bg-transparent rounded focus:border-secondary-foreground outline-hidden"
                 value={name}
                 onChange={(e) => setName(e.currentTarget.value)}
               />
@@ -380,18 +380,20 @@ export default function QueryWindow({
 
               <div className="flex">
                 <button
+                  type="button"
                   onClick={() => onRunClicked()}
                   className={cn(
                     buttonVariants({ size: "sm" }),
                     "rounded-r-none",
                   )}
                 >
-                  <LucidePlay className="mr-2 h-4 w-4" />
+                  <LucidePlay className="mr-2 w-4 h-4" />
                   Run
                 </button>
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <button
+                      type="button"
                       className={cn(
                         buttonVariants({ size: "sm" }),
                         "rounded-l-none border-l",
@@ -416,7 +418,7 @@ export default function QueryWindow({
               </div>
             </div>
           </div>
-          <div className="grow overflow-hidden p-2">
+          <div className="overflow-hidden p-2 grow">
             <SqlEditor
               onPrompt={onPrompt}
               agents={agentDriver}
@@ -442,7 +444,7 @@ export default function QueryWindow({
           </div>
           <div className="shrink-0 grow-0">
             <div className="flex gap-1 px-2 pb-1">
-              <div className="mr-2 flex grow items-center gap-2 pl-4 text-xs">
+              <div className="flex gap-2 items-center pl-4 mr-2 text-xs grow">
                 <div>Ln {lineNumber}</div>
                 <div>Col {columnNumber + 1}</div>
               </div>
@@ -468,7 +470,7 @@ export default function QueryWindow({
                 </TooltipTrigger>
                 <TooltipContent className="p-4">
                   <p className="mb-2">
-                    <span className="bg-secondary text-secondary-foreground inline-block rounded px-2 py-1">
+                    <span className="inline-block px-2 py-1 rounded bg-secondary text-secondary-foreground">
                       {KEY_BINDING.format.toString()}
                     </span>
                   </p>

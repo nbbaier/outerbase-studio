@@ -1,6 +1,6 @@
 {
   "$schema": "https://biomejs.dev/schemas/2.2.5/schema.json",
-  "vcs": { "enabled": false, "clientKind": "git", "useIgnoreFile": true },
+  "vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
   "files": { "ignoreUnknown": false },
   "formatter": {
     "enabled": true,
@@ -12,14 +12,36 @@
     "bracketSameLine": false,
     "bracketSpacing": true,
     "expand": "auto",
-    "useEditorconfig": true
+    "useEditorconfig": true,
+    "includes": [
+      "**",
+      "!**/package-lock.json",
+      "!**/.next",
+      "!**/dist",
+      "!drizzle/*",
+      "!**/*/drizzle",
+      "!**/.prettierignore",
+      "!**/.gitignore",
+      "!**/.changeset/",
+      "!**/wrangler.jsonc"
+    ]
   },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": true,
-      "suspicious": { "noUnknownAtRules": "off" }
+      "suspicious": {
+        "noUnknownAtRules": "off",
+        "noCatchAssign": "error",
+        "noArrayIndexKey": "info"
+      },
+      "correctness": {
+        "noUndeclaredVariables": "error"
+      }
     }
+  },
+  "html": {
+    "formatter": { "enabled": true, "selfCloseVoidElements": "always" }
   },
   "javascript": { "formatter": { "quoteStyle": "double" } },
   "assist": {
@@ -27,6 +49,9 @@
     "actions": { "source": { "organizeImports": "on" } }
   },
   "css": {
+    "parser": {
+      "cssModules": true
+    },
     "formatter": {
       "enabled": false
     },

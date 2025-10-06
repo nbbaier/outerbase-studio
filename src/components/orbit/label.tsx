@@ -1,5 +1,5 @@
+import { Label as LabelPrimitive } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
-
 export type LabelProps = React.LabelHTMLAttributes<HTMLLabelElement> & {
   children?: React.ReactNode;
   className?: string;
@@ -19,7 +19,7 @@ export const Label = ({
   ...props
 }: LabelProps) => {
   return (
-    <label
+    <LabelPrimitive
       className={cn(
         "text-ob-base-200 relative block w-full items-center gap-1 text-sm transition-colors *:w-full",
         className,
@@ -40,6 +40,6 @@ export const Label = ({
         )}
       </div>
       {children}
-    </label>
+    </LabelPrimitive>
   );
 };

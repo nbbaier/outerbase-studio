@@ -25,13 +25,15 @@ export default class LocalBoardSource extends BoardSourceDriver {
   }
 
   sourceList(): BoardSource[] {
-    return this.sources.map((source) => {
-      return {
-        id: source.id!,
-        name: source.name,
-        type: source.driver ?? "sqlite",
-      };
-    });
+    return this.sources
+      .filter((source) => source.id)
+      .map((source) => {
+        return {
+          id: source.id ?? "",
+          name: source.name,
+          type: source.driver ?? "sqlite",
+        };
+      });
   }
 
   getDriver(sourceId: string) {

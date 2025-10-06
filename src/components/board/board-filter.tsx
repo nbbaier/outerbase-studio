@@ -64,11 +64,11 @@ export function BoardFilter(props: Props) {
   const mapFilterItem = props.value.data.filters.map((x, i) => {
     const icon =
       x.type === "search" ? (
-        <Search className="h-3 w-3" />
+        <Search className="w-3 h-3" />
       ) : x.type === "enum" ? (
-        <ListOrdered className="h-3 w-3" />
+        <ListOrdered className="w-3 h-3" />
       ) : (
-        <CalendarDays className="h-3 w-3" />
+        <CalendarDays className="w-3 h-3" />
       );
     const input =
       x.type === "search" ? (
@@ -115,9 +115,9 @@ export function BoardFilter(props: Props) {
     return (
       <div
         key={i}
-        className="bg-secondary flex items-center rounded-md text-sm"
+        className="flex items-center text-sm rounded-md bg-secondary"
       >
-        <div className="border-background flex items-center gap-1 border-r border-solid px-2 py-1">
+        <div className="flex gap-1 items-center px-2 py-1 border-r border-solid border-background">
           {icon}
           {x.name}
         </div>
@@ -130,8 +130,8 @@ export function BoardFilter(props: Props) {
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger>
-            <div className="hover:bg-background mr-2 cursor-pointer rounded-md p-1">
-              <Ellipsis className="h-3 w-3" />
+            <div className="p-1 mr-2 rounded-md cursor-pointer hover:bg-background">
+              <Ellipsis className="w-3 h-3" />
             </div>
           </DropdownMenuTrigger>
           <DropdownMenuContent>
@@ -169,7 +169,7 @@ export function BoardFilter(props: Props) {
   });
 
   return (
-    <div className="sticky top-0 z-50 bg-neutral-100 px-1 pt-0 pb-2 dark:bg-neutral-950">
+    <div className="sticky top-0 z-50 px-1 pt-0 pb-2 bg-neutral-100 dark:bg-neutral-950">
       <BoardToolbar
         show={show}
         onChangeShow={setShow}
@@ -224,10 +224,11 @@ export function BoardFilter(props: Props) {
         <div className="flex flex-wrap gap-3">
           {mapFilterItem}
           <button
+            type="button"
             className={buttonVariants({ size: "sm", variant: "ghost" })}
             onClick={onFilter}
           >
-            <ListFilter className="h-4 w-4" />
+            <ListFilter className="w-4 h-4" />
           </button>
         </div>
       </div>

@@ -54,7 +54,7 @@ export default function PasswordResetPage() {
   }, [email]);
 
   const { title, description } = useMemo(() => {
-    let title, description;
+    let title: string, description: string;
 
     if (isSent) {
       title = "Check your email";

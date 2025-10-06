@@ -1,4 +1,8 @@
-import { CaretDown, ChartBar, MagnifyingGlass } from "@phosphor-icons/react";
+import {
+  CaretDownIcon,
+  ChartBarIcon,
+  MagnifyingGlassIcon,
+} from "@phosphor-icons/react";
 import Link from "next/link";
 import { type PropsWithChildren, useMemo, useState } from "react";
 import { Button } from "@/components/orbit/button";
@@ -19,7 +23,7 @@ function CreateResourceItem({
     return (
       <div
         className={cn(
-          "text-muted-foreground flex w-full cursor-pointer items-center justify-start rounded p-2 text-base",
+          "flex justify-start items-center p-2 w-full text-base rounded cursor-pointer text-muted-foreground",
           { "bg-secondary": selected },
         )}
       >
@@ -39,7 +43,7 @@ function CreateResourceItem({
       prefetch={false}
       href={data.href}
       className={cn(
-        "hover:bg-secondary flex w-full cursor-pointer items-center justify-start rounded p-2 text-base",
+        "flex justify-start items-center p-2 w-full text-base rounded cursor-pointer hover:bg-secondary",
         { "bg-secondary": selected },
       )}
     >
@@ -81,10 +85,12 @@ export default function NewResourceType({
     <>
       <div className="flex gap-4 p-2">
         <button
+          type="button"
+          aria-label="Board"
           className="bg-secondary flex w-[250px] cursor-pointer items-center gap-4 rounded p-2 px-4 text-left text-base"
           onClick={onCreateBoard}
         >
-          <ChartBar className="h-8 w-8" />
+          <ChartBarIcon className="w-8 h-8" />
           <div>
             <div className="font-semibold">Board</div>
             <div className="text-sm">Multiple source dashboard</div>
@@ -96,7 +102,7 @@ export default function NewResourceType({
         Bring your existing databases
       </h2>
 
-      <div className="my-2 grid grid-cols-2 gap-2 px-2">
+      <div className="grid grid-cols-2 gap-2 px-2 my-2">
         {resourceTypeList
           .filter((resource) => !resource.cloudflare)
           .map((resource) => (
@@ -106,11 +112,11 @@ export default function NewResourceType({
 
       {cloudflare.length > 0 && (
         <>
-          <div className="text-muted-foreground mt-4 border-t-4 p-4 text-sm font-semibold tracking-wider">
+          <div className="p-4 mt-4 text-sm font-semibold tracking-wider border-t-4 text-muted-foreground">
             CLOUDFLARE
           </div>
 
-          <div className="mb-2 grid grid-cols-2 gap-2 px-2">
+          <div className="grid grid-cols-2 gap-2 px-2 mb-2">
             {cloudflare.map((resource) => (
               <CreateResourceItem key={resource.name} data={resource} />
             ))}
@@ -131,7 +137,7 @@ export default function NewResourceType({
 
     if (filteredResource.length === 0) {
       return (
-        <div className="flex h-16 flex-col items-center justify-center px-2 pb-2">
+        <div className="flex flex-col justify-center items-center px-2 pb-2 h-16">
           <span className="text-base">
             There is no resource type of <strong>{search}</strong>
           </span>
@@ -167,7 +173,7 @@ export default function NewResourceType({
       >
         <DropdownMenuTrigger asChild>
           <Button variant="primary" className={open ? "z-25" : ""}>
-            New Resource <CaretDown />
+            New Resource <CaretDownIcon />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="start" className="w-[500px] shadow-xl">
@@ -175,10 +181,10 @@ export default function NewResourceType({
             <Input
               placeholder="Search"
               autoFocus
-              className="bg-secondary w-full"
+              className="w-full bg-secondary"
               value={search}
               onValueChange={setSearch}
-              preText={<MagnifyingGlass className="mr-2" />}
+              preText={<MagnifyingGlassIcon className="mr-2" />}
             />
           </div>
 

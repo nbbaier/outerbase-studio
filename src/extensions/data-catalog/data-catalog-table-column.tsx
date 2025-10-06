@@ -35,7 +35,7 @@ export default function DataCatalogTableColumn({
 
   const modelColumn = driver.getColumn(
     table.schemaName,
-    table.tableName!,
+    table.tableName ?? "",
     column.name,
   );
   const [open, setOpen] = useState(false);
@@ -44,8 +44,9 @@ export default function DataCatalogTableColumn({
   });
 
   const handleClickToggle = useCallback(() => {
+    const tableName = table.tableName ?? "";
     driver
-      .updateColumn(table.schemaName, table.tableName!, column.name, {
+      .updateColumn(table.schemaName, tableName, column.name, {
         samples: modelColumn?.samples ?? [],
         definition: modelColumn?.definition ?? "",
         hide: !enabled,
@@ -123,7 +124,7 @@ export default function DataCatalogTableColumn({
           {open && (
             <DataCatalogTableColumnModal
               schemaName={table.schemaName}
-              tableName={table.tableName!}
+              tableName={table.tableName ?? ""}
               columnName={column.name}
               onClose={() => setOpen(false)}
             />

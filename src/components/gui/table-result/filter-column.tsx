@@ -43,7 +43,7 @@ export default function useTableResultColumnFilter({
           size={"sm"}
           className="ml-[3px] flex items-center gap-1 border-neutral-300 bg-neutral-200 dark:border-neutral-700 dark:bg-neutral-800"
         >
-          <LucideSettings2 className="h-3 w-4" />
+          <LucideSettings2 className="w-4 h-3" />
           Columns
           {!!columnFilterBadge && (
             <span className="transform-y-[-2px] text-secondary text-secondary-foreground ml-1 h-4 w-4 rounded-[1px] border border-neutral-600 bg-neutral-700 text-[11px]">
@@ -58,12 +58,13 @@ export default function useTableResultColumnFilter({
           {!!columnFilterBadge && (
             <>
               <button
+                type="button"
                 onClick={() => {
                   setColumnIndexList(headers.map((_, idx) => idx));
                 }}
                 className="hover:bg-secondary aria-selected:bg-accent aria-selected:text-accent-foreground relative mx-1 my-1 flex cursor-default items-center rounded-sm px-2 py-1.5 text-sm font-semibold outline-hidden select-none data-disabled:pointer-events-none data-disabled:opacity-50"
               >
-                <ListChecks className="mr-2 h-4 w-4" />
+                <ListChecks className="mr-2 w-4 h-4" />
                 Select all columns
               </button>
               <CommandSeparator />
@@ -93,7 +94,7 @@ export default function useTableResultColumnFilter({
                 >
                   <Check
                     className={cn(
-                      "mr-2 h-4 w-4",
+                      "mr-2 w-4 h-4",
                       isChecked ? "opacity-100" : "opacity-0",
                     )}
                   />

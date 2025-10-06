@@ -157,7 +157,7 @@ export default function ExportResultButton({
   const [open, setOpen] = useState(false);
 
   const onExportClicked = useCallback(() => {
-    if (!exportSetting.format) return;
+    if (!exportSetting.format || !exportSetting.options) return;
 
     let content = "";
 
@@ -165,7 +165,7 @@ export default function ExportResultButton({
       data,
       exportSetting.target,
       exportSelection,
-      exportSetting.options!,
+      exportSetting.options,
       selectedRangeIndex,
     );
 
@@ -227,7 +227,7 @@ export default function ExportResultButton({
       </PopoverTrigger>
       <PopoverContent className="min-w[550px] w-[550px] p-0">
         <div>
-          <div className="flex flex-col gap-2 border-b p-4">
+          <div className="flex flex-col gap-2 p-4 border-b">
             <h1 className="text-lg font-bold">Export</h1>
 
             <small>Export target</small>
@@ -253,11 +253,11 @@ export default function ExportResultButton({
             </RadioGroup>
           </div>
 
-          <div className="mb-2 flex grow border-b">
-            <div className="flex flex-col border-r p-2 px-4">
+          <div className="flex mb-2 border-b grow">
+            <div className="flex flex-col p-2 px-4 border-r">
               <small>Output format</small>
               <RadioGroup
-                className="mt-2 flex flex-col gap-3"
+                className="flex flex-col gap-3 mt-2"
                 defaultValue={exportSetting.format}
                 onValueChange={(e) => {
                   setExportSetting((prev) => ({
@@ -322,11 +322,11 @@ export default function ExportResultButton({
               </RadioGroup>
             </div>
             <div className="grow">
-              <div className="flex grow flex-col border-b p-2 px-4">
+              <div className="flex flex-col p-2 px-4 border-b grow">
                 <small>Selection</small>
                 <div>
                   <RadioGroup
-                    className="my-2 gap-3"
+                    className="gap-3 my-2"
                     defaultValue={exportSelection}
                     onValueChange={(e) => {
                       setExportSelection(e as ExportSelection);
@@ -400,16 +400,16 @@ export default function ExportResultButton({
                   </RadioGroup>
                 </div>
               </div>
-              <div className="ml-2 flex grow flex-col p-2">
+              <div className="flex flex-col p-2 ml-2 grow">
                 <small>Options</small>
-                <div className="mt-2 flex flex-col space-y-2">
+                <div className="flex flex-col mt-2 space-y-2">
                   <div className="flex items-center space-x-4">
                     <span className="w-[120px] text-sm">Field separator:</span>
-                    <div className="flex h-[28px] w-[120px] items-center rounded-md bg-white px-3 py-2.5 text-base text-neutral-900 outline outline-1 outline-neutral-200 focus:outline-neutral-400/70 dark:bg-neutral-900 dark:text-white dark:outline-neutral-800 dark:focus:outline-neutral-600">
+                    <div className="flex h-[28px] w-[120px] items-center rounded-md bg-white px-3 py-2.5 text-base text-neutral-900 outline-1 outline-neutral-200 focus:outline-neutral-400/70 dark:bg-neutral-900 dark:text-white dark:outline-neutral-800 dark:focus:outline-neutral-600">
                       <input
                         disabled={exportSetting.format !== "delimited"}
                         type="text"
-                        className="flex-1 bg-transparent text-sm font-light outline-hidden"
+                        className="flex-1 text-sm font-light bg-transparent outline-hidden"
                         value={exportSetting.options?.fieldSeparator || ""}
                         onChange={(e) => {
                           setExportSetting({
@@ -425,11 +425,11 @@ export default function ExportResultButton({
                   </div>
                   <div className="flex items-center space-x-4">
                     <span className="w-[120px] text-sm">Line terminator:</span>
-                    <div className="flex h-[28px] w-[120px] items-center rounded-md bg-white px-3 py-2.5 text-base text-neutral-900 outline outline-1 outline-neutral-200 focus:outline-neutral-400/70 dark:bg-neutral-900 dark:text-white dark:outline-neutral-800 dark:focus:outline-neutral-600">
+                    <div className="flex h-[28px] w-[120px] items-center rounded-md bg-white px-3 py-2.5 text-base text-neutral-900 outline-1 outline-neutral-200 focus:outline-neutral-400/70 dark:bg-neutral-900 dark:text-white dark:outline-neutral-800 dark:focus:outline-neutral-600">
                       <input
                         disabled={exportSetting.format !== "delimited"}
                         type="text"
-                        className="flex-1 bg-transparent text-sm font-light outline-hidden"
+                        className="flex-1 text-sm font-light bg-transparent outline-hidden"
                         value={exportSetting.options?.lineTerminator || ""}
                         onChange={(e) => {
                           setExportSetting({
@@ -446,11 +446,11 @@ export default function ExportResultButton({
 
                   <div className="flex items-center space-x-4">
                     <span className="w-[120px] text-sm">Encloser:</span>
-                    <div className="flex h-[28px] w-[120px] items-center rounded-md bg-white px-3 py-2.5 text-base text-neutral-900 outline outline-1 outline-neutral-200 focus:outline-neutral-400/70 dark:bg-neutral-900 dark:text-white dark:outline-neutral-800 dark:focus:outline-neutral-600">
+                    <div className="flex h-[28px] w-[120px] items-center rounded-md bg-white px-3 py-2.5 text-base text-neutral-900 outline-1 outline-neutral-200 focus:outline-neutral-400/70 dark:bg-neutral-900 dark:text-white dark:outline-neutral-800 dark:focus:outline-neutral-600">
                       <input
                         disabled={exportSetting.format !== "delimited"}
                         type="text"
-                        className="flex-1 bg-transparent text-sm font-light outline-hidden"
+                        className="flex-1 text-sm font-light bg-transparent outline-hidden"
                         value={exportSetting.options?.encloser || ""}
                         onChange={(e) => {
                           setExportSetting({
@@ -466,10 +466,10 @@ export default function ExportResultButton({
                   </div>
                   <div className="flex items-center space-x-4">
                     <span className="w-[120px] text-sm">NULL Value:</span>
-                    <div className="flex h-[28px] w-[120px] items-center rounded-md bg-white px-3 py-2.5 text-base text-neutral-900 outline outline-1 outline-neutral-200 focus:outline-neutral-400/70 dark:bg-neutral-900 dark:text-white dark:outline-neutral-800 dark:focus:outline-neutral-600">
+                    <div className="flex h-[28px] w-[120px] items-center rounded-md bg-white px-3 py-2.5 text-base text-neutral-900 outline-1 outline-neutral-200 focus:outline-neutral-400/70 dark:bg-neutral-900 dark:text-white dark:outline-neutral-800 dark:focus:outline-neutral-600">
                       <input
                         type="text"
-                        className="flex-1 bg-transparent text-sm font-light outline-hidden"
+                        className="flex-1 text-sm font-light bg-transparent outline-hidden"
                         value={exportSetting.options?.nullValue || ""}
                         onChange={(e) => {
                           setExportSetting({

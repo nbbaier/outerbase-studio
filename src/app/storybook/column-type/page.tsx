@@ -11,7 +11,7 @@ export default function ColumnTypeStorybook() {
       <ColumnTypeSelector
         value={value}
         onChange={setValue}
-        suggestions={MYSQL_DATA_TYPE_SUGGESTION.typeSuggestions!}
+        suggestions={MYSQL_DATA_TYPE_SUGGESTION.typeSuggestions ?? []}
       />
     </div>
   );

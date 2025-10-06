@@ -136,10 +136,10 @@ function calculateAggregateResult(data: OptimizeTableState): AggregateResult {
 
   if (detectedDataType === "number") {
     return {
-      sum: formatNumber(sum),
-      avg: formatNumber(avg),
-      min: formatNumber(min as number),
-      max: formatNumber(max as number),
+      sum: sum !== undefined ? formatNumber(sum) : undefined,
+      avg: avg !== undefined ? formatNumber(avg) : undefined,
+      min: min !== undefined ? formatNumber(min as number) : undefined,
+      max: max !== undefined ? formatNumber(max as number) : undefined,
       count: selectedCell.size,
     };
   }

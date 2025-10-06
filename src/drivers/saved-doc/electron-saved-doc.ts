@@ -110,15 +110,21 @@ export default class ElectronSavedDocs implements SavedDocDriver {
   ): Promise<SavedDocData> {
     await this.getNamespaces();
 
+    const foundNamespace = (this.cacheNamespaceList ?? []).find(
+      (n) => n.id === namespace,
+    );
+
+    if (!foundNamespace) {
+      throw new Error("Namespace not found");
+    }
+
     const now = Math.floor(Date.now() / 1000);
     const r: SavedDocData = {
       content: data.content,
       name: data.name,
       createdAt: now,
       updatedAt: now,
-      namespace: (this.cacheNamespaceList ?? []).find(
-        (n) => n.id === namespace,
-      )!,
+      namespace: foundNamespace,
       type,
       id: generateId(),
     };

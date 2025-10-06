@@ -30,12 +30,12 @@ export default function ColumnListEditor({
         return (
           <div
             key={idx}
-            className="px-2 bg-secondary rounded flex items-center"
+            className="flex items-center px-2 rounded bg-secondary"
           >
             <span className="p-1">{columnName}</span>
             {!disabled && (
               <span
-                className="p-1 rounded-full ml-1 cursor-pointer hover:bg-red-400"
+                className="p-1 ml-1 rounded-full cursor-pointer hover:bg-red-400"
                 onClick={() => {
                   onChange(value.filter((c) => c !== columnName));
                 }}
@@ -50,7 +50,7 @@ export default function ColumnListEditor({
       {!disabled && (
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger>
-            <button className="p-1 bg-secondary rounded">
+            <button type="button" className="p-1 rounded bg-secondary">
               <LucidePlus className="w-4 h-4" />
             </button>
           </PopoverTrigger>

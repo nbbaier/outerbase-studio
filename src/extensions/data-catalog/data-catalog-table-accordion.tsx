@@ -35,7 +35,7 @@ export default function DataCatalogTableAccordion({
   driver,
   hasDefinitionOnly,
 }: DataCatalogTableAccordionProps) {
-  const modelTable = driver.getTable(table.schemaName, table.tableName!);
+  const modelTable = driver.getTable(table.schemaName, table.tableName ?? "");
   const virtualJoinList = modelTable?.relations ?? [];
 
   const [collapsible, setCollapsible] = useState(false);
@@ -67,7 +67,7 @@ export default function DataCatalogTableAccordion({
       .map((col) => {
         const modelColumn = driver.getColumn(
           table.schemaName,
-          table.tableName!,
+          table.tableName ?? "",
           col.name,
         );
         return modelColumn?.definition;
@@ -89,7 +89,7 @@ export default function DataCatalogTableAccordion({
           {open && (
             <TableMetadataModal
               schemaName={table.schemaName}
-              tableName={table.tableName!}
+              tableName={table.tableName ?? ""}
               data={tableMetadata}
               onClose={() => {
                 setOpen(false);

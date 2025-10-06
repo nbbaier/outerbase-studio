@@ -66,7 +66,7 @@ export function BoardButtonMenu(props: Props) {
 
   if (boardMode?.mode === "REARRANGING_CHART") {
     return (
-      <div className="flex items-center gap-2">
+      <div className="flex gap-2 items-center">
         <Button variant={"secondary"} onClick={props.onCancel}>
           Cancel
         </Button>
@@ -86,14 +86,15 @@ export function BoardButtonMenu(props: Props) {
   return (
     <div className="flex gap-2">
       <button
+        type="button"
         className={buttonVariants({ size: "sm", variant: "ghost" })}
         onClick={() => {
           props.onRefresh?.();
         }}
       >
-        <div className="flex items-center gap-2">
+        <div className="flex gap-2 items-center">
           <div>
-            <RefreshCcw className="h-4 w-4" />
+            <RefreshCcw className="w-4 h-4" />
           </div>
         </div>
       </button>
@@ -101,6 +102,7 @@ export function BoardButtonMenu(props: Props) {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <button
+            type="button"
             className={cn(
               buttonVariants({ size: "sm", variant: "ghost" }),
               "gap-2",
@@ -116,7 +118,7 @@ export function BoardButtonMenu(props: Props) {
               </div>
             )}
             {props.interval > 0 && <div>{autoIntervalSelected}</div>}
-            <ChevronDown className="h-4 w-4" />
+            <ChevronDown className="w-4 h-4" />
           </button>
         </DropdownMenuTrigger>
         <DropdownMenuContent>

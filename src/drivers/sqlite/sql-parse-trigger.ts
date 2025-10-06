@@ -32,7 +32,7 @@ export function parseCreateTriggerScript(
   }
 
   let operation: TriggerOperation = "INSERT";
-  let columnNames;
+  let columnNames: string[] | undefined;
 
   if (cursor.match("DELETE")) {
     operation = "DELETE";
@@ -55,7 +55,7 @@ export function parseCreateTriggerScript(
 
   let whenExpression = "";
   const fromExpression = cursor.getPointer();
-  let toExpression;
+  let toExpression: number | undefined;
 
   if (cursor.match("WHEN")) {
     // Loop till the end or meet the BEGIN
@@ -76,7 +76,7 @@ export function parseCreateTriggerScript(
 
   let statement = "";
   const fromStatement = cursor.getPointer();
-  let toStatement;
+  let toStatement: number | undefined;
 
   while (!cursor.end()) {
     toStatement = cursor.getPointer();
