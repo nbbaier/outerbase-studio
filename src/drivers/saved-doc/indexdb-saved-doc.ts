@@ -200,6 +200,8 @@ export default class IndexdbSavedDoc implements SavedDocDriver {
   }
 
   protected triggerChange() {
-    this.cb.forEach((c) => c());
+    this.cb.forEach((c) => {
+      c();
+    });
   }
 }

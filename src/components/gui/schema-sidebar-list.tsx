@@ -109,7 +109,9 @@ function groupByFtsTable(items: ListViewItem<DatabaseSchemaItem>[]) {
         .map((suffix) => hash[item.data.name + suffix])
         .filter(Boolean);
 
-      ftsSuffix.forEach((suffix) => excludes.add(item.data.name + suffix));
+      ftsSuffix.forEach((suffix) => {
+        excludes.add(item.data.name + suffix);
+      });
 
       item.badgeContent = "fts5";
     }

@@ -187,6 +187,8 @@ export default class ElectronSavedDocs implements SavedDocDriver {
   }
 
   protected triggerChange() {
-    this.cb.forEach((c) => c());
+    this.cb.forEach((c) => {
+      c();
+    });
   }
 }

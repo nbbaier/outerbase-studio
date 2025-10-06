@@ -41,14 +41,16 @@ function getLayoutElements(
   const g = new Dagre.graphlib.Graph().setDefaultEdgeLabel(() => ({}));
   g.setGraph(options);
 
-  edges.forEach((edge) => g.setEdge(edge.source, edge.target));
-  nodes.forEach((node) =>
+  edges.forEach((edge) => {
+    g.setEdge(edge.source, edge.target);
+  });
+  nodes.forEach((node) => {
     g.setNode(node.id, {
       ...node,
       width: node.measured?.width ?? 0,
       height: node.measured?.height ?? 0,
-    }),
-  );
+    });
+  });
 
   Dagre.layout(g);
 

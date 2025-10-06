@@ -463,6 +463,8 @@ export default class DataCatalogOuterbaseDriver implements DataCatalogDriver {
 
   // Notify all subscribers
   private notify() {
-    this.subscribers.forEach((callback) => callback());
+    this.subscribers.forEach((callback) => {
+      callback();
+    });
   }
 }

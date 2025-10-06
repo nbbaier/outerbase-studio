@@ -86,13 +86,17 @@ export default class OptimizeTableState<HeaderMetadata = unknown> {
   protected broadcastChange(instant?: boolean) {
     if (instant) {
       if (this.changeDebounceTimerId) clearTimeout(this.changeDebounceTimerId);
-      this.changeCallback.reverse().forEach((cb) => cb(this));
+      this.changeCallback.reverse().forEach((cb) => {
+        cb(this);
+      });
     }
 
     if (this.changeDebounceTimerId) return false;
     this.changeDebounceTimerId = setTimeout(() => {
       this.changeDebounceTimerId = null;
-      this.changeCallback.reverse().forEach((cb) => cb(this));
+      this.changeCallback.reverse().forEach((cb) => {
+        cb(this);
+      });
     }, 5);
 
     return true;

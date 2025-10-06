@@ -14,7 +14,9 @@ export default class QueryHistoryConsoleLogExtension extends StudioExtension {
         console.groupEnd();
       } else {
         console.group("Transaction");
-        statements.forEach((s) => console.log(`%c${s}`, "color:#e67e22"));
+        statements.forEach((s) => {
+          console.log(`%c${s}`, "color:#e67e22");
+        });
         console.groupEnd();
       }
     });

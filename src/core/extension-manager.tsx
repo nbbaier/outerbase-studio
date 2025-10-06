@@ -56,7 +56,9 @@ export class StudioExtensionContext {
     {};
 
   constructor(protected extensions: IStudioExtension[]) {
-    this.extensions.forEach((ext) => ext.init(this));
+    this.extensions.forEach((ext) => {
+      ext.init(this);
+    });
   }
 
   registerBeforeQuery(handler: BeforeQueryHandler) {

@@ -173,6 +173,8 @@ export default class OuterbaseQueryDriver implements SavedDocDriver {
   }
 
   protected triggerChange() {
-    this.cb.forEach((c) => c());
+    this.cb.forEach((c) => {
+      c();
+    });
   }
 }
