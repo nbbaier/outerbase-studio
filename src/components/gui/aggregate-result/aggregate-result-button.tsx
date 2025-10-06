@@ -91,7 +91,7 @@ function calculateAggregateResult(data: OptimizeTableState): AggregateResult {
     for (const value of values) {
       const parsed = Number(value);
       if (!Number.isNaN(parsed)) {
-        sum = sum !== undefined ? sum + parsed : parsed;
+        sum = sum !== undefined ? (sum as number) + parsed : parsed;
         min =
           min !== undefined
             ? (min as number) < parsed
@@ -131,13 +131,13 @@ function calculateAggregateResult(data: OptimizeTableState): AggregateResult {
   }
 
   if (sum !== undefined && values.length > 0) {
-    avg = sum / values.length;
+    avg = (sum as number) / values.length;
   }
 
   if (detectedDataType === "number") {
     return {
-      sum: sum !== undefined ? formatNumber(sum) : undefined,
-      avg: avg !== undefined ? formatNumber(avg) : undefined,
+      sum: sum !== undefined ? formatNumber(sum as number) : undefined,
+      avg: avg !== undefined ? formatNumber(avg as number) : undefined,
       min: min !== undefined ? formatNumber(min as number) : undefined,
       max: max !== undefined ? formatNumber(max as number) : undefined,
       count: selectedCell.size,

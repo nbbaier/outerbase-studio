@@ -1,5 +1,6 @@
 "use client";
 
+import { useId } from "react";
 import Block from "@/components/orbit/block";
 import { Input } from "@/components/orbit/input";
 import Inset from "@/components/orbit/inset";
@@ -11,11 +12,11 @@ export default function LabelStorybook() {
     <Section>
       <Inset>
         <Block title="Label">
-          <Label title="Name" htmlFor="name" className="w-1/2">
+          <Label title="Name" className="w-1/2">
             <Input
               onValueChange={() => {}}
               placeholder="e.g. Joe Smith"
-              id="name"
+              id={useId()}
             />
           </Label>
         </Block>

@@ -12,6 +12,7 @@ import {
   type Dispatch,
   type SetStateAction,
   useCallback,
+  useId,
   useMemo,
 } from "react";
 import { Button } from "@/components/ui/button";
@@ -441,10 +442,12 @@ export default function SchemaEditorColumnList({
     return initialCounter;
   }, [options]);
 
+  const collationListId = useId();
+
   return (
     <div className="p-4">
       {options.collations.length > 0 && (
-        <datalist id="collation-list" className="hidden">
+        <datalist id={collationListId} className="hidden">
           {options.collations.map((collation) => (
             <option key={collation} value={collation} />
           ))}

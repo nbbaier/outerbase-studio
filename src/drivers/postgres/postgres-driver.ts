@@ -116,7 +116,7 @@ export default class PostgresLikeDriver extends CommonSQLImplement {
 
     const db = result.rows[0].search_path?.split(",")[0];
 
-    return db === this.escapeId("$user") ? "public" : db;
+    return db === this.escapeId("$user") ? "public" : (db ?? null);
   }
 
   async schemas(): Promise<DatabaseSchemas> {

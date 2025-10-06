@@ -30,7 +30,7 @@ async function cleanupFileHandler() {
 }
 
 async function openFileHandler() {
-  const [newFileHandler] = await window.showOpenFilePicker?.({
+  const fileHandlers = await window.showOpenFilePicker?.({
     types: [
       {
         description: "SQLite Files",
@@ -52,6 +52,12 @@ async function openFileHandler() {
       },
     ],
   });
+
+  if (!fileHandlers || fileHandlers.length === 0) {
+    throw new Error("No file selected");
+  }
+
+  const [newFileHandler] = fileHandlers;
 
   const id = generateId();
   localDb.file_handler.add({ id, handler: newFileHandler }).then();

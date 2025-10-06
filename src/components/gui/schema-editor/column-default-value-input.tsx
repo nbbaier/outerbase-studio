@@ -1,5 +1,6 @@
 import { ChevronsUpDown } from "lucide-react";
-import { type ChangeEvent, useCallback, useMemo } from "react";
+import { type ChangeEvent, useCallback, useId, useMemo } from "react";
+import { Input } from "@/components/orbit/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import {
@@ -9,7 +10,6 @@ import {
 } from "@/components/ui/popover";
 import { useStudioContext } from "@/context/driver-provider";
 import type { DatabaseTableColumnConstraint } from "@/drivers/base-driver";
-import { Input } from "../../ui/input";
 
 export default function ColumnDefaultValueInput({
   constraint,
@@ -115,6 +115,11 @@ export default function ColumnDefaultValueInput({
     constraint?.defaultExpression === undefined &&
     !constraint?.autoIncrement;
 
+  const noDefaultValueId = useId();
+  const autoIncrementId = useId();
+  const customValueId = useId();
+  const customExpressionId = useId();
+
   return (
     <Popover>
       <PopoverTrigger className="flex h-full w-full">
@@ -131,35 +136,36 @@ export default function ColumnDefaultValueInput({
         <div className="flex flex-col gap-4">
           <div className="flex items-center space-x-2">
             <Checkbox
-              id="no-default-value"
+              id={noDefaultValueId}
               disabled={disabled}
               checked={noDefaultValue}
               onCheckedChange={onDefaultValueChange}
             />
-            <Label htmlFor="no-default-value">No Default Value</Label>
+            <Label htmlFor={noDefaultValueId}>No Default Value</Label>
           </div>
           {databaseDriver.getFlags().dialect !== "postgres" && (
             <div className="flex items-center space-x-2">
               <Checkbox
-                id="auto-increment"
+                id={autoIncrementId}
                 disabled={disabled}
                 checked={!!constraint?.autoIncrement}
                 onCheckedChange={onAutoIncrementChange}
               />
-              <Label htmlFor="auto-increment">Autoincrement</Label>
+              <Label htmlFor={autoIncrementId}>Autoincrement</Label>
             </div>
           )}
           <div className="flex items-center space-x-2">
             <Checkbox
-              id="custom-value"
+              id={customValueId}
               disabled={disabled}
               checked={constraint?.defaultValue !== undefined}
               onCheckedChange={onCustomValueCheckedChange}
             />
-            <Label htmlFor="custom-value">Custom Value</Label>
+            <Label htmlFor={customValueId}>Custom Value</Label>
           </div>
           <div className="mt-2 mb-2 flex">
             <Input
+              id={customValueId}
               readOnly={disabled}
               placeholder="Default Value"
               value={constraint?.defaultValue?.toString() ?? ""}
@@ -168,12 +174,12 @@ export default function ColumnDefaultValueInput({
           </div>
           <div className="flex items-center space-x-2">
             <Checkbox
-              id="custom-expression"
+              id={customExpressionId}
               disabled={disabled}
               checked={constraint?.defaultExpression !== undefined}
               onCheckedChange={onExpressionCheckedChange}
             />
-            <Label htmlFor="custom-expression">Custom Expression</Label>
+            <Label htmlFor={customExpressionId}>Custom Expression</Label>
           </div>
           <div className="mt-2 mb-2 flex">
             <Input

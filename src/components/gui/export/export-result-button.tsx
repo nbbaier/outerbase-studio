@@ -1,6 +1,6 @@
 // import { Button, buttonVariants } from "../../ui/button";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useId, useState } from "react";
 import { Button } from "@/components/orbit/button";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
@@ -109,13 +109,14 @@ export default function ExportResultButton({
         return null;
     }
   }, []);
-  const saveSettingToStorage = (settings: ExportSettings) => {
+
+  const saveSettingToStorage = useCallback((settings: ExportSettings) => {
     settings.formatTemplate = {
       ...settings.formatTemplate,
       ...(settings.options ? { [settings.format]: settings.options } : {}),
     };
     localStorage.setItem("export_settings", JSON.stringify(settings));
-  };
+  }, []);
 
   const getSettingFromStorage = useCallback(() => {
     const settings = localStorage.getItem("export_settings");
@@ -218,6 +219,18 @@ export default function ExportResultButton({
     saveSettingToStorage(exportSetting);
   }, [exportSetting, saveSettingToStorage]);
 
+  const exportClipboardId = useId();
+  const exportFileId = useId();
+  const exportFormatCsvId = useId();
+  const exportFormatDelimitId = useId();
+  const exportFormatJsonId = useId();
+  const exportFormatSqlId = useId();
+  const exportFormatXlsxId = useId();
+  const exportSelectionCompleteId = useId();
+  const exportSelectionRowsId = useId();
+  const exportSelectionColsId = useId();
+  const exportSelectionRangeId = useId();
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -243,12 +256,12 @@ export default function ExportResultButton({
               }}
             >
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="clipboard" id="export-clipboard" />
-                <Label htmlFor="export-clipboard">Copy to clipboard</Label>
+                <RadioGroupItem value="clipboard" id={exportClipboardId} />
+                <Label htmlFor={exportClipboardId}>Copy to clipboard</Label>
               </div>
               <div className="flex items-center space-x-2">
-                <RadioGroupItem value="file" id="export-file" />
-                <Label htmlFor="export-file">Export to file</Label>
+                <RadioGroupItem value="file" id={exportFileId} />
+                <Label htmlFor={exportFileId}>Export to file</Label>
               </div>
             </RadioGroup>
           </div>
@@ -272,9 +285,9 @@ export default function ExportResultButton({
                 }}
               >
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="csv" id="export-format-csv" />
+                  <RadioGroupItem value="csv" id={exportFormatCsvId} />
                   <Label
-                    htmlFor="export-format-csv"
+                    htmlFor={exportFormatCsvId}
                     className="flex-1 font-normal"
                   >
                     CSV
@@ -283,37 +296,37 @@ export default function ExportResultButton({
                 <div className="flex items-center space-x-2">
                   <RadioGroupItem
                     value="delimited"
-                    id="export-format-delimit"
+                    id={exportFormatDelimitId}
                   />
                   <Label
-                    htmlFor="export-format-delimit"
+                    htmlFor={exportFormatDelimitId}
                     className="flex-1 font-normal"
                   >
                     Delimited Text
                   </Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="json" id="export-format-json" />
+                  <RadioGroupItem value="json" id={exportFormatJsonId} />
                   <Label
-                    htmlFor="export-format-json"
+                    htmlFor={exportFormatJsonId}
                     className="flex-1 font-normal"
                   >
                     JSON
                   </Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="sql" id="export-format-sql" />
+                  <RadioGroupItem value="sql" id={exportFormatSqlId} />
                   <Label
-                    htmlFor="export-format-sql"
+                    htmlFor={exportFormatSqlId}
                     className="flex-1 font-normal"
                   >
                     SQL
                   </Label>
                 </div>
                 <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="xlsx" id="export-format-xlsx" />
+                  <RadioGroupItem value="xlsx" id={exportFormatXlsxId} />
                   <Label
-                    htmlFor="export-format-xlsx"
+                    htmlFor={exportFormatXlsxId}
                     className="flex-1 font-normal"
                   >
                     Excel
@@ -335,10 +348,10 @@ export default function ExportResultButton({
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem
                         value="complete"
-                        id="export-selection-complete"
+                        id={exportSelectionCompleteId}
                       />
                       <Label
-                        htmlFor="export-selection-complete"
+                        htmlFor={exportSelectionCompleteId}
                         className="flex-1 font-normal"
                       >
                         Complete ({data.getAllRows().length} rows)
@@ -347,11 +360,11 @@ export default function ExportResultButton({
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem
                         value="selected_row"
-                        id="export-selection-rows"
+                        id={exportSelectionRowsId}
                         disabled={selectionCount.rows === 0}
                       />
                       <Label
-                        htmlFor="export-selection-rows"
+                        htmlFor={exportSelectionRowsId}
                         className="flex-1 font-normal"
                       >
                         Rows ({selectionCount.rows} rows)
@@ -360,11 +373,11 @@ export default function ExportResultButton({
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem
                         value="selected_col"
-                        id="export-selection-cols"
+                        id={exportSelectionColsId}
                         disabled={selectionCount.cols === 0}
                       />
                       <Label
-                        htmlFor="export-selection-cols"
+                        htmlFor={exportSelectionColsId}
                         className="flex-1 font-normal"
                       >
                         Columns ({selectionCount.cols} cols)
@@ -373,11 +386,11 @@ export default function ExportResultButton({
                     <div className="flex items-center space-x-2">
                       <RadioGroupItem
                         value="selected_range"
-                        id="export-selection-range"
+                        id={exportSelectionRangeId}
                         disabled={selectionCount.ranges.length === 0}
                       />
                       <Label
-                        htmlFor="export-selection-range"
+                        htmlFor={exportSelectionRangeId}
                         className="flex-1 font-normal"
                       >
                         Ranges

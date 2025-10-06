@@ -1,4 +1,5 @@
 import { produce } from "immer";
+import Image from "next/image";
 import type { Dispatch, SetStateAction } from "react";
 import { type ChartValue, outerBaseUrl } from "./chart-type";
 
@@ -23,7 +24,7 @@ export default function ChartBackGroundImage({
       {PRESET_IMAGES.map((image, index) => {
         return (
           <div key={index} className="relative cursor-pointer">
-            <img
+            <Image
               src={outerBaseUrl + image}
               alt=""
               className="h-24 w-full rounded-lg object-cover"

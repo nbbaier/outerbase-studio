@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 import Block from "@/components/orbit/block";
 import { Input } from "@/components/orbit/input";
 import Inset from "@/components/orbit/inset";
@@ -16,22 +16,26 @@ export default function InputStorybook() {
     } else setIsValid(false);
   };
 
+  const nameId = useId();
+  const resourceNameId = useId();
+  const monthId = useId();
+
   return (
     <Section>
       <Inset>
         <Block title="Input">
-          <Label title="Name" htmlFor="name">
+          <Label title="Name" htmlFor={nameId}>
             <Input
               onValueChange={() => {}}
               placeholder="e.g. Joe Smith"
-              id="name"
+              id={nameId}
               size="sm"
               disabled
             />
           </Label>
           <Label
             title="Resource name"
-            htmlFor="resourceName"
+            htmlFor={resourceNameId}
             required
             requiredDescription="text must be 'dog' "
             isValid={isValid}
@@ -41,15 +45,15 @@ export default function InputStorybook() {
               preText="outerbase.com/"
               onValueChange={checkIfValid}
               placeholder="my-cool-base"
-              id="resourceName"
+              id={resourceNameId}
               size="base"
             />
           </Label>
-          <Label title="Month" htmlFor="month">
+          <Label title="Month" htmlFor={monthId}>
             <Input
               onValueChange={() => {}}
               placeholder="e.g. April"
-              id="month"
+              id={monthId}
               size="lg"
             />
           </Label>
