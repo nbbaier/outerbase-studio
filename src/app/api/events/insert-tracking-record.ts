@@ -1,10 +1,10 @@
 "use server";
 
+import { escapeSqlValue } from "@outerbase/sdk-transform";
 import { StarbaseQuery } from "@/drivers/database/starbasedb";
 import { env } from "@/env";
 import { generateId } from "@/lib/generate-id";
-import { escapeSqlValue } from "@outerbase/sdk-transform";
-import { type TrackEventItem } from "../../../lib/tracking";
+import type { TrackEventItem } from "../../../lib/tracking";
 
 export async function insertTrackingRecord(
   deviceId: string,

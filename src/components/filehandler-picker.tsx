@@ -30,7 +30,7 @@ async function cleanupFileHandler() {
 }
 
 async function openFileHandler() {
-  const [newFileHandler] = await window.showOpenFilePicker({
+  const [newFileHandler] = await window.showOpenFilePicker?.({
     types: [
       {
         description: "SQLite Files",

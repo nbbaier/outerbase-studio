@@ -1,5 +1,8 @@
-import { BaseDriver } from "../base-driver";
-import CommonAgentDriverImplementation, { CommonAgentMessage } from "./common";
+import type { BaseDriver } from "../base-driver";
+import CommonAgentDriverImplementation, {
+  type CommonAgentMessage,
+} from "./common";
+
 interface ChatGPTResponse {
   choices: { message: { role: string; content: string } }[];
 }

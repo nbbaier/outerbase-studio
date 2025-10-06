@@ -1,10 +1,10 @@
 import { syntaxTree } from "@codemirror/language";
-import { SyntaxNode } from "@lezer/common";
+import type { SyntaxNode } from "@lezer/common";
 import {
   Decoration,
-  EditorState,
+  type EditorState,
   EditorView,
-  Range,
+  type Range,
   StateField,
 } from "@uiw/react-codemirror";
 

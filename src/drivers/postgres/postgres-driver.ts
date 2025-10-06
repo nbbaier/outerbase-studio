@@ -1,5 +1,5 @@
-import { ColumnType } from "@outerbase/sdk-transform";
-import {
+import type { ColumnType } from "@outerbase/sdk-transform";
+import type {
   ColumnTypeSelector,
   DatabaseResultSet,
   DatabaseSchemaItem,
@@ -114,7 +114,7 @@ export default class PostgresLikeDriver extends CommonSQLImplement {
       rows: { search_path?: string | null }[];
     };
 
-    const db = result.rows[0].search_path!.split(",")[0];
+    const db = result.rows[0].search_path?.split(",")[0];
 
     return db === this.escapeId("$user") ? "public" : db;
   }
@@ -171,7 +171,7 @@ WHERE
 
     const tableRecord: Record<string, DatabaseSchemaItem> = {};
     for (const table of tableResult) {
-      const key = table.table_schema + "." + table.table_name;
+      const key = `${table.table_schema}.${table.table_name}`;
 
       const tableItem: DatabaseSchemaItem = {
         name: table.table_name,
@@ -220,7 +220,7 @@ WHERE
 
       columnRecord[key] = columnItem;
 
-      const tableKey = column.table_schema + "." + column.table_name;
+      const tableKey = `${column.table_schema}.${column.table_name}`;
 
       const tableSchema = tableRecord[tableKey]?.tableSchema;
       if (tableSchema) {
@@ -232,8 +232,8 @@ WHERE
     const constraintRecord: Record<string, DatabaseTableColumnConstraint> = {};
 
     for (const constraint of constraintResult) {
-      const tableKey = constraint.table_schema + "." + constraint.table_name;
-      const constraintKey = tableKey + "." + constraint.column_name;
+      const tableKey = `${constraint.table_schema}.${constraint.table_name}`;
+      const constraintKey = `${tableKey}.${constraint.column_name}`;
 
       const constraintItem = constraintRecord[constraintKey] || {
         name: constraint.constraint_name,

@@ -1,16 +1,16 @@
 import {
-  OuterbaseAPIBaseResponse,
-  OuterbaseAPIDashboardChart,
-  OuterbaseAPIDashboardDetail,
-  OuterbaseAPIDashboardListResponse,
+  type OuterbaseAPIBaseResponse,
+  type OuterbaseAPIDashboardChart,
+  type OuterbaseAPIDashboardDetail,
+  type OuterbaseAPIDashboardListResponse,
   OuterbaseAPIError,
-  OuterbaseAPIQuery,
-  OuterbaseAPIQueryListResponse,
-  OuterbaseAPIQueryRaw,
-  OuterbaseAPIResponse,
-  OuterbaseAPISession,
-  OuterbaseAPIUser,
-  OuterbaseAPIWorkspaceResponse,
+  type OuterbaseAPIQuery,
+  type OuterbaseAPIQueryListResponse,
+  type OuterbaseAPIQueryRaw,
+  type OuterbaseAPIResponse,
+  type OuterbaseAPISession,
+  type OuterbaseAPIUser,
+  type OuterbaseAPIWorkspaceResponse,
 } from "./api-type";
 
 export async function requestOuterbase<T = unknown>(

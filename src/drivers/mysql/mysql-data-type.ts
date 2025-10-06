@@ -1,4 +1,4 @@
-import { ColumnTypeSelector } from "../base-driver";
+import type { ColumnTypeSelector } from "../base-driver";
 
 export const MYSQL_DATA_TYPE_SUGGESTION: ColumnTypeSelector = {
   type: "text",

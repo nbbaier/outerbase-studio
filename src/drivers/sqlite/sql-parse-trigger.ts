@@ -1,9 +1,9 @@
-import {
+import { tokenizeSql } from "@outerbase/sdk-transform";
+import type {
   DatabaseTriggerSchema,
   TriggerOperation,
   TriggerWhen,
 } from "@/drivers/base-driver";
-import { tokenizeSql } from "@outerbase/sdk-transform";
 import { CursorV2, parseColumnList } from "./sql-parse-table";
 
 export function parseCreateTriggerScript(

@@ -1,4 +1,4 @@
-import { ChartParams, ChartValue } from "@/components/chart/chart-type";
+import type { ChartParams, ChartValue } from "@/components/chart/chart-type";
 import { requestOuterbase } from "./api";
 
 export async function createOuterbaseDashboardChart(

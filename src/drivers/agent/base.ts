@@ -1,4 +1,4 @@
-import { DatabaseSchemas } from "../base-driver";
+import type { DatabaseSchemas } from "../base-driver";
 
 export interface AgentPromptOption {
   schema?: DatabaseSchemas;

@@ -1,5 +1,5 @@
 import { isEqual, omit } from "lodash";
-import {
+import type {
   BaseDriver,
   DatabaseTableColumn,
   DatabaseTableColumnConstraint,
@@ -9,7 +9,7 @@ import {
 function wrapParen(str: string) {
   if (str.toUpperCase() === "NULL") return str;
   if (str.length >= 2 && str.startsWith("(") && str.endsWith(")")) return str;
-  return "(" + str + ")";
+  return `(${str})`;
 }
 
 function generateCreateColumn(
@@ -93,11 +93,11 @@ function generateCreateColumn(
   }
 
   if (col.constraint?.collate) {
-    tokens.push("COLLATE " + driver.escapeValue(col.constraint.collate));
+    tokens.push(`COLLATE ${driver.escapeValue(col.constraint.collate)}`);
   }
 
   if (col.constraint?.checkExpression) {
-    tokens.push("CHECK " + wrapParen(col.constraint.checkExpression));
+    tokens.push(`CHECK ${wrapParen(col.constraint.checkExpression)}`);
   }
 
   const foreignTableName = col.constraint?.foreignKey?.foreignTableName;
@@ -174,7 +174,7 @@ export function generatePostgresSchemaChange(
       if (isCreateScript) {
         lines.push(generateCreateColumn(driver, col.new));
       } else {
-        lines.push("ADD " + generateCreateColumn(driver, col.new));
+        lines.push(`ADD ${generateCreateColumn(driver, col.new)}`);
       }
     } else {
       // check if there is rename
@@ -241,7 +241,7 @@ export function generatePostgresSchemaChange(
     return [
       `CREATE TABLE ${driver.escapeId(change.schemaName ?? "main")}.${driver.escapeId(
         change.name.new || "no_table_name",
-      )}(\n${lines.map((line) => "  " + line).join(",\n")}\n)`,
+      )}(\n${lines.map((line) => `  ${line}`).join(",\n")}\n)`,
     ];
   } else {
     const alter = `ALTER TABLE ${driver.escapeId(change.schemaName ?? "main")}.${driver.escapeId(change.name.old ?? "")} `;

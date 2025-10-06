@@ -1,5 +1,5 @@
 import { ColumnType } from "@outerbase/sdk-transform";
-import {
+import type {
   DatabaseHeader,
   DatabaseResultSet,
   DatabaseRow,

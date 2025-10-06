@@ -1,5 +1,5 @@
 import { transformCloudflareD1 } from "@outerbase/sdk-transform";
-import { DatabaseResultSet, QueryableBaseDriver } from "../base-driver";
+import type { DatabaseResultSet, QueryableBaseDriver } from "../base-driver";
 
 interface CloudflareResult {
   results: {

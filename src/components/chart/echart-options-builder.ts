@@ -1,4 +1,4 @@
-import {
+import type {
   BarSeriesOption,
   EChartsOption,
   FunnelSeriesOption,
@@ -8,11 +8,11 @@ import {
   SeriesOption,
 } from "echarts";
 import {
-  ChartData,
-  ChartValue,
+  type ChartData,
+  type ChartValue,
   DEFAULT_THEME,
-  ThemeColors,
   THEMES,
+  type ThemeColors,
 } from "./chart-type";
 
 export default class EchartOptionsBuilder {
@@ -213,7 +213,7 @@ export default class EchartOptionsBuilder {
           },
         },
         axisLabel: {
-          // @ts-ignore bug in echarts? this definitely exists
+          // @ts-expect-error bug in echarts? this definitely exists
           formatter: isXAxisDate ? undefined : this.labelFormatter,
           color: this.getTextColor(),
           hideOverlap: true,
@@ -257,7 +257,7 @@ export default class EchartOptionsBuilder {
           },
         },
         axisLabel: {
-          // @ts-ignore bug in echarts? this definitely exists
+          // @ts-expect-error bug in echarts? this definitely exists
           formatter: isXAxisDate ? undefined : this.labelFormatter, // `isXAxisDate` is not a typo
           color: this.getTextColor(),
           align: "right",
@@ -438,12 +438,12 @@ export default class EchartOptionsBuilder {
 }
 
 export function isDate(dateString: string): boolean {
-  if (!isNaN(Number(dateString))) {
+  if (!Number.isNaN(Number(dateString))) {
     // this is number
     return false;
   } else {
     const date = new Date(dateString);
-    return !isNaN(date.getTime());
+    return !Number.isNaN(date.getTime());
   }
 }
 

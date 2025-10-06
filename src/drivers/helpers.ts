@@ -1,4 +1,4 @@
-import { SavedConnectionRawLocalStorage } from "@/app/(theme)/connect/saved-connection-storage";
+import type { SavedConnectionRawLocalStorage } from "@/app/(theme)/connect/saved-connection-storage";
 import { CloudflareD1Queryable } from "./database/cloudflare-d1";
 import CloudflareWAEDriver from "./database/cloudflare-wae";
 import { RqliteQueryable } from "./database/rqlite";
@@ -17,7 +17,7 @@ export function createLocalDriver(conn: SavedConnectionRawLocalStorage) {
   } else if (conn.driver === "cloudflare-d1") {
     return new SqliteLikeBaseDriver(
       new CloudflareD1Queryable("/proxy/d1", {
-        Authorization: "Bearer " + conn.token,
+        Authorization: `Bearer ${conn.token}`,
         "x-account-id": conn.username ?? "",
         "x-database-id": conn.database ?? "",
       }),

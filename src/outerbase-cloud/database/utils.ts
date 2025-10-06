@@ -1,8 +1,11 @@
-import { DatabaseResultSet } from "@/drivers/base-driver";
+import type { DatabaseResultSet } from "@/drivers/base-driver";
 import MySQLLikeDriver from "@/drivers/mysql/mysql-driver";
 import PostgresLikeDriver from "@/drivers/postgres/postgres-driver";
 import { SqliteLikeBaseDriver } from "@/drivers/sqlite-base-driver";
-import { OuterbaseAPIQueryRaw, OuterbaseDatabaseConfig } from "../api-type";
+import type {
+  OuterbaseAPIQueryRaw,
+  OuterbaseDatabaseConfig,
+} from "../api-type";
 import { OuterbaseQueryable } from "./query";
 
 export function transformOuterbaseResult(

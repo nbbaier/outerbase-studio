@@ -1,14 +1,14 @@
-import { escapeIdentity, escapeSqlValue } from "@/drivers/sqlite/sql-helper";
-import {
+import { isEqual, omit } from "lodash";
+import type {
   DatabaseTableColumn,
   DatabaseTableColumnConstraint,
   DatabaseTableSchemaChange,
 } from "@/drivers/base-driver";
-import { omit, isEqual } from "lodash";
+import { escapeIdentity, escapeSqlValue } from "@/drivers/sqlite/sql-helper";
 
 function wrapParen(str: string) {
   if (str.length >= 2 && str.startsWith("(") && str.endsWith(")")) return str;
-  return "(" + str + ")";
+  return `(${str})`;
 }
 
 function generateCreateColumn(col: DatabaseTableColumn): string {
@@ -78,7 +78,7 @@ function generateCreateColumn(col: DatabaseTableColumn): string {
   }
 
   if (col.constraint?.checkExpression) {
-    tokens.push("CHECK " + wrapParen(col.constraint.checkExpression));
+    tokens.push(`CHECK ${wrapParen(col.constraint.checkExpression)}`);
   }
 
   const foreignTableName = col.constraint?.foreignKey?.foreignTableName;
@@ -128,7 +128,7 @@ export default function generateSqlSchemaChange(
       if (isCreateScript) {
         lines.push(generateCreateColumn(col.new));
       } else {
-        lines.push("ADD " + generateCreateColumn(col.new));
+        lines.push(`ADD ${generateCreateColumn(col.new)}`);
       }
     } else {
       // check if there is rename
@@ -167,7 +167,7 @@ export default function generateSqlSchemaChange(
     return [
       `CREATE TABLE ${escapeIdentity(change.schemaName ?? "main")}.${escapeIdentity(
         change.name.new || "no_table_name",
-      )}(\n${lines.map((line) => "  " + line).join(",\n")}\n)`,
+      )}(\n${lines.map((line) => `  ${line}`).join(",\n")}\n)`,
     ];
   } else {
     const alter = `ALTER TABLE ${escapeIdentity(change.schemaName ?? "main")}.${escapeIdentity(change.name.old ?? "")} `;

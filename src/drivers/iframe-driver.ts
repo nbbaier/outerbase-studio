@@ -1,5 +1,5 @@
 "use client";
-import { DatabaseResultSet, QueryableBaseDriver } from "./base-driver";
+import type { DatabaseResultSet, QueryableBaseDriver } from "./base-driver";
 
 type ParentResponseData =
   | {
@@ -82,11 +82,11 @@ class ElectronConnection {
   }
 
   query(stmt: string): Promise<DatabaseResultSet> {
-    return window.outerbaseIpc!.query(stmt);
+    return window.outerbaseIpc?.query(stmt);
   }
 
   transaction(stmts: string[]): Promise<DatabaseResultSet[]> {
-    return window.outerbaseIpc!.transaction(stmts);
+    return window.outerbaseIpc?.transaction(stmts);
   }
 }
 

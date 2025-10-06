@@ -1,4 +1,4 @@
-import { ColumnTypeSelector } from "../base-driver";
+import type { ColumnTypeSelector } from "../base-driver";
 
 //https://www.postgresql.org/docs/current/datatype.html
 export const POSTGRES_DATA_TYPE_SUGGESTION: ColumnTypeSelector = {

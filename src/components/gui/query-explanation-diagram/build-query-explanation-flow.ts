@@ -1,6 +1,12 @@
-import { Edge, NodeProps, Node, MarkerType, Position } from "@xyflow/react";
 import Dagre from "@dagrejs/dagre";
-import { ExplanationRow } from "../query-explanation";
+import {
+  type Edge,
+  MarkerType,
+  type Node,
+  type NodeProps,
+  Position,
+} from "@xyflow/react";
+import type { ExplanationRow } from "../query-explanation";
 
 interface ExplanationMysqlTable {
   id: string;
@@ -458,8 +464,8 @@ export function buildQueryExplanationFlow(item: ExplanationMysql, id?: number) {
     }
 
     const layout = getLayoutedExplanationElements(
-      [...nodes, ...union_flow.map((x) => x.nodes).flat()],
-      [...edges, ...union_flow.map((x) => x.edges).flat()],
+      [...nodes, ...union_flow.flatMap((x) => x.nodes)],
+      [...edges, ...union_flow.flatMap((x) => x.edges)],
       "LR",
     );
 
@@ -511,7 +517,7 @@ export function buildQueryExplanationFlow(item: ExplanationMysql, id?: number) {
   if (!table && nested_reverse.length > 0) {
     for (const [index, value] of nested_reverse.entries()) {
       nodes.push({
-        id: "nested_loop_" + index,
+        id: `nested_loop_${index}`,
         data: {
           label: "nested loop",
           cost_info: {
@@ -535,11 +541,11 @@ export function buildQueryExplanationFlow(item: ExplanationMysql, id?: number) {
         target:
           index === 0
             ? keyNestedloopAndTableShouldConnected
-            : "nested_loop_" + (index - 1),
-        source: index === 0 ? "nested_loop_0" : "nested_loop_" + index,
+            : `nested_loop_${index - 1}`,
+        source: index === 0 ? "nested_loop_0" : `nested_loop_${index}`,
         targetHandle:
           index === 0 ? keyNestedloopAndTableShouldConnected : "left",
-        sourceHandle: index === 0 ? "nested_loop_0" : "nested_loop_" + index,
+        sourceHandle: index === 0 ? "nested_loop_0" : `nested_loop_${index}`,
         type: "smoothstep",
         markerEnd: {
           type: MarkerType.ArrowClosed,
@@ -553,7 +559,7 @@ export function buildQueryExplanationFlow(item: ExplanationMysql, id?: number) {
         label:
           value.table.rows_produced_per_join === "0"
             ? ""
-            : formatCost(Number(value.table.rows_produced_per_join)) + " rows",
+            : `${formatCost(Number(value.table.rows_produced_per_join))} rows`,
         labelShowBg: false,
         labelStyle: {
           fill: "#AAAAAA",
@@ -583,7 +589,7 @@ export function buildQueryExplanationFlow(item: ExplanationMysql, id?: number) {
       });
       edgesTable.add({
         id: `nested_loop_${key}-${value.table.table_name}${id}`,
-        target: "nested_loop_" + key,
+        target: `nested_loop_${key}`,
         source: `${value.table.table_name}${id}`,
         targetHandle:
           index === nested_reverse.length - 1 || id ? "left" : "bottom",

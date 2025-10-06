@@ -1,7 +1,7 @@
-import AgentDriverList from "@/drivers/agent/list";
-import { BaseDriver } from "@/drivers/base-driver";
 import { useMemo } from "react";
 import useSWR, { mutate } from "swr";
+import AgentDriverList from "@/drivers/agent/list";
+import type { BaseDriver } from "@/drivers/base-driver";
 
 export interface LocalAgentType {
   provider: "openai";

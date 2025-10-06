@@ -1,9 +1,12 @@
-import {
+import type {
   BaseDriver,
   DatabaseResultSet,
   DatabaseResultStat,
 } from "@/drivers/base-driver";
-import { getSQLStatementType, SQLStatementType } from "@/drivers/sql-helper";
+import {
+  getSQLStatementType,
+  type SQLStatementType,
+} from "@/drivers/sql-helper";
 import { sendAnalyticEvents } from "@/lib/tracking";
 
 export interface MultipleQueryProgressItem {

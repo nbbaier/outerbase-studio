@@ -1,12 +1,12 @@
-import {
-  EditorView,
-  ViewPlugin,
-  Decoration,
-  DecorationSet,
-  ViewUpdate,
-} from "@codemirror/view";
-import { Range } from "@codemirror/state";
 import { syntaxTree } from "@codemirror/language";
+import type { Range } from "@codemirror/state";
+import {
+  Decoration,
+  type DecorationSet,
+  type EditorView,
+  ViewPlugin,
+  type ViewUpdate,
+} from "@codemirror/view";
 
 const underlineMark = Decoration.mark({ class: "cm-table-name" });
 
@@ -25,7 +25,7 @@ export default function createSQLTableNameHighlightPlugin(
         from,
         to,
         enter: (node) => {
-          if (node.name == "Identifier") {
+          if (node.name === "Identifier") {
             const word = view.state.doc
               .sliceString(node.from, node.to)
               .toLowerCase();

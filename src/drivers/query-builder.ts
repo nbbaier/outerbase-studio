@@ -1,4 +1,4 @@
-import { BaseDriver } from "./base-driver";
+import type { BaseDriver } from "./base-driver";
 
 function generateWhere(dialect: BaseDriver, where: Record<string, unknown>) {
   const conditions = Object.entries(where)
@@ -7,7 +7,7 @@ function generateWhere(dialect: BaseDriver, where: Record<string, unknown>) {
     })
     .join(" AND ");
 
-  if (conditions.length > 0) return "WHERE " + conditions;
+  if (conditions.length > 0) return `WHERE ${conditions}`;
   return null;
 }
 

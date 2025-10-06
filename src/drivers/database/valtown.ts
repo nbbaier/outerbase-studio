@@ -1,5 +1,8 @@
-import { DatabaseResultSet, QueryableBaseDriver } from "@/drivers/base-driver";
-import { InStatement, ResultSet } from "@libsql/client";
+import type { InStatement, ResultSet } from "@libsql/client";
+import type {
+  DatabaseResultSet,
+  QueryableBaseDriver,
+} from "@/drivers/base-driver";
 import { transformRawResult } from "./turso";
 
 export class ValtownQueryable implements QueryableBaseDriver {
@@ -9,7 +12,7 @@ export class ValtownQueryable implements QueryableBaseDriver {
     const r = await fetch(`https://api.val.town/v1/sqlite/batch`, {
       method: "POST",
       headers: {
-        Authorization: "Bearer " + this.token,
+        Authorization: `Bearer ${this.token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -26,7 +29,7 @@ export class ValtownQueryable implements QueryableBaseDriver {
     const r = await fetch(`https://api.val.town/v1/sqlite/execute`, {
       method: "POST",
       headers: {
-        Authorization: "Bearer " + this.token,
+        Authorization: `Bearer ${this.token}`,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ statement: stmt }),

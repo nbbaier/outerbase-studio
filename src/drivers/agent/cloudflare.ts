@@ -1,6 +1,8 @@
 import { format } from "sql-formatter";
-import { BaseDriver } from "../base-driver";
-import CommonAgentDriverImplementation, { CommonAgentMessage } from "./common";
+import type { BaseDriver } from "../base-driver";
+import CommonAgentDriverImplementation, {
+  type CommonAgentMessage,
+} from "./common";
 
 export default class CloudflareAgentDriver extends CommonAgentDriverImplementation {
   constructor(

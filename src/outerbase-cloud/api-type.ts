@@ -1,6 +1,6 @@
-import { DashboardProps } from "@/components/board";
-import { ChartValue } from "@/components/chart/chart-type";
-import { ColumnHeader, ResultStat } from "@outerbase/sdk-transform";
+import type { ColumnHeader, ResultStat } from "@outerbase/sdk-transform";
+import type { DashboardProps } from "@/components/board";
+import type { ChartValue } from "@/components/chart/chart-type";
 
 export interface OuterbaseDatabaseConfig {
   workspaceId: string;

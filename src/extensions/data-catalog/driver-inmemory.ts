@@ -1,4 +1,5 @@
-import DataCatalogDriver, {
+import type DataCatalogDriver from "./driver";
+import type {
   DataCatalogColumn,
   DataCatalogColumnInput,
   DataCatalogSchemas,

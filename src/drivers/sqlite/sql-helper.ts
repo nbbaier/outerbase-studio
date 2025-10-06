@@ -44,7 +44,7 @@ export function extractInputValue(input: string): string | number {
   }
 
   const parsedNumber = parseFloat(trimmedInput);
-  if (!isNaN(parsedNumber)) {
+  if (!Number.isNaN(parsedNumber)) {
     return parsedNumber;
   }
 

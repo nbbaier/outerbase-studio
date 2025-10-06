@@ -1,5 +1,5 @@
-import { DashboardProps } from "@/components/board";
-import { ChartParams, ChartValue } from "@/components/chart/chart-type";
+import type { DashboardProps } from "@/components/board";
+import type { ChartParams, ChartValue } from "@/components/chart/chart-type";
 import {
   deleteOuterbaseDashboardChart,
   updateOuterbaseDashboard,
@@ -8,7 +8,7 @@ import {
   createOuterbaseDashboardChart,
   updateOuterbaseDashboardChart,
 } from "@/outerbase-cloud/api-board";
-import { IBoardStorageDriver } from "./base";
+import type { IBoardStorageDriver } from "./base";
 
 export default class OuterbaseBoardStorageDriver
   implements IBoardStorageDriver

@@ -1,6 +1,9 @@
-import { DatabaseResultSet, QueryableBaseDriver } from "@/drivers/base-driver";
+import type {
+  DatabaseResultSet,
+  QueryableBaseDriver,
+} from "@/drivers/base-driver";
 import { runOuterbaseQueryBatch, runOuterbaseQueryRaw } from "../api";
-import { OuterbaseDatabaseConfig } from "../api-type";
+import type { OuterbaseDatabaseConfig } from "../api-type";
 import { transformOuterbaseResult } from "./utils";
 
 export class OuterbaseQueryable implements QueryableBaseDriver {

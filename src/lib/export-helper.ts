@@ -1,17 +1,17 @@
-import {
+import { toast } from "sonner";
+import type {
   ExportFormat,
   ExportOptions,
   ExportSelection,
   ExportTarget,
 } from "@/components/gui/export/export-result-button";
-import OptimizeTableState from "@/components/gui/table-optimized/optimize-table-state";
+import type OptimizeTableState from "@/components/gui/table-optimized/optimize-table-state";
 import { getSingleTableName } from "@/components/gui/tabs/query-tab";
 import {
   escapeDelimitedValue,
   escapeIdentity,
   escapeSqlValue,
 } from "@/drivers/sqlite/sql-helper";
-import { toast } from "sonner";
 
 export function selectArrayFromIndexList<T = unknown>(
   data: T[],
@@ -54,7 +54,7 @@ function cellToExcelValue(value: unknown, nullValue: string = "NULL") {
   if (value === undefined) return "";
   if (value === null) return parseUserInput(nullValue);
   const parsed = Number(value);
-  return isNaN(parsed) ? value : parsed;
+  return Number.isNaN(parsed) ? value : parsed;
 }
 
 export function exportRowsToExcel(

@@ -1,6 +1,6 @@
-import { Tooltip, showTooltip, EditorView } from "@codemirror/view";
-import { StateField, EditorState } from "@codemirror/state";
 import { syntaxTree } from "@codemirror/language";
+import { type EditorState, StateField } from "@codemirror/state";
+import { EditorView, showTooltip, type Tooltip } from "@codemirror/view";
 
 export type TooltipDirectionary = Record<
   string,

@@ -1,12 +1,12 @@
 import { validateOperation } from "@/lib/validation";
 import {
   BaseDriver,
-  DatabaseResultSet,
-  DatabaseTableOperation,
-  DatabaseTableOperationReslt,
-  DatabaseTableSchema,
-  DatabaseValue,
-  SelectFromTableOptions,
+  type DatabaseResultSet,
+  type DatabaseTableOperation,
+  type DatabaseTableOperationReslt,
+  type DatabaseTableSchema,
+  type DatabaseValue,
+  type SelectFromTableOptions,
 } from "./base-driver";
 import { deleteFrom, insertInto, updateTable } from "./query-builder";
 import { escapeSqlValue } from "./sqlite/sql-helper";
@@ -158,7 +158,7 @@ export default abstract class CommonSQLImplement extends BaseDriver {
       })
       .join(" AND ");
 
-    const sql = `SELECT * FROM ${this.escapeId(schemaName)}.${this.escapeId(tableName)} ${wherePart ? "WHERE " + wherePart : ""} LIMIT 1 OFFSET 0`;
+    const sql = `SELECT * FROM ${this.escapeId(schemaName)}.${this.escapeId(tableName)} ${wherePart ? `WHERE ${wherePart}` : ""} LIMIT 1 OFFSET 0`;
     return this.query(sql);
   }
 

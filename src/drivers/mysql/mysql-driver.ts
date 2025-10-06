@@ -1,6 +1,6 @@
-import { ColumnType } from "@outerbase/sdk-transform";
+import type { ColumnType } from "@outerbase/sdk-transform";
 import { format } from "sql-formatter";
-import {
+import type {
   ColumnTypeSelector,
   DatabaseResultSet,
   DatabaseSchemaChange,
@@ -20,8 +20,8 @@ import {
 import CommonSQLImplement from "../common-sql-imp";
 import { escapeSqlValue } from "../sqlite/sql-helper";
 import {
-  generateMysqlDatabaseSchema,
   generateMySqlSchemaChange,
+  generateMysqlDatabaseSchema,
 } from "./generate-schema";
 import {
   MYSQL_COLLATION_LIST,
@@ -170,11 +170,11 @@ export default class MySQLLikeDriver extends CommonSQLImplement {
   getFlags(): DriverFlags {
     return {
       defaultSchema: this.selectedDatabase,
-      optionalSchema: this.selectedDatabase ? true : false,
+      optionalSchema: !!this.selectedDatabase,
       supportBigInt: false,
       supportModifyColumn: true,
       supportCreateUpdateTable: true,
-      supportCreateUpdateDatabase: this.selectedDatabase ? false : true,
+      supportCreateUpdateDatabase: !this.selectedDatabase,
       dialect: "mysql",
       supportUseStatement: true,
       supportRowId: false,
@@ -248,7 +248,7 @@ export default class MySQLLikeDriver extends CommonSQLImplement {
     // Hash table of table
     const tableRecord: Record<string, DatabaseSchemaItem> = {};
     for (const t of tableResult) {
-      const key = t.TABLE_SCHEMA + "." + t.TABLE_NAME;
+      const key = `${t.TABLE_SCHEMA}.${t.TABLE_NAME}`;
       const table: DatabaseSchemaItem = {
         name: t.TABLE_NAME,
         type: t.TABLE_TYPE === "VIEW" ? "view" : "table",
@@ -274,7 +274,7 @@ export default class MySQLLikeDriver extends CommonSQLImplement {
 
     for (const c of columnResult) {
       const column: DatabaseTableColumn = mapColumn(c);
-      const tableKey = c.TABLE_SCHEMA + "." + c.TABLE_NAME;
+      const tableKey = `${c.TABLE_SCHEMA}.${c.TABLE_NAME}`;
       const tableSchema = tableRecord[tableKey].tableSchema;
       if (tableSchema) {
         tableSchema.columns.push(column);
@@ -285,13 +285,12 @@ export default class MySQLLikeDriver extends CommonSQLImplement {
     const constraintRecords: Record<string, DatabaseTableColumnConstraint> = {};
 
     for (const c of constraintResult) {
-      const constraintKey =
-        c.TABLE_SCHEMA + "." + c.TABLE_NAME + "." + c.CONSTRAINT_NAME;
+      const constraintKey = `${c.TABLE_SCHEMA}.${c.TABLE_NAME}.${c.CONSTRAINT_NAME}`;
 
-      const tableKey = c.TABLE_SCHEMA + "." + c.TABLE_NAME;
+      const tableKey = `${c.TABLE_SCHEMA}.${c.TABLE_NAME}`;
       const table = tableRecord[tableKey];
 
-      if (table && table.tableSchema) {
+      if (table?.tableSchema) {
         const constraint: DatabaseTableColumnConstraint = {
           name: c.CONSTRAINT_NAME,
         };
@@ -326,10 +325,9 @@ export default class MySQLLikeDriver extends CommonSQLImplement {
 
     // Add columns to constraint
     for (const c of constraintColumnsResult) {
-      const constraintKey =
-        c.TABLE_SCHEMA + "." + c.TABLE_NAME + "." + c.CONSTRAINT_NAME;
+      const constraintKey = `${c.TABLE_SCHEMA}.${c.TABLE_NAME}.${c.CONSTRAINT_NAME}`;
 
-      const tableKey = c.TABLE_SCHEMA + "." + c.TABLE_NAME;
+      const tableKey = `${c.TABLE_SCHEMA}.${c.TABLE_NAME}`;
       const tableSchema = tableRecord[tableKey]?.tableSchema;
 
       const constraint = constraintRecords[constraintKey];

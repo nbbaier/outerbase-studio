@@ -1,5 +1,5 @@
-import { DashboardProps } from "@/components/board";
-import { ChartValue } from "@/components/chart/chart-type";
+import type { DashboardProps } from "@/components/board";
+import type { ChartValue } from "@/components/chart/chart-type";
 
 export abstract class IBoardStorageDriver {
   abstract save(value: DashboardProps): Promise<unknown>;

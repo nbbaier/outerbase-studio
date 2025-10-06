@@ -1,13 +1,13 @@
-import { OptimizeTableHeaderProps } from "@/components/gui/table-optimized";
-import { TableHeaderMetadata } from "@/components/gui/table-result/type";
-import {
+import { ColumnType } from "@outerbase/sdk-transform";
+import { LucideKey, LucideKeySquare, LucideSigma } from "lucide-react";
+import type { OptimizeTableHeaderProps } from "@/components/gui/table-optimized";
+import type { TableHeaderMetadata } from "@/components/gui/table-result/type";
+import type {
   BaseDriver,
   DatabaseResultSet,
   DatabaseSchemas,
   DatabaseTableSchema,
 } from "@/drivers/base-driver";
-import { ColumnType } from "@outerbase/sdk-transform";
-import { LucideKey, LucideKeySquare, LucideSigma } from "lucide-react";
 
 export interface BuildTableResultProps {
   result: DatabaseResultSet;
@@ -86,11 +86,7 @@ function pipeWithTableSchema(
     }
 
     // Attaching the foreign key from column constraint
-    if (
-      columnSchema &&
-      columnSchema.constraint?.foreignKey &&
-      columnSchema.constraint.foreignKey.foreignColumns
-    ) {
+    if (columnSchema?.constraint?.foreignKey?.foreignColumns) {
       header.metadata.referenceTo = {
         schema: columnSchema.constraint.foreignKey.foreignSchemaName!,
         table: columnSchema.constraint.foreignKey.foreignTableName!,
@@ -101,7 +97,7 @@ function pipeWithTableSchema(
     // Attaching the foreign key from table constraint
     if (tableSchema.constraints) {
       for (const constraint of tableSchema.constraints) {
-        if (constraint.foreignKey && constraint.foreignKey.columns) {
+        if (constraint.foreignKey?.columns) {
           const foundIndex = constraint.foreignKey.columns.indexOf(header.name);
           if (foundIndex !== -1) {
             header.metadata.referenceTo = {

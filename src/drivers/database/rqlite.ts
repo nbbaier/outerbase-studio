@@ -1,4 +1,4 @@
-import {
+import type {
   DatabaseHeader,
   DatabaseResultSet,
   DatabaseRow,
@@ -82,12 +82,12 @@ export class RqliteQueryable implements QueryableBaseDriver {
     if (this.username) {
       headers = {
         ...headers,
-        Authorization: "Basic " + btoa(this.username + ":" + this.password),
+        Authorization: `Basic ${btoa(`${this.username}:${this.password}`)}`,
       };
     }
 
     // https://rqlite.io/docs/api/api/#unified-endpoint
-    const result = await fetch(this.endpoint + "/db/request?timings", {
+    const result = await fetch(`${this.endpoint}/db/request?timings`, {
       method: "POST",
       headers,
       body: JSON.stringify(

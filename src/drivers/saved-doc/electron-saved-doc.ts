@@ -1,6 +1,6 @@
 "use client";
 import { generateId } from "@/lib/generate-id";
-import {
+import type {
   SavedDocData,
   SavedDocDriver,
   SavedDocGroupByNamespace,

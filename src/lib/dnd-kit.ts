@@ -1,4 +1,4 @@
-import { Modifier } from "@dnd-kit/core";
+import type { Modifier } from "@dnd-kit/core";
 
 type Transform = {
   x: number;

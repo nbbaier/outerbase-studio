@@ -1,4 +1,4 @@
-import { DatabaseResultSet, QueryableBaseDriver } from "../base-driver";
+import type { DatabaseResultSet, QueryableBaseDriver } from "../base-driver";
 import MySQLLikeDriver from "./mysql-driver";
 
 type PromiseResolveReject = {

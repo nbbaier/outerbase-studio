@@ -198,8 +198,8 @@ export default function PlaygroundEditorBody({
             },
           ],
         })
-        .then(([fileHandler]) => {
-          setHandler(fileHandler);
+        .then((fileHandlers) => {
+          setHandler(fileHandlers[0]);
         });
     } else {
       const input = document.createElement("input");
@@ -348,9 +348,9 @@ async function loadDatabaseFileHandlerFromSessionId(sessionId: string) {
 
   const sessionData = await localDb.file_handler.get(fileHandlerId);
   if (sessionData?.handler) {
-    const permission = await sessionData.handler.queryPermission();
+    const permission = await sessionData.handler.queryPermission?.();
     if (permission !== "granted") {
-      await sessionData.handler.requestPermission();
+      await sessionData.handler.requestPermission?.();
       return sessionData.handler;
     } else {
       return sessionData.handler;

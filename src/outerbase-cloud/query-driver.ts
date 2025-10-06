@@ -1,4 +1,4 @@
-import {
+import type {
   SavedDocData,
   SavedDocDriver,
   SavedDocGroupByNamespace,
@@ -100,8 +100,8 @@ export default class OuterbaseQueryDriver implements SavedDocDriver {
       updatedAt: Date.now(),
     };
 
-    if (this.cacheDocs["default"]) {
-      this.cacheDocs["default"].unshift(doc);
+    if (this.cacheDocs.default) {
+      this.cacheDocs.default.unshift(doc);
     }
 
     this.triggerChange();
@@ -140,8 +140,8 @@ export default class OuterbaseQueryDriver implements SavedDocDriver {
       updatedAt: Date.now(),
     };
 
-    if (this.cacheDocs["default"]) {
-      this.cacheDocs["default"] = this.cacheDocs["default"].map((d) => {
+    if (this.cacheDocs.default) {
+      this.cacheDocs.default = this.cacheDocs.default.map((d) => {
         if (d.id === r.id) return doc;
         return d;
       });

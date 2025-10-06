@@ -1,4 +1,8 @@
-import { BaseDriver, DatabaseResultSet, DatabaseSchemas } from "../base-driver";
+import type {
+  BaseDriver,
+  DatabaseResultSet,
+  DatabaseSchemas,
+} from "../base-driver";
 
 export interface BoardSource {
   id: string;

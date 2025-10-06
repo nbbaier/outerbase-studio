@@ -1,7 +1,7 @@
-import useElementResize from "@/components/hooks/useElementResize";
 import { useCallback, useEffect, useState } from "react";
-import { OptimizeTableHeaderWithIndexProps } from ".";
-import OptimizeTableState from "./optimize-table-state";
+import useElementResize from "@/components/hooks/useElementResize";
+import type { OptimizeTableHeaderWithIndexProps } from ".";
+import type OptimizeTableState from "./optimize-table-state";
 
 /**
  * Giving the container, we calculate visible rows and column
@@ -106,7 +106,7 @@ export default function useTableVisibilityRecalculation({
         ),
       );
     },
-    [setVisibleDebounce, totalRowCount, rowHeight, renderAhead, headers, state],
+    [totalRowCount, rowHeight, renderAhead, headers, state],
   );
 
   const onHeaderResize = useCallback(

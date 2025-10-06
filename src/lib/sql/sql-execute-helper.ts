@@ -1,7 +1,6 @@
-import OptimizeTableState, {
-  OptimizeTableRowValue,
-} from "@/components/gui/table-optimized/optimize-table-state";
-import {
+import type OptimizeTableState from "@/components/gui/table-optimized/optimize-table-state";
+import type { OptimizeTableRowValue } from "@/components/gui/table-optimized/optimize-table-state";
+import type {
   BaseDriver,
   DatabaseTableOperation,
   DatabaseTableSchema,

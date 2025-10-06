@@ -1,6 +1,6 @@
-import { HttpStatus } from "@/constants/http-status";
 import { headers } from "next/headers";
 import { type NextRequest, NextResponse } from "next/server";
+import { HttpStatus } from "@/constants/http-status";
 
 export async function POST(req: NextRequest) {
   const headerStore = await headers();

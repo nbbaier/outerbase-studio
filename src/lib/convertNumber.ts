@@ -11,7 +11,7 @@ export function convertTimeToMilliseconds(time: string) {
   const extension = time.charAt(time.length - 1);
   const value = time.substring(0, time.length - 1);
 
-  if (!isNaN(Number(value))) {
+  if (!Number.isNaN(Number(value))) {
     switch (extension) {
       case "s":
         return Number(value) * 1000;

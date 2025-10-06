@@ -1,9 +1,9 @@
-import { DatabaseResultSet } from "@/drivers/base-driver";
 import { produce } from "immer";
 import { isDate } from "lodash";
+import type { DatabaseResultSet } from "@/drivers/base-driver";
 import {
-  ChartType,
-  ChartValue,
+  type ChartType,
+  type ChartValue,
   DEFAULT_THEME,
   THEMES,
 } from "../chart/chart-type";
@@ -240,7 +240,7 @@ function isSuitableForSingleValue(rows: any[]): boolean {
 }
 
 function isSuitTableForRadarChart(
-  xAxisKeys: string[],
+  _xAxisKeys: string[],
   yAxisKeys: string[],
   rows: any[],
 ): boolean {

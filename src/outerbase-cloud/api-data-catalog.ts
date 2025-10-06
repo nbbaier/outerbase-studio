@@ -1,5 +1,5 @@
 import { requestOuterbase } from "./api";
-import {
+import type {
   OuterbaseAPIResponse,
   OuterbaseDataCatalogComment,
   OuterbaseDataCatalogDefinition,

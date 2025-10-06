@@ -1,4 +1,4 @@
-import crypto from "crypto";
+import crypto from "node:crypto";
 
 const RANDOM_IV_LENGTH = 12;
 const AUTH_TAG_SIZE = 16;

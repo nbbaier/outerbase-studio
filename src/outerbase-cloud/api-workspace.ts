@@ -1,6 +1,6 @@
 import { mutate } from "swr";
 import { requestOuterbase } from "./api";
-import {
+import type {
   OuterbaseAPIBase,
   OuterbaseAPIBaseCredential,
   OuterbaseAPIConnection,

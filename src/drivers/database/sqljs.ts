@@ -1,11 +1,11 @@
-import {
+import type { InStatement } from "@libsql/client";
+import type { BindParams, Database } from "sql.js";
+import type {
   DatabaseHeader,
   DatabaseResultSet,
   DatabaseRow,
   QueryableBaseDriver,
 } from "@/drivers/base-driver";
-import { InStatement } from "@libsql/client";
-import { BindParams, Database } from "sql.js";
 import { SqliteLikeBaseDriver } from "../sqlite-base-driver";
 
 class SqljsQueryable implements QueryableBaseDriver {

@@ -1,5 +1,5 @@
 import { tokenizeSql } from "@outerbase/sdk-transform";
-import { DatabaseViewSchema } from "../base-driver";
+import type { DatabaseViewSchema } from "../base-driver";
 import { CursorV2 } from "./sql-parse-table";
 
 export function parseCreateViewScript(

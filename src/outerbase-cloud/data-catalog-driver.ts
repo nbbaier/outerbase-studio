@@ -1,4 +1,5 @@
-import DataCatalogDriver, {
+import type DataCatalogDriver from "@/extensions/data-catalog/driver";
+import type {
   DataCatalogColumn,
   DataCatalogColumnInput,
   DataCatalogTable,
@@ -16,7 +17,7 @@ import {
   updateOuerbaseDefinition,
   updateOuterbaseDataCatalogVirtualColumn,
 } from "./api-data-catalog";
-import {
+import type {
   OuterbaseDatabaseConfig,
   OuterbaseDataCatalogComment,
   OuterbaseDataCatalogDefinition,
@@ -303,10 +304,9 @@ export default class DataCatalogOuterbaseDriver implements DataCatalogDriver {
       tableName: comment.table,
       columnName: comment.column,
       definition: comment.body,
-      samples:
-        comment.sample_data && comment.sample_data.trim()
-          ? comment.sample_data.split(",")
-          : [],
+      samples: comment.sample_data?.trim()
+        ? comment.sample_data.split(",")
+        : [],
       hide: comment.flags.isActive,
     };
   }

@@ -1,8 +1,8 @@
-import { DashboardProps } from "@/components/board";
-import { ChartValue } from "@/components/chart/chart-type";
-import { LocalDashboardData, localDb } from "@/indexdb";
+import type { DashboardProps } from "@/components/board";
+import type { ChartValue } from "@/components/chart/chart-type";
+import { type LocalDashboardData, localDb } from "@/indexdb";
 import { generateId } from "@/lib/generate-id";
-import { IBoardStorageDriver } from "./base";
+import type { IBoardStorageDriver } from "./base";
 
 export default class LocalBoardStorage implements IBoardStorageDriver {
   constructor(protected board: LocalDashboardData) {}

@@ -1,5 +1,5 @@
-import { ColumnHeader, ColumnType } from "@outerbase/sdk-transform";
-import {
+import { type ColumnHeader, ColumnType } from "@outerbase/sdk-transform";
+import type {
   DatabaseResultSet,
   DatabaseSchemas,
   DatabaseTableColumn,
@@ -79,7 +79,7 @@ class WAEQueryable implements QueryableBaseDriver {
       method: "POST",
       headers: {
         "Content-Type": "text/plain",
-        Authorization: "Bearer " + this.token,
+        Authorization: `Bearer ${this.token}`,
         "x-account-id": this.accountId,
       },
       body: stmt,
