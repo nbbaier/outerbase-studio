@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { parseCreateTriggerScript } from "./sql-parse-trigger";
 
 function generateSql({

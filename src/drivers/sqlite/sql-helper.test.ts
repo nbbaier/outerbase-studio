@@ -1,4 +1,5 @@
 import { ColumnType } from "@outerbase/sdk-transform";
+import { describe, expect, it } from "vitest";
 import {
   convertSqliteType,
   escapeIdentity,

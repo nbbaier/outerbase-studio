@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { deserializeV8 } from ".";
 
 function p(hex: string) {

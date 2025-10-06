@@ -1,5 +1,6 @@
-import type { DatabaseTableColumnConstraint } from "@/drivers/base-driver";
 import { tokenizeSql } from "@outerbase/sdk-transform";
+import { describe, expect, test } from "vitest";
+import type { DatabaseTableColumnConstraint } from "@/drivers/base-driver";
 import { CursorV2, parseColumnConstraint } from "./sql-parse-table";
 
 // Parse column constraint

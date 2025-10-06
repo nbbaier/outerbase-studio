@@ -1,7 +1,7 @@
-import { DatabaseValue } from "@/drivers/base-driver";
+import { ColumnType } from "@outerbase/sdk-transform";
+import type { DatabaseValue } from "@/drivers/base-driver";
 import { hex } from "@/lib/bit-operation";
 import { parseUserInput } from "@/lib/export-helper";
-import { ColumnType } from "@outerbase/sdk-transform";
 
 export function escapeIdentity(str: string) {
   return `"${str.replace(/"/g, `""`)}"`;

@@ -1,3 +1,4 @@
+import { describe, expect, test } from "vitest";
 import { parseCreateViewScript } from "./sql-parse-view";
 
 describe("parse", () => {

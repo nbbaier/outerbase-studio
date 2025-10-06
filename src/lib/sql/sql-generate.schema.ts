@@ -1,10 +1,10 @@
-import {
+import deepEqual from "deep-equal";
+import { cloneDeep } from "lodash";
+import type {
   DatabaseTableColumnChange,
   DatabaseTableSchema,
   DatabaseTableSchemaChange,
 } from "@/drivers/base-driver";
-import deepEqual from "deep-equal";
-import { cloneDeep } from "lodash";
 import { generateId } from "../generate-id";
 
 export function checkSchemaColumnChange(change: DatabaseTableColumnChange) {

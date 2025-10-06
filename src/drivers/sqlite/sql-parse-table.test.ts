@@ -1,3 +1,4 @@
+import { describe, expect, it, test } from "vitest";
 import type { DatabaseTableSchema } from "@/drivers/base-driver";
 import { parseCreateTableScript } from "./sql-parse-table";
 

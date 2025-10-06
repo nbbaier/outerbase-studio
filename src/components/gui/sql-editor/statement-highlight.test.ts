@@ -1,5 +1,6 @@
 import { MySQL, SQLite } from "@codemirror/lang-sql";
 import { EditorState } from "@codemirror/state";
+import { describe, expect, test } from "vitest";
 import { splitSqlQuery } from "./statement-highlight";
 
 function sqlite(code: string) {

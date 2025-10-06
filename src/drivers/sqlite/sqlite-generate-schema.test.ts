@@ -1,7 +1,8 @@
-import { parseCreateTableScript } from "./sql-parse-table";
 import { produce } from "immer";
-import generateSqlSchemaChange from "./sqlite-generate-schema";
+import { describe, expect, test } from "vitest";
 import { createTableSchemaDraft } from "@/lib/sql/sql-generate.schema";
+import { parseCreateTableScript } from "./sql-parse-table";
+import generateSqlSchemaChange from "./sqlite-generate-schema";
 
 function c(sql: string) {
   return createTableSchemaDraft("main", parseCreateTableScript("main", sql));
