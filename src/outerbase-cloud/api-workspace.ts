@@ -115,7 +115,7 @@ export async function updateOuterbaseCredential(
   sourceId: string,
   source: OuterbaseAPISourceInput,
 ) {
-  mutate("/source/${sourceId}/credential");
+  mutate(`/source/${sourceId}/credential`);
 
   return await requestOuterbase<OuterbaseAPISourceInput>(
     `/api/v1/workspace/${workspaceId}/source/${sourceId}`,

@@ -1,7 +1,16 @@
-import { DatabaseResultSet } from "./drivers/base-driver";
-import { SavedDocNamespace } from "./drivers/saved-doc/saved-doc-driver";
+import type { DatabaseResultSet } from "./drivers/base-driver";
+import type { SavedDocNamespace } from "./drivers/saved-doc/saved-doc-driver";
 
-export {};
+interface FilePickerAcceptType {
+  description?: string;
+  accept: Record<string, string | string[]>;
+}
+
+interface OpenFilePickerOptions {
+  multiple?: boolean;
+  excludeAcceptAllOption?: boolean;
+  types?: FilePickerAcceptType[];
+}
 
 interface OuterbaseIPC {
   docs?: {
@@ -23,6 +32,9 @@ interface OuterbaseIPC {
 declare global {
   interface Window {
     outerbaseIpc?: OuterbaseIPC;
+    showOpenFilePicker?: (
+      options?: OpenFilePickerOptions,
+    ) => Promise<FileSystemFileHandle[]>;
     showOuterbaseDialog: Record<
       string,
       (props: {
@@ -32,5 +44,14 @@ declare global {
         defaultCloseValue: unknown;
       }) => void
     >;
+  }
+
+  interface FileSystemFileHandle {
+    queryPermission?(descriptor?: {
+      mode?: "read" | "readwrite";
+    }): Promise<PermissionState>;
+    requestPermission?(descriptor?: {
+      mode?: "read" | "readwrite";
+    }): Promise<PermissionState>;
   }
 }

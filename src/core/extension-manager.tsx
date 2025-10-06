@@ -108,7 +108,9 @@ export class StudioExtensionContext {
 }
 export class StudioExtensionManager extends StudioExtensionContext {
   cleanup() {
-    this.extensions.forEach((ext) => ext.cleanup());
+    this.extensions.forEach((ext) => {
+      ext.cleanup();
+    });
   }
 
   getSidebars() {

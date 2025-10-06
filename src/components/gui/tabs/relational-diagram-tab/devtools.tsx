@@ -80,12 +80,10 @@ export function ChangeLogger({ limit = 20 }: ChangeLoggerProps) {
     return () => store.setState({ onNodesChange: undefined });
   }, [handleNodeChanges, store]);
 
-  const NoChanges = () => <div>No Changes Triggered</div>;
-
   return (
     <>
       {changes.length === 0 ? (
-        <NoChanges />
+        <div>No Changes Triggered</div>
       ) : (
         changes.map((change, index) => (
           <ChangeInfo key={index} change={change} />

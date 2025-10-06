@@ -64,6 +64,34 @@ interface ExportSettings {
   formatTemplate?: Record<string, ExportOptions>;
 }
 
+const SelectedRange = ({
+  ranges,
+  value,
+  onChange,
+}: {
+  ranges: TableSelectionRange[];
+  value?: string;
+  onChange: (value: string) => void;
+}) => {
+  return (
+    <Select value={value} onValueChange={onChange}>
+      <SelectTrigger className="ml-5 w-[200px]">
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent>
+        {ranges.map((range, index) => {
+          const value = buildSelectionRangeLabel(range);
+          return (
+            <SelectItem key={index} value={index.toString()}>
+              <small>{value}</small>
+            </SelectItem>
+          );
+        })}
+      </SelectContent>
+    </Select>
+  );
+};
+
 export default function ExportResultButton({
   data,
 }: {
@@ -189,34 +217,6 @@ export default function ExportResultButton({
   useEffect(() => {
     saveSettingToStorage(exportSetting);
   }, [exportSetting, saveSettingToStorage]);
-
-  const SelectedRange = ({
-    ranges,
-    value,
-    onChange,
-  }: {
-    ranges: TableSelectionRange[];
-    value?: string;
-    onChange: (value: string) => void;
-  }) => {
-    return (
-      <Select value={value} onValueChange={onChange}>
-        <SelectTrigger className="ml-5 w-[200px]">
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent>
-          {ranges.map((range, index) => {
-            const value = buildSelectionRangeLabel(range);
-            return (
-              <SelectItem key={index} value={index.toString()}>
-                <small>{value}</small>
-              </SelectItem>
-            );
-          })}
-        </SelectContent>
-      </Select>
-    );
-  };
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
