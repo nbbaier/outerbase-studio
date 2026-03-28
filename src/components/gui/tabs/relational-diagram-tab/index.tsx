@@ -1,4 +1,4 @@
-import Dagre from "@dagrejs/dagre";
+import { graphlib, layout as dagreLayout, type GraphLabel } from "@dagrejs/dagre";
 import {
   AlignCenterHorizontalSimple,
   AlignCenterVerticalSimple,
@@ -36,9 +36,9 @@ const MAX_NODE_WIDTH = 300;
 function getLayoutElements(
   nodes: Node[],
   edges: Edge[],
-  options: Dagre.GraphLabel,
+  options: GraphLabel,
 ) {
-  const g = new Dagre.graphlib.Graph().setDefaultEdgeLabel(() => ({}));
+  const g = new graphlib.Graph().setDefaultEdgeLabel(() => ({}));
   g.setGraph(options);
 
   edges.forEach((edge) => {
@@ -52,7 +52,7 @@ function getLayoutElements(
     });
   });
 
-  Dagre.layout(g);
+  dagreLayout(g);
 
   return {
     nodes: nodes.map((node) => {
@@ -70,7 +70,7 @@ function getLayoutElements(
 function mapSchema(
   schema: DatabaseSchemas,
   selectedSchema: string,
-  rankdir?: string,
+  rankdir?: "TB" | "BT" | "LR" | "RL",
 ): { initialNodes: Node[]; initialEdges: Edge[] } {
   const initialEdges: Edge[] = [];
 

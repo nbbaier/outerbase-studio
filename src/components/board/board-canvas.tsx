@@ -9,8 +9,8 @@ import {
   Square,
   Trash2,
 } from "lucide-react";
-import { useCallback } from "react";
-import RGL, { WidthProvider } from "react-grid-layout";
+import { type JSX, useCallback } from "react";
+import RGL, { WidthProvider, type Layout, type LayoutItem } from "react-grid-layout/legacy";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "../ui/button";
 import {
@@ -35,7 +35,7 @@ export interface BoardChartLayout {
 
 interface BoardProps {
   value: DashboardProps;
-  onChange: (v: ReactGridLayout.Layout[]) => void;
+  onChange: (v: Layout) => void;
 }
 
 const ReactGridLayout = WidthProvider(RGL);
@@ -121,10 +121,10 @@ export function BoardCanvas({ value, onChange }: BoardProps) {
 
   const handleClickResize = useCallback(
     (w: number, h: number, index: number) => {
-      const dummy = structuredClone(value.layout);
+      const dummy = structuredClone(value.layout) as LayoutItem[];
       dummy[index].w = w;
       dummy[index].h = h;
-      onChange(dummy);
+      onChange(dummy as Layout);
     },
     [onChange, value.layout],
   );

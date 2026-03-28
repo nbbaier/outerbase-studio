@@ -61,7 +61,7 @@ export function splitSqlQuery(
 
   // Get all the statements
   let needEndStatementCounter = 0;
-  const statements = topNode.getChildren("Statement");
+  const statements = topNode.getChildren("Statement") as unknown as SyntaxNode[];
 
   if (statements.length === 0) return [];
 

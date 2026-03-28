@@ -15,6 +15,7 @@ import {
 } from "@dnd-kit/sortable";
 import { type LucideIcon, LucidePlus } from "lucide-react";
 import {
+  type JSX,
   createContext,
   useCallback,
   useContext,

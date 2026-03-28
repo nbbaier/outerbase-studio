@@ -74,7 +74,7 @@ export function createVariableHighlightPlugin({
   function handlebarCompletion(context: CompletionContext) {
     const node = syntaxTree(context.state).resolveInner(context.pos);
 
-    const ptr: SyntaxNode | null | undefined = node.parent;
+    const ptr: SyntaxNode | null | undefined = node.parent as SyntaxNode | null;
 
     if (ptr?.type.name === "Braces" || ptr?.type.name === "Brackets") {
       return {

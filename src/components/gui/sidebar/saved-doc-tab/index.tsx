@@ -1,6 +1,6 @@
 import { Binoculars, Folder, Plus } from "@phosphor-icons/react";
 import { LucideTrash } from "lucide-react";
-import { useCallback, useEffect, useState } from "react";
+import { type JSX, useCallback, useEffect, useState } from "react";
 import { ListView, type ListViewItem } from "@/components/listview";
 import { buttonVariants } from "@/components/ui/button";
 import {

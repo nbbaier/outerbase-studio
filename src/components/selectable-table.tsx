@@ -1,4 +1,5 @@
 import {
+  type JSX,
   type PropsWithChildren,
   useCallback,
   useEffect,

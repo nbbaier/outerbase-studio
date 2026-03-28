@@ -65,8 +65,9 @@ async function CodeBlock(props: MDXCodeBlockProps) {
       React.isValidElement(child) && (child as any).type().type === "code",
   ) as React.ReactElement | undefined;
 
-  if (codeElement && typeof codeElement.props.children === "string") {
-    return <CodeBlockInner {...(codeElement.props as CodeBlockProps)} />;
+  const codeProps = codeElement?.props as Record<string, unknown> | undefined;
+  if (codeElement && codeProps && typeof codeProps.children === "string") {
+    return <CodeBlockInner {...(codeProps as unknown as CodeBlockProps)} />;
   }
 
   return (
